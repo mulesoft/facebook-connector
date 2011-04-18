@@ -32,18 +32,30 @@ import java.net.URI;
 public class FacebookConnector {
     private static String FACEBOOK_URI = "https://graph.facebook.com";
 
+    /**
+     * The application identifier as registered with Facebook
+     */
     @Property
     @OAuthClientId
     private String appId;
 
+    /**
+     * The application secret
+     */
     @Property
     @OAuthClientSecret
     private String appSecret;
 
+    /**
+     * The URI of the endpoint that will be called upon authorization by Facebook
+     */
     @Property
     @OAuthRedirectUri
     private String redirectUri;
 
+    /**
+     * Facebook permissions
+     */
     @Property(optional = true, defaultValue = "email,read_stream,publish_stream")
     @OAuthScope
     private String scope;
@@ -1782,7 +1794,7 @@ public class FacebookConnector {
      */
     @Operation
     public void deleteObject(String objectId) {
-        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{object_id}").build(object_id);
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{object_id}").build(objectId);
         WebResource resource = client.resource(uri);
 
         resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();

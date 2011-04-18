@@ -1,7 +1,7 @@
 Mule Facebook Connector
 =======================
 
-Mule Cloud Connector to Facebook
+Facebook is a social networking service and website launched in February 2004, operated and privately owned by Facebook, Inc. This connector allows access to Facebook API.
 
 Installation
 ------------
@@ -53,10 +53,10 @@ Here is detailed list of all the configuration attributes:
 | attribute | description | optional | default value |
 |:-----------|:-----------|:---------|:--------------|
 |name|Give a name to this configuration so it can be later referenced by config-ref.|yes||
-|appId||no|
-|appSecret||no|
-|redirectUri||no|
-|scope||yes|     email,read_stream,publish_stream
+|appId|The application identifier as registered with Facebook|no|
+|appSecret|The application secret|no|
+|redirectUri|The URI of the endpoint that will be called upon authorization by Facebook|no|
+|scope|Facebook permissions|yes|     email,read_stream,publish_stream
 
 
 
