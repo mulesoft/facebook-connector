@@ -12,7 +12,7 @@
     <url>http://www.muleforge.org/projects/mule-module-facebook</url>
 
     <properties>
-        <mule.version>3.1.0</mule.version>
+        <mule.version>3.1.1</mule.version>
         <!-- Tools properties -->
         <eclipsePluginVersion>2.8</eclipsePluginVersion>
         <vmtype>org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType</vmtype>
@@ -161,6 +161,7 @@
             <artifactId>mule-module-spring-config</artifactId>
             <version>${mule.version}</version>
             <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
@@ -237,7 +238,7 @@
             </snapshots>
         </pluginRepository>
         <pluginRepository>
-            <id>muleforge-plugin-release</id>
+            <id>muleforge-plugin-snapshot</id>
             <name>Muleforge Snapshots Repository</name>
             <url>http://repository.mulesoft.org/snapshots/</url>
             <releases>
