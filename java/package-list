@@ -1,0 +1,5 @@
+org.mule.module.facebook
+org.mule.module.facebook.adapters
+org.mule.module.facebook.config
+org.mule.module.facebook.processors
+
