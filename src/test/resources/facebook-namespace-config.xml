@@ -10,17 +10,114 @@
       xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook"
       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-                          http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
-                          http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/1.0-SNAPSHOT/mule-facebook.xsd">
+                          http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+                          http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/1.0/mule-facebook.xsd">
 
-        <!--
-           Declare one flow like this one per element you add in your schema.
+    <facebook:config appId="my_app_id" appSecret="my_app_secret"/>
 
-           See the comment in FacebookNamespaceHandlerTestCase for an example how to send
-           Mule events directly to this flow.
-
-       <flow name="theFlow">
-           <facebook:operation parameter="#[payload]"/>
-       </flow>
-        -->
+    <flow name="a">
+        <facebook:attend-event eventId="#[map-payload:eventId]"/>
+        <facebook:decline-event eventId="#[map-payload:eventId]"/>
+        <facebook:delete-object objectId="#[map-payload:objectId]"/>
+        <facebook:dislike postId="#[map-payload:postId]"/>
+        <facebook:get-album album="#[map-payload:album]"/>
+        <facebook:get-album-comments album="#[map-payload:album]"/>
+        <facebook:get-album-photos album="#[map-payload:album]"/>
+        <facebook:get-application application="#[map-payload:application]"/>
+        <facebook:get-application-albums application="#[map-payload:application]"/>
+        <facebook:get-application-events application="#[map-payload:application]"/>
+        <facebook:get-application-insights application="#[map-payload:application]"/>
+        <facebook:get-application-links application="#[map-payload:application]"/>
+        <facebook:get-application-notes application="#[map-payload:application]"/>
+        <facebook:get-application-photos application="#[map-payload:application]"/>
+        <facebook:get-application-picture application="#[map-payload:application]"/>
+        <facebook:get-application-posts application="#[map-payload:application]"/>
+        <facebook:get-application-statuses application="#[map-payload:application]"/>
+        <facebook:get-application-tagged application="#[map-payload:application]"/>
+        <facebook:get-application-videos application="#[map-payload:application]"/>
+        <facebook:get-application-wall application="#[map-payload:application]"/>
+        <facebook:get-checkin checkin="#[map-payload:checkin]"/>
+        <facebook:get-event eventId="#[map-payload:eventId]"/>
+        <facebook:get-event-attending eventId="#[map-payload:eventId]"/>
+        <facebook:get-event-declined eventId="#[map-payload:eventId]"/>
+        <facebook:get-event-invited eventId="#[map-payload:eventId]"/>
+        <facebook:get-event-maybe eventId="#[map-payload:eventId]"/>
+        <facebook:get-event-no-reply eventId="#[map-payload:eventId]"/>
+        <facebook:get-event-picture eventId="#[map-payload:eventId]"/>
+        <facebook:get-event-wall eventId="#[map-payload:eventId]"/>
+        <facebook:get-group group="#[map-payload:group]"/>
+        <facebook:get-group-members group="#[map-payload:group]"/>
+        <facebook:get-group-picture group="#[map-payload:group]"/>
+        <facebook:get-group-wall group="#[map-payload:group]"/>
+        <facebook:get-link link="#[map-payload:link]"/>
+        <facebook:get-link-comments link="#[map-payload:link]"/>
+        <facebook:get-note note="#[map-payload:note]"/>
+        <facebook:get-note-comments note="#[map-payload:note]"/>
+        <facebook:get-note-likes note="#[map-payload:note]"/>
+        <facebook:get-page page="#[map-payload:page]"/>
+        <facebook:get-page-albums page="#[map-payload:page]"/>
+        <facebook:get-page-checkins page="#[map-payload:page]"/>
+        <facebook:get-page-events page="#[map-payload:page]"/>
+        <facebook:get-page-groups page="#[map-payload:page]"/>
+        <facebook:get-page-links page="#[map-payload:page]"/>
+        <facebook:get-page-notes page="#[map-payload:page]"/>
+        <facebook:get-page-photos page="#[map-payload:page]"/>
+        <facebook:get-page-picture page="#[map-payload:page]"/>
+        <facebook:get-page-posts page="#[map-payload:page]"/>
+        <facebook:get-page-statuses page="#[map-payload:page]"/>
+        <facebook:get-page-tagged page="#[map-payload:page]"/>
+        <facebook:get-page-videos page="#[map-payload:page]"/>
+        <facebook:get-page-wall page="#[map-payload:page]"/>
+        <facebook:get-photo photo="#[map-payload:photo]"/>
+        <facebook:get-photo-comments photo="#[map-payload:photo]"/>
+        <facebook:get-photo-likes photo="#[map-payload:photo]"/>
+        <facebook:get-post post="#[map-payload:post]"/>
+        <facebook:get-post-comments post="#[map-payload:post]"/>
+        <facebook:get-status status="#[map-payload:status]"/>
+        <facebook:get-status-comments status="#[map-payload:status]"/>
+        <facebook:get-user user="#[map-payload:user]"/>
+        <facebook:get-user-albums user="#[map-payload:user]"/>
+        <facebook:get-user-accounts user="#[map-payload:user]"/>
+        <facebook:get-user-activities user="#[map-payload:user]"/>
+        <facebook:get-user-albums user="#[map-payload:user]"/>
+        <facebook:get-user-books user="#[map-payload:user]"/>
+        <facebook:get-user-checkins user="#[map-payload:user]"/>
+        <facebook:get-user-events user="#[map-payload:user]"/>
+        <facebook:get-user-friends user="#[map-payload:user]"/>
+        <facebook:get-user-groups user="#[map-payload:user]"/>
+        <facebook:get-user-home user="#[map-payload:user]"/>
+        <facebook:get-user-inbox user="#[map-payload:user]"/>
+        <facebook:get-user-interests user="#[map-payload:user]"/>
+        <facebook:get-user-likes user="#[map-payload:user]"/>
+        <facebook:get-user-links user="#[map-payload:user]"/>
+        <facebook:get-user-movies user="#[map-payload:user]"/>
+        <facebook:get-user-music user="#[map-payload:user]"/>
+        <facebook:get-user-notes user="#[map-payload:user]"/>
+        <facebook:get-user-outbox user="#[map-payload:user]"/>
+        <facebook:get-user-photos user="#[map-payload:user]"/>
+        <facebook:get-user-picture user="#[map-payload:user]"/>
+        <facebook:get-user-posts user="#[map-payload:user]"/>
+        <facebook:get-user-search user="#[map-payload:user]"/>
+        <facebook:get-user-statuses user="#[map-payload:user]"/>
+        <facebook:get-user-tagged user="#[map-payload:user]"/>
+        <facebook:get-user-television user="#[map-payload:user]"/>
+        <facebook:get-user-updates user="#[map-payload:user]"/>
+        <facebook:get-user-videos user="#[map-payload:user]"/>
+        <facebook:get-user-wall user="#[map-payload:user]"/>
+        <facebook:get-video video="#[map-payload:video]"/>
+        <facebook:get-video-comments video="#[map-payload:video]"/>
+        <facebook:like postId="#[map-payload:postId]"/>
+        <facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" name=""/>
+        <facebook:publish-comment postId="#[map-payload:postId]" msg="#[map-payload:msg]"/>
+        <facebook:publish-event profile_id="#[map-payload:profileId]"/>
+        <facebook:publish-link profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"
+                               link="#[map-payload:link]"/>
+        <facebook:publish-message profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"/>
+        <facebook:publish-note profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"
+                               subject="#[map-payload:subject]"/>
+        <facebook:publish-photo albumId="#[map-payload:albumId" caption="#[map-payload:caption]"
+                                photo-ref="#[map-payload:photo]"/>
+        <facebook:search q="#[map-payload:q]"/>
+        <facebook:tentative-event eventId="#[map-payload:eventId]"/>
+    </flow>
 </mule>

@@ -13,14 +13,23 @@
  */
 package org.mule.module.facebook.config;
 
+import org.mule.api.MuleContext;
 import org.mule.construct.Flow;
 import org.mule.tck.FunctionalTestCase;
+import org.mule.transport.http.HttpConnector;
 
 public class FacebookNamespaceHandlerTestCase extends FunctionalTestCase {
 
     @Override
     protected String getConfigResources() {
         return "facebook-namespace-config.xml";
+    }
+
+    @Override
+    protected MuleContext createMuleContext() throws Exception {
+        MuleContext muleContext = super.createMuleContext();
+        muleContext.getRegistry().registerObject("connector.http.mule.default", new HttpConnector(muleContext));
+        return muleContext;
     }
 
     public void testSendMessageToFlow() throws Exception {
