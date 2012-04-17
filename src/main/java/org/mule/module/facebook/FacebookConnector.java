@@ -517,8 +517,8 @@ public class FacebookConnector
     }
 
     /**
-     * A link shared on a user's wall {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getLink}
+     * A link shared on a user's wall 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getLink}
      * 
      * @param link Represents the ID of the link object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -537,8 +537,8 @@ public class FacebookConnector
     }
 
     /**
-     * All of the comments on this link {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getLinkComments}
+     * All of the comments on this link 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getLinkComments}
      * 
      * @param link Represents the ID of the link object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -566,8 +566,8 @@ public class FacebookConnector
     }
 
     /**
-     * A Facebook note {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getNote}
+     * A Facebook note
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getNote}
      * 
      * @param note Represents the ID of the note object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -586,8 +586,8 @@ public class FacebookConnector
     }
 
     /**
-     * All of the comments on this note {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getNoteComments}
+     * All of the comments on this note 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getNoteComments}
      * 
      * @param note Represents the ID of the note object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -615,8 +615,8 @@ public class FacebookConnector
     }
 
     /**
-     * People who like the note {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getNoteLikes}
+     * People who like the note 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getNoteLikes}
      * 
      * @param note Represents the ID of the note object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -644,7 +644,8 @@ public class FacebookConnector
     }
 
     /**
-     * A {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPage}
+     * A
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPage}
      * 
      * @param page Represents the ID of the page object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -663,8 +664,8 @@ public class FacebookConnector
     }
 
     /**
-     * The page's wall {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getPageWall}
+     * The page's wall 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageWall}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -692,8 +693,8 @@ public class FacebookConnector
     }
 
     /**
-     * The page's profile picture {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPagePicture}
+     * The page's profile picture 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPagePicture}
      * 
      * @param page Represents the ID of the page object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
@@ -711,8 +712,8 @@ public class FacebookConnector
     }
 
     /**
-     * The photos, videos, and posts in which this page has been tagged {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageTagged}
+     * The photos, videos, and posts in which this page has been tagged 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageTagged}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -745,8 +746,8 @@ public class FacebookConnector
     }
 
     /**
-     * The page's posted links {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageLinks}
+     * The page's posted links 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageLinks}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -774,8 +775,8 @@ public class FacebookConnector
     }
 
     /**
-     * The photos this page has uploaded {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPagePhotos}
+     * The photos this page has uploaded 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPagePhotos}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -803,8 +804,8 @@ public class FacebookConnector
     }
 
     /**
-     * The groups this page is a member of {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageGroups}
+     * The groups this page is a member of 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageGroups}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -832,8 +833,8 @@ public class FacebookConnector
     }
 
     /**
-     * The photo albums this page has created {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageAlbums}
+     * The photo albums this page has created 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageAlbums}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -861,8 +862,8 @@ public class FacebookConnector
     }
 
     /**
-     * The page's status updates {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageStatuses}
+     * The page's status updates 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageStatuses}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -890,8 +891,8 @@ public class FacebookConnector
     }
 
     /**
-     * The videos this page has created {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageVideos}
+     * The videos this page has created 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageVideos}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -919,8 +920,8 @@ public class FacebookConnector
     }
 
     /**
-     * The page's notes {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getPageNotes}
+     * The page's notes 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageNotes}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -948,8 +949,8 @@ public class FacebookConnector
     }
 
     /**
-     * The page's own posts {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getPagePosts}
+     * The page's own posts 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPagePosts}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -977,8 +978,8 @@ public class FacebookConnector
     }
 
     /**
-     * The events this page is attending {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageEvents}
+     * The events this page is attending 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageEvents}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1006,8 +1007,8 @@ public class FacebookConnector
     }
 
     /**
-     * Checkins made by the friends of the current session user {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPageCheckins}
+     * Checkins made by the friends of the current session user 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageCheckins}
      * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1035,8 +1036,8 @@ public class FacebookConnector
     }
 
     /**
-     * An individual photo {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getPhoto}
+     * An individual photo 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhoto}
      * 
      * @param photo Represents the ID of the photo object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -1055,8 +1056,8 @@ public class FacebookConnector
     }
 
     /**
-     * All of the comments on this photo {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoComments}
+     * All of the comments on this photo 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoComments}
      * 
      * @param photo Represents the ID of the photo object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1084,8 +1085,8 @@ public class FacebookConnector
     }
 
     /**
-     * People who like the photo {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoLikes}
+     * People who like the photo 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoLikes}
      * 
      * @param photo Represents the ID of the photo object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1113,8 +1114,8 @@ public class FacebookConnector
     }
 
     /**
-     * An individual entry in a profile's feed {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPost}
+     * An individual entry in a profile's feed 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPost}
      * 
      * @param post Represents the ID of the post object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -1133,8 +1134,8 @@ public class FacebookConnector
     }
 
     /**
-     * All of the comments on this post {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getPostComments}
+     * All of the comments on this post 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPostComments}
      * 
      * @param post Represents the ID of the post object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1162,8 +1163,8 @@ public class FacebookConnector
     }
 
     /**
-     * A status message on a user's wall {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getStatus}
+     * A status message on a user's wall 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getStatus}
      * 
      * @param status Represents the ID of the status object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -1182,8 +1183,8 @@ public class FacebookConnector
     }
 
     /**
-     * All of the comments on this message {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getStatusComments}
+     * All of the comments on this message 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getStatusComments}
      * 
      * @param status Represents the ID of the status object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1211,8 +1212,8 @@ public class FacebookConnector
     }
 
     /**
-     * A user profile. {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getUser}
+     * A user profile. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUser}
      * 
      * @param user Represents the ID of the user object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -1255,8 +1256,8 @@ public class FacebookConnector
     }
 
     /**
-     * The user's News Feed. Requires the read_stream permission {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserHome}
+     * The user's News Feed. Requires the read_stream permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserHome}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1316,8 +1317,8 @@ public class FacebookConnector
     /**
      * The photos, videos, and posts in which this user has been tagged. Requires the
      * user_photo_tags, user_video_tags, friend_photo_tags, or friend_video_tags
-     * permissions {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getUserTagged}
+     * permissions 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserTagged}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1346,8 +1347,8 @@ public class FacebookConnector
 
     /**
      * The user's own posts. Requires the read_stream permission to see non-public
-     * posts. {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getUserPosts}
+     * posts. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserPosts}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1375,8 +1376,8 @@ public class FacebookConnector
     }
 
     /**
-     * The user's profile picture {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserPicture}
+     * The user's profile picture 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserPicture}
      * 
      * @param user Represents the ID of the user object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
@@ -1394,8 +1395,8 @@ public class FacebookConnector
     }
 
     /**
-     * The user's friends {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getUserFriends}
+     * The user's friends 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserFriends}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1423,8 +1424,8 @@ public class FacebookConnector
     }
 
     /**
-     * The activities listed on the user's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserActivities}
+     * The activities listed on the user's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserActivities}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1452,8 +1453,8 @@ public class FacebookConnector
     }
 
     /**
-     * The music listed on the user's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserCheckins}
+     * The music listed on the user's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserCheckins}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1481,8 +1482,8 @@ public class FacebookConnector
     }
 
     /**
-     * The interests listed on the user's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserInterests}
+     * The interests listed on the user's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserInterests}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1510,8 +1511,8 @@ public class FacebookConnector
     }
 
     /**
-     * The music listed on the user's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserMusic}
+     * The music listed on the user's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserMusic}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1539,8 +1540,8 @@ public class FacebookConnector
     }
 
     /**
-     * The books listed on the user's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserBooks}
+     * The books listed on the user's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserBooks}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1568,8 +1569,8 @@ public class FacebookConnector
     }
 
     /**
-     * The movies listed on the user's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserMovies}
+     * The movies listed on the user's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserMovies}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1597,8 +1598,8 @@ public class FacebookConnector
     }
 
     /**
-     * The television listed on the user's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserTelevision}
+     * The television listed on the user's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserTelevision}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1627,7 +1628,8 @@ public class FacebookConnector
 
     /**
      * All the pages this user has liked. Requires the user_likes or friend_likes
-     * permission {@sample.xml ../../../doc/mule-module-facebook.xml.sample
+     * permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserLikes}
      * 
      * @param user Represents the ID of the user object.
@@ -1657,7 +1659,8 @@ public class FacebookConnector
 
     /**
      * The photos this user is tagged in. Requires the user_photos or friend_photos
-     * permission {@sample.xml ../../../doc/mule-module-facebook.xml.sample
+     * permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserPhotos}
      * 
      * @param user Represents the ID of the user object.
@@ -1687,8 +1690,8 @@ public class FacebookConnector
 
     /**
      * The photo albums this user has created. Requires the user_photos or
-     * friend_photos permission {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserAlbums}
+     * friend_photos permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserAlbums}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1717,8 +1720,8 @@ public class FacebookConnector
 
     /**
      * The videos this user has been tagged in. Requires the user_videos or
-     * friend_videos permission. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserVideos}
+     * friend_videos permission. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserVideos}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1747,7 +1750,8 @@ public class FacebookConnector
 
     /**
      * The groups this user is a member of. Requires the user_groups or friend_groups
-     * permission {@sample.xml ../../../doc/mule-module-facebook.xml.sample
+     * permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserGroups}
      * 
      * @param user Represents the ID of the user object.
@@ -1776,8 +1780,8 @@ public class FacebookConnector
     }
 
     /**
-     * The user's status updates. Requires the read_stream permission {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserStatuses}
+     * The user's status updates. Requires the read_stream permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserStatuses}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1805,8 +1809,8 @@ public class FacebookConnector
     }
 
     /**
-     * The user's posted links. Requires the read_stream permission {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserLinks}
+     * The user's posted links. Requires the read_stream permission 
+     * {@sample.xml../../../doc/mule-module-facebook.xml.sample facebook:getUserLinks}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1834,8 +1838,8 @@ public class FacebookConnector
     }
 
     /**
-     * The user's notes. Requires the read_stream permission {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserNotes}
+     * The user's notes. Requires the read_stream permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserNotes}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -1864,7 +1868,8 @@ public class FacebookConnector
 
     /**
      * The events this user is attending. Requires the user_events or friend_events
-     * permission {@sample.xml ../../../doc/mule-module-facebook.xml.sample
+     * permission 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserEvents}
      * 
      * @param user Represents the ID of the user object.
@@ -1983,8 +1988,8 @@ public class FacebookConnector
     }
 
     /**
-     * The Facebook pages owned by the current user {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getUserAccounts}
+     * The Facebook pages owned by the current user 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserAccounts}
      * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2012,7 +2017,8 @@ public class FacebookConnector
     }
 
     /**
-     * An individual video {@sample.xml ../../../doc/mule-module-facebook.xml.sample
+     * An individual video 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getVideo}
      * 
      * @param video Represents the ID of the video object.
@@ -2032,8 +2038,8 @@ public class FacebookConnector
     }
 
     /**
-     * All of the comments on this video {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getVideoComments}
+     * All of the comments on this video 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getVideoComments}
      * 
      * @param video Represents the ID of the video object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2061,8 +2067,8 @@ public class FacebookConnector
     }
 
     /**
-     * Write to the given profile's feed/wall. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:publishMessage}
+     * Write to the given profile's feed/wall. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishMessage}
      * 
      * @param accessToken the access token to use to authenticate the request
      * @param profile_id the profile where to publish the message
@@ -2101,8 +2107,8 @@ public class FacebookConnector
     }
 
     /**
-     * Comment on the given post {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:publishComment}
+     * Comment on the given post 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishComment}
      * 
      * @param accessToken the access token to use to authentica the request to
      *            Facebook
@@ -2125,8 +2131,8 @@ public class FacebookConnector
     }
 
     /**
-     * Write to the given profile's feed/wall. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:like}
+     * Write to the given profile's feed/wall. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:like}
      * 
      * @param postId Represents the ID of the post object.
      */
@@ -2139,8 +2145,8 @@ public class FacebookConnector
     }
 
     /**
-     * Write a note on the given profile. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:publishNote}
+     * Write a note on the given profile. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishNote}
      * 
      * @param profile_id the profile where to publish the note
      * @param msg The message
@@ -2159,8 +2165,8 @@ public class FacebookConnector
     }
 
     /**
-     * Write a note on the given profile. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:publishLink}
+     * Write a note on the given profile. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishLink}
      * 
      * @param profile_id the profile where to publish the link
      * @param msg The message
@@ -2179,8 +2185,8 @@ public class FacebookConnector
     }
 
     /**
-     * Post an event in the given profile. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:publishEvent}
+     * Post an event in the given profile. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishEvent}
      * 
      * @param profile_id the profile where to publish the event
      */
@@ -2193,8 +2199,8 @@ public class FacebookConnector
     }
 
     /**
-     * Attend the given event. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:attendEvent}
+     * Attend the given event. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:attendEvent}
      * 
      * @param eventId the id of the event to attend
      */
@@ -2207,8 +2213,8 @@ public class FacebookConnector
     }
 
     /**
-     * Maybe attend the given event. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:tentativeEvent}
+     * Maybe attend the given event. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:tentativeEvent}
      * 
      * @param eventId Represents the id of the event object
      */
@@ -2221,8 +2227,8 @@ public class FacebookConnector
     }
 
     /**
-     * Decline the given event. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:declineEvent}
+     * Decline the given event. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:declineEvent}
      * 
      * @param eventId Represents the id of the event object
      */
@@ -2235,7 +2241,8 @@ public class FacebookConnector
     }
 
     /**
-     * Create an album. {@sample.xml ../../../doc/mule-module-facebook.xml.sample
+     * Create an album. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:publishAlbum}
      * 
      * @param profile_id the id of the profile object
@@ -2255,8 +2262,8 @@ public class FacebookConnector
     }
 
     /**
-     * Upload a photo to an album. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:publishPhoto}
+     * Upload a photo to an album. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishPhoto}
      * 
      * @param albumId the id of the album object
      * @param caption Caption of the photo
@@ -2275,8 +2282,8 @@ public class FacebookConnector
     }
 
     /**
-     * Delete an object in the graph. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:deleteObject}
+     * Delete an object in the graph. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:deleteObject}
      * 
      * @param objectId The ID of the object to be deleted
      */
@@ -2290,8 +2297,8 @@ public class FacebookConnector
     }
 
     /**
-     * Remove a 'like' from a post. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:dislike}
+     * Remove a 'like' from a post. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:dislike}
      * 
      * @param postId The ID of the post to be disliked
      */
@@ -2304,8 +2311,8 @@ public class FacebookConnector
     }
 
     /**
-     * A check-in that was made through Facebook Places. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getCheckin}
+     * A check-in that was made through Facebook Places. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getCheckin}
      * 
      * @param checkin Represents the ID of the checkin object.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -2324,8 +2331,8 @@ public class FacebookConnector
     }
 
     /**
-     * An application's profile {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplication}
+     * An application's profile 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplication}
      * 
      * @param application Represents the ID of the application object.
      * @return response from Facebook
@@ -2341,8 +2348,8 @@ public class FacebookConnector
     }
 
     /**
-     * The application's wall. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationWall}
+     * The application's wall. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationWall}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2370,8 +2377,8 @@ public class FacebookConnector
     }
 
     /**
-     * The application's own posts. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPosts}
+     * The application's own posts. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPosts}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2399,8 +2406,8 @@ public class FacebookConnector
     }
 
     /**
-     * The application's logo {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPicture}
+     * The application's logo 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPicture}
      * 
      * @param application Represents the ID of the application object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
@@ -2419,6 +2426,7 @@ public class FacebookConnector
 
     /**
      * The photos, videos, and posts in which this application has been tagged.
+     * 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getApplicationTagged}
      * 
@@ -2448,8 +2456,8 @@ public class FacebookConnector
     }
 
     /**
-     * The application's posted links. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationLinks}
+     * The application's posted links. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationLinks}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2477,8 +2485,8 @@ public class FacebookConnector
     }
 
     /**
-     * The photos this application is tagged in. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPhotos}
+     * The photos this application is tagged in. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPhotos}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2506,8 +2514,8 @@ public class FacebookConnector
     }
 
     /**
-     * The photo albums this application has created. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationAlbums}
+     * The photo albums this application has created. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationAlbums}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2535,8 +2543,8 @@ public class FacebookConnector
     }
 
     /**
-     * The application's status updates. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationStatuses}
+     * The application's status updates. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationStatuses}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2564,8 +2572,8 @@ public class FacebookConnector
     }
 
     /**
-     * The videos this application has created {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationVideos}
+     * The videos this application has created 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationVideos}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2593,8 +2601,8 @@ public class FacebookConnector
     }
 
     /**
-     * The application's notes. {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationNotes}
+     * The application's notes. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationNotes}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2622,8 +2630,8 @@ public class FacebookConnector
     }
 
     /**
-     * The events this page is managing {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationEvents}
+     * The events this page is managing 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationEvents}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
@@ -2651,8 +2659,8 @@ public class FacebookConnector
     }
 
     /**
-     * Usage metrics for this application {@sample.xml
-     * ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationInsights}
+     * Usage metrics for this application 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationInsights}
      * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
