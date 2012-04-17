@@ -12,6 +12,7 @@ package org.mule.module.facebook;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
@@ -26,6 +27,7 @@ import org.mule.api.annotations.oauth.OAuthConsumerSecret;
 import org.mule.api.annotations.oauth.OAuthScope;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.module.facebook.util.JSONMapper;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -82,7 +84,7 @@ public class FacebookConnector
         client = new Client();
         client.addFilter(new LoggingFilter());
     }
-
+    
     /**
      * Search over all public objects in the social graph
      * <p/>
@@ -95,11 +97,11 @@ public class FacebookConnector
      * @return response from Facebook the search resutl
      */
     @Processor
-    public String search(String q, @Optional @Default("post") String obj)
+    public Map<String, Object> search(String q, @Optional @Default("post") String obj)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        return resource.queryParam("q", q).queryParam("object", obj).get(String.class);
+        return JSONMapper.toMap(resource.queryParam("q", q).queryParam("object", obj).get(String.class));
     }
 
     /**
@@ -114,13 +116,11 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getAlbum(String album, @Optional @Default("0") String metadata)
+    public Map<String, Object> getAlbum(String album, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}").build(album);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
-
-        get(String.class);
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).get(String.class));
     }
 
     /**
@@ -137,7 +137,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getAlbumPhotos(String album,
+    public Map<String, Object> getAlbumPhotos(String album,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("3") String limit,
@@ -145,11 +145,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}/photos").build(album);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class);
+            .get(String.class));
     }
 
     /**
@@ -166,7 +166,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getAlbumComments(String album,
+    public Map<String, Object> getAlbumComments(String album,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -174,11 +174,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}/comments").build(album);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class);
+            .get(String.class));
     }
 
     /**
@@ -194,13 +194,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEvent(String eventId, @Optional @Default("0") String metadata)
+    public Map<String, Object> getEvent(String eventId, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -217,7 +217,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEventWall(String eventId,
+    public Map<String, Object> getEventWall(String eventId,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -225,13 +225,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/feed").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -249,7 +249,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEventNoReply(String eventId,
+    public Map<String, Object> getEventNoReply(String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -257,13 +257,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/noreply").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -281,7 +281,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEventMaybe(String eventId,
+    public Map<String, Object> getEventMaybe(String eventId,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -289,13 +289,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/maybe").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class);
+            .get(String.class));
     }
 
     /**
@@ -312,7 +310,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEventInvited(String eventId,
+    public Map<String, Object> getEventInvited(String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -320,13 +318,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/invited").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -343,7 +341,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEventAttending(String eventId,
+    public Map<String, Object> getEventAttending(String eventId,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -351,13 +349,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/attending").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -374,7 +372,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEventDeclined(String eventId,
+    public Map<String, Object> getEventDeclined(String eventId,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -382,13 +380,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/declined").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -403,13 +401,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getEventPicture(String eventId, @Optional @Default("small") String type)
+    public Map<String, Object> getEventPicture(String eventId, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/picture").build(eventId);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("type", type).
+        return JSONMapper.toMap( resource.queryParam("type", type).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -424,13 +422,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getGroup(String group, @Optional @Default("0") String metadata)
+    public Map<String, Object> getGroup(String group, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}").build(group);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -447,7 +445,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getGroupWall(String group,
+    public Map<String, Object> getGroupWall(String group,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -455,13 +453,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/feed").build(group);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -478,7 +476,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getGroupMembers(String group,
+    public Map<String, Object> getGroupMembers(String group,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -486,13 +484,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/members").build(group);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -507,13 +505,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getGroupPicture(String group, @Optional @Default("small") String type)
+    public Map<String, Object> getGroupPicture(String group, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/picture").build(group);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("type", type).
+        return JSONMapper.toMap( resource.queryParam("type", type).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -527,13 +525,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getLink(String link, @Optional @Default("0") String metadata)
+    public Map<String, Object> getLink(String link, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}").build(link);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -548,7 +546,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getLinkComments(String link,
+    public Map<String, Object> getLinkComments(String link,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -556,13 +554,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}/comments").build(link);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -576,13 +574,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getNote(String note, @Optional @Default("0") String metadata)
+    public Map<String, Object> getNote(String note, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}").build(note);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -597,7 +595,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getNoteComments(String note,
+    public Map<String, Object> getNoteComments(String note,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -605,13 +603,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}/comments").build(note);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -626,7 +624,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getNoteLikes(String note,
+    public Map<String, Object> getNoteLikes(String note,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -634,13 +632,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}/likes").build(note);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -654,13 +652,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPage(String page, @Optional @Default("0") String metadata)
+    public Map<String, Object> getPage(String page, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -675,7 +673,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageWall(String page,
+    public Map<String, Object> getPageWall(String page,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("3") String limit,
@@ -683,13 +681,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/feed").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -702,13 +700,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPagePicture(String page, @Optional @Default("small") String type)
+    public Map<String, Object> getPagePicture(String page, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("type", type).
+        return JSONMapper.toMap( resource.queryParam("type", type).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -728,7 +726,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageTagged(String page,
+    public Map<String, Object> getPageTagged(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -736,13 +734,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/tagged").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -757,7 +755,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageLinks(String page,
+    public Map<String, Object> getPageLinks(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -765,13 +763,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/links").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -786,7 +784,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPagePhotos(String page,
+    public Map<String, Object> getPagePhotos(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -794,13 +792,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/photos").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -815,7 +813,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageGroups(String page,
+    public Map<String, Object> getPageGroups(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -823,13 +821,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/groups").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -844,7 +842,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageAlbums(String page,
+    public Map<String, Object> getPageAlbums(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -852,13 +850,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/albums").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -873,7 +871,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageStatuses(String page,
+    public Map<String, Object> getPageStatuses(String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -881,13 +879,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/statuses").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -902,7 +900,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageVideos(String page,
+    public Map<String, Object> getPageVideos(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -910,13 +908,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/videos").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -931,7 +929,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageNotes(String page,
+    public Map<String, Object> getPageNotes(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -939,13 +937,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/notes").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -960,7 +958,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPagePosts(String page,
+    public Map<String, Object> getPagePosts(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -968,13 +966,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/posts").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -989,7 +987,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageEvents(String page,
+    public Map<String, Object> getPageEvents(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -997,13 +995,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/events").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1018,7 +1016,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPageCheckins(String page,
+    public Map<String, Object> getPageCheckins(String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1026,13 +1024,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/checkins").build(page);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1046,13 +1044,11 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPhoto(String photo, @Optional @Default("0") String metadata)
+    public Map<String, Object> getPhoto(String photo, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}").build(photo);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
-
-        get(String.class);
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).get(String.class));
     }
 
     /**
@@ -1067,7 +1063,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPhotoComments(String photo,
+    public Map<String, Object> getPhotoComments(String photo,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -1075,13 +1071,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}/comments").build(photo);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1096,7 +1092,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPhotoLikes(String photo,
+    public Map<String, Object> getPhotoLikes(String photo,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1104,13 +1100,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}/likes").build(photo);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1124,13 +1120,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPost(String post, @Optional @Default("0") String metadata)
+    public Map<String, Object> getPost(String post, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}").build(post);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -1145,7 +1141,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getPostComments(String post,
+    public Map<String, Object> getPostComments(String post,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1153,13 +1149,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}/comments").build(post);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1173,13 +1169,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getStatus(String status, @Optional @Default("0") String metadata)
+    public Map<String, Object> getStatus(String status, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}").build(status);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -1194,7 +1190,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getStatusComments(String status,
+    public Map<String, Object> getStatusComments(String status,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -1202,13 +1198,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}/comments").build(status);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1222,13 +1218,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUser(String user, @Optional @Default("0") String metadata)
+    public Map<String, Object> getUser(String user, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -1244,15 +1240,15 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserSearch(String user,
+    public Map<String, Object> getUserSearch(String user,
                                 @Optional @Default("0") String metadata,
                                 @Optional @Default("facebook") String q)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).queryParam("q", q).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).queryParam("q", q).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -1267,7 +1263,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserHome(String user,
+    public Map<String, Object> getUserHome(String user,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("3") String limit,
@@ -1275,13 +1271,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1297,7 +1293,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserWall(String user,
+    public Map<String, Object> getUserWall(String user,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("3") String limit,
@@ -1305,13 +1301,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/feed").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1328,7 +1324,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserTagged(String user,
+    public Map<String, Object> getUserTagged(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1336,13 +1332,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/tagged").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1358,7 +1354,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserPosts(String user,
+    public Map<String, Object> getUserPosts(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1366,13 +1362,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/posts").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1385,13 +1381,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserPicture(String user, @Optional @Default("small") String type)
+    public Map<String, Object> getUserPicture(String user, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/picture").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("type", type).
+        return JSONMapper.toMap( resource.queryParam("type", type).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -1406,7 +1402,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserFriends(String user,
+    public Map<String, Object> getUserFriends(String user,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("3") String limit,
@@ -1414,13 +1410,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/friends").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1435,7 +1431,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserActivities(String user,
+    public Map<String, Object> getUserActivities(String user,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -1443,13 +1439,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/activities").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1464,7 +1460,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserCheckins(String user,
+    public Map<String, Object> getUserCheckins(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1472,13 +1468,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/checkins").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1493,7 +1489,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserInterests(String user,
+    public Map<String, Object> getUserInterests(String user,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -1501,13 +1497,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/interests").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1522,7 +1518,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserMusic(String user,
+    public Map<String, Object> getUserMusic(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1530,13 +1526,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/music").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1551,7 +1547,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserBooks(String user,
+    public Map<String, Object> getUserBooks(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1559,13 +1555,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/books").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1580,7 +1576,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserMovies(String user,
+    public Map<String, Object> getUserMovies(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1588,13 +1584,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/movies").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1609,7 +1605,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserTelevision(String user,
+    public Map<String, Object> getUserTelevision(String user,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -1617,13 +1613,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/television").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1640,7 +1636,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserLikes(String user,
+    public Map<String, Object> getUserLikes(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1648,13 +1644,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/likes").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1671,7 +1667,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserPhotos(String user,
+    public Map<String, Object> getUserPhotos(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1679,13 +1675,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/photos").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1701,7 +1697,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserAlbums(String user,
+    public Map<String, Object> getUserAlbums(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1709,13 +1705,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/albums").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1731,7 +1727,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserVideos(String user,
+    public Map<String, Object> getUserVideos(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1739,13 +1735,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/videos").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1762,7 +1758,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserGroups(String user,
+    public Map<String, Object> getUserGroups(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1770,13 +1766,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/groups").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1791,7 +1787,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserStatuses(String user,
+    public Map<String, Object> getUserStatuses(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1799,13 +1795,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/statuses").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1820,7 +1816,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserLinks(String user,
+    public Map<String, Object> getUserLinks(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1828,13 +1824,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/links").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1849,7 +1845,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserNotes(String user,
+    public Map<String, Object> getUserNotes(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1857,13 +1853,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/notes").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1880,7 +1876,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserEvents(String user,
+    public Map<String, Object> getUserEvents(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1888,13 +1884,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/events").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1910,7 +1906,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserInbox(String user,
+    public Map<String, Object> getUserInbox(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1918,13 +1914,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/inbox").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1940,7 +1936,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserOutbox(String user,
+    public Map<String, Object> getUserOutbox(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1948,13 +1944,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/outbox").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1970,7 +1966,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserUpdates(String user,
+    public Map<String, Object> getUserUpdates(String user,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("3") String limit,
@@ -1978,13 +1974,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/updates").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -1999,7 +1995,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getUserAccounts(String user,
+    public Map<String, Object> getUserAccounts(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -2007,13 +2003,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/accounts").build(user);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2028,13 +2024,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getVideo(String video, @Optional @Default("0") String metadata)
+    public Map<String, Object> getVideo(String video, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}").build(video);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -2049,7 +2045,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getVideoComments(String video,
+    public Map<String, Object> getVideoComments(String video,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -2057,13 +2053,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}/comments").build(video);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2082,7 +2078,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String publishMessage(@OAuthAccessToken String accessToken,
+    public Map<String, Object> publishMessage(@OAuthAccessToken String accessToken,
                                  String profile_id,
                                  String msg,
                                  @Optional String picture,
@@ -2103,7 +2099,7 @@ public class FacebookConnector
         if (name != null) form.add("name", name);
         if (description != null) form.add("description", description);
 
-        return resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+        return JSONMapper.toMap( resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form));
     }
 
     /**
@@ -2117,7 +2113,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String publishComment(@OAuthAccessToken String accessToken, String postId, String msg)
+    public Map<String, Object> publishComment(@OAuthAccessToken String accessToken, String postId, String msg)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/comments").build(postId);
         WebResource resource = client.resource(uri);
@@ -2126,8 +2122,8 @@ public class FacebookConnector
         form.add("message", msg);
 
         WebResource.Builder type = resource.type(MediaType.APPLICATION_FORM_URLENCODED);
-        return type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE).post(
-            String.class, form);
+        return JSONMapper.toMap( type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE).post(
+            String.class, form));
     }
 
     /**
@@ -2148,14 +2144,14 @@ public class FacebookConnector
      * Write a note on the given profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishNote}
      * 
-     * @param profile_id the profile where to publish the note
+     * @param profileId the profile where to publish the note
      * @param msg The message
      * @param subject the subject of the note
      */
     @Processor
-    public void publishNote(String profile_id, String msg, String subject)
+    public void publishNote(String profileId, String msg, String subject)
     {
-        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profile_id);
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profileId);
         WebResource resource = client.resource(uri);
         Form form = new Form();
         form.add("message", msg);
@@ -2168,14 +2164,14 @@ public class FacebookConnector
      * Write a note on the given profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishLink}
      * 
-     * @param profile_id the profile where to publish the link
+     * @param profileId the profile where to publish the link
      * @param msg The message
      * @param link the link
      */
     @Processor
-    public void publishLink(String profile_id, String msg, String link)
+    public void publishLink(String profileId, String msg, String link)
     {
-        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profile_id);
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profileId);
         WebResource resource = client.resource(uri);
         Form form = new Form();
         form.add("message", msg);
@@ -2321,13 +2317,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getCheckin(String checkin, @Optional @Default("0") String metadata)
+    public Map<String, Object> getCheckin(String checkin, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{checkin}").build(checkin);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("metadata", metadata).
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -2338,13 +2334,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplication(String application)
+    public Map<String, Object> getApplication(String application)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}").build(application);
         WebResource resource = client.resource(uri);
-        return resource.
+        return JSONMapper.toMap( resource.
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -2359,7 +2355,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationWall(String application,
+    public Map<String, Object> getApplicationWall(String application,
                                      @Optional @Default("last week") String since,
                                      @Optional @Default("yesterday") String until,
                                      @Optional @Default("3") String limit,
@@ -2367,13 +2363,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/feed").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2388,7 +2384,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationPosts(String application,
+    public Map<String, Object> getApplicationPosts(String application,
                                       @Optional @Default("last week") String since,
                                       @Optional @Default("yesterday") String until,
                                       @Optional @Default("3") String limit,
@@ -2396,13 +2392,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/posts").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2415,13 +2411,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationPicture(String application, @Optional @Default("small") String type)
+    public Map<String, Object> getApplicationPicture(String application, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/picture").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("type", type).
+        return JSONMapper.toMap( resource.queryParam("type", type).
 
-        get(String.class);
+        get(String.class));
     }
 
     /**
@@ -2438,7 +2434,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationTagged(String application,
+    public Map<String, Object> getApplicationTagged(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2446,13 +2442,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/tagged").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2467,7 +2463,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationLinks(String application,
+    public Map<String, Object> getApplicationLinks(String application,
                                       @Optional @Default("last week") String since,
                                       @Optional @Default("yesterday") String until,
                                       @Optional @Default("3") String limit,
@@ -2475,13 +2471,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/links").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2496,7 +2492,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationPhotos(String application,
+    public Map<String, Object> getApplicationPhotos(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2504,13 +2500,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/photos").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2525,7 +2521,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationAlbums(String application,
+    public Map<String, Object> getApplicationAlbums(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2533,13 +2529,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/albums").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2554,7 +2550,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationStatuses(String application,
+    public Map<String, Object> getApplicationStatuses(String application,
                                          @Optional @Default("last week") String since,
                                          @Optional @Default("yesterday") String until,
                                          @Optional @Default("3") String limit,
@@ -2562,13 +2558,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/statuses").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2583,7 +2579,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationVideos(String application,
+    public Map<String, Object> getApplicationVideos(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2591,13 +2587,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/videos").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2612,7 +2608,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationNotes(String application,
+    public Map<String, Object> getApplicationNotes(String application,
                                       @Optional @Default("last week") String since,
                                       @Optional @Default("yesterday") String until,
                                       @Optional @Default("3") String limit,
@@ -2620,13 +2616,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/notes").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class);
+            .get(String.class));
     }
 
     /**
@@ -2641,7 +2635,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationEvents(String application,
+    public Map<String, Object> getApplicationEvents(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2649,13 +2643,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/events").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class);
+            get(String.class));
     }
 
     /**
@@ -2670,7 +2664,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public String getApplicationInsights(String application,
+    public Map<String, Object> getApplicationInsights(String application,
                                          @Optional @Default("last week") String since,
                                          @Optional @Default("yesterday") String until,
                                          @Optional @Default("3") String limit,
@@ -2678,13 +2672,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/insights").build(application);
         WebResource resource = client.resource(uri);
-        return resource.queryParam("since", since)
+        return JSONMapper.toMap( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class);
+            .get(String.class));
     }
 
     public String getAppId()
