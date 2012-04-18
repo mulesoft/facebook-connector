@@ -23,6 +23,11 @@ public class JSONMapper
 {
     private static ObjectMapper mapper = new ObjectMapper();
     
+    private JSONMapper()
+    {
+        
+    }
+    
     public static Map<String, Object> toMap(String response)
     {
         try
