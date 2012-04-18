@@ -2144,14 +2144,14 @@ public class FacebookConnector
      * Write a note on the given profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishNote}
      * 
-     * @param profileId the profile where to publish the note
+     * @param profile_id the profile where to publish the note
      * @param msg The message
      * @param subject the subject of the note
      */
     @Processor
-    public void publishNote(String profileId, String msg, String subject)
+    public void publishNote(String profile_id, String msg, String subject)
     {
-        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profileId);
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profile_id);
         WebResource resource = client.resource(uri);
         Form form = new Form();
         form.add("message", msg);
@@ -2164,14 +2164,14 @@ public class FacebookConnector
      * Write a note on the given profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishLink}
      * 
-     * @param profileId the profile where to publish the link
+     * @param profile_id the profile where to publish the link
      * @param msg The message
      * @param link the link
      */
     @Processor
-    public void publishLink(String profileId, String msg, String link)
+    public void publishLink(String profile_id, String msg, String link)
     {
-        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profileId);
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profile_id);
         WebResource resource = client.resource(uri);
         Form form = new Form();
         form.add("message", msg);
@@ -2707,5 +2707,15 @@ public class FacebookConnector
     public void setScope(String scope)
     {
         this.scope = scope;
+    }
+    
+    public Client getClient()
+    {
+        return client;
+    }
+    
+    public void setClient(Client client)
+    {
+        this.client = client;
     }
 }
