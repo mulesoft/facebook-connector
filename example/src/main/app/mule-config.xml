@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+	Mule Facebook Cloud Connector
+	
+	Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+	
+	The software in this package is published under the terms of the CPAL v1.0
+	license, a copy of which has been included with this distribution in the
+	LICENSE.txt file.
+
+-->
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:xm="http://www.mulesource.org/schema/mule/xml/2.2"
+      xmlns:as2="http://www.mulesoft.org/schema/mule/as2"
+      xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.2/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/as2 http://www.mulesoft.org/schema/mule/as2/1.0/mule-as2.xsd
+        http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/2.0/mule-facebook.xsd
+        http://www.mulesource.org/schema/mule/xml/2.2 http://www.mulesource.org/schema/mule/xml/2.2/mule-xml.xsd"
+        >
+        
+        
+  <as2:config urlServer="${as2UrlServer}" />
+  <facebook:config appId="#{appId}" appSecret="#{appSecret}" />
+        
+  <flow name="get-photo-and-send-to-as2">
+    <http:inbound-endpoint host="localhost" port="9090" path="facebook-get-photo-and-send-to-as2"/>
+    <flow-ref name="get-photo-from-fb" />
+    <flow-ref name="send-to-as2" />
+  </flow>
+  
+  <flow name="send-to-as2">
+    <description>Send a file to AS2 Server</description>
+    <http:outbound-endpoint address="http://#[variable:link]" />
+    <as2:basic-send from="OpenAS2A" to="OpenAS2B" subject="EDI to send"/>
+  </flow>
+  
+  <flow name="get-photo-from-fb">
+    <description>
+      Gets a photo from facebook given its id
+    </description>
+    <facebook:get-photo photo="#[header:inbound:photo]" />
+    <message-properties-transformer scope="invocation">
+        <add-message-property key="link" value="#[groovy:payload.images[0].source[7..-1]]" />
+    </message-properties-transformer>
+    <expression-transformer
+            expression="The photo #[header:inbound:photo] was successfully retrieve from facebook. It's link is #[variable:link]"
+            evaluator="string" />
+  </flow>
+
+</mule>
