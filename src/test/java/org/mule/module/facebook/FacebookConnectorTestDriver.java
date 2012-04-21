@@ -12,6 +12,7 @@ package org.mule.module.facebook;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -32,26 +33,27 @@ public class FacebookConnectorTestDriver
         connector = new FacebookConnector();
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetPhoto() throws Exception
     {
-        final Map<String, Object> res = connector.getPhoto("4", "");
-        assertNotNull(res.get("link"));
+        final Map<String, Object> res = connector.getPhoto("347528201978388", "");
+        assertNotNull((((List<Map<String, Object>>) res.get("images")).get(0)).get("source"));
     }
-    
+
     @SuppressWarnings("unchecked")
     @Test
     public void getAlbum()
     {
         final Map<String, Object> res = connector.getAlbum("20531316728", "");
-        assertNotNull(((Map<String, Object>)res.get("cover")).get("cover_id"));
+        assertNotNull(((Map<String, Object>) res.get("cover")).get("cover_id"));
     }
-    
+
     @Test
     public void testPublishMessage() throws Exception
     {
-        final Map<String, Object> res = connector.publishMessage(ACCESS_TOKEN, "me",
-            "testFacebookConnector", "", "", "", "", "");
+        final Map<String, Object> res = connector.publishMessage(ACCESS_TOKEN, "me", "testFacebookConnector",
+            "", "", "", "", "");
         assertNotNull(res);
     }
 
