@@ -4,14 +4,14 @@
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
-        <version>3.2</version>
+        <version>3.3-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-      <jackson.version>1.9.5</jackson.version>
-      <mule.modules.utils.version>1.0</mule.modules.utils.version>
+        <jackson.version>1.9.5</jackson.version>
+        <mule.modules.utils.version>1.0</mule.modules.utils.version>
     </properties>
 
     <groupId>org.mule.modules</groupId>
@@ -65,7 +65,7 @@
     </scm>
 
     <repositories>
-    <repository>
+        <repository>
             <id>mule-ee-snapshot</id>
             <name>EE Repository Snapshots</name>
             <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots</url>
@@ -77,8 +77,8 @@
             <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
             <layout>default</layout>
         </repository>
-    
-    
+
+
     </repositories>
 
 </project>
