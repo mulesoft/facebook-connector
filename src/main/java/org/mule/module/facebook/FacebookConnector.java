@@ -42,7 +42,8 @@ import com.sun.jersey.multipart.FormDataMultiPart;
  * @author MuleSoft, inc.
  */
 @Module(name = "facebook", schemaVersion = "2.0")
-@OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize")
+@OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize",
+        accessTokenRegex = "access_token=([^&]+?)&", expirationRegex = "expires_in=([^&]+?)$")
 public class FacebookConnector
 {
 
