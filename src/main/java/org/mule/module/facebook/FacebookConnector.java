@@ -87,6 +87,22 @@ public class FacebookConnector
     }
     
     /**
+     * Gets the user logged details.
+     * <p/>
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:logged-user-details}
+     * 
+     * @param accessToken the access token to use to authenticate the request
+     * @return response from Facebook the actual user.
+     */
+    @Processor
+    public Map<String, Object> loggedUserDetails(@OAuthAccessToken String accessToken)
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("me").build();
+        WebResource resource = client.resource(uri);
+        return JSONMapper.toMap( resource.queryParam("access_token", accessToken).type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class));
+    }
+    
+    /**
      * Search over all public objects in the social graph
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search}

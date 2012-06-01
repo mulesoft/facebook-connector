@@ -1,3 +1,7 @@
+<!-- BEGIN_INCLUDE(facebook:logged-user-details) -->
+<facebook:logged-user-details />
+<!-- END_BEGIN(facebook:logged-user-details) -->
+
 <!-- BEGIN_INCLUDE(facebook:search) -->
 <facebook:search q="muelsoft" obj="photo"/>
 <!-- END_INCLUDE(facebook:search) -->

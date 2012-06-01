@@ -52,9 +52,15 @@ public class FacebookConnectorTestDriver
     @Test
     public void testPublishMessage() throws Exception
     {
-        final Map<String, Object> res = connector.publishMessage(ACCESS_TOKEN, "me", "testFacebookConnector",
+        final Map<String, Object> res = connector.publishMessage(ACCESS_TOKEN, "me", "testFacebookConnector6",
             "", "", "", "", "");
         assertNotNull(res);
+    }
+    
+    @Test
+    public void testLoggedUserDetails()
+    {
+    	assertNotNull(connector.loggedUserDetails( ACCESS_TOKEN));
     }
 
 }
