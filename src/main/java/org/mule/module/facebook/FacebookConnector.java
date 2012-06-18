@@ -10,13 +10,18 @@
 
 package org.mule.module.facebook;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -28,6 +33,7 @@ import org.mule.api.annotations.oauth.OAuthScope;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.module.facebook.util.JSONMapper;
+import org.mule.modules.utils.MuleSoftException;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -1395,16 +1401,24 @@ public class FacebookConnector
      * @param user Represents the ID of the user object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
-     * @return response from Facebook
+     * @return Byte[] with the jpg image
      */
     @Processor
-    public Map<String, Object> getUserPicture(String user, @Optional @Default("small") String type)
+    public Byte[] getUserPicture(String user, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/picture").build(user);
         WebResource resource = client.resource(uri);
-        return JSONMapper.toMap( resource.queryParam("type", type).
-
-        get(String.class));
+        BufferedImage image = resource.queryParam("type", type).get(BufferedImage.class);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try
+        {
+            ImageIO.write(image, "jpg", baos);
+        }
+        catch (IOException e)
+        {
+            throw MuleSoftException.soften(e);
+        }
+        return ArrayUtils.toObject(baos.toByteArray());
     }
 
     /**

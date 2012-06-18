@@ -24,7 +24,7 @@ import org.junit.Test;
 public class FacebookConnectorTestDriver
 {
     /**  */
-    private static final String ACCESS_TOKEN = "";
+    private static final String ACCESS_TOKEN = System.getenv("facebookAccessToken");
     private FacebookConnector connector;
 
     @Before
@@ -39,6 +39,13 @@ public class FacebookConnectorTestDriver
     {
         final Map<String, Object> res = connector.getPhoto("347528201978388", "");
         assertNotNull((((List<Map<String, Object>>) res.get("images")).get(0)).get("source"));
+    }
+    
+    @Test
+    public void getUserPicture() throws Exception
+    {
+        final Byte[] res = connector.getUserPicture("chackn", "large");
+        assertNotNull(res);
     }
 
     @SuppressWarnings("unchecked")
