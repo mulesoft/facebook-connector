@@ -127,7 +127,7 @@ public class FacebookConnectorUnitTest
     @Test
     public void testGetVideo() throws Exception
     {
-        final Map<String, Object> res = connector.getVideo("", "");
+        final Map<String, Object> res = connector.getVideo("", "", "");
         assertNotNull(res);
     }
     

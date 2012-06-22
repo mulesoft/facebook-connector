@@ -2048,6 +2048,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getVideo}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param video Represents the ID of the video object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -2055,13 +2056,11 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getVideo(String video, @Optional @Default("0") String metadata)
+    public Map<String, Object> getVideo(@OAuthAccessToken String accessToken, String video, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}").build(video);
-        WebResource resource = client.resource(uri);
-        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).get(String.class));
     }
 
     /**

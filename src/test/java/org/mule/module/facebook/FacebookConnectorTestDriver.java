@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -57,6 +58,7 @@ public class FacebookConnectorTestDriver
     }
 
     @Test
+    @Ignore
     public void testPublishMessage() throws Exception
     {
         final Map<String, Object> res = connector.publishMessage(ACCESS_TOKEN, "me", "testFacebookConnector6",
@@ -74,6 +76,12 @@ public class FacebookConnectorTestDriver
     public void getStatus()
     {
         assertNotNull(connector.getStatus(ACCESS_TOKEN, "367501354973", "0"));
+    }
+    
+    @Test
+    public void getVideo()
+    {
+        assertNotNull(connector.getVideo(ACCESS_TOKEN, "817129783203", "0"));
     }
 
 }
