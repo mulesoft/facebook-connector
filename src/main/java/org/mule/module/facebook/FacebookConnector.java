@@ -599,10 +599,10 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getNote(@OAuthAccessToken String access_token, String note, @Optional @Default("0") String metadata)
+    public Map<String, Object> getNote(@OAuthAccessToken String accessToken, String note, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}").build(note);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, access_token);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
         return JSONMapper.toMap( resource.queryParam("metadata", metadata).
 
         get(String.class));
