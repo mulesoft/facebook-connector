@@ -83,5 +83,11 @@ public class FacebookConnectorTestDriver
     {
         assertNotNull(connector.getVideo(ACCESS_TOKEN, "817129783203", "0"));
     }
+    
+    @Test
+    public void getNote()
+    {
+        assertNotNull(connector.getNote(ACCESS_TOKEN, "122788341354", "0"));
+    }
 
 }

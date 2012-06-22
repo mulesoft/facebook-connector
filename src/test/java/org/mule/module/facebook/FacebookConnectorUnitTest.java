@@ -85,7 +85,7 @@ public class FacebookConnectorUnitTest
     @Test
     public void testGetNote() throws Exception
     {
-        final Map<String, Object> res = connector.getNote("", "");
+        final Map<String, Object> res = connector.getNote("", "", "");
         assertNotNull(res);
     }
     
