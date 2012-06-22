@@ -1341,7 +1341,7 @@ Summary:
             Map&lt;String,&nbsp;Object&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getNote(java.lang.String, java.lang.String)">getNote</a></span>(String note, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getNote(java.lang.String, java.lang.String, java.lang.String)">getNote</a></span>(String accessToken, String note, String metadata)</nobr>
         
         <div class="jd-descrdiv">A Facebook note
  </div>
@@ -5211,7 +5211,7 @@ From class
 </div>
 
 
-<A NAME="getNote(java.lang.String, java.lang.String)"></A>
+<A NAME="getNote(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5224,7 +5224,7 @@ From class
         Map&lt;String,&nbsp;Object&gt;
       </span>
       <span class="sympad">getNote</span>
-      <span class="normal">(String note, String metadata)</span>
+      <span class="normal">(String accessToken, String note, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5241,6 +5241,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>note</td>
           <td>Represents the ID of the note object.</td>
