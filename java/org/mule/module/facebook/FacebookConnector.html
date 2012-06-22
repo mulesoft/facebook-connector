@@ -1028,7 +1028,7 @@ Summary:
             Map&lt;String,&nbsp;Object&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getCheckin(java.lang.String, java.lang.String)">getCheckin</a></span>(String checkin, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getCheckin(java.lang.String, java.lang.String, java.lang.String)">getCheckin</a></span>(String accessToken, String checkin, String metadata)</nobr>
         
         <div class="jd-descrdiv">A check-in that was made through Facebook Places.</div>
   
@@ -4297,7 +4297,7 @@ From class
 </div>
 
 
-<A NAME="getCheckin(java.lang.String, java.lang.String)"></A>
+<A NAME="getCheckin(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4310,7 +4310,7 @@ From class
         Map&lt;String,&nbsp;Object&gt;
       </span>
       <span class="sympad">getCheckin</span>
-      <span class="normal">(String checkin, String metadata)</span>
+      <span class="normal">(String accessToken, String checkin, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4327,6 +4327,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>checkin</td>
           <td>Represents the ID of the checkin object.</td>
