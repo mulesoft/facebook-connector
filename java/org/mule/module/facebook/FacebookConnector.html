@@ -2328,7 +2328,7 @@ Summary:
             Map&lt;String,&nbsp;Object&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getVideo(java.lang.String, java.lang.String)">getVideo</a></span>(String video, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getVideo(java.lang.String, java.lang.String, java.lang.String)">getVideo</a></span>(String accessToken, String video, String metadata)</nobr>
         
         <div class="jd-descrdiv">An individual video 
  </div>
@@ -8391,7 +8391,7 @@ From class
 </div>
 
 
-<A NAME="getVideo(java.lang.String, java.lang.String)"></A>
+<A NAME="getVideo(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -8404,7 +8404,7 @@ From class
         Map&lt;String,&nbsp;Object&gt;
       </span>
       <span class="sympad">getVideo</span>
-      <span class="normal">(String video, String metadata)</span>
+      <span class="normal">(String accessToken, String video, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -8421,6 +8421,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>video</td>
           <td>Represents the ID of the video object.</td>
