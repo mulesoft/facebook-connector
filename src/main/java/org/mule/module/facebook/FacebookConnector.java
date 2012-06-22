@@ -54,6 +54,7 @@ public class FacebookConnector
 {
 
     private static String FACEBOOK_URI = "https://graph.facebook.com";
+    private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
 
     /**
      * The application identifier as registered with Facebook
@@ -1185,6 +1186,7 @@ public class FacebookConnector
      * A status message on a user's wall 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getStatus}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param status Represents the ID of the status object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -1192,13 +1194,11 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getStatus(String status, @Optional @Default("0") String metadata)
+    public Map<String, Object> getStatus(@OAuthAccessToken String accessToken, String status, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}").build(status);
-        WebResource resource = client.resource(uri);
-        return JSONMapper.toMap( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        return JSONMapper.toMap( resource.queryParam("metadata", metadata).get(String.class));
     }
 
     /**

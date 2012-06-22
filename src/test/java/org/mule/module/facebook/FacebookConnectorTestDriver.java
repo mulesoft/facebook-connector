@@ -69,5 +69,11 @@ public class FacebookConnectorTestDriver
     {
     	assertNotNull(connector.loggedUserDetails( ACCESS_TOKEN));
     }
+    
+    @Test
+    public void getStatus()
+    {
+        assertNotNull(connector.getStatus(ACCESS_TOKEN, "367501354973", "0"));
+    }
 
 }

@@ -113,7 +113,7 @@ public class FacebookConnectorUnitTest
     @Test
     public void testGetStatus() throws Exception
     {
-        final Map<String, Object> res = connector.getStatus("", "");
+        final Map<String, Object> res = connector.getStatus("", "", "");
         assertNotNull(res);
     }
     
