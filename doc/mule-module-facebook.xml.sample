@@ -2,9 +2,29 @@
 <facebook:logged-user-details />
 <!-- END_BEGIN(facebook:logged-user-details) -->
 
-<!-- BEGIN_INCLUDE(facebook:search) -->
-<facebook:search q="muelsoft" obj="photo"/>
-<!-- END_INCLUDE(facebook:search) -->
+<!-- BEGIN_INCLUDE(facebook:search-posts) -->
+<facebook:search q="muelsoft"/>
+<!-- END_INCLUDE(facebook:search-posts) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-users) -->
+<facebook:search q="muelsoft"/>
+<!-- END_INCLUDE(facebook:search-users) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-groups) -->
+<facebook:search q="muelsoft"/>
+<!-- END_INCLUDE(facebook:search-groups) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-checkins) -->
+<facebook:search q="muelsoft"/>
+<!-- END_INCLUDE(facebook:search-checkins) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-pages) -->
+<facebook:search q="muelsoft"/>
+<!-- END_INCLUDE(facebook:search-pages) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-events) -->
+<facebook:search q="muelsoft"/>
+<!-- END_INCLUDE(facebook:search-events) -->
 
 
 <!-- BEGIN_INCLUDE(facebook:getAlbum) -->
