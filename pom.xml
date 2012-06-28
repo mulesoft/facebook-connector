@@ -13,6 +13,7 @@
         <jackson.version>1.9.5</jackson.version>
         <mule.modules.utils.version>1.0</mule.modules.utils.version>
         <mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
+        <restfb.version>1.6.9</restfb.version>
     </properties>
 
     <groupId>org.mule.modules</groupId>
@@ -55,6 +56,11 @@
             <artifactId>mule-modules-utils</artifactId>
             <version>${mule.modules.utils.version}</version>
         </dependency>
+        <dependency>
+		  <groupId>com.restfb</groupId>
+		  <artifactId>restfb</artifactId>
+		  <version>${restfb.version}</version>
+		</dependency>
     </dependencies>
 
     <scm>
