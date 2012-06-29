@@ -12,6 +12,7 @@
     <properties>
         <jackson.version>1.9.5</jackson.version>
         <mule.modules.utils.version>1.0</mule.modules.utils.version>
+        <mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
     </properties>
 
     <groupId>org.mule.modules</groupId>
