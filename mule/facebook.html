@@ -1513,26 +1513,26 @@ to be the OAuth access token and OAuth access token secret.</p>
 <p>The following is an example of how to log the access token and access token secret.<p>
 <pre>
     &lt;facebook:config&gt;
-        &lt;facebook:save-oauth-access-token&gt;
-            &lt;logger level="INFO" message="Received access token #[header:INBOUND:OAuthAccessToken] and #[header:INBOUND:OAuthAccessTokenSecret]"/&gt;
-        &lt;/facebook:save-oauth-access-token&gt;
+        &lt;facebook:oauth-save-access-token&gt;
+            &lt;logger level="INFO" message="Received access token #[variable:OAuthAccessToken] and #[variable:OAuthAccessTokenSecret]"/&gt;
+        &lt;/facebook:oauth-save-access-token&gt;
     &lt;/facebook:config&gt;
 </pre>
-<p>The <i>save-oauth-access-token</i> is a message processor chain and you can add inside of it as many message processors as you want. The chain will
+<p>The <i>oauth-save-access-token</i> is a message processor chain and you can add inside of it as many message processors as you want. The chain will
 be called with special inbound properties in the message which the information that needs saved.</p>
 <p>Restoring the information is equally simple:</p>
 <pre>
     &lt;facebook:config&gt;
-        &lt;facebook:restore-oauth-access-token&gt;
+        &lt;facebook:oauth-restore-access-token&gt;
             &lt;message-properties-transformer&gt;
                 &lt;add-message-property key="OAuthAccessToken" value="123"/&gt;
                 &lt;add-message-property key="OAuthAccessTokenSecret" value="567"/&gt;
             &lt;/message-properties-transformer&gt;
-        &lt;/facebook:restore-oauth-access-token&gt;
+        &lt;/facebook:oauth-restore-access-token&gt;
     &lt;/facebook:config&gt;
 </pre>
 <p>The example above does not do anything useful expect hardcode the access token and the token secret to 123 and 567 respectively. Just like
-<i>save-oauth-access-token</i>, <i>restore-oauth-access-token</i> is another message processor chain. Once the chain is done executing
+<i>oauth-save-access-token</i>, <i>oauth-restore-access-token</i> is another message processor chain. Once the chain is done executing
 we will extract the OAuth access token property and OAuth access token secret property values.</p>
 <p>The following shows a full example on how to save and restore using Mule ObjectStore Module to store the information inside an object store.<p>
 <pre>
@@ -1549,18 +1549,18 @@ we will extract the OAuth access token property and OAuth access token secret pr
                http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd"&gt;
 
     &lt;facebook:config&gt;
-        &lt;facebook:save-oauth-access-token&gt;
-            &lt;objectstore:store key="OAuthAccessToken" value="#[header:INBOUND:OAuthAccessToken]"/&gt;
-            &lt;objectstore:store key="OAuthAccessTokenSecret" value="#[header:INBOUND:OAuthAccessTokenSecret]"/&gt;
-        &lt;/facebook:save-oauth-access-token&gt;
-        &lt;facebook:restore-oauth-access-token&gt;
+        &lt;facebook:oauth-save-access-token&gt;
+            &lt;objectstore:store key="OAuthAccessToken" value-ref="#[variable:OAuthAccessToken]"/&gt;
+            &lt;objectstore:store key="OAuthAccessTokenSecret" value-ref="#[variable:OAuthAccessTokenSecret]"/&gt;
+        &lt;/facebook:oauth-save-access-token&gt;
+        &lt;facebook:oauth-restore-access-token&gt;
             &lt;enricher target="#[header:OAuthAccessToken]"&gt;
                 &lt;objectstore:retrieve key="OAuthAccessToken"/&gt;
             &lt;/enricher&gt;
             &lt;enricher target="#[header:OAuthAccessTokenSecret]"&gt;
                 &lt;objectstore:retrieve key="OAuthAccessTokenSecret"/&gt;
             &lt;/enricher&gt;
-        &lt;/facebook:restore-oauth-access-token&gt;
+        &lt;/facebook:oauth-restore-access-token&gt;
     &lt;/facebook:config&gt;
 
 &lt;/mule&gt;
