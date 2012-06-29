@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.ws.rs.core.MediaType;
@@ -33,18 +32,33 @@ import org.mule.api.annotations.oauth.OAuthConsumerSecret;
 import org.mule.api.annotations.oauth.OAuthScope;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.module.facebook.types.GetApplicationTaggedResponseType;
+import org.mule.module.facebook.types.GetUserAccountResponseType;
+import org.mule.module.facebook.types.Member;
+import org.mule.module.facebook.types.OutboxThread;
+import org.mule.module.facebook.types.Thread;
 import org.mule.modules.utils.MuleSoftException;
 
 import com.restfb.DefaultJsonMapper;
 import com.restfb.JsonMapper;
 import com.restfb.types.Album;
+import com.restfb.types.Application;
 import com.restfb.types.Checkin;
+import com.restfb.types.Comment;
 import com.restfb.types.Event;
 import com.restfb.types.Group;
+import com.restfb.types.Insight;
+import com.restfb.types.Link;
+import com.restfb.types.NamedFacebookType;
+import com.restfb.types.Note;
 import com.restfb.types.Page;
+import com.restfb.types.PageConnection;
 import com.restfb.types.Photo;
 import com.restfb.types.Post;
+import com.restfb.types.Post.Likes;
+import com.restfb.types.StatusMessage;
 import com.restfb.types.User;
+import com.restfb.types.Video;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.LoggingFilter;
@@ -285,7 +299,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getAlbumComments(String album,
+    public List<Comment> getAlbumComments(String album,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -293,11 +307,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}/comments").build(album);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class));
+            .get(String.class), Comment.class);
     }
 
     /**
@@ -313,13 +327,13 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getEvent(String eventId, @Optional @Default("0") String metadata)
+    public Event getEvent(String eventId, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}").build(eventId);
         WebResource resource = client.resource(uri);
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).
 
-        get(String.class));
+        get(String.class), Event.class);
     }
 
     /**
@@ -336,7 +350,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getEventWall(String eventId,
+    public List<Post> getEventWall(String eventId,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -344,13 +358,13 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/feed").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .
 
-            get(String.class));
+            get(String.class), Post.class);
     }
 
     /**
@@ -365,10 +379,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of events
      */
     @Processor
-    public Map<String, Object> getEventNoReply(String eventId,
+    public List<Event> getEventNoReply(String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -376,13 +390,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/noreply").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -397,10 +409,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of events
      */
     @Processor
-    public Map<String, Object> getEventMaybe(String eventId,
+    public List<Event> getEventMaybe(String eventId,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -408,11 +420,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/maybe").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -426,10 +438,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of events
      */
     @Processor
-    public Map<String, Object> getEventInvited(String eventId,
+    public List<Event> getEventInvited(String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -437,13 +449,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/invited").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -457,10 +467,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of events
      */
     @Processor
-    public Map<String, Object> getEventAttending(String eventId,
+    public List<Event> getEventAttending(String eventId,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -468,13 +478,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/attending").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -488,10 +496,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of events
      */
     @Processor
-    public Map<String, Object> getEventDeclined(String eventId,
+    public List<Event> getEventDeclined(String eventId,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -499,13 +507,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/declined").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -517,16 +523,24 @@ public class FacebookConnector
      * @param eventId Represents the ID of the event object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
-     * @return response from Facebook
+     * @return The image as a Byte array
      */
     @Processor
-    public Map<String, Object> getEventPicture(String eventId, @Optional @Default("small") String type)
+    public Byte[] getEventPicture(String eventId, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/picture").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("type", type).
-
-        get(String.class));
+        BufferedImage image = resource.queryParam("type", type).get(BufferedImage.class);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try
+        {
+            ImageIO.write(image, "jpg", baos);
+        }
+        catch (Exception e)
+        {
+            MuleSoftException.soften(e);
+        }
+        return ArrayUtils.toObject(baos.toByteArray());
     }
 
     /**
@@ -538,16 +552,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The group represented by the given id
      */
     @Processor
-    public Map<String, Object> getGroup(String group, @Optional @Default("0") String metadata)
+    public Group getGroup(String group, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}").build(group);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Group.class);
     }
 
     /**
@@ -561,10 +573,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of posts
      */
     @Processor
-    public Map<String, Object> getGroupWall(String group,
+    public List<Post> getGroupWall(String group,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -572,13 +584,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/feed").build(group);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -595,7 +605,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getGroupMembers(String group,
+    public List<Member> getGroupMembers(String group,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -603,13 +613,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/members").build(group);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Member.class);
     }
 
     /**
@@ -624,13 +632,11 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getGroupPicture(String group, @Optional @Default("small") String type)
+    public Byte[] getGroupPicture(String group, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/picture").build(group);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("type", type).
-
-        get(String.class));
+        return bufferedImageToByteArray(resource.queryParam("type", type).get(BufferedImage.class));
     }
 
     /**
@@ -641,16 +647,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The link from facebook
      */
     @Processor
-    public Map<String, Object> getLink(String link, @Optional @Default("0") String metadata)
+    public Link getLink(String link, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}").build(link);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Link.class);
     }
 
     /**
@@ -662,10 +666,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of comments
      */
     @Processor
-    public Map<String, Object> getLinkComments(String link,
+    public List<Comment> getLinkComments(String link,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -673,13 +677,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}/comments").build(link);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Comment.class);
     }
 
     /**
@@ -691,16 +693,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The note represented by the given id
      */
     @Processor
-    public Map<String, Object> getNote(@OAuthAccessToken String accessToken, String note, @Optional @Default("0") String metadata)
+    public Note getNote(@OAuthAccessToken String accessToken, String note, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}").build(note);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Note.class);
     }
 
     /**
@@ -712,10 +712,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of comments from the given note
      */
     @Processor
-    public Map<String, Object> getNoteComments(String note,
+    public List<Comment> getNoteComments(String note,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -723,13 +723,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}/comments").build(note);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Comment.class);
     }
 
     /**
@@ -741,10 +739,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The links from the given note
      */
     @Processor
-    public Map<String, Object> getNoteLikes(String note,
+    public Likes getNoteLikes(String note,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -756,9 +754,7 @@ public class FacebookConnector
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Likes.class);
     }
 
     /**
@@ -769,16 +765,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The page represented by the given id
      */
     @Processor
-    public Map<String, Object> getPage(String page, @Optional @Default("0") String metadata)
+    public Page getPage(String page, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Page.class);
     }
 
     /**
@@ -790,10 +784,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of posts from the given page wall
      */
     @Processor
-    public Map<String, Object> getPageWall(String page,
+    public List<Post> getPageWall(String page,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("3") String limit,
@@ -801,13 +795,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/feed").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -817,16 +809,14 @@ public class FacebookConnector
      * @param page Represents the ID of the page object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
-     * @return response from Facebook
+     * @return A byte array with the page picture
      */
     @Processor
-    public Map<String, Object> getPagePicture(String page, @Optional @Default("small") String type)
+    public Byte[] getPagePicture(String page, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("type", type).
-
-        get(String.class));
+        return bufferedImageToByteArray( resource.queryParam("type", type).get(BufferedImage.class));
     }
 
     /**
@@ -843,10 +833,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A heterogeneous array of Photo, Video or Post objects.
      */
     @Processor
-    public Map<String, Object> getPageTagged(String page,
+    public List<NamedFacebookType> getPageTagged(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -854,13 +844,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/tagged").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), NamedFacebookType.class);
     }
 
     /**
@@ -872,10 +860,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of this page's links
      */
     @Processor
-    public Map<String, Object> getPageLinks(String page,
+    public List<Link> getPageLinks(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -883,13 +871,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/links").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Link.class);
     }
 
     /**
@@ -901,10 +887,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of photos from this page
      */
     @Processor
-    public Map<String, Object> getPagePhotos(String page,
+    public List<Photo> getPagePhotos(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -912,13 +898,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/photos").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Photo.class);
     }
 
     /**
@@ -930,10 +914,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of groups
      */
     @Processor
-    public Map<String, Object> getPageGroups(String page,
+    public List<Group> getPageGroups(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -941,13 +925,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/groups").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Group.class);
     }
 
     /**
@@ -959,10 +941,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of albums
      */
     @Processor
-    public Map<String, Object> getPageAlbums(String page,
+    public List<Album> getPageAlbums(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -970,13 +952,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/albums").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Album.class);
     }
 
     /**
@@ -988,10 +968,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of status messages
      */
     @Processor
-    public Map<String, Object> getPageStatuses(String page,
+    public List<StatusMessage> getPageStatuses(String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -999,13 +979,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/statuses").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), StatusMessage.class);
     }
 
     /**
@@ -1017,10 +995,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of videos
      */
     @Processor
-    public Map<String, Object> getPageVideos(String page,
+    public List<Video> getPageVideos(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1028,13 +1006,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/videos").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Video.class);
     }
 
     /**
@@ -1049,7 +1025,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getPageNotes(String page,
+    public List<Note> getPageNotes(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1057,13 +1033,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/notes").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Note.class);
     }
 
     /**
@@ -1075,10 +1049,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of posts
      */
     @Processor
-    public Map<String, Object> getPagePosts(String page,
+    public List<Post> getPagePosts(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1086,13 +1060,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/posts").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -1104,10 +1076,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of events
      */
     @Processor
-    public Map<String, Object> getPageEvents(String page,
+    public List<Event> getPageEvents(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1115,13 +1087,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/events").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -1136,7 +1106,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getPageCheckins(String page,
+    public List<Checkin> getPageCheckins(String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1144,13 +1114,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/checkins").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Checkin.class);
     }
 
     /**
@@ -1161,14 +1129,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The photo represented by the given id
      */
     @Processor
-    public Map<String, Object> getPhoto(String photo, @Optional @Default("0") String metadata)
+    public Photo getPhoto(String photo, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}").build(photo);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class));
+        return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Photo.class);
     }
 
     /**
@@ -1180,10 +1148,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of comments of the given photo
      */
     @Processor
-    public Map<String, Object> getPhotoComments(String photo,
+    public List<Comment> getPhotoComments(String photo,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -1191,13 +1159,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}/comments").build(photo);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Comment.class);
     }
 
     /**
@@ -1209,10 +1175,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The likes from the given photo
      */
     @Processor
-    public Map<String, Object> getPhotoLikes(String photo,
+    public Likes getPhotoLikes(String photo,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1224,9 +1190,7 @@ public class FacebookConnector
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Likes.class);
     }
 
     /**
@@ -1237,16 +1201,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The post represented by the given id
      */
     @Processor
-    public Map<String, Object> getPost(String post, @Optional @Default("0") String metadata)
+    public Post getPost(String post, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}").build(post);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Post.class);
     }
 
     /**
@@ -1258,10 +1220,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of comments from this post
      */
     @Processor
-    public Map<String, Object> getPostComments(String post,
+    public List<Comment> getPostComments(String post,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1269,13 +1231,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}/comments").build(post);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Comment.class);
     }
 
     /**
@@ -1287,14 +1247,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The status represented by the given id
      */
     @Processor
-    public Map<String, Object> getStatus(@OAuthAccessToken String accessToken, String status, @Optional @Default("0") String metadata)
+    public StatusMessage getStatus(@OAuthAccessToken String accessToken, String status, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}").build(status);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class));
+        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), StatusMessage.class);
     }
 
     /**
@@ -1306,10 +1266,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The list of comments
      */
     @Processor
-    public Map<String, Object> getStatusComments(String status,
+    public List<Comment> getStatusComments(String status,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -1317,13 +1277,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}/comments").build(status);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Comment.class);
     }
 
     /**
@@ -1334,16 +1292,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The user represented by the given id
      */
     @Processor
-    public Map<String, Object> getUser(String user, @Optional @Default("0") String metadata)
+    public User getUser(String user, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).
-
-        get(String.class));
+        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), User.class);
     }
 
     /**
@@ -1356,18 +1312,16 @@ public class FacebookConnector
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
      * @param q The text for which to search.
-     * @return response from Facebook
+     * @return A list of posts
      */
     @Processor
-    public Map<String, Object> getUserSearch(String user,
+    public List<Post> getUserSearch(String user,
                                 @Optional @Default("0") String metadata,
                                 @Optional @Default("facebook") String q)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).queryParam("q", q).
-
-        get(String.class));
+        return mapper.toJavaList(resource.queryParam("metadata", metadata).queryParam("q", q).get(String.class), Post.class);
     }
 
     /**
@@ -1379,10 +1333,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of posts
      */
     @Processor
-    public Map<String, Object> getUserHome(String user,
+    public List<Post> getUserHome(String user,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("3") String limit,
@@ -1390,13 +1344,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -1409,10 +1361,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of posts
      */
     @Processor
-    public Map<String, Object> getUserWall(String user,
+    public List<Post> getUserWall(String user,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("3") String limit,
@@ -1420,13 +1372,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/feed").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -1443,7 +1393,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getUserTagged(String user,
+    public List<Post> getUserTagged(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1451,13 +1401,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/tagged").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -1470,10 +1418,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of posts
      */
     @Processor
-    public Map<String, Object> getUserPosts(String user,
+    public List<Post> getUserPosts(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1481,13 +1429,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/posts").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -1505,16 +1451,7 @@ public class FacebookConnector
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/picture").build(user);
         WebResource resource = client.resource(uri);
         BufferedImage image = resource.queryParam("type", type).get(BufferedImage.class);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try
-        {
-            ImageIO.write(image, "jpg", baos);
-        }
-        catch (IOException e)
-        {
-            throw MuleSoftException.soften(e);
-        }
-        return ArrayUtils.toObject(baos.toByteArray());
+        return bufferedImageToByteArray(image);
     }
 
     /**
@@ -1526,10 +1463,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of objects with the name and id of the given user's friends
      */
     @Processor
-    public Map<String, Object> getUserFriends(String user,
+    public List<NamedFacebookType> getUserFriends(String user,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("3") String limit,
@@ -1537,13 +1474,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/friends").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), NamedFacebookType.class);
     }
 
     /**
@@ -1555,10 +1490,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return 
      */
     @Processor
-    public Map<String, Object> getUserActivities(String user,
+    public List<PageConnection> getUserActivities(String user,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -1566,13 +1501,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/activities").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), PageConnection.class);
     }
 
     /**
@@ -1584,10 +1517,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list with the user checkins
      */
     @Processor
-    public Map<String, Object> getUserCheckins(String user,
+    public List<Checkin> getUserCheckins(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1595,13 +1528,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/checkins").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Checkin.class);
     }
 
     /**
@@ -1613,10 +1544,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list with the user interests
      */
     @Processor
-    public Map<String, Object> getUserInterests(String user,
+    public List<PageConnection> getUserInterests(String user,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -1624,13 +1555,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/interests").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), PageConnection.class);
     }
 
     /**
@@ -1642,10 +1571,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list with the given user's music
      */
     @Processor
-    public Map<String, Object> getUserMusic(String user,
+    public List<PageConnection> getUserMusic(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1653,13 +1582,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/music").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), PageConnection.class);
     }
 
     /**
@@ -1671,10 +1598,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given user's books
      */
     @Processor
-    public Map<String, Object> getUserBooks(String user,
+    public List<PageConnection> getUserBooks(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1682,13 +1609,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/books").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), PageConnection.class);
     }
 
     /**
@@ -1700,10 +1625,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given user's movies
      */
     @Processor
-    public Map<String, Object> getUserMovies(String user,
+    public List<PageConnection> getUserMovies(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1711,13 +1636,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/movies").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), PageConnection.class);
     }
 
     /**
@@ -1729,10 +1652,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the television listed on the given user's profile
      */
     @Processor
-    public Map<String, Object> getUserTelevision(String user,
+    public List<PageConnection> getUserTelevision(String user,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -1740,13 +1663,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/television").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), PageConnection.class);
     }
 
     /**
@@ -1760,10 +1681,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing all the pages this user has liked
      */
     @Processor
-    public Map<String, Object> getUserLikes(String user,
+    public List<PageConnection> getUserLikes(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1771,13 +1692,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/likes").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), PageConnection.class);
     }
 
     /**
@@ -1791,10 +1710,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of photos the given user is tagged in
      */
     @Processor
-    public Map<String, Object> getUserPhotos(String user,
+    public List<Photo> getUserPhotos(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1802,13 +1721,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/photos").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Photo.class);
     }
 
     /**
@@ -1821,10 +1738,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the photo albums the given user has created
      */
     @Processor
-    public Map<String, Object> getUserAlbums(String user,
+    public List<Album> getUserAlbums(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1832,13 +1749,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/albums").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Album.class);
     }
 
     /**
@@ -1851,10 +1766,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the videos the given user has been tagged in
      */
     @Processor
-    public Map<String, Object> getUserVideos(String user,
+    public List<Video> getUserVideos(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1862,13 +1777,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/videos").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Video.class);
     }
 
     /**
@@ -1882,10 +1795,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the Groups that the given user belongs to
      */
     @Processor
-    public Map<String, Object> getUserGroups(String user,
+    public List<Group> getUserGroups(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1893,13 +1806,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/groups").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Group.class);
     }
 
     /**
@@ -1911,10 +1822,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list contining the user's status updates
      */
     @Processor
-    public Map<String, Object> getUserStatuses(String user,
+    public List<StatusMessage> getUserStatuses(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1922,13 +1833,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/statuses").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), StatusMessage.class);
     }
 
     /**
@@ -1940,10 +1849,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given user's posted links 
      */
     @Processor
-    public Map<String, Object> getUserLinks(String user,
+    public List<Link> getUserLinks(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1951,13 +1860,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/links").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Link.class);
     }
 
     /**
@@ -1969,10 +1876,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given user's notes
      */
     @Processor
-    public Map<String, Object> getUserNotes(String user,
+    public List<Note> getUserNotes(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1980,13 +1887,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/notes").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Note.class);
     }
 
     /**
@@ -2000,10 +1905,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the events the given user is attending
      */
     @Processor
-    public Map<String, Object> getUserEvents(String user,
+    public List<Event> getUserEvents(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -2011,13 +1916,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/events").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -2030,10 +1933,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the threads in the given user's inbox
      */
     @Processor
-    public Map<String, Object> getUserInbox(String user,
+    public List<org.mule.module.facebook.types.Thread> getUserInbox(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -2041,13 +1944,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/inbox").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Thread.class);
     }
 
     /**
@@ -2060,10 +1961,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of threads
      */
     @Processor
-    public Map<String, Object> getUserOutbox(String user,
+    public List<OutboxThread> getUserOutbox(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -2071,13 +1972,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/outbox").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), OutboxThread.class);
     }
 
     /**
@@ -2090,10 +1989,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given user updates
      */
     @Processor
-    public Map<String, Object> getUserUpdates(String user,
+    public List<OutboxThread> getUserUpdates(String user,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("3") String limit,
@@ -2101,13 +2000,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/updates").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), OutboxThread.class);
     }
 
     /**
@@ -2119,10 +2016,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of objects containing account name, access_token, category, id
      */
     @Processor
-    public Map<String, Object> getUserAccounts(String user,
+    public List<GetUserAccountResponseType> getUserAccounts(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -2130,13 +2027,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/accounts").build(user);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), GetUserAccountResponseType.class);
     }
 
     /**
@@ -2152,11 +2047,11 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Map<String, Object> getVideo(@OAuthAccessToken String accessToken, String video, @Optional @Default("0") String metadata)
+    public Video getVideo(@OAuthAccessToken String accessToken, String video, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}").build(video);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class));
+        return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Video.class);
     }
 
     /**
@@ -2168,10 +2063,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given video's comments
      */
     @Processor
-    public Map<String, Object> getVideoComments(String video,
+    public List<Comment> getVideoComments(String video,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -2179,13 +2074,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}/comments").build(video);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Comment.class);
     }
 
     /**
@@ -2201,10 +2094,10 @@ public class FacebookConnector
      * @param name The name of the link
      * @param description A description of the link (appears beneath the link
      *            caption)
-     * @return response from Facebook
+     * @return The id of the published object
      */
     @Processor
-    public Map<String, Object> publishMessage(@OAuthAccessToken String accessToken,
+    public String publishMessage(@OAuthAccessToken String accessToken,
                                  String profile_id,
                                  String msg,
                                  @Optional String picture,
@@ -2225,7 +2118,7 @@ public class FacebookConnector
         if (name != null) form.add("name", name);
         if (description != null) form.add("description", description);
 
-        return mapper.toJavaObject( resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form));
+        return resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
     }
 
     /**
@@ -2236,10 +2129,10 @@ public class FacebookConnector
      *            Facebook
      * @param postId Represents the ID of the post object.
      * @param msg comment on the given post
-     * @return response from Facebook
+     * @return The id of the published comment
      */
     @Processor
-    public Map<String, Object> publishComment(@OAuthAccessToken String accessToken, String postId, String msg)
+    public String publishComment(@OAuthAccessToken String accessToken, String postId, String msg)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/comments").build(postId);
         WebResource resource = client.resource(uri);
@@ -2248,8 +2141,8 @@ public class FacebookConnector
         form.add("message", msg);
 
         WebResource.Builder type = resource.type(MediaType.APPLICATION_FORM_URLENCODED);
-        return mapper.toJavaObject( type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE).post(
-            String.class, form));
+        return type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE)
+                        .post(String.class, form);
     }
 
     /**
@@ -2441,14 +2334,14 @@ public class FacebookConnector
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
      *            type ahead of time.
-     * @return response from Facebook
+     * @return The checkin represented by the given id
      */
     @Processor
-    public Map<String, Object> getCheckin(@OAuthAccessToken String accessToken, String checkin, @Optional @Default("0") String metadata)
+    public Checkin getCheckin(@OAuthAccessToken String accessToken, String checkin, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{checkin}").build(checkin);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class));
+        return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Checkin.class);
     }
 
     /**
@@ -2456,16 +2349,14 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplication}
      * 
      * @param application Represents the ID of the application object.
-     * @return response from Facebook
+     * @return The application represented by the given id
      */
     @Processor
-    public Map<String, Object> getApplication(String application)
+    public Application getApplication(String application)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.
-
-        get(String.class));
+        return mapper.toJavaObject( resource.get(String.class), Application.class);
     }
 
     /**
@@ -2477,10 +2368,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given application posts
      */
     @Processor
-    public Map<String, Object> getApplicationWall(String application,
+    public List<Post> getApplicationWall(String application,
                                      @Optional @Default("last week") String since,
                                      @Optional @Default("yesterday") String until,
                                      @Optional @Default("3") String limit,
@@ -2488,42 +2379,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/feed").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
-    }
-
-    /**
-     * The application's own posts. 
-     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPosts}
-     * 
-     * @param application Represents the ID of the application object.
-     * @param since A unix timestamp or any date accepted by strtotime
-     * @param until A unix timestamp or any date accepted by strtotime
-     * @param limit Limit the number of items returned.
-     * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
-     */
-    @Processor
-    public Map<String, Object> getApplicationPosts(String application,
-                                      @Optional @Default("last week") String since,
-                                      @Optional @Default("yesterday") String until,
-                                      @Optional @Default("3") String limit,
-                                      @Optional @Default("2") String offset)
-    {
-        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/posts").build(application);
-        WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
-            .queryParam("until", until)
-            .queryParam("limit", limit)
-            .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -2533,16 +2393,15 @@ public class FacebookConnector
      * @param application Represents the ID of the application object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
-     * @return response from Facebook
+     * @return The given application picture
      */
     @Processor
-    public Map<String, Object> getApplicationPicture(String application, @Optional @Default("small") String type)
+    public Byte[] getApplicationPicture(String application, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/picture").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("type", type).
-
-        get(String.class));
+        BufferedImage image = resource.queryParam("type", type).get(BufferedImage.class);
+        return bufferedImageToByteArray(image);
     }
 
     /**
@@ -2556,10 +2415,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return The posts where this application has been tagged
      */
     @Processor
-    public Map<String, Object> getApplicationTagged(String application,
+    public List<GetApplicationTaggedResponseType> getApplicationTagged(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2567,13 +2426,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/tagged").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), GetApplicationTaggedResponseType.class);
     }
 
     /**
@@ -2585,10 +2442,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containig the links of the given application
      */
     @Processor
-    public Map<String, Object> getApplicationLinks(String application,
+    public List<Post> getApplicationLinks(String application,
                                       @Optional @Default("last week") String since,
                                       @Optional @Default("yesterday") String until,
                                       @Optional @Default("3") String limit,
@@ -2596,13 +2453,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/links").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Post.class);
     }
 
     /**
@@ -2610,14 +2465,14 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPhotos}
      * 
      * @param application Represents the ID of the application object.
-     * @param since A unix timestamp or any date accepted by strtotime
-     * @param until A unix timestamp or any date accepted by strtotime
+     * @param since A unix timestamp or any date accepted by shorttime
+     * @param until A unix timestamp or any date accepted by shorttime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list with photos
      */
     @Processor
-    public Map<String, Object> getApplicationPhotos(String application,
+    public List<Photo> getApplicationPhotos(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2625,13 +2480,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/photos").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Photo.class);
     }
 
     /**
@@ -2643,10 +2496,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the given application's albums
      */
     @Processor
-    public Map<String, Object> getApplicationAlbums(String application,
+    public List<Album> getApplicationAlbums(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2654,13 +2507,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/albums").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Album.class);
     }
 
     /**
@@ -2672,10 +2523,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the status messages for the given application
      */
     @Processor
-    public Map<String, Object> getApplicationStatuses(String application,
+    public List<StatusMessage> getApplicationStatuses(String application,
                                          @Optional @Default("last week") String since,
                                          @Optional @Default("yesterday") String until,
                                          @Optional @Default("3") String limit,
@@ -2683,13 +2534,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/statuses").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), StatusMessage.class);
     }
 
     /**
@@ -2701,10 +2550,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list of videos for the given application
      */
     @Processor
-    public Map<String, Object> getApplicationVideos(String application,
+    public List<Video> getApplicationVideos(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2712,13 +2561,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/videos").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Video.class);
     }
 
     /**
@@ -2730,10 +2577,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the notes for the given application
      */
     @Processor
-    public Map<String, Object> getApplicationNotes(String application,
+    public List<Note> getApplicationNotes(String application,
                                       @Optional @Default("last week") String since,
                                       @Optional @Default("yesterday") String until,
                                       @Optional @Default("3") String limit,
@@ -2741,11 +2588,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/notes").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class));
+            .get(String.class), Note.class);
     }
 
     /**
@@ -2757,10 +2604,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the events for the given application
      */
     @Processor
-    public Map<String, Object> getApplicationEvents(String application,
+    public List<Event> getApplicationEvents(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("3") String limit,
@@ -2768,13 +2615,11 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/events").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .
-
-            get(String.class));
+            .get(String.class), Event.class);
     }
 
     /**
@@ -2786,10 +2631,10 @@ public class FacebookConnector
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return response from Facebook
+     * @return A list containing the insights for the given application
      */
     @Processor
-    public Map<String, Object> getApplicationInsights(String application,
+    public List<Insight> getApplicationInsights(String application,
                                          @Optional @Default("last week") String since,
                                          @Optional @Default("yesterday") String until,
                                          @Optional @Default("3") String limit,
@@ -2797,11 +2642,25 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/insights").build(application);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class));
+            .get(String.class), Insight.class);
+    }
+    
+    private Byte[] bufferedImageToByteArray(BufferedImage image)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try
+        {
+            ImageIO.write(image, "jpg", baos);
+        }
+        catch (IOException e)
+        {
+            throw MuleSoftException.soften(e);
+        }
+        return ArrayUtils.toObject(baos.toByteArray());
     }
 
     public String getAppId()
