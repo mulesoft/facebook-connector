@@ -671,6 +671,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getGroupWall}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param group Represents the ID of the group object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -679,7 +680,7 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getGroupWall(String group,
+    public List<Post> getGroupWall(@OAuthAccessToken String accessToken, String group,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -687,7 +688,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/feed").build(group);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -700,6 +702,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getGroupMembers}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param group Represents the ID of the group object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -708,7 +711,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Member> getGroupMembers(String group,
+    public List<Member> getGroupMembers(@OAuthAccessToken String accessToken, String group,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -716,7 +719,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/members").build(group);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -2758,6 +2762,7 @@ public class FacebookConnector
         try
         {
             ImageIO.write(image, "jpg", baos);
+            baos.close();
         }
         catch (IOException e)
         {
