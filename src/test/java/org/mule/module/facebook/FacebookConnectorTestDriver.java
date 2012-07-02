@@ -24,10 +24,16 @@ import com.restfb.types.Checkin;
 import com.restfb.types.Comment;
 import com.restfb.types.Event;
 import com.restfb.types.Group;
+import com.restfb.types.Link;
+import com.restfb.types.NamedFacebookType;
+import com.restfb.types.Note;
 import com.restfb.types.Page;
 import com.restfb.types.Photo;
 import com.restfb.types.Post;
+import com.restfb.types.StatusMessage;
 import com.restfb.types.User;
+import com.restfb.types.Video;
+import com.restfb.types.Post.Likes;
 
 /**
  * Test Driver for the connector
@@ -35,7 +41,7 @@ import com.restfb.types.User;
 public class FacebookConnectorTestDriver
 {
     /**  */
-    private static final String ACCESS_TOKEN = "AAAAAAITEghMBAJ0dypJ21fXjNdiuihxassIpnKSMsf1hbka0508OyD0cqyoq8eWi6DeTfhEO4MTlHkgZCcBNwUNaHGn1v0L8p9VQr9XNI3wYFZAbrd";
+    private static final String ACCESS_TOKEN = "AAAAAAITEghMBAAFPC7jTfnOholxNDkNZAOL7mKlurpbZCjZATZB0YI9MSer1RZA0VCDGVLgRlp9VubZAOmk2HBVUt9oAEZClnkECBT58aHE06bQZBqJS12py";
     private FacebookConnector connector;
 
     @Before
@@ -262,6 +268,205 @@ public class FacebookConnectorTestDriver
     }
     
     @Test
+    public void getLink()
+    {
+        final Link res = connector.getLink(ACCESS_TOKEN, "114961875194024", "");
+        assertNotNull(res.getId());
+        assertNotNull(res.getFrom().getId());
+    }
+    
+    @Test
+    public void getLinkComments()
+    {
+        List<Comment> comments = connector.getLinkComments(ACCESS_TOKEN, "114961875194024", "", "", "1", "");
+        assertTrue(comments.size() == 1);
+        for (Comment comment : comments)
+        {
+            assertNotNull(comment.getId());
+        }
+    }
+    
+    @Test
+    public void getNote()
+    {
+        final Note note = connector.getNote(ACCESS_TOKEN, "122788341354", "");
+        assertNotNull(note);
+        assertNotNull(note.getId());
+        assertNotNull(note.getFrom().getName());
+        assertNotNull(note.getMessage());
+    }
+    
+    @Test
+    public void getNoteComments()
+    {
+        List<Comment> comments = connector.getNoteComments("122788341354", "", "", "1", "");
+        assertTrue(comments.size() == 1);
+        for (Comment comment : comments)
+        {
+            assertNotNull(comment.getId());
+        }
+    }
+    
+    @Test
+    public void getNoteLikes()
+    {
+        Likes likes = connector.getNoteLikes("122788341354", "", "", "2", "");
+        assertTrue(likes.getData().size() == 2);
+        for (NamedFacebookType like : likes.getData())
+        {
+            assertNotNull(like.getId());
+            assertNotNull(like.getName());
+        }
+    }
+    
+    @Test
+    public void getPage()
+    {
+        final Page page = connector.getPage("cocacola", "");
+        assertNotNull(page);
+        assertNotNull(page.getId());
+        assertNotNull(page.getDescription());
+        assertNotNull(page.getUsername());
+    }
+    
+    @Test
+    public void getPageWall()
+    {
+        List<Post> posts = connector.getPageWall(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertTrue(posts.size() == 2);
+        for (Post post : posts)
+        {
+            assertNotNull(post.getId());
+            assertNotNull(post.getFrom().getName());
+            assertNotNull(post.getTo().get(0).getName());
+        }
+    }
+    
+    @Test
+    public void getPagePicture() throws Exception
+    {
+        final Byte[] res = connector.getPagePicture("cocacola", "large");
+        assertNotNull(res);
+    }
+    
+    @Test
+    public void getPageTagged()
+    {
+        List<Post> posts = connector.getPageTagged(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertTrue(posts.size() == 2);
+        for (Post post : posts)
+        {
+            assertNotNull(post.getId());
+            assertNotNull(post.getFrom().getName());
+            assertNotNull(post.getTo().get(0).getName());
+        }
+    }
+    
+    @Test
+    public void getPagePhotos()
+    {
+        List<Photo> photos = connector.getPagePhotos("cocacola", "", "", "2", "");
+        assertTrue(photos.size() == 2);
+        for (Photo photo : photos)
+        {
+            assertNotNull(photo.getId());
+            assertNotNull(photo.getFrom().getName());
+            assertNotNull(photo.getImages().get(0).getSource());
+        }
+    }
+    
+    @Test
+    public void getPageGroups()
+    {
+        List<Group> groups = connector.getPageGroups(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertNotNull(groups);
+    }
+    
+    @Test
+    public void getPageAlbums()
+    {
+        List<Album> albums = connector.getPageAlbums("cocacola", "", "", "2", "");
+        assertTrue(albums.size() == 2);
+        for (Album album : albums)
+        {
+            assertNotNull(album.getId());
+            assertNotNull(album.getFrom().getName());
+            assertNotNull(album.getCreatedTime());
+        }
+    }
+    
+    @Test
+    public void getPageStatuses()
+    {
+        List<StatusMessage> statuses = connector.getPageStatuses(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertTrue(statuses.size() == 2);
+        for (StatusMessage status : statuses)
+        {
+            assertNotNull(status.getId());
+            assertNotNull(status.getFrom().getName());
+        }
+    }
+    
+    @Test
+    public void getPageVideos()
+    {
+        List<Video> videos = connector.getPageVideos(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertTrue(videos.size() == 2);
+        for (Video video : videos)
+        {
+            assertNotNull(video.getId());
+            assertNotNull(video.getFrom().getName());
+            assertNotNull(video.getComments());
+        }
+    }
+    
+    @Test
+    public void getPageNotes()
+    {
+        List<Note> notes = connector.getPageNotes(ACCESS_TOKEN, "cocacola", "", "", "1", "");
+        assertTrue(notes.size() == 1);
+        for (Note note : notes)
+        {
+            assertNotNull(note.getId());
+            assertNotNull(note.getFrom().getName());
+            assertNotNull(note.getSubject());
+        }
+    }
+    
+    @Test
+    public void getPagePosts()
+    {
+        List<Post> posts = connector.getPagePosts(ACCESS_TOKEN, "facebook", "", "", "3", "");
+        assertTrue(posts.size() == 3);
+        for (Post post : posts)
+        {
+            assertNotNull(post.getId());
+            assertNotNull(post.getFrom().getName());
+            assertNotNull(post.getLikes().getCount());
+        }
+    }
+    
+    @Test
+    public void getPageEvents()
+    {
+        List<Event> events = connector.getPageEvents(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertTrue(events.size() == 2);
+        for (Event event : events)
+        {
+            assertNotNull(event.getId());
+            assertNotNull(event.getStartTime());
+            assertNotNull(event.getEndTime());
+        }
+    }
+    
+    @Test
+    public void getPageCheckins()
+    {
+        List<Checkin> checkins = connector.getPageCheckins(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertNotNull(checkins);
+    }
+    
+    @Test
     public void getUserPicture() throws Exception
     {
         final Byte[] res = connector.getUserPicture("chackn", "large");
@@ -289,11 +494,4 @@ public class FacebookConnectorTestDriver
     {
         assertNotNull(connector.getVideo(ACCESS_TOKEN, "817129783203", "0"));
     }
-    
-    @Test
-    public void getNote()
-    {
-        assertNotNull(connector.getNote(ACCESS_TOKEN, "122788341354", "0"));
-    }
-
 }

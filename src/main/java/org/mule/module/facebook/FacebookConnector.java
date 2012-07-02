@@ -750,6 +750,7 @@ public class FacebookConnector
      * A link shared on a user's wall 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getLink}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param link Represents the ID of the link object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -757,17 +758,20 @@ public class FacebookConnector
      * @return The link from facebook
      */
     @Processor
-    public Link getLink(String link, @Optional @Default("0") String metadata)
+    public Link getLink(@OAuthAccessToken String accessToken, String link,
+                        @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}").build(link);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Link.class);
+        return mapper.toJavaObject( resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+                                            .queryParam("metadata", metadata).get(String.class), Link.class);
     }
 
     /**
      * All of the comments on this link 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getLinkComments}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param link Represents the ID of the link object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -776,7 +780,7 @@ public class FacebookConnector
      * @return A list of comments
      */
     @Processor
-    public List<Comment> getLinkComments(String link,
+    public List<Comment> getLinkComments(@OAuthAccessToken String accessToken, String link,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -784,7 +788,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}/comments").build(link);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -886,6 +891,7 @@ public class FacebookConnector
      * The page's wall 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageWall}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -894,7 +900,7 @@ public class FacebookConnector
      * @return A list of posts from the given page wall
      */
     @Processor
-    public List<Post> getPageWall(String page,
+    public List<Post> getPageWall(@OAuthAccessToken String accessToken, String page,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("3") String limit,
@@ -902,7 +908,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/feed").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -930,20 +937,16 @@ public class FacebookConnector
      * The photos, videos, and posts in which this page has been tagged 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageTagged}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @param page Represents the ID of the page object.
-     * @param since A unix timestamp or any date accepted by strtotime
-     * @param until A unix timestamp or any date accepted by strtotime
-     * @param limit Limit the number of items returned.
-     * @param offset An offset to the response. Useful for paging.
-     * @return A heterogeneous array of Photo, Video or Post objects.
+     * @return A list of posts
      */
     @Processor
-    public List<NamedFacebookType> getPageTagged(String page,
+    public List<Post> getPageTagged(@OAuthAccessToken String accessToken, String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -951,11 +954,12 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/tagged").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class), NamedFacebookType.class);
+            .get(String.class), Post.class);
     }
 
     /**
@@ -1016,6 +1020,7 @@ public class FacebookConnector
      * The groups this page is a member of 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageGroups}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1024,7 +1029,7 @@ public class FacebookConnector
      * @return The list of groups
      */
     @Processor
-    public List<Group> getPageGroups(String page,
+    public List<Group> getPageGroups(@OAuthAccessToken String accessToken, String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1032,7 +1037,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/groups").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -1070,6 +1076,7 @@ public class FacebookConnector
      * The page's status updates 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageStatuses}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1078,7 +1085,7 @@ public class FacebookConnector
      * @return The list of status messages
      */
     @Processor
-    public List<StatusMessage> getPageStatuses(String page,
+    public List<StatusMessage> getPageStatuses(@OAuthAccessToken String accessToken, String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1086,7 +1093,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/statuses").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -1097,6 +1105,7 @@ public class FacebookConnector
      * The videos this page has created 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageVideos}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1105,7 +1114,7 @@ public class FacebookConnector
      * @return The list of videos
      */
     @Processor
-    public List<Video> getPageVideos(String page,
+    public List<Video> getPageVideos(@OAuthAccessToken String accessToken, String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1113,7 +1122,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/videos").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -1124,6 +1134,7 @@ public class FacebookConnector
      * The page's notes 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageNotes}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1132,7 +1143,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Note> getPageNotes(String page,
+    public List<Note> getPageNotes(@OAuthAccessToken String accessToken, String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1140,7 +1151,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/notes").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -1151,15 +1163,16 @@ public class FacebookConnector
      * The page's own posts 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPagePosts}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return The list of posts
+     * @return A list of posts
      */
     @Processor
-    public List<Post> getPagePosts(String page,
+    public List<Post> getPagePosts(@OAuthAccessToken String accessToken, String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -1167,7 +1180,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/posts").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -1178,6 +1192,7 @@ public class FacebookConnector
      * The events this page is attending 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageEvents}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1186,7 +1201,7 @@ public class FacebookConnector
      * @return The list of events
      */
     @Processor
-    public List<Event> getPageEvents(String page,
+    public List<Event> getPageEvents(@OAuthAccessToken String accessToken, String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -1194,7 +1209,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/events").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
@@ -1205,6 +1221,7 @@ public class FacebookConnector
      * Checkins made by the friends of the current session user 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageCheckins}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1213,7 +1230,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Checkin> getPageCheckins(String page,
+    public List<Checkin> getPageCheckins(@OAuthAccessToken String accessToken, String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -1221,7 +1238,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/checkins").build(page);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
