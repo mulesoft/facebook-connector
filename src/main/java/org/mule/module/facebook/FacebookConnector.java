@@ -171,6 +171,7 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-users}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param q The search string
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -235,6 +236,7 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-events}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param q The search string
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -243,7 +245,7 @@ public class FacebookConnector
      * @return A list of events
      */
     @Processor
-    public List<Event> searchEvents(String q,
+    public List<Event> searchEvents(@OAuthAccessToken String accessToken, String q,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -251,7 +253,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        final String jsonResponse = resource.queryParam("q", q)
+        final String jsonResponse = resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+                                            .queryParam("q", q)
                                             .queryParam("type", "event")
                                             .queryParam("since", since)
                                             .queryParam("until", until)
@@ -266,32 +269,63 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-groups}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param q The search string
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
      * @return A list of groups
      */
     @Processor
-    public List<Group> searchGroups(String q)
+    public List<Group> searchGroups(@OAuthAccessToken String accessToken, String q,
+                                    @Optional @Default("last week") String since,
+                                    @Optional @Default("yesterday") String until,
+                                    @Optional @Default("3") String limit,
+                                    @Optional @Default("2") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        final String jsonResponse = resource.queryParam("q", q).queryParam("type", "group").get(String.class);
+        final String jsonResponse = resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+                                            .queryParam("q", q)
+                                            .queryParam("type", "group")
+                                            .queryParam("since", since)
+                                            .queryParam("until", until)
+                                            .queryParam("limit", limit)
+                                            .queryParam("offset", offset)
+                                            .get(String.class);
         return mapper.toJavaList(jsonResponse, Group.class);
     }
     
     /**
-     * Search over all check-ins in the social graph
+     * This request returns you or your friend's latest checkins,
+     * or checkins where you or your friends have been tagged; currently,
+     * it does not accept a query parameter.
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-checkins}
      * 
-     * @param q The search string
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
      * @return A list of checkins
      */
     @Processor
-    public List<Checkin> searchCheckins(String q)
+    public List<Checkin> searchCheckins(@OAuthAccessToken String accessToken,
+                                        @Optional @Default("last week") String since,
+                                        @Optional @Default("yesterday") String until,
+                                        @Optional @Default("3") String limit,
+                                        @Optional @Default("2") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        final String jsonResponse = resource.queryParam("q", q).queryParam("type", "checkin").get(String.class);
+        final String jsonResponse = resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+                                            .queryParam("type", "checkin")
+                                            .queryParam("since", since)
+                                            .queryParam("until", until)
+                                            .queryParam("limit", limit)
+                                            .queryParam("offset", offset)
+                                            .get(String.class);
         return mapper.toJavaList(jsonResponse, Checkin.class);
     }
 
