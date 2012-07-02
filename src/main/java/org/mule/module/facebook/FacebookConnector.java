@@ -304,6 +304,7 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-checkins}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
@@ -434,6 +435,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventWall}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -442,7 +444,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Post> getEventWall(String eventId,
+    public List<Post> getEventWall(@OAuthAccessToken String accessToken, String eventId,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("3") String limit,
@@ -450,13 +452,12 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/feed").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList( resource.queryParam("since", since)
-            .queryParam("until", until)
-            .queryParam("limit", limit)
-            .queryParam("offset", offset)
-            .
-
-            get(String.class), Post.class);
+        return mapper.toJavaList( resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+                                          .queryParam("since", since)
+                                          .queryParam("until", until)
+                                          .queryParam("limit", limit)
+                                          .queryParam("offset", offset)
+                                          .get(String.class), Post.class);
     }
 
     /**
@@ -466,15 +467,16 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventNoReply}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return A list of events
+     * @return A list of users
      */
     @Processor
-    public List<Event> getEventNoReply(String eventId,
+    public List<User> getEventNoReply(@OAuthAccessToken String accessToken, String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -483,10 +485,11 @@ public class FacebookConnector
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/noreply").build(eventId);
         WebResource resource = client.resource(uri);
         return mapper.toJavaList( resource.queryParam("since", since)
+            .queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class), Event.class);
+            .get(String.class), User.class);
     }
 
     /**
@@ -496,15 +499,16 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventMaybe}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return A list of events
+     * @return A list of users
      */
     @Processor
-    public List<Event> getEventMaybe(String eventId,
+    public List<User> getEventMaybe(@OAuthAccessToken String accessToken, String eventId,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("3") String limit,
@@ -512,11 +516,12 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/maybe").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class), Event.class);
+            .get(String.class), User.class);
     }
 
     /**
@@ -525,15 +530,16 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventInvited}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return A list of events
+     * @return A list of users
      */
     @Processor
-    public List<Event> getEventInvited(String eventId,
+    public List<User> getEventInvited(@OAuthAccessToken String accessToken, String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("3") String limit,
@@ -541,11 +547,12 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/invited").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList( resource.queryParam("since", since)
+        return mapper.toJavaList( resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class), Event.class);
+            .get(String.class), User.class);
     }
 
     /**
@@ -554,15 +561,16 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventAttending}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
-     * @return A list of events
+     * @return A list of users
      */
     @Processor
-    public List<Event> getEventAttending(String eventId,
+    public List<User> getEventAttending(@OAuthAccessToken String accessToken, String eventId,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("3") String limit,
@@ -570,11 +578,12 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/attending").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
-            .get(String.class), Event.class);
+            .get(String.class), User.class);
     }
 
     /**
@@ -583,6 +592,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventDeclined}
      * 
+     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -591,7 +601,7 @@ public class FacebookConnector
      * @return A list of events
      */
     @Processor
-    public List<Event> getEventDeclined(String eventId,
+    public List<Event> getEventDeclined(@OAuthAccessToken String accessToken, String eventId,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("3") String limit,
@@ -599,7 +609,8 @@ public class FacebookConnector
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/declined").build(eventId);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaList(resource.queryParam("since", since)
+        return mapper.toJavaList(resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+            .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
