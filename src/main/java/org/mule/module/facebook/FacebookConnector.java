@@ -141,14 +141,28 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-posts}
      * 
      * @param q The search string
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
      * @return A list of posts
      */
     @Processor
-    public List<Post> searchPosts(String q)
+    public List<Post> searchPosts(String q,
+                                  @Optional @Default("last week") String since,
+                                  @Optional @Default("yesterday") String until,
+                                  @Optional @Default("3") String limit,
+                                  @Optional @Default("2") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        final String jsonResponse = resource.queryParam("q", q).queryParam("type", "post").get(String.class);
+        final String jsonResponse = resource.queryParam("q", q)
+                                            .queryParam("since", since)
+                                            .queryParam("until", until)
+                                            .queryParam("limit", limit)
+                                            .queryParam("offset", offset)
+                                            .get(String.class);
+        
         return mapper.toJavaList(jsonResponse, Post.class);
     }
     
@@ -158,14 +172,30 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-users}
      * 
      * @param q The search string
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
      * @return A list of users
      */
     @Processor
-    public List<User> searchUsers(String q)
+    public List<User> searchUsers(@OAuthAccessToken String accessToken, String q,
+                                  @Optional @Default("last week") String since,
+                                  @Optional @Default("yesterday") String until,
+                                  @Optional @Default("3") String limit,
+                                  @Optional @Default("2") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        final String jsonResponse = resource.queryParam("q", q).queryParam("type", "user").get(String.class);
+        final String jsonResponse = resource.queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken)
+                                            .queryParam("q", q)
+                                            .queryParam("since", since)
+                                            .queryParam("until", until)
+                                            .queryParam("limit", limit)
+                                            .queryParam("offset", offset)
+                                            .queryParam("type", "user")
+                                            .get(String.class);
+        
         return mapper.toJavaList(jsonResponse, User.class);
     }
     
@@ -175,14 +205,28 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-pages}
      * 
      * @param q The search string
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
      * @return A list of pages
      */
     @Processor
-    public List<Page> searchPages(String q)
+    public List<Page> searchPages(String q,
+                                  @Optional @Default("last week") String since,
+                                  @Optional @Default("yesterday") String until,
+                                  @Optional @Default("3") String limit,
+                                  @Optional @Default("2") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        final String jsonResponse = resource.queryParam("q", q).queryParam("type", "page").get(String.class);
+        final String jsonResponse = resource.queryParam("q", q)
+                                            .queryParam("type", "page")
+                                            .queryParam("since", since)
+                                            .queryParam("until", until)
+                                            .queryParam("limit", limit)
+                                            .queryParam("offset", offset)
+                                            .get(String.class);
         return mapper.toJavaList(jsonResponse, Page.class);
     }
     
@@ -192,14 +236,28 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-events}
      * 
      * @param q The search string
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
      * @return A list of events
      */
     @Processor
-    public List<Event> searchEvents(String q)
+    public List<Event> searchEvents(String q,
+                                    @Optional @Default("last week") String since,
+                                    @Optional @Default("yesterday") String until,
+                                    @Optional @Default("3") String limit,
+                                    @Optional @Default("2") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = client.resource(uri);
-        final String jsonResponse = resource.queryParam("q", q).queryParam("type", "event").get(String.class);
+        final String jsonResponse = resource.queryParam("q", q)
+                                            .queryParam("type", "event")
+                                            .queryParam("since", since)
+                                            .queryParam("until", until)
+                                            .queryParam("limit", limit)
+                                            .queryParam("offset", offset)
+                                            .get(String.class);
         return mapper.toJavaList(jsonResponse, Event.class);
     }
     
