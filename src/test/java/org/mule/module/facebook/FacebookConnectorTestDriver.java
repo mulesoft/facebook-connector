@@ -467,6 +467,41 @@ public class FacebookConnectorTestDriver
     }
     
     @Test
+    public void getPhoto()
+    {
+        org.mule.module.facebook.types.Photo photo = connector.getPhoto("20531316728", "");
+        assertNotNull(photo);
+        assertNotNull(photo.getId());
+        assertNotNull(photo.getName());
+        assertNotNull(photo.getPicture());
+        assertNotNull(photo.getLink());
+    }
+    
+    @Test
+    public void getPhotoComments()
+    {
+        List<Comment> comments = connector.getPhotoComments("10151795798083306", "", "", "2", "");
+        assertTrue(comments.size() == 2);
+        for (Comment comment : comments)
+        {
+            assertNotNull(comment.getId());
+            assertNotNull(comment.getMessage());
+        }
+    }
+    
+    @Test
+    public void getPhotoLikes()
+    {
+        Likes likes = connector.getPhotoLikes("10151795798083306", "", "", "2", "");
+        assertTrue(likes.getData().size() == 2);
+        for (NamedFacebookType like : likes.getData())
+        {
+            assertNotNull(like.getId());
+            assertNotNull(like.getName());
+        }
+    }
+    
+    @Test
     public void getUserPicture() throws Exception
     {
         final Byte[] res = connector.getUserPicture("chackn", "large");
