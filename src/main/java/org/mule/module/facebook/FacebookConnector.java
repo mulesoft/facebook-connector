@@ -1257,11 +1257,11 @@ public class FacebookConnector
      * @return The photo represented by the given id
      */
     @Processor
-    public Photo getPhoto(String photo, @Optional @Default("0") String metadata)
+    public org.mule.module.facebook.types.Photo getPhoto(String photo, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}").build(photo);
         WebResource resource = client.resource(uri);
-        return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Photo.class);
+        return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), org.mule.module.facebook.types.Photo.class);
     }
 
     /**
