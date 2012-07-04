@@ -11,5 +11,9 @@ public class GetUserAccountResponseType extends CategorizedFacebookType
     @Facebook("access_token")
     private String accessToken;
 
+    
+    public String getAccessToken()
+    {
+        return accessToken;
+    }
 }
-

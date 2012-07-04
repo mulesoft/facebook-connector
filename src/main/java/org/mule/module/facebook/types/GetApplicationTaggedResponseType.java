@@ -26,6 +26,35 @@ public class GetApplicationTaggedResponseType extends NamedFacebookType
     
     @Facebook
     private Comments comments;
-    
-}
 
+    public NamedFacebookType getFrom()
+    {
+        return from;
+    }
+    
+    public NamedFacebookTypeList getTo()
+    {
+        return to;
+    }
+
+    public String getMessage()
+    {
+        return message;
+    }
+
+    public String getCreatedTime()
+    {
+        return createdTime;
+    }
+
+    public String getUpdatedTime()
+    {
+        return updatedTime;
+    }
+
+    public Comments getComments()
+    {
+        return comments;
+    }
+
+}
