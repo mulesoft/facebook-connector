@@ -17,7 +17,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mule.module.facebook.types.GetUserAccountResponseType;
 import org.mule.module.facebook.types.Member;
+import org.mule.module.facebook.types.OutboxThread;
+import org.mule.module.facebook.types.Thread;
 
 import com.restfb.types.Album;
 import com.restfb.types.Checkin;
@@ -28,12 +31,13 @@ import com.restfb.types.Link;
 import com.restfb.types.NamedFacebookType;
 import com.restfb.types.Note;
 import com.restfb.types.Page;
+import com.restfb.types.PageConnection;
 import com.restfb.types.Photo;
 import com.restfb.types.Post;
+import com.restfb.types.Post.Likes;
 import com.restfb.types.StatusMessage;
 import com.restfb.types.User;
 import com.restfb.types.Video;
-import com.restfb.types.Post.Likes;
 
 /**
  * Test Driver for the connector
@@ -41,7 +45,7 @@ import com.restfb.types.Post.Likes;
 public class FacebookConnectorTestDriver
 {
     /**  */
-    private static final String ACCESS_TOKEN = "AAAAAAITEghMBAAFPC7jTfnOholxNDkNZAOL7mKlurpbZCjZATZB0YI9MSer1RZA0VCDGVLgRlp9VubZAOmk2HBVUt9oAEZClnkECBT58aHE06bQZBqJS12py";
+    private static final String ACCESS_TOKEN = System.getenv("facebook-access-token");
     private FacebookConnector connector;
 
     @Before
@@ -502,31 +506,387 @@ public class FacebookConnectorTestDriver
     }
     
     @Test
-    public void getUserPicture() throws Exception
+    public void getPost()
     {
-        final Byte[] res = connector.getUserPicture("chackn", "large");
+        final Post res = connector.getPost("19292868552_10150189643478553", "");
         assertNotNull(res);
+        assertNotNull(res.getFrom().getName());
+        assertNotNull(res.getName());
+        assertNotNull(res.getProperties().get(0).getName());
     }
-
-
+    
     @Test
-    @Ignore
-    public void testPublishMessage() throws Exception
+    public void getPostComments()
     {
-        final String res = connector.publishMessage(ACCESS_TOKEN, "me", "testFacebookConnector6",
-            "", "", "", "", "");
-        assertNotNull(res);
+        List<Comment> comments = connector.getPostComments("10151795798083306", "", "", "2", "");
+        assertTrue(comments.size() == 2);
+        for (Comment comment : comments)
+        {
+            assertNotNull(comment.getId());
+            assertNotNull(comment.getMessage());
+        }
     }
     
     @Test
     public void getStatus()
     {
-        assertNotNull(connector.getStatus(ACCESS_TOKEN, "367501354973", "0"));
+        StatusMessage status = connector.getStatus(ACCESS_TOKEN, "367501354973", "0");
+        assertNotNull(status);
+        assertNotNull(status.getFrom().getName());
+        assertNotNull(status.getMessage());
+    }
+    
+    @Test
+    public void getStatusComments()
+    {
+        List<Comment> comments = connector.getStatusComments(ACCESS_TOKEN, "367501354973", "", "", "2", "");
+        assertTrue(comments.size() == 2);
+        for (Comment comment : comments)
+        {
+            assertNotNull(comment.getId());
+            assertNotNull(comment.getMessage());
+        }
+    }
+    
+    @Test
+    public void getUser()
+    {
+        User user = connector.getUser("chackn", "0");
+        assertNotNull(user);
+        assertNotNull(user.getName());
+        assertNotNull(user.getLastName());
+    }
+    
+    @Test
+    public void getUserSearch()
+    {
+        List<Post> posts = connector.getUserSearch(ACCESS_TOKEN, "chackn", "a", "", "", "", "2", "");
+        assertTrue(posts.size() == 2);
+        for (Post post : posts)
+        {
+            assertNotNull(post.getId());
+        }
+    }
+    
+    @Test
+    public void getUserHome()
+    {
+        List<Post> posts = connector.getUserHome(ACCESS_TOKEN, "chackn", "", "", "1", "");
+        assertTrue(posts.size() == 1);
+        for (Post post : posts)
+        {
+            assertNotNull(post.getId());
+        }
+    }
+    
+    @Test
+    public void getUserWall()
+    {
+        List<Post> posts = connector.getUserWall(ACCESS_TOKEN, "chackn", "", "", "1", "");
+        assertTrue(posts.size() == 1);
+        for (Post post : posts)
+        {
+            assertNotNull(post.getId());
+        }
+    }
+    
+    @Test
+    public void getUserTagged()
+    {
+        List<Post> posts = connector.getUserTagged(ACCESS_TOKEN, "u2", "", "", "1", "");
+        assertNotNull(posts);
+    }
+    
+    @Test
+    public void getUserPosts()
+    {
+        List<Post> posts = connector.getUserPosts(ACCESS_TOKEN, "chackn", "", "", "2", "1");
+        assertTrue(posts.size() == 2);
+        for (Post post : posts)
+        {
+            assertNotNull(post.getId());
+            assertNotNull(post.getComments());
+        }
+    }
+    
+    @Test
+    public void getUserPicture() throws Exception
+    {
+        final Byte[] res = connector.getUserPicture("chackn", "large");
+        assertNotNull(res);
+    }
+    
+    @Test
+    public void getUserFriends()
+    {
+        List<NamedFacebookType> users = connector.getUserFriends(ACCESS_TOKEN, "chackn", "", "", "2", "1");
+        assertTrue(users.size() == 2);
+        for (NamedFacebookType user : users)
+        {
+            assertNotNull(user.getId());
+            assertNotNull(user.getName());
+        }
+    }
+    
+    @Test
+    public void getUserActivities()
+    {
+        List<PageConnection> activities = connector.getUserActivities(ACCESS_TOKEN, "chuckn", "", "", "2", "");
+        assertNotNull(activities);
+    }
+    
+    @Test
+    public void getUserCheckins()
+    {
+        List<Checkin> checkins = connector.getUserCheckins(ACCESS_TOKEN, "chuckn", "", "", "2", "");
+        assertNotNull(checkins);
+    }
+    
+    @Test
+    public void getUserInterests()
+    {
+        List<PageConnection> interests = connector.getUserInterests(ACCESS_TOKEN, "chuckn", "", "", "2", "");
+        assertNotNull(interests);
+    }
+    
+    @Test
+    public void getUserMusic()
+    {
+        List<PageConnection> music = connector.getUserMusic(ACCESS_TOKEN, "chuckn", "", "", "2", "");
+        assertNotNull(music);
+    }
+    
+    @Test
+    public void getUserBooks()
+    {
+        List<PageConnection> books = connector.getUserBooks(ACCESS_TOKEN, "chuckn", "", "", "2", "");
+        assertNotNull(books);
+    }
+    
+    @Test
+    public void getUserMovies()
+    {
+        List<PageConnection> movies = connector.getUserMovies(ACCESS_TOKEN, "chuckn", "", "", "2", "");
+        assertNotNull(movies);
+    }
+    
+    @Test
+    public void getUserTelevision()
+    {
+        List<PageConnection> television = connector.getUserTelevision(ACCESS_TOKEN, "chuckn", "", "", "2", "");
+        assertNotNull(television);
+    }
+    
+    @Test
+    public void getUserLikes()
+    {
+        List<PageConnection> likes = connector.getUserLikes(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertNotNull(likes);
+        assertTrue(likes.size() == 2);
+        for (PageConnection like : likes)
+        {
+            assertNotNull(like.getId());
+            assertNotNull(like.getCategory());
+        }
+    }
+    
+    @Test
+    public void getUserPhotos()
+    {
+        List<Photo> photos = connector.getUserPhotos("cocacola", "", "", "2", "");
+        assertNotNull(photos);
+        assertTrue(photos.size() == 2);
+        for (Photo photo : photos)
+        {
+            assertNotNull(photo.getId());
+            assertNotNull(photo.getFrom());
+        }
+    }
+    
+    @Test
+    public void getUserAlbums()
+    {
+        List<Album> albums = connector.getUserAlbums("cocacola", "", "", "2", "");
+        assertNotNull(albums);
+        assertTrue(albums.size() == 2);
+        for (Album album : albums)
+        {
+            assertNotNull(album.getId());
+            assertNotNull(album.getFrom());
+        }
+    }
+    
+    @Test
+    public void getUserVideos()
+    {
+        List<Video> videos = connector.getUserVideos(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertNotNull(videos);
+        assertTrue(videos.size() == 2);
+        for (Video video : videos)
+        {
+            assertNotNull(video.getId());
+            assertNotNull(video.getFrom());
+        }
+    }
+    
+    @Test
+    public void getUserGroups()
+    {
+        List<Group> groups = connector.getUserGroups(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertNotNull(groups);
+    }
+    
+    @Test
+    public void getUserStatuses()
+    {
+        List<StatusMessage> statuses = connector.getUserStatuses(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertNotNull(statuses);
+        assertTrue(statuses.size() == 2);
+        for (StatusMessage status : statuses)
+        {
+            assertNotNull(status.getId());
+            assertNotNull(status.getFrom());
+            assertNotNull(status.getMessage());
+        }
+    }
+    
+    @Test
+    public void getUserLinks()
+    {
+        List<Link> links = connector.getUserLinks(ACCESS_TOKEN, "cocacola", "", "", "2", "");
+        assertNotNull(links);
+    }
+    
+    @Test
+    public void getUserNotes()
+    {
+        List<Note> notes = connector.getUserNotes(ACCESS_TOKEN, "cocacola", "", "", "1", "");
+        assertNotNull(notes);
+        assertTrue(notes.size() == 1);
+        for (Note note : notes)
+        {
+            assertNotNull(note.getId());
+            assertNotNull(note.getFrom());
+            assertNotNull(note.getMessage());
+        }
+    }
+    
+    @Test
+    public void getUserEvents()
+    {
+        List<Event> events = connector.getUserEvents(ACCESS_TOKEN, "cocacola", "", "", "3", "");
+        assertNotNull(events);
+        assertTrue(events.size() == 3);
+        for (Event event : events)
+        {
+            assertNotNull(event.getId());
+        }
+    }
+    
+    @Test
+    @Ignore
+    public void getUserInbox()
+    {
+        List<org.mule.module.facebook.types.Thread> threads = connector.getUserInbox(ACCESS_TOKEN, "chackn", "", "", "3", "");
+        assertNotNull(threads);
+        assertTrue(threads.size() == 3);
+        for (Thread thread : threads)
+        {
+            assertNotNull(thread.getId());
+            assertNotNull(thread.getFrom().getName());
+            assertNotNull(thread.getTo().getData().get(0).getName());
+        }
+    }
+    
+    @Test
+    @Ignore
+    public void getUserOutbox()
+    {
+        List<OutboxThread> threads = connector.getUserOutbox(ACCESS_TOKEN, "chackn", "", "", "3", "");
+        assertNotNull(threads);
+        assertTrue(threads.size() == 3);
+        for (Thread thread : threads)
+        {
+            assertNotNull(thread.getId());
+            assertNotNull(thread.getFrom().getName());
+            assertNotNull(thread.getTo().getData().get(0).getName());
+        }
+    }
+    
+    @Test
+    @Ignore
+    public void getUserUpdates()
+    {
+        List<OutboxThread> updates = connector.getUserUpdates(ACCESS_TOKEN, "chackn", "", "", "3", "");
+        assertNotNull(updates);
+        assertTrue(updates.size() == 3);
+        for (Thread update : updates)
+        {
+            assertNotNull(update.getId());
+            assertNotNull(update.getFrom().getName());
+            assertNotNull(update.getTo().getData().get(0).getName());
+        }
+    }
+    
+    @Test
+    public void getUserAccounts()
+    {
+        List<GetUserAccountResponseType> accounts = connector.getUserAccounts(ACCESS_TOKEN, "chackn", "", "", "2", "");
+        assertNotNull(accounts);
+        assertTrue(accounts.size() == 2);
+        for (GetUserAccountResponseType account : accounts)
+        {
+            assertNotNull(account.getId());
+        }
     }
     
     @Test
     public void getVideo()
     {
-        assertNotNull(connector.getVideo(ACCESS_TOKEN, "817129783203", "0"));
+        final Video video = connector.getVideo(ACCESS_TOKEN, "2031763147233", "0");
+        assertNotNull(video);
+        assertNotNull(video.getFrom().getId());
+        assertNotNull(video.getPicture());
+    }
+    
+    @Test
+    public void getVideoComments()
+    {
+        List<Comment> comments = connector.getVideoComments("2031763147233", "", "", "2", "");
+        assertNotNull(comments);
+        assertTrue(comments.size() == 2);
+        for (Comment comment : comments)
+        {
+            assertNotNull(comment.getId());
+        }
+    }
+
+    @Test
+    @Ignore
+    public void testPublishMessage() throws Exception
+    {
+        final String res = connector.publishMessage(ACCESS_TOKEN, "me", "Hello World!",
+            "", "", "", "", "");
+        assertNotNull(res);
+    }
+    
+    @Test
+    @Ignore
+    public void testPublishComment() throws Exception
+    {
+        final String res = connector.publishComment(ACCESS_TOKEN, "test-post-id", "Hello World!");
+        assertNotNull(res);
+    }
+    
+    @Test
+    public void like()
+    {
+        List<Post> posts = connector.getUserPosts(ACCESS_TOKEN, "chackn", "", "", "", "");
+        if (!posts.isEmpty())
+        {
+            final Post post = posts.get(0);
+            connector.like(ACCESS_TOKEN, post.getId());
+            System.out.println(post.getId());
+        }
     }
 }
