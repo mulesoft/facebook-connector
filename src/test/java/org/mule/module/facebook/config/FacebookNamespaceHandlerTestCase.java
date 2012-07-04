@@ -13,9 +13,10 @@
  */
 package org.mule.module.facebook.config;
 
+import org.junit.Test;
 import org.mule.api.MuleContext;
 import org.mule.construct.Flow;
-import org.mule.tck.FunctionalTestCase;
+import org.mule.tck.junit4.FunctionalTestCase;
 import org.mule.transport.http.HttpConnector;
 
 public class FacebookNamespaceHandlerTestCase extends FunctionalTestCase {
@@ -32,6 +33,7 @@ public class FacebookNamespaceHandlerTestCase extends FunctionalTestCase {
         return muleContext;
     }
 
+    @Test
     public void testSendMessageToFlow() throws Exception {
         /*
             This test case tests your Mule integration.
