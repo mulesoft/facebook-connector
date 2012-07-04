@@ -8,7 +8,14 @@ import com.restfb.types.NamedFacebookType;
  
 public class NamedFacebookTypeList implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     @Facebook
     private List<NamedFacebookType> data;
-}
 
+    
+    public List<NamedFacebookType> getData()
+    {
+        return data;
+    }
+}
