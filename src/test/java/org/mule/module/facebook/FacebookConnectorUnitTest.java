@@ -15,11 +15,22 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.net.URI;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mule.module.facebook.types.Photo;
 
+import com.restfb.types.Album;
+import com.restfb.types.Application;
+import com.restfb.types.Event;
+import com.restfb.types.Group;
+import com.restfb.types.Link;
+import com.restfb.types.Note;
+import com.restfb.types.Page;
+import com.restfb.types.Post;
+import com.restfb.types.StatusMessage;
+import com.restfb.types.User;
+import com.restfb.types.Video;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
@@ -41,6 +52,7 @@ public class FacebookConnectorUnitTest
         client = mock(Client.class);
         connector.setClient(client);
         resource = mock(WebResource.class);
+        
         when(client.resource((URI) anyObject())).thenReturn(resource);
         when(resource.queryParam(eq(anyString()), "")).thenReturn(resource);
         when(resource.get(String.class)).thenReturn(responseJSON);
@@ -50,84 +62,84 @@ public class FacebookConnectorUnitTest
     @Test
     public void testGetAlbum() throws Exception
     {
-        final Map<String, Object> res = connector.getAlbum("test", "");
+        final Album res = connector.getAlbum("test", anyString());
         assertNotNull(res);
     }
     
     @Test
     public void testGetApplication() throws Exception
     {
-        final Map<String, Object> res = connector.getApplication("");
+        final Application res = connector.getApplication("", anyString());
         assertNotNull(res);
     }
     
     @Test
     public void testGetEvent() throws Exception
     {
-        final Map<String, Object> res = connector.getEvent("", "");
+        final Event res = connector.getEvent("", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetGroup() throws Exception
     {
-        final Map<String, Object> res = connector.getGroup("", "");
+        final Group res = connector.getGroup("", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetLink() throws Exception
     {
-        final Map<String, Object> res = connector.getLink("", "");
+        final Link res = connector.getLink("", "", anyString());
         assertNotNull(res);
     }
     
     @Test
     public void testGetNote() throws Exception
     {
-        final Map<String, Object> res = connector.getNote("", "", "");
+        final Note res = connector.getNote("", "", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetPage() throws Exception
     {
-        final Map<String, Object> res = connector.getPage("", "");
+        final Page res = connector.getPage("", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetPhoto() throws Exception
     {
-        final Map<String, Object> res = connector.getPhoto("", "");
+        final Photo res = connector.getPhoto("", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetPost() throws Exception
     {
-        final Map<String, Object> res = connector.getPost("", "");
+        final Post res = connector.getPost("", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetStatus() throws Exception
     {
-        final Map<String, Object> res = connector.getStatus("", "", "");
+        final StatusMessage res = connector.getStatus("", "", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetUser() throws Exception
     {
-        final Map<String, Object> res = connector.getUser("", "");
+        final User res = connector.getUser("", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetVideo() throws Exception
     {
-        final Map<String, Object> res = connector.getVideo("", "", "");
+        final Video res = connector.getVideo("", "", "");
         assertNotNull(res);
     }
     
