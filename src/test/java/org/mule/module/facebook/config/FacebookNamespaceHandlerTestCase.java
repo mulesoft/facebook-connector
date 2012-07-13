@@ -13,9 +13,12 @@
  */
 package org.mule.module.facebook.config;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.mule.api.MuleContext;
-import org.mule.construct.Flow;
+import org.mule.api.MuleEvent;
+import org.mule.api.processor.MessageProcessor;
 import org.mule.tck.junit4.FunctionalTestCase;
 import org.mule.transport.http.HttpConnector;
 
@@ -46,14 +49,22 @@ public class FacebookNamespaceHandlerTestCase extends FunctionalTestCase {
             Now you can send data to your test flow from the unit test:
 
             String payload = <your input to the flow here>;
-            SimpleFlowConstruct flow = lookupFlowConstruct("theFlow");
+            MessageProcessor flow = lookupFlowConstruct("theFlow");
             MuleEvent event = getTestEvent(payload);
             MuleEvent responseEvent = flow.process(event);
             assertEquals(<expected test output>, responseEvent.getMessage().getPayloadAsString());
         */
     }
+    
+    public void testFlow() throws Exception
+    {
+        MessageProcessor flow = lookupFlowConstruct("flow-name");
+        assertNotNull(flow);
+        MuleEvent response = flow.process(getTestEvent(null));
+        assertNotNull(response);
+    }
 
-    private Flow lookupFlowConstruct(String name) {
-        return (Flow) muleContext.getRegistry().lookupFlowConstruct(name);
+    private MessageProcessor lookupFlowConstruct(String name) {
+        return (MessageProcessor) muleContext.getRegistry().lookupFlowConstruct(name);
     }
 }
