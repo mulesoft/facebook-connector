@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="maverickme" created="Thu Jul 19 12:38:28 ART 2012" guiVersion="3.3.0.M2" id="1342720078451" licenseCode="Unlicensed" licenseType="Unknown" modified="Thu Jul 19 12:38:28 ART 2012" modifiedBy="maverickme" name="get-link-link" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/link" _dataStructure="OBJECT" _id="__id" _type="Output" id="625a91e0-ca57-4f13-9e12-f92620b1715f">
+<Record fieldDelimiter="|" label="link" name="link" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/link/link" containerType="" label="link" name="link" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="Link" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/createdTime" containerType="" label="createdTime" name="createdTime" type="date"/>
+<Field __sourcePath="{}/object/description" containerType="" label="description" name="description" type="string"/>
+<Field __sourcePath="{}/object/from/id" containerType="" label="id" name="id" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/activities" containerType="" label="activities" name="activities" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/albums" containerType="" label="albums" name="albums" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/books" containerType="" label="books" name="books" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/events" containerType="" label="events" name="events" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/family" containerType="" label="family" name="family" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/feed" containerType="" label="feed" name="feed" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/friends" containerType="" label="friends" name="friends" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/groups" containerType="" label="groups" name="groups" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/home" containerType="" label="home" name="home" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/inbox" containerType="" label="inbox" name="inbox" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/interests" containerType="" label="interests" name="interests" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/likes" containerType="" label="likes" name="likes" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/links" containerType="" label="links" name="links" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/movies" containerType="" label="movies" name="movies" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/music" containerType="" label="music" name="music" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/notes" containerType="" label="notes" name="notes" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/outbox" containerType="" label="outbox" name="outbox" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/photos" containerType="" label="photos" name="photos" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/picture" containerType="" label="picture" name="picture2" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/posts" containerType="" label="posts" name="posts" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/statuses" containerType="" label="statuses" name="statuses" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/tagged" containerType="" label="tagged" name="tagged" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/television" containerType="" label="television" name="television" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/updates" containerType="" label="updates" name="updates" type="string"/>
+<Field __sourcePath="{}/object/from/metadata/connections/videos" containerType="" label="videos" name="videos" type="string"/>
+<Field __sourcePath="{}/object/from/name" containerType="" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/from/type" containerType="" label="type" name="type" type="string"/>
+<Field __sourcePath="{}/object/icon" containerType="" label="icon" name="icon" type="string"/>
+<Field __sourcePath="{}/object/id" containerType="" label="id" name="id2" type="string"/>
+<Field __sourcePath="{}/object/link" containerType="" label="link" name="link" type="string"/>
+<Field __sourcePath="{}/object/message" containerType="" label="message" name="message" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/activities" containerType="" label="activities" name="activities2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/albums" containerType="" label="albums" name="albums2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/books" containerType="" label="books" name="books2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/events" containerType="" label="events" name="events2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/family" containerType="" label="family" name="family2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/feed" containerType="" label="feed" name="feed2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/friends" containerType="" label="friends" name="friends2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/groups" containerType="" label="groups" name="groups2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/home" containerType="" label="home" name="home2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/inbox" containerType="" label="inbox" name="inbox2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/interests" containerType="" label="interests" name="interests2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/likes" containerType="" label="likes" name="likes2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/links" containerType="" label="links" name="links2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/movies" containerType="" label="movies" name="movies2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/music" containerType="" label="music" name="music2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/notes" containerType="" label="notes" name="notes2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/outbox" containerType="" label="outbox" name="outbox2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/photos" containerType="" label="photos" name="photos2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/picture" containerType="" label="picture" name="picture3" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/posts" containerType="" label="posts" name="posts2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/statuses" containerType="" label="statuses" name="statuses2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/tagged" containerType="" label="tagged" name="tagged2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/television" containerType="" label="television" name="television2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/updates" containerType="" label="updates" name="updates2" type="string"/>
+<Field __sourcePath="{}/object/metadata/connections/videos" containerType="" label="videos" name="videos2" type="string"/>
+<Field __sourcePath="{}/object/name" containerType="" label="name" name="name2" type="string"/>
+<Field __sourcePath="{}/object/picture" containerType="" label="picture" name="picture4" type="string"/>
+<Field __sourcePath="{}/object/type" containerType="" label="type" name="type2" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="JAVA Reader" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="createdTime" trim="true" xpath="createdTime"/>
+  <Mapping cloverField="description" trim="true" xpath="description"/>
+  <Mapping cloverField="id" trim="true" xpath="from/id"/>
+  <Mapping cloverField="activities" trim="true" xpath="from/metadata/connections/activities"/>
+  <Mapping cloverField="albums" trim="true" xpath="from/metadata/connections/albums"/>
+  <Mapping cloverField="books" trim="true" xpath="from/metadata/connections/books"/>
+  <Mapping cloverField="events" trim="true" xpath="from/metadata/connections/events"/>
+  <Mapping cloverField="family" trim="true" xpath="from/metadata/connections/family"/>
+  <Mapping cloverField="feed" trim="true" xpath="from/metadata/connections/feed"/>
+  <Mapping cloverField="friends" trim="true" xpath="from/metadata/connections/friends"/>
+  <Mapping cloverField="groups" trim="true" xpath="from/metadata/connections/groups"/>
+  <Mapping cloverField="home" trim="true" xpath="from/metadata/connections/home"/>
+  <Mapping cloverField="inbox" trim="true" xpath="from/metadata/connections/inbox"/>
+  <Mapping cloverField="interests" trim="true" xpath="from/metadata/connections/interests"/>
+  <Mapping cloverField="likes" trim="true" xpath="from/metadata/connections/likes"/>
+  <Mapping cloverField="links" trim="true" xpath="from/metadata/connections/links"/>
+  <Mapping cloverField="movies" trim="true" xpath="from/metadata/connections/movies"/>
+  <Mapping cloverField="music" trim="true" xpath="from/metadata/connections/music"/>
+  <Mapping cloverField="notes" trim="true" xpath="from/metadata/connections/notes"/>
+  <Mapping cloverField="outbox" trim="true" xpath="from/metadata/connections/outbox"/>
+  <Mapping cloverField="photos" trim="true" xpath="from/metadata/connections/photos"/>
+  <Mapping cloverField="picture2" trim="true" xpath="from/metadata/connections/picture"/>
+  <Mapping cloverField="posts" trim="true" xpath="from/metadata/connections/posts"/>
+  <Mapping cloverField="statuses" trim="true" xpath="from/metadata/connections/statuses"/>
+  <Mapping cloverField="tagged" trim="true" xpath="from/metadata/connections/tagged"/>
+  <Mapping cloverField="television" trim="true" xpath="from/metadata/connections/television"/>
+  <Mapping cloverField="updates" trim="true" xpath="from/metadata/connections/updates"/>
+  <Mapping cloverField="videos" trim="true" xpath="from/metadata/connections/videos"/>
+  <Mapping cloverField="name" trim="true" xpath="from/name"/>
+  <Mapping cloverField="type" trim="true" xpath="from/type"/>
+  <Mapping cloverField="icon" trim="true" xpath="icon"/>
+  <Mapping cloverField="id2" trim="true" xpath="id"/>
+  <Mapping cloverField="link" trim="true" xpath="link"/>
+  <Mapping cloverField="message" trim="true" xpath="message"/>
+  <Mapping cloverField="activities2" trim="true" xpath="metadata/connections/activities"/>
+  <Mapping cloverField="albums2" trim="true" xpath="metadata/connections/albums"/>
+  <Mapping cloverField="books2" trim="true" xpath="metadata/connections/books"/>
+  <Mapping cloverField="events2" trim="true" xpath="metadata/connections/events"/>
+  <Mapping cloverField="family2" trim="true" xpath="metadata/connections/family"/>
+  <Mapping cloverField="feed2" trim="true" xpath="metadata/connections/feed"/>
+  <Mapping cloverField="friends2" trim="true" xpath="metadata/connections/friends"/>
+  <Mapping cloverField="groups2" trim="true" xpath="metadata/connections/groups"/>
+  <Mapping cloverField="home2" trim="true" xpath="metadata/connections/home"/>
+  <Mapping cloverField="inbox2" trim="true" xpath="metadata/connections/inbox"/>
+  <Mapping cloverField="interests2" trim="true" xpath="metadata/connections/interests"/>
+  <Mapping cloverField="likes2" trim="true" xpath="metadata/connections/likes"/>
+  <Mapping cloverField="links2" trim="true" xpath="metadata/connections/links"/>
+  <Mapping cloverField="movies2" trim="true" xpath="metadata/connections/movies"/>
+  <Mapping cloverField="music2" trim="true" xpath="metadata/connections/music"/>
+  <Mapping cloverField="notes2" trim="true" xpath="metadata/connections/notes"/>
+  <Mapping cloverField="outbox2" trim="true" xpath="metadata/connections/outbox"/>
+  <Mapping cloverField="photos2" trim="true" xpath="metadata/connections/photos"/>
+  <Mapping cloverField="picture3" trim="true" xpath="metadata/connections/picture"/>
+  <Mapping cloverField="posts2" trim="true" xpath="metadata/connections/posts"/>
+  <Mapping cloverField="statuses2" trim="true" xpath="metadata/connections/statuses"/>
+  <Mapping cloverField="tagged2" trim="true" xpath="metadata/connections/tagged"/>
+  <Mapping cloverField="television2" trim="true" xpath="metadata/connections/television"/>
+  <Mapping cloverField="updates2" trim="true" xpath="metadata/connections/updates"/>
+  <Mapping cloverField="videos2" trim="true" xpath="metadata/connections/videos"/>
+  <Mapping cloverField="name2" trim="true" xpath="name"/>
+  <Mapping cloverField="picture4" trim="true" xpath="picture"/>
+  <Mapping cloverField="type2" trim="true" xpath="type"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="com.restfb.types.Link"/>
+  <typed-object type="com.restfb.types.Link">
+    <typed-object-ref name="createdTime" type-ref="java.util.Date"/>
+    <typed-object-ref name="description" type-ref="java.lang.String"/>
+    <typed-object-ref name="from" type-ref="com.restfb.types.NamedFacebookType"/>
+    <typed-object-ref name="icon" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="java.lang.String"/>
+    <typed-object-ref name="link" type-ref="java.lang.String"/>
+    <typed-object-ref name="message" type-ref="java.lang.String"/>
+    <typed-object-ref name="metadata" type-ref="com.restfb.types.FacebookType$Metadata"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="picture" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="com.restfb.types.NamedFacebookType">
+    <typed-object-ref name="id" type-ref="java.lang.String"/>
+    <typed-object-ref name="metadata" type-ref="com.restfb.types.FacebookType$Metadata"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.restfb.types.FacebookType$Metadata$Connections">
+    <typed-object-ref name="activities" type-ref="java.lang.String"/>
+    <typed-object-ref name="albums" type-ref="java.lang.String"/>
+    <typed-object-ref name="books" type-ref="java.lang.String"/>
+    <typed-object-ref name="events" type-ref="java.lang.String"/>
+    <typed-object-ref name="family" type-ref="java.lang.String"/>
+    <typed-object-ref name="feed" type-ref="java.lang.String"/>
+    <typed-object-ref name="friends" type-ref="java.lang.String"/>
+    <typed-object-ref name="groups" type-ref="java.lang.String"/>
+    <typed-object-ref name="home" type-ref="java.lang.String"/>
+    <typed-object-ref name="inbox" type-ref="java.lang.String"/>
+    <typed-object-ref name="interests" type-ref="java.lang.String"/>
+    <typed-object-ref name="likes" type-ref="java.lang.String"/>
+    <typed-object-ref name="links" type-ref="java.lang.String"/>
+    <typed-object-ref name="movies" type-ref="java.lang.String"/>
+    <typed-object-ref name="music" type-ref="java.lang.String"/>
+    <typed-object-ref name="notes" type-ref="java.lang.String"/>
+    <typed-object-ref name="outbox" type-ref="java.lang.String"/>
+    <typed-object-ref name="photos" type-ref="java.lang.String"/>
+    <typed-object-ref name="picture" type-ref="java.lang.String"/>
+    <typed-object-ref name="posts" type-ref="java.lang.String"/>
+    <typed-object-ref name="statuses" type-ref="java.lang.String"/>
+    <typed-object-ref name="tagged" type-ref="java.lang.String"/>
+    <typed-object-ref name="television" type-ref="java.lang.String"/>
+    <typed-object-ref name="updates" type-ref="java.lang.String"/>
+    <typed-object-ref name="videos" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.restfb.types.FacebookType$Metadata">
+    <typed-object-ref name="connections" type-ref="com.restfb.types.FacebookType$Metadata$Connections"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="MAP Writer" guiWidth="0" guiX="460" guiY="20" id="MAP_WRITER0" type="MAP_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<link xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <link>$0.link</link>
+</link>]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="object_to_link" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+$out.0.__id=$in.0.__id;
+	$out.0.link=$in.0.link;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="625a91e0-ca57-4f13-9e12-f92620b1715f" outPort="Port 0 (out)" toNode="MAP_WRITER0:0"/>
+</Phase>
+</Graph>

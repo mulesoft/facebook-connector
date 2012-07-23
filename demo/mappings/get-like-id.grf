@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="maverickme" created="Thu Jul 19 12:38:28 ART 2012" guiVersion="3.3.0.M2" id="1342719488448" licenseCode="Unlicensed" licenseType="Unknown" modified="Thu Jul 19 12:38:28 ART 2012" modifiedBy="maverickme" name="get-like-id" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/like" _dataStructure="OBJECT" _id="__id" _type="Output" id="4d436a12-e5a5-4bf9-a017-65411b32975e">
+<Record fieldDelimiter="|" label="like" name="like" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/like/id" containerType="" label="id" name="id" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/list" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="PageConnection" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/list/category" containerType="" label="category" name="category" type="string"/>
+<Field __sourcePath="{}/list/createdTime" containerType="" label="createdTime" name="createdTime" type="date"/>
+<Field __sourcePath="{}/list/id" containerType="" label="id" name="id" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/activities" containerType="" label="activities" name="activities" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/albums" containerType="" label="albums" name="albums" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/books" containerType="" label="books" name="books" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/events" containerType="" label="events" name="events" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/family" containerType="" label="family" name="family" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/feed" containerType="" label="feed" name="feed" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/friends" containerType="" label="friends" name="friends" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/groups" containerType="" label="groups" name="groups" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/home" containerType="" label="home" name="home" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/inbox" containerType="" label="inbox" name="inbox" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/interests" containerType="" label="interests" name="interests" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/likes" containerType="" label="likes" name="likes" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/links" containerType="" label="links" name="links" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/movies" containerType="" label="movies" name="movies" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/music" containerType="" label="music" name="music" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/notes" containerType="" label="notes" name="notes" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/outbox" containerType="" label="outbox" name="outbox" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/photos" containerType="" label="photos" name="photos" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/picture" containerType="" label="picture" name="picture" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/posts" containerType="" label="posts" name="posts" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/statuses" containerType="" label="statuses" name="statuses" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/tagged" containerType="" label="tagged" name="tagged" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/television" containerType="" label="television" name="television" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/updates" containerType="" label="updates" name="updates" type="string"/>
+<Field __sourcePath="{}/list/metadata/connections/videos" containerType="" label="videos" name="videos" type="string"/>
+<Field __sourcePath="{}/list/name" containerType="" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/list/type" containerType="" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="JAVA Reader" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="category" trim="true" xpath="category"/>
+  <Mapping cloverField="createdTime" trim="true" xpath="createdTime"/>
+  <Mapping cloverField="id" trim="true" xpath="id"/>
+  <Mapping cloverField="activities" trim="true" xpath="metadata/connections/activities"/>
+  <Mapping cloverField="albums" trim="true" xpath="metadata/connections/albums"/>
+  <Mapping cloverField="books" trim="true" xpath="metadata/connections/books"/>
+  <Mapping cloverField="events" trim="true" xpath="metadata/connections/events"/>
+  <Mapping cloverField="family" trim="true" xpath="metadata/connections/family"/>
+  <Mapping cloverField="feed" trim="true" xpath="metadata/connections/feed"/>
+  <Mapping cloverField="friends" trim="true" xpath="metadata/connections/friends"/>
+  <Mapping cloverField="groups" trim="true" xpath="metadata/connections/groups"/>
+  <Mapping cloverField="home" trim="true" xpath="metadata/connections/home"/>
+  <Mapping cloverField="inbox" trim="true" xpath="metadata/connections/inbox"/>
+  <Mapping cloverField="interests" trim="true" xpath="metadata/connections/interests"/>
+  <Mapping cloverField="likes" trim="true" xpath="metadata/connections/likes"/>
+  <Mapping cloverField="links" trim="true" xpath="metadata/connections/links"/>
+  <Mapping cloverField="movies" trim="true" xpath="metadata/connections/movies"/>
+  <Mapping cloverField="music" trim="true" xpath="metadata/connections/music"/>
+  <Mapping cloverField="notes" trim="true" xpath="metadata/connections/notes"/>
+  <Mapping cloverField="outbox" trim="true" xpath="metadata/connections/outbox"/>
+  <Mapping cloverField="photos" trim="true" xpath="metadata/connections/photos"/>
+  <Mapping cloverField="picture" trim="true" xpath="metadata/connections/picture"/>
+  <Mapping cloverField="posts" trim="true" xpath="metadata/connections/posts"/>
+  <Mapping cloverField="statuses" trim="true" xpath="metadata/connections/statuses"/>
+  <Mapping cloverField="tagged" trim="true" xpath="metadata/connections/tagged"/>
+  <Mapping cloverField="television" trim="true" xpath="metadata/connections/television"/>
+  <Mapping cloverField="updates" trim="true" xpath="metadata/connections/updates"/>
+  <Mapping cloverField="videos" trim="true" xpath="metadata/connections/videos"/>
+  <Mapping cloverField="name" trim="true" xpath="name"/>
+  <Mapping cloverField="type" trim="true" xpath="type"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <schema-collection>
+    <typed-object-ref type-ref="com.restfb.types.PageConnection"/>
+  </schema-collection>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="com.restfb.types.PageConnection">
+    <typed-object-ref name="category" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdTime" type-ref="java.util.Date"/>
+    <typed-object-ref name="id" type-ref="java.lang.String"/>
+    <typed-object-ref name="metadata" type-ref="com.restfb.types.FacebookType$Metadata"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.restfb.types.FacebookType$Metadata$Connections">
+    <typed-object-ref name="activities" type-ref="java.lang.String"/>
+    <typed-object-ref name="albums" type-ref="java.lang.String"/>
+    <typed-object-ref name="books" type-ref="java.lang.String"/>
+    <typed-object-ref name="events" type-ref="java.lang.String"/>
+    <typed-object-ref name="family" type-ref="java.lang.String"/>
+    <typed-object-ref name="feed" type-ref="java.lang.String"/>
+    <typed-object-ref name="friends" type-ref="java.lang.String"/>
+    <typed-object-ref name="groups" type-ref="java.lang.String"/>
+    <typed-object-ref name="home" type-ref="java.lang.String"/>
+    <typed-object-ref name="inbox" type-ref="java.lang.String"/>
+    <typed-object-ref name="interests" type-ref="java.lang.String"/>
+    <typed-object-ref name="likes" type-ref="java.lang.String"/>
+    <typed-object-ref name="links" type-ref="java.lang.String"/>
+    <typed-object-ref name="movies" type-ref="java.lang.String"/>
+    <typed-object-ref name="music" type-ref="java.lang.String"/>
+    <typed-object-ref name="notes" type-ref="java.lang.String"/>
+    <typed-object-ref name="outbox" type-ref="java.lang.String"/>
+    <typed-object-ref name="photos" type-ref="java.lang.String"/>
+    <typed-object-ref name="picture" type-ref="java.lang.String"/>
+    <typed-object-ref name="posts" type-ref="java.lang.String"/>
+    <typed-object-ref name="statuses" type-ref="java.lang.String"/>
+    <typed-object-ref name="tagged" type-ref="java.lang.String"/>
+    <typed-object-ref name="television" type-ref="java.lang.String"/>
+    <typed-object-ref name="updates" type-ref="java.lang.String"/>
+    <typed-object-ref name="videos" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.restfb.types.FacebookType$Metadata">
+    <typed-object-ref name="connections" type-ref="com.restfb.types.FacebookType$Metadata$Connections"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="MAP Writer" guiWidth="0" guiX="460" guiY="20" id="MAP_WRITER0" type="MAP_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<like xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <id>$0.id</id>
+</like>]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="list_to_like" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+$out.0.__id=$in.0.__id;
+	$out.0.id=$in.0.id;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="4d436a12-e5a5-4bf9-a017-65411b32975e" outPort="Port 0 (out)" toNode="MAP_WRITER0:0"/>
+</Phase>
+</Graph>
