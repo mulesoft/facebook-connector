@@ -161,6 +161,7 @@ public class FacebookConnector
                                             .queryParam("until", until)
                                             .queryParam("limit", limit)
                                             .queryParam("offset", offset)
+                                            .queryParam("type", "post")
                                             .get(String.class);
         
         return mapper.toJavaList(jsonResponse, Post.class);
@@ -2883,6 +2884,10 @@ public class FacebookConnector
         catch (IOException e)
         {
             throw MuleSoftException.soften(e);
+        }
+        catch (IllegalArgumentException iae)
+        {
+            throw MuleSoftException.soften(iae);
         }
         return ArrayUtils.toObject(baos.toByteArray());
     }
