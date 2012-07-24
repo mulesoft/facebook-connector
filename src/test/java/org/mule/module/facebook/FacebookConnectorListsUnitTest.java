@@ -285,5 +285,229 @@ public class FacebookConnectorListsUnitTest extends FacebookConnectorGenericUnit
         connector.getUserPosts("", "", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
+    
+    @Test
+    public void testGetUserFriends()
+    {
+        connector.getUserFriends("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserActivities()
+    {
+        connector.getUserActivities("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserCheckins()
+    {
+        connector.getUserCheckins("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserInterest()
+    {
+        connector.getUserInterests("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserMusic()
+    {
+        connector.getUserMusic("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserBooks()
+    {
+        connector.getUserBooks("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserMovies()
+    {
+        connector.getUserMovies("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserTelevision()
+    {
+        connector.getUserTelevision("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserLikes()
+    {
+        connector.getUserLikes("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserPhotos()
+    {
+        connector.getUserPhotos("", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserAlbums()
+    {
+        connector.getUserAlbums("", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserVideos()
+    {
+        connector.getUserVideos("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserGroups()
+    {
+        connector.getUserGroups("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserStatuses()
+    {
+        connector.getUserStatuses("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserLinks()
+    {
+        connector.getUserLinks("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserNotes()
+    {
+        connector.getUserNotes("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserEvents()
+    {
+        connector.getUserEvents("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserInbox()
+    {
+        connector.getUserInbox("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserOutbox()
+    {
+        connector.getUserOutbox("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserUpdates()
+    {
+        connector.getUserUpdates("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetUserAccounts()
+    {
+        connector.getUserAccounts("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetVideoComments()
+    {
+        connector.getVideoComments("", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationWall()
+    {
+        connector.getApplicationWall("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationTagged()
+    {
+        connector.getApplicationTagged("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationLinks()
+    {
+        connector.getApplicationLinks("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationPhotos()
+    {
+        connector.getApplicationPhotos("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationAlbums()
+    {
+        connector.getApplicationAlbums("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationStatuses()
+    {
+        connector.getApplicationStatuses("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationVideos()
+    {
+        connector.getApplicationVideos("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationNotes()
+    {
+        connector.getApplicationNotes("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationEvents()
+    {
+        connector.getApplicationEvents("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationInsights()
+    {
+        connector.getApplicationInsights("", "", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
 
 }

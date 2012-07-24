@@ -175,4 +175,26 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
         Mockito.verify(resource).get(BufferedImage.class);
     }
     
+    @Test
+    public void testGetCheckin()
+    {
+        connector.getCheckin("", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+    
+    @Test
+    public void testGetApplicationPicture()
+    {
+        connector.getApplicationPicture("", "", "");
+        Mockito.verify(resource).get(BufferedImage.class);
+    }
+    
+    @Test
+    public void testFailGetApplicationPicture()
+    {
+        Mockito.when(resource.get(BufferedImage.class)).thenReturn(null);
+        connector.getEventPicture("", "");
+        Mockito.verify(resource).get(BufferedImage.class);
+    }
+    
 }
