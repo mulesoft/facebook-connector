@@ -25,7 +25,7 @@ import org.springframework.core.io.ClassPathResource;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
  
-public class FacebookConnectorGenericUnitTest
+public abstract class FacebookConnectorGenericUnitTest
 {
     public FacebookConnector connector;
     public Client client;
