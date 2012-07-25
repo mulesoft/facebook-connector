@@ -19,6 +19,29 @@ public class GetApplicationTaggedResponseType extends NamedFacebookType
     /**  */
     private static final long serialVersionUID = 1L;
     
+    /**
+     * Default constructor
+     * */
+    public GetApplicationTaggedResponseType()
+    {
+        super();
+    }
+    
+    /**
+     * Constructor for testing purposes
+     * */
+    public GetApplicationTaggedResponseType(final NamedFacebookType from, final NamedFacebookTypeList to,
+                                            final String message, final String createdTime,
+                                            final String updatedTime, final Comments comments)
+    {
+        this.from = from;
+        this.to = to;
+        this.message = message;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
+        this.comments = comments;
+    }
+    
     @Facebook
     private NamedFacebookType from;
     

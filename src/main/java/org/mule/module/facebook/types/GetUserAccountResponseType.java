@@ -26,4 +26,9 @@ public class GetUserAccountResponseType extends CategorizedFacebookType
     {
         return accessToken;
     }
+    
+    public void setAccessToken(final String accessToken)
+    {
+        this.accessToken = accessToken;
+    }
 }

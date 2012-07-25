@@ -96,6 +96,18 @@ public class Photo extends NamedFacebookType {
     private String createdTime;
 
     private static final long serialVersionUID = 1L;
+    
+    public Tag()
+    {
+        
+    }
+    
+    public Tag(Integer x, Integer y, String createdTime)
+    {
+        this.x = x;
+        this.y = y;
+        this.createdTime = createdTime;
+    }
 
     /**
      * X coordinate (as a percentage of distance from left vs. width).
@@ -144,6 +156,18 @@ public class Photo extends NamedFacebookType {
     private String source;
 
     private static final long serialVersionUID = 1L;
+    
+    public Image()
+    {
+        
+    }
+    
+    public Image(Integer height, Integer width, String source)
+    {
+        this.height = height;
+        this.width = width;
+        this.source = source;
+    }
     
     /**
      * @see java.lang.Object#hashCode()
@@ -197,6 +221,34 @@ public class Photo extends NamedFacebookType {
     }
   }
 
+  /**
+   * Default constructor
+   * */
+  public Photo()
+  {
+      
+  }
+  
+  public Photo(CategorizedFacebookType from, String picture, String source, Integer height, Integer width,
+               String link, String icon, Integer position, String createdTime, String updatedTime,
+               List<Tag> tags, List<Comment> comments, Long likes, List<Image> images)
+  {
+      this.from = from;
+      this.picture = picture;
+      this.source = source;
+      this.height = height;
+      this.width = width;
+      this.link = link;
+      this.icon = icon;
+      this.position = position;
+      this.createdTime = createdTime;
+      this.updatedTime = updatedTime;
+      this.tags = tags;
+      this.comments = comments;
+      this.likes = likes;
+      this.images = images;
+  }
+  
   /**
    * An object containing the name and ID of the user who posted the photo.
    * 

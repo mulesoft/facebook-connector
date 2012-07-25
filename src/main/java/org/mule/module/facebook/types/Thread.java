@@ -71,4 +71,34 @@ public class Thread extends FacebookType
         return comments;
     }
 
+    public void setFrom(NamedFacebookType from)
+    {
+        this.from = from;
+    }
+
+    public void setTo(NamedFacebookTypeList to)
+    {
+        this.to = to;
+    }
+
+    public void setUpdatedTime(String updatedTime)
+    {
+        this.updatedTime = updatedTime;
+    }
+
+    public void setUnread(Integer unread)
+    {
+        this.unread = unread;
+    }
+
+    public void setUnseen(Integer unseen)
+    {
+        this.unseen = unseen;
+    }
+
+    public void setComments(CommentList comments)
+    {
+        this.comments = comments;
+    }
+
 }

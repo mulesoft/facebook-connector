@@ -28,4 +28,9 @@ public class NamedFacebookTypeList implements Serializable
     {
         return data;
     }
+    
+    public void setData(List<NamedFacebookType> data)
+    {
+        this.data = data;
+    }
 }

@@ -18,7 +18,20 @@ import com.restfb.types.Comment;
  
 public class CommentList implements Serializable
 {
+    
+    private static final long serialVersionUID = 1L;
+    
     @Facebook
     private List<Comment> data;
+
+    public List<Comment> getData()
+    {
+        return data;
+    }
+    
+    public void setData(List<Comment> data)
+    {
+        this.data = data;
+    }
 }
 
