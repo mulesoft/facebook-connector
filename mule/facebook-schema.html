@@ -4276,6 +4276,29 @@ permission&lt;/xs:documentation&gt;
       &lt;/xs:extension&gt;
     &lt;/xs:complexContent&gt;
   &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/facebook&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;download-image&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; type=&quot;DownloadImageType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;This is a convinience processor that simply fetchs an uri which is expected to return an image
+and returns it as a Byte array. Notice that I'm using the word image instead of photo or picture which are
+words with a particular meaning in facebook. By image, I refer to a generic bitmap.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;DownloadImageType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute name=&quot;config-ref&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;imageUri&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;the uri of an image resource&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
 &lt;/xs:schema&gt;</pre>
 </div><!-- jd-descr -->
 

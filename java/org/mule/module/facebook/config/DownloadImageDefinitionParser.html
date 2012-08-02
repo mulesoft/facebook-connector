@@ -74,7 +74,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../favicon.ico" />
 <title>
 
-  GetApplicationStatusesMessageProcessor
+  DownloadImageDefinitionParser
 
 
 | Mule Facebook Connector
@@ -237,7 +237,7 @@
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DeleteObjectMessageProcessor.html">DeleteObjectMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DislikeDefinitionParser.html">DislikeDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DislikeMessageProcessor.html">DislikeMessageProcessor</a></li>
-          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DownloadImageDefinitionParser.html">DownloadImageDefinitionParser</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DownloadImageDefinitionParser.html">DownloadImageDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/FacebookConnectorConfigDefinitionParser.html">FacebookConnectorConfigDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/FacebookConnectorHttpCallbackAdapter.html">FacebookConnectorHttpCallbackAdapter</a></li>
@@ -269,7 +269,7 @@
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationPostsDefinitionParser.html">GetApplicationPostsDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationPostsMessageProcessor.html">GetApplicationPostsMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationStatusesDefinitionParser.html">GetApplicationStatusesDefinitionParser</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html">GetApplicationStatusesMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html">GetApplicationStatusesMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationTaggedDefinitionParser.html">GetApplicationTaggedDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationTaggedMessageProcessor.html">GetApplicationTaggedMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationVideosDefinitionParser.html">GetApplicationVideosDefinitionParser</a></li>
@@ -500,56 +500,6 @@
   
   
 
-  
-   
-  
-  
-  
-  
-
-  
-   
-  
-  
-   
-  
-  
-  
-
-  
-   
-  
-  
-   
-  
-  
-  
-
-  
-   
-  
-  
-   
-  
-  
-  
-
-  
-   
-  
-  
-   
-  
-  
-  
-
-  
-   
-  
-  
-  
-  
-
 
 <div class="sum-details-links">
 
@@ -561,11 +511,8 @@ Summary:
 
 
 
-  <a href="#inhconstants">Inherited Constants</a>
-  
 
-
-  &#124; <a href="#lfields">Fields</a>
+  <a href="#lfields">Fields</a>
   
 
 
@@ -578,6 +525,9 @@ Summary:
   &#124; <a href="#pubmethods">Methods</a>
   
 
+
+  &#124; <a href="#promethods">Protected Methods</a>
+  
 
 
   &#124; <a href="#inhmethods">Inherited Methods</a>
@@ -604,7 +554,7 @@ Summary:
      
     
     class
-<h1>GetApplicationStatusesMessageProcessor</h1>
+<h1>DownloadImageDefinitionParser</h1>
 
 
 
@@ -618,19 +568,7 @@ Summary:
   
       implements 
       
-        FlowConstructAware 
-      
-        MuleContextAware 
-      
-        Disposable 
-      
-        Initialisable 
-      
-        Startable 
-      
-        Stoppable 
-      
-        MessageProcessor 
+        BeanDefinitionParser 
       
   
   
@@ -654,7 +592,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.module.facebook.config.GetApplicationStatusesMessageProcessor</td>
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.module.facebook.config.DownloadImageDefinitionParser</td>
     </tr>
     
 
@@ -668,11 +606,6 @@ Summary:
 
 <div class="jd-descr">
 
-
-<h2>Class Overview</h2>
-<p>GetApplicationStatusesMessageProcessor invokes the org.mule.module.facebook.FacebookConnector#getApplicationStatuses(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
- 
-</p>
 
 
 
@@ -715,146 +648,6 @@ Summary:
 
 
 
-<!-- =========== ENUM CONSTANT SUMMARY =========== -->
-<table id="inhconstants" class="jd-sumtable"><tr><th>
-  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
-  <div style="clear:left;">Inherited Constants</div></th></tr>
-
-
-
-
-
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Disposable" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.api.lifecycle.Disposable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From interface
-org.mule.api.lifecycle.Disposable
-<div id="inherited-constants-org.mule.api.lifecycle.Disposable">
-  <div id="inherited-constants-org.mule.api.lifecycle.Disposable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.api.lifecycle.Disposable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol">PHASE_NAME</td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Initialisable" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.api.lifecycle.Initialisable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From interface
-org.mule.api.lifecycle.Initialisable
-<div id="inherited-constants-org.mule.api.lifecycle.Initialisable">
-  <div id="inherited-constants-org.mule.api.lifecycle.Initialisable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.api.lifecycle.Initialisable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol">PHASE_NAME</td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Startable" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.api.lifecycle.Startable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From interface
-org.mule.api.lifecycle.Startable
-<div id="inherited-constants-org.mule.api.lifecycle.Startable">
-  <div id="inherited-constants-org.mule.api.lifecycle.Startable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.api.lifecycle.Startable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol">PHASE_NAME</td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Stoppable" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.api.lifecycle.Stoppable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From interface
-org.mule.api.lifecycle.Stoppable
-<div id="inherited-constants-org.mule.api.lifecycle.Stoppable">
-  <div id="inherited-constants-org.mule.api.lifecycle.Stoppable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.api.lifecycle.Stoppable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol">PHASE_NAME</td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-
-</table>
-
-
 
 
 <!-- =========== FIELD SUMMARY =========== -->
@@ -867,208 +660,11 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#_applicationType">_applicationType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#_limitType">_limitType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#_offsetType">_offsetType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#_sinceType">_sinceType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#_untilType">_untilType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#application">application</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          ExpressionManager</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#expressionManager">expressionManager</a></td>
-          <td class="jd-descrcol" width="100%">Mule Expression Manager
- 
-</td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          FlowConstruct</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#flowConstruct">flowConstruct</a></td>
-          <td class="jd-descrcol" width="100%">Flow construct
- 
-</td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#limit">limit</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          static
-          
-          Logger</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#logger">logger</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#moduleObject">moduleObject</a></td>
-          <td class="jd-descrcol" width="100%">Module object
- 
-</td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          MuleContext</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#muleContext">muleContext</a></td>
-          <td class="jd-descrcol" width="100%">Mule Context
- 
-</td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#offset">offset</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
           TemplateParser.PatternInfo</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#patternInfo">patternInfo</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/DownloadImageDefinitionParser.html#patternInfo">patternInfo</a></td>
           <td class="jd-descrcol" width="100%">Mule Pattern Info
  
 </td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          AtomicInteger</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#retryCount">retryCount</a></td>
-          <td class="jd-descrcol" width="100%">Variable used to track how many retries we have attempted on this message processor
- 
-</td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          int</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#retryMax">retryMax</a></td>
-          <td class="jd-descrcol" width="100%">Maximum number of retries that can be attempted.</td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#since">since</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#until">until</a></td>
-          <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
@@ -1097,7 +693,7 @@ org.mule.api.lifecycle.Stoppable
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#GetApplicationStatusesMessageProcessor()">GetApplicationStatusesMessageProcessor</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/DownloadImageDefinitionParser.html#DownloadImageDefinitionParser()">DownloadImageDefinitionParser</a></span>()</nobr>
         
   </td></tr>
 
@@ -1123,240 +719,10 @@ org.mule.api.lifecycle.Stoppable
             
             
             
-            void</nobr>
+            BeanDefinition</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#dispose()">dispose</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#initialise()">initialise</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Obtains the expression manager from the Mule context and initialises the connector.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            MuleEvent</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#process(org.mule.api.MuleEvent)">process</a></span>(MuleEvent event)</nobr>
-        
-        <div class="jd-descrdiv">Invokes the MessageProcessor.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setApplication(java.lang.Object)">setApplication</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets application</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
-        
-        <div class="jd-descrdiv">Sets flow construct</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setLimit(java.lang.Object)">setLimit</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets limit</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setModuleObject(java.lang.Object)">setModuleObject</a></span>(Object moduleObject)</nobr>
-        
-        <div class="jd-descrdiv">Sets the instance of the object under which the processor will execute</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext context)</nobr>
-        
-        <div class="jd-descrdiv">Set the Mule context</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setOffset(java.lang.Object)">setOffset</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets offset</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setRetryMax(int)">setRetryMax</a></span>(int value)</nobr>
-        
-        <div class="jd-descrdiv">Sets retryMax</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setSince(java.lang.Object)">setSince</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets since</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#setUntil(java.lang.Object)">setUntil</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets until</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#start()">start</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/GetApplicationStatusesMessageProcessor.html#stop()">stop</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/DownloadImageDefinitionParser.html#parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)">parse</a></span>(Element element, ParserContext parserContent)</nobr>
         
   </td></tr>
 
@@ -1365,6 +731,31 @@ org.mule.api.lifecycle.Stoppable
 </table>
 
 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="promethods" class="jd-sumtable"><tr><th colspan="12">Protected Methods</th></tr>
+
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/config/DownloadImageDefinitionParser.html#getAttributeValue(org.w3c.dom.Element, java.lang.String)">getAttributeValue</a></span>(Element element, String attributeName)</nobr>
+        
+  </td></tr>
+
+
+
+</table>
 
 
 
@@ -1580,19 +971,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.construct.FlowConstructAware" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.construct.FlowConstructAware-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.construct.FlowConstructAware
+  org.springframework.beans.factory.xml.BeanDefinitionParser
 
-<div id="inherited-methods-org.mule.api.construct.FlowConstructAware">
-  <div id="inherited-methods-org.mule.api.construct.FlowConstructAware-list"
+<div id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser">
+  <div id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.construct.FlowConstructAware-summary" style="display: none;">
+  <div id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -1605,262 +996,10 @@ From interface
             
             
             
-            void</nobr>
+            BeanDefinition</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setFlowConstruct</span>(FlowConstruct arg0)</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.context.MuleContextAware" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.context.MuleContextAware-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.context.MuleContextAware
-
-<div id="inherited-methods-org.mule.api.context.MuleContextAware">
-  <div id="inherited-methods-org.mule.api.context.MuleContextAware-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.context.MuleContextAware-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setMuleContext</span>(MuleContext arg0)</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Disposable" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.lifecycle.Disposable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.lifecycle.Disposable
-
-<div id="inherited-methods-org.mule.api.lifecycle.Disposable">
-  <div id="inherited-methods-org.mule.api.lifecycle.Disposable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.lifecycle.Disposable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">dispose</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Initialisable" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.lifecycle.Initialisable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.lifecycle.Initialisable
-
-<div id="inherited-methods-org.mule.api.lifecycle.Initialisable">
-  <div id="inherited-methods-org.mule.api.lifecycle.Initialisable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.lifecycle.Initialisable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">initialise</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Startable" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.lifecycle.Startable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.lifecycle.Startable
-
-<div id="inherited-methods-org.mule.api.lifecycle.Startable">
-  <div id="inherited-methods-org.mule.api.lifecycle.Startable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.lifecycle.Startable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">start</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Stoppable" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.lifecycle.Stoppable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.lifecycle.Stoppable
-
-<div id="inherited-methods-org.mule.api.lifecycle.Stoppable">
-  <div id="inherited-methods-org.mule.api.lifecycle.Stoppable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.lifecycle.Stoppable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">stop</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.processor.MessageProcessor" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.processor.MessageProcessor-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.processor.MessageProcessor
-
-<div id="inherited-methods-org.mule.api.processor.MessageProcessor">
-  <div id="inherited-methods-org.mule.api.processor.MessageProcessor-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.processor.MessageProcessor-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            MuleEvent</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">process</span>(MuleEvent arg0)</nobr>
+        <span class="sympad">parse</span>(Element arg0, ParserContext arg1)</nobr>
         
   </td></tr>
 
@@ -1903,404 +1042,6 @@ From interface
 
 
 
-<A NAME="_applicationType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        _applicationType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_limitType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        _limitType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_offsetType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        _offsetType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_sinceType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        _sinceType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_untilType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        _untilType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="application"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        Object
-      </span>
-        application
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="expressionManager"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        ExpressionManager
-      </span>
-        expressionManager
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Mule Expression Manager
- 
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="flowConstruct"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        FlowConstruct
-      </span>
-        flowConstruct
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Flow construct
- 
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="limit"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        Object
-      </span>
-        limit
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="logger"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-        static 
-         
-        Logger
-      </span>
-        logger
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="moduleObject"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        Object
-      </span>
-        moduleObject
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Module object
- 
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="muleContext"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        MuleContext
-      </span>
-        muleContext
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Mule Context
- 
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="offset"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        Object
-      </span>
-        offset
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="patternInfo"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2333,130 +1074,6 @@ From interface
 
 
 
-<A NAME="retryCount"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        AtomicInteger
-      </span>
-        retryCount
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Variable used to track how many retries we have attempted on this message processor
- 
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="retryMax"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        int
-      </span>
-        retryMax
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Maximum number of retries that can be attempted.
- 
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="since"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        Object
-      </span>
-        since
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="until"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        Object
-      </span>
-        until
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 
 <!-- Public ctors -->
 
@@ -2466,7 +1083,7 @@ From interface
 
 
 
-<A NAME="GetApplicationStatusesMessageProcessor()"></A>
+<A NAME="DownloadImageDefinitionParser()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2478,7 +1095,7 @@ From interface
          
         
       </span>
-      <span class="sympad">GetApplicationStatusesMessageProcessor</span>
+      <span class="sympad">DownloadImageDefinitionParser</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2512,7 +1129,7 @@ From interface
 
 
 
-<A NAME="dispose()"></A>
+<A NAME="parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2522,499 +1139,10 @@ From interface
          
          
          
-        void
+        BeanDefinition
       </span>
-      <span class="sympad">dispose</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="initialise()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">initialise</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Obtains the expression manager from the Mule context and initialises the connector. If a target object  has not been set already it will search the Mule registry for a default one.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>InitialisationException</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="process(org.mule.api.MuleEvent)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        MuleEvent
-      </span>
-      <span class="sympad">process</span>
-      <span class="normal">(MuleEvent event)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Invokes the MessageProcessor.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>event</td>
-          <td>MuleEvent to be processed</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>MuleException</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setApplication(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setApplication</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets application</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setFlowConstruct(org.mule.api.construct.FlowConstruct)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setFlowConstruct</span>
-      <span class="normal">(FlowConstruct flowConstruct)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets flow construct</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>flowConstruct</td>
-          <td>Flow construct to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setLimit(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setLimit</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets limit</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setModuleObject(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setModuleObject</span>
-      <span class="normal">(Object moduleObject)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the instance of the object under which the processor will execute</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>moduleObject</td>
-          <td>Instace of the module
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setMuleContext(org.mule.api.MuleContext)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setMuleContext</span>
-      <span class="normal">(MuleContext context)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Set the Mule context</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>context</td>
-          <td>Mule context to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setOffset(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setOffset</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets offset</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setRetryMax(int)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setRetryMax</span>
-      <span class="normal">(int value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets retryMax</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setSince(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setSince</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets since</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setUntil(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setUntil</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets until</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="start()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">start</span>
-      <span class="normal">()</span>
+      <span class="sympad">parse</span>
+      <span class="normal">(Element element, ParserContext parserContent)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -3028,51 +1156,15 @@ From interface
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
         <tr>
-            <th>MuleException</td>
-            <td></td>
+          <th>element</td>
+          <td></td>
         </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="stop()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">stop</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
         <tr>
-            <th>MuleException</td>
-            <td></td>
+          <th>parserContent</td>
+          <td></td>
         </tr>
       </table>
   </div>
@@ -3085,6 +1177,55 @@ From interface
 
 
 <!-- ========= METHOD DETAIL ======== -->
+
+<h2>Protected Methods</h2>
+
+
+
+<A NAME="getAttributeValue(org.w3c.dom.Element, java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getAttributeValue</span>
+      <span class="normal">(Element element, String attributeName)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>element</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>attributeName</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 
 
 
