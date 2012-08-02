@@ -560,7 +560,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>GetAlbumMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getAlbum(java.lang.String, java.lang.String)">getAlbum(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>GetAlbumMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getAlbum(java.lang.String, java.lang.String, java.lang.String)">getAlbum(java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -758,7 +758,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/processors/GetAlbumMessageProcessor.html#_albumType">_albumType</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/processors/GetAlbumMessageProcessor.html#_accessTokenType">_accessTokenType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -769,7 +769,29 @@ org.mule.api.lifecycle.Stoppable
           
           
           String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/processors/GetAlbumMessageProcessor.html#_albumType">_albumType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/processors/GetAlbumMessageProcessor.html#_metadataType">_metadataType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/processors/GetAlbumMessageProcessor.html#accessToken">accessToken</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1002,6 +1024,24 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/processors/GetAlbumMessageProcessor.html#setAccessToken(java.lang.Object)">setAccessToken</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets accessToken</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/processors/GetAlbumMessageProcessor.html#setAlbum(java.lang.Object)">setAlbum</a></span>(Object value)</nobr>
         
         <div class="jd-descrdiv">Sets album</div>
@@ -1010,7 +1050,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1028,7 +1068,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1046,7 +1086,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1064,7 +1104,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1082,7 +1122,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1100,7 +1140,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1116,7 +1156,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1673,6 +1713,36 @@ From interface
 
 
 
+<A NAME="_accessTokenType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        _accessTokenType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="_albumType"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1714,6 +1784,36 @@ From interface
         String
       </span>
         _metadataType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="accessToken"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Object
+      </span>
+        accessToken
     </h4>
       <div class="api-level">
         
@@ -2214,6 +2314,47 @@ From interface
         <tr>
             <th>MuleException</td>
             <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setAccessToken(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAccessToken</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets accessToken</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
         </tr>
       </table>
   </div>

@@ -2182,7 +2182,7 @@ From class
             Album</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbum(java.lang.String, java.lang.String)">getAlbum</a></span>(String album, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbum(java.lang.String, java.lang.String, java.lang.String)">getAlbum</a></span>(String accessToken, String album, String metadata)</nobr>
         
         <div class="jd-descrdiv">A photo album
  <p/>
@@ -2202,7 +2202,7 @@ From class
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumComments</a></span>(String album, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumComments</a></span>(String accessToken, String album, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The comments made on this album
  <p/>
@@ -2222,7 +2222,7 @@ From class
             List&lt;Photo&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumPhotos</a></span>(String album, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumPhotos</a></span>(String accessToken, String album, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photos contained in this album
  <p/>
@@ -2529,7 +2529,7 @@ From class
             Event</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEvent(java.lang.String, java.lang.String)">getEvent</a></span>(String eventId, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEvent(java.lang.String, java.lang.String, java.lang.String)">getEvent</a></span>(String accessToken, String eventId, String metadata)</nobr>
         
         <div class="jd-descrdiv">Specifies information about an event, including the location, event name, and
  which invitees plan to attend.</div>
@@ -2650,7 +2650,7 @@ From class
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventPicture(java.lang.String, java.lang.String)">getEventPicture</a></span>(String eventId, String type)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventPicture(java.lang.String, java.lang.String, java.lang.String)">getEventPicture</a></span>(String accessToken, String eventId, String type)</nobr>
         
         <div class="jd-descrdiv">The event's profile picture
  <p/>
@@ -2690,7 +2690,7 @@ From class
             Group</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroup(java.lang.String, java.lang.String)">getGroup</a></span>(String group, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroup(java.lang.String, java.lang.String, java.lang.String)">getGroup</a></span>(String accessToken, String group, String metadata)</nobr>
         
         <div class="jd-descrdiv">A Facebook group
  <p/>
@@ -2730,7 +2730,7 @@ From class
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroupPicture(java.lang.String, java.lang.String)">getGroupPicture</a></span>(String group, String type)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroupPicture(java.lang.String, java.lang.String, java.lang.String)">getGroupPicture</a></span>(String accessToken, String group, String type)</nobr>
         
         <div class="jd-descrdiv">The profile picture of this group
  <p/>
@@ -2827,7 +2827,7 @@ From class
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteComments</a></span>(String note, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteComments</a></span>(String accessToken, String note, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this note 
  </div>
@@ -2846,7 +2846,7 @@ From class
             Post.Likes</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteLikes</a></span>(String note, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteLikes</a></span>(String accessToken, String note, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">People who like the note 
  </div>
@@ -2865,7 +2865,7 @@ From class
             Page</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPage(java.lang.String, java.lang.String)">getPage</a></span>(String page, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPage(java.lang.String, java.lang.String, java.lang.String)">getPage</a></span>(String accessToken, String page, String metadata)</nobr>
         
         <div class="jd-descrdiv">A
  </div>
@@ -2884,7 +2884,7 @@ From class
             List&lt;Album&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageAlbums</a></span>(String page, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageAlbums</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photo albums this page has created 
  </div>
@@ -2960,7 +2960,7 @@ From class
             List&lt;Link&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageLinks</a></span>(String page, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageLinks</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The page's posted links 
  </div>
@@ -2998,7 +2998,7 @@ From class
             List&lt;Photo&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPagePhotos</a></span>(String page, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPagePhotos</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photos this page has uploaded 
  </div>
@@ -3017,7 +3017,7 @@ From class
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePicture(java.lang.String, java.lang.String)">getPagePicture</a></span>(String page, String type)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePicture(java.lang.String, java.lang.String, java.lang.String)">getPagePicture</a></span>(String accessToken, String page, String type)</nobr>
         
         <div class="jd-descrdiv">The page's profile picture 
  </div>
@@ -3131,7 +3131,7 @@ From class
             <a href="../../../../../../java/org/mule/module/facebook/types/Photo.html">Photo</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhoto(java.lang.String, java.lang.String)">getPhoto</a></span>(String photo, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhoto(java.lang.String, java.lang.String, java.lang.String)">getPhoto</a></span>(String accessToken, String photo, String metadata)</nobr>
         
         <div class="jd-descrdiv">An individual photo 
  </div>
@@ -3150,7 +3150,7 @@ From class
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoComments</a></span>(String photo, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoComments</a></span>(String accessToken, String photo, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this photo 
  </div>
@@ -3169,7 +3169,7 @@ From class
             Post.Likes</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoLikes</a></span>(String photo, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoLikes</a></span>(String accessToken, String photo, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">People who like the photo 
  </div>
@@ -3188,7 +3188,7 @@ From class
             Post</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPost(java.lang.String, java.lang.String)">getPost</a></span>(String post, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPost(java.lang.String, java.lang.String, java.lang.String)">getPost</a></span>(String accessToken, String post, String metadata)</nobr>
         
         <div class="jd-descrdiv">An individual entry in a profile's feed 
  </div>
@@ -3207,7 +3207,7 @@ From class
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPostComments</a></span>(String post, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPostComments</a></span>(String accessToken, String post, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this post 
  </div>
@@ -3280,7 +3280,7 @@ From class
             User</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUser(java.lang.String, java.lang.String)">getUser</a></span>(String user, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUser(java.lang.String, java.lang.String, java.lang.String)">getUser</a></span>(String accessToken, String user, String metadata)</nobr>
         
         <div class="jd-descrdiv">A user profile.</div>
   
@@ -3336,7 +3336,7 @@ From class
             List&lt;Album&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAlbums</a></span>(String user, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAlbums</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photo albums this user has created.</div>
   
@@ -3612,7 +3612,7 @@ From class
             List&lt;Photo&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPhotos</a></span>(String user, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPhotos</a></span>(String user, String accessToken, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photos this user is tagged in.</div>
   
@@ -3630,7 +3630,7 @@ From class
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPicture(java.lang.String, java.lang.String)">getUserPicture</a></span>(String user, String type)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPicture(java.lang.String, java.lang.String, java.lang.String)">getUserPicture</a></span>(String accessToken, String user, String type)</nobr>
         
         <div class="jd-descrdiv">The user's profile picture 
  </div>
@@ -3814,7 +3814,7 @@ From class
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getVideoComments</a></span>(String video, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getVideoComments</a></span>(String accessToken, String video, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this video 
  </div>
@@ -4056,7 +4056,7 @@ From class
             List&lt;Page&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPages</a></span>(String q, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPages</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">Search over all pages in the social graph
  <p/>
@@ -4076,7 +4076,7 @@ From class
             List&lt;Post&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPosts</a></span>(String q, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPosts</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">Search over all public posts in the social graph
  <p/>

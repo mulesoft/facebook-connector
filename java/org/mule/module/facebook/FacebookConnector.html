@@ -708,7 +708,7 @@ Summary:
             Album</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbum(java.lang.String, java.lang.String)">getAlbum</a></span>(String album, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbum(java.lang.String, java.lang.String, java.lang.String)">getAlbum</a></span>(String accessToken, String album, String metadata)</nobr>
         
         <div class="jd-descrdiv">A photo album
  <p/>
@@ -728,7 +728,7 @@ Summary:
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumComments</a></span>(String album, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumComments</a></span>(String accessToken, String album, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The comments made on this album
  <p/>
@@ -748,7 +748,7 @@ Summary:
             List&lt;Photo&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumPhotos</a></span>(String album, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumPhotos</a></span>(String accessToken, String album, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photos contained in this album
  <p/>
@@ -1055,7 +1055,7 @@ Summary:
             Event</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getEvent(java.lang.String, java.lang.String)">getEvent</a></span>(String eventId, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getEvent(java.lang.String, java.lang.String, java.lang.String)">getEvent</a></span>(String accessToken, String eventId, String metadata)</nobr>
         
         <div class="jd-descrdiv">Specifies information about an event, including the location, event name, and
  which invitees plan to attend.</div>
@@ -1176,7 +1176,7 @@ Summary:
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getEventPicture(java.lang.String, java.lang.String)">getEventPicture</a></span>(String eventId, String type)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getEventPicture(java.lang.String, java.lang.String, java.lang.String)">getEventPicture</a></span>(String accessToken, String eventId, String type)</nobr>
         
         <div class="jd-descrdiv">The event's profile picture
  <p/>
@@ -1216,7 +1216,7 @@ Summary:
             Group</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getGroup(java.lang.String, java.lang.String)">getGroup</a></span>(String group, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getGroup(java.lang.String, java.lang.String, java.lang.String)">getGroup</a></span>(String accessToken, String group, String metadata)</nobr>
         
         <div class="jd-descrdiv">A Facebook group
  <p/>
@@ -1256,7 +1256,7 @@ Summary:
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getGroupPicture(java.lang.String, java.lang.String)">getGroupPicture</a></span>(String group, String type)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getGroupPicture(java.lang.String, java.lang.String, java.lang.String)">getGroupPicture</a></span>(String accessToken, String group, String type)</nobr>
         
         <div class="jd-descrdiv">The profile picture of this group
  <p/>
@@ -1353,7 +1353,7 @@ Summary:
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteComments</a></span>(String note, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteComments</a></span>(String accessToken, String note, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this note 
  </div>
@@ -1372,7 +1372,7 @@ Summary:
             Post.Likes</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteLikes</a></span>(String note, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteLikes</a></span>(String accessToken, String note, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">People who like the note 
  </div>
@@ -1391,7 +1391,7 @@ Summary:
             Page</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPage(java.lang.String, java.lang.String)">getPage</a></span>(String page, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPage(java.lang.String, java.lang.String, java.lang.String)">getPage</a></span>(String accessToken, String page, String metadata)</nobr>
         
         <div class="jd-descrdiv">A
  </div>
@@ -1410,7 +1410,7 @@ Summary:
             List&lt;Album&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPageAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageAlbums</a></span>(String page, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPageAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageAlbums</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photo albums this page has created 
  </div>
@@ -1486,7 +1486,7 @@ Summary:
             List&lt;Link&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPageLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageLinks</a></span>(String page, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPageLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageLinks</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The page's posted links 
  </div>
@@ -1524,7 +1524,7 @@ Summary:
             List&lt;Photo&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPagePhotos</a></span>(String page, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPagePhotos</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photos this page has uploaded 
  </div>
@@ -1543,7 +1543,7 @@ Summary:
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePicture(java.lang.String, java.lang.String)">getPagePicture</a></span>(String page, String type)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePicture(java.lang.String, java.lang.String, java.lang.String)">getPagePicture</a></span>(String accessToken, String page, String type)</nobr>
         
         <div class="jd-descrdiv">The page's profile picture 
  </div>
@@ -1657,7 +1657,7 @@ Summary:
             <a href="../../../../../java/org/mule/module/facebook/types/Photo.html">Photo</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPhoto(java.lang.String, java.lang.String)">getPhoto</a></span>(String photo, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPhoto(java.lang.String, java.lang.String, java.lang.String)">getPhoto</a></span>(String accessToken, String photo, String metadata)</nobr>
         
         <div class="jd-descrdiv">An individual photo 
  </div>
@@ -1676,7 +1676,7 @@ Summary:
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoComments</a></span>(String photo, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoComments</a></span>(String accessToken, String photo, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this photo 
  </div>
@@ -1695,7 +1695,7 @@ Summary:
             Post.Likes</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoLikes</a></span>(String photo, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoLikes</a></span>(String accessToken, String photo, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">People who like the photo 
  </div>
@@ -1714,7 +1714,7 @@ Summary:
             Post</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPost(java.lang.String, java.lang.String)">getPost</a></span>(String post, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPost(java.lang.String, java.lang.String, java.lang.String)">getPost</a></span>(String accessToken, String post, String metadata)</nobr>
         
         <div class="jd-descrdiv">An individual entry in a profile's feed 
  </div>
@@ -1733,7 +1733,7 @@ Summary:
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPostComments</a></span>(String post, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPostComments</a></span>(String accessToken, String post, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this post 
  </div>
@@ -1806,7 +1806,7 @@ Summary:
             User</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUser(java.lang.String, java.lang.String)">getUser</a></span>(String user, String metadata)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUser(java.lang.String, java.lang.String, java.lang.String)">getUser</a></span>(String accessToken, String user, String metadata)</nobr>
         
         <div class="jd-descrdiv">A user profile.</div>
   
@@ -1862,7 +1862,7 @@ Summary:
             List&lt;Album&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAlbums</a></span>(String user, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAlbums</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photo albums this user has created.</div>
   
@@ -2138,7 +2138,7 @@ Summary:
             List&lt;Photo&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPhotos</a></span>(String user, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPhotos</a></span>(String user, String accessToken, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">The photos this user is tagged in.</div>
   
@@ -2156,7 +2156,7 @@ Summary:
             Byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPicture(java.lang.String, java.lang.String)">getUserPicture</a></span>(String user, String type)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPicture(java.lang.String, java.lang.String, java.lang.String)">getUserPicture</a></span>(String accessToken, String user, String type)</nobr>
         
         <div class="jd-descrdiv">The user's profile picture 
  </div>
@@ -2340,7 +2340,7 @@ Summary:
             List&lt;Comment&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getVideoComments</a></span>(String video, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getVideoComments</a></span>(String accessToken, String video, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">All of the comments on this video 
  </div>
@@ -2582,7 +2582,7 @@ Summary:
             List&lt;Page&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPages</a></span>(String q, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPages</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">Search over all pages in the social graph
  <p/>
@@ -2602,7 +2602,7 @@ Summary:
             List&lt;Post&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPosts</a></span>(String q, String since, String until, String limit, String offset)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPosts</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
         
         <div class="jd-descrdiv">Search over all public posts in the social graph
  <p/>
@@ -3415,7 +3415,7 @@ From class
 </div>
 
 
-<A NAME="getAlbum(java.lang.String, java.lang.String)"></A>
+<A NAME="getAlbum(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -3428,7 +3428,7 @@ From class
         Album
       </span>
       <span class="sympad">getAlbum</span>
-      <span class="normal">(String album, String metadata)</span>
+      <span class="normal">(String accessToken, String album, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -3446,6 +3446,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request to Facebook</td>
+        </tr>
         <tr>
           <th>album</td>
           <td>Represents the ID of the album object.</td>
@@ -3468,7 +3472,7 @@ From class
 </div>
 
 
-<A NAME="getAlbumComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getAlbumComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -3481,7 +3485,7 @@ From class
         List&lt;Comment&gt;
       </span>
       <span class="sympad">getAlbumComments</span>
-      <span class="normal">(String album, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String album, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -3499,6 +3503,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request to Facebook</td>
+        </tr>
         <tr>
           <th>album</td>
           <td>Represents the ID of the album object.</td>
@@ -3531,7 +3539,7 @@ From class
 </div>
 
 
-<A NAME="getAlbumPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getAlbumPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -3544,7 +3552,7 @@ From class
         List&lt;Photo&gt;
       </span>
       <span class="sympad">getAlbumPhotos</span>
-      <span class="normal">(String album, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String album, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -3562,6 +3570,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request to Facebook</td>
+        </tr>
         <tr>
           <th>album</td>
           <td>Represents the ID of the album object.</td>
@@ -4509,7 +4521,7 @@ From class
 </div>
 
 
-<A NAME="getEvent(java.lang.String, java.lang.String)"></A>
+<A NAME="getEvent(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4522,7 +4534,7 @@ From class
         Event
       </span>
       <span class="sympad">getEvent</span>
-      <span class="normal">(String eventId, String metadata)</span>
+      <span class="normal">(String accessToken, String eventId, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4541,6 +4553,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request to Facebook</td>
+        </tr>
         <tr>
           <th>eventId</td>
           <td>Represents the ID of the event object.</td>
@@ -4900,7 +4916,7 @@ From class
 </div>
 
 
-<A NAME="getEventPicture(java.lang.String, java.lang.String)"></A>
+<A NAME="getEventPicture(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4913,7 +4929,7 @@ From class
         Byte[]
       </span>
       <span class="sympad">getEventPicture</span>
-      <span class="normal">(String eventId, String type)</span>
+      <span class="normal">(String accessToken, String eventId, String type)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4931,6 +4947,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>eventId</td>
           <td>Represents the ID of the event object.</td>
@@ -5019,7 +5039,7 @@ From class
 </div>
 
 
-<A NAME="getGroup(java.lang.String, java.lang.String)"></A>
+<A NAME="getGroup(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5032,7 +5052,7 @@ From class
         Group
       </span>
       <span class="sympad">getGroup</span>
-      <span class="normal">(String group, String metadata)</span>
+      <span class="normal">(String accessToken, String group, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5050,6 +5070,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>group</td>
           <td>Represents the ID of the group object.</td>
@@ -5139,7 +5163,7 @@ From class
 </div>
 
 
-<A NAME="getGroupPicture(java.lang.String, java.lang.String)"></A>
+<A NAME="getGroupPicture(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5152,7 +5176,7 @@ From class
         Byte[]
       </span>
       <span class="sympad">getGroupPicture</span>
-      <span class="normal">(String group, String type)</span>
+      <span class="normal">(String accessToken, String group, String type)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5170,6 +5194,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>group</td>
           <td>Represents the ID of the group object.</td>
@@ -5436,7 +5464,7 @@ From class
 </div>
 
 
-<A NAME="getNoteComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getNoteComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5449,7 +5477,7 @@ From class
         List&lt;Comment&gt;
       </span>
       <span class="sympad">getNoteComments</span>
-      <span class="normal">(String note, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String note, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5466,6 +5494,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>note</td>
           <td>Represents the ID of the note object.</td>
@@ -5498,7 +5530,7 @@ From class
 </div>
 
 
-<A NAME="getNoteLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getNoteLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5511,7 +5543,7 @@ From class
         Post.Likes
       </span>
       <span class="sympad">getNoteLikes</span>
-      <span class="normal">(String note, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String note, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5528,6 +5560,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>note</td>
           <td>Represents the ID of the note object.</td>
@@ -5560,7 +5596,7 @@ From class
 </div>
 
 
-<A NAME="getPage(java.lang.String, java.lang.String)"></A>
+<A NAME="getPage(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5573,7 +5609,7 @@ From class
         Page
       </span>
       <span class="sympad">getPage</span>
-      <span class="normal">(String page, String metadata)</span>
+      <span class="normal">(String accessToken, String page, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5590,6 +5626,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>page</td>
           <td>Represents the ID of the page object.</td>
@@ -5612,7 +5652,7 @@ From class
 </div>
 
 
-<A NAME="getPageAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getPageAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5625,7 +5665,7 @@ From class
         List&lt;Album&gt;
       </span>
       <span class="sympad">getPageAlbums</span>
-      <span class="normal">(String page, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String page, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5642,6 +5682,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>page</td>
           <td>Represents the ID of the page object.</td>
@@ -5872,7 +5916,7 @@ From class
 </div>
 
 
-<A NAME="getPageLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getPageLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -5885,7 +5929,7 @@ From class
         List&lt;Link&gt;
       </span>
       <span class="sympad">getPageLinks</span>
-      <span class="normal">(String page, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String page, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -5902,6 +5946,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>page</td>
           <td>Represents the ID of the page object.</td>
@@ -6000,7 +6048,7 @@ From class
 </div>
 
 
-<A NAME="getPagePhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getPagePhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6013,7 +6061,7 @@ From class
         List&lt;Photo&gt;
       </span>
       <span class="sympad">getPagePhotos</span>
-      <span class="normal">(String page, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String page, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6030,6 +6078,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>page</td>
           <td>Represents the ID of the page object.</td>
@@ -6062,7 +6114,7 @@ From class
 </div>
 
 
-<A NAME="getPagePicture(java.lang.String, java.lang.String)"></A>
+<A NAME="getPagePicture(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6075,7 +6127,7 @@ From class
         Byte[]
       </span>
       <span class="sympad">getPagePicture</span>
-      <span class="normal">(String page, String type)</span>
+      <span class="normal">(String accessToken, String page, String type)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6092,6 +6144,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>page</td>
           <td>Represents the ID of the page object.</td>
@@ -6443,7 +6499,7 @@ From class
 </div>
 
 
-<A NAME="getPhoto(java.lang.String, java.lang.String)"></A>
+<A NAME="getPhoto(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6456,7 +6512,7 @@ From class
         <a href="../../../../../java/org/mule/module/facebook/types/Photo.html">Photo</a>
       </span>
       <span class="sympad">getPhoto</span>
-      <span class="normal">(String photo, String metadata)</span>
+      <span class="normal">(String accessToken, String photo, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6473,6 +6529,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>photo</td>
           <td>Represents the ID of the photo object.</td>
@@ -6495,7 +6555,7 @@ From class
 </div>
 
 
-<A NAME="getPhotoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getPhotoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6508,7 +6568,7 @@ From class
         List&lt;Comment&gt;
       </span>
       <span class="sympad">getPhotoComments</span>
-      <span class="normal">(String photo, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String photo, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6525,6 +6585,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>photo</td>
           <td>Represents the ID of the photo object.</td>
@@ -6557,7 +6621,7 @@ From class
 </div>
 
 
-<A NAME="getPhotoLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getPhotoLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6570,7 +6634,7 @@ From class
         Post.Likes
       </span>
       <span class="sympad">getPhotoLikes</span>
-      <span class="normal">(String photo, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String photo, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6587,6 +6651,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>photo</td>
           <td>Represents the ID of the photo object.</td>
@@ -6619,7 +6687,7 @@ From class
 </div>
 
 
-<A NAME="getPost(java.lang.String, java.lang.String)"></A>
+<A NAME="getPost(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6632,7 +6700,7 @@ From class
         Post
       </span>
       <span class="sympad">getPost</span>
-      <span class="normal">(String post, String metadata)</span>
+      <span class="normal">(String accessToken, String post, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6649,6 +6717,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>post</td>
           <td>Represents the ID of the post object.</td>
@@ -6671,7 +6743,7 @@ From class
 </div>
 
 
-<A NAME="getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6684,7 +6756,7 @@ From class
         List&lt;Comment&gt;
       </span>
       <span class="sympad">getPostComments</span>
-      <span class="normal">(String post, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String post, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6701,6 +6773,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>post</td>
           <td>Represents the ID of the post object.</td>
@@ -6886,7 +6962,7 @@ From class
 </div>
 
 
-<A NAME="getUser(java.lang.String, java.lang.String)"></A>
+<A NAME="getUser(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6899,7 +6975,7 @@ From class
         User
       </span>
       <span class="sympad">getUser</span>
-      <span class="normal">(String user, String metadata)</span>
+      <span class="normal">(String accessToken, String user, String metadata)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6916,6 +6992,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>user</td>
           <td>Represents the ID of the user object.</td>
@@ -7070,7 +7150,7 @@ From class
 </div>
 
 
-<A NAME="getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -7083,7 +7163,7 @@ From class
         List&lt;Album&gt;
       </span>
       <span class="sympad">getUserAlbums</span>
-      <span class="normal">(String user, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String user, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -7101,6 +7181,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>user</td>
           <td>Represents the ID of the user object.</td>
@@ -8060,7 +8144,7 @@ From class
 </div>
 
 
-<A NAME="getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -8073,7 +8157,7 @@ From class
         List&lt;Photo&gt;
       </span>
       <span class="sympad">getUserPhotos</span>
-      <span class="normal">(String user, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String user, String accessToken, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -8094,6 +8178,10 @@ From class
         <tr>
           <th>user</td>
           <td>Represents the ID of the user object.</td>
+        </tr>
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request </td>
         </tr>
         <tr>
           <th>since</td>
@@ -8123,7 +8211,7 @@ From class
 </div>
 
 
-<A NAME="getUserPicture(java.lang.String, java.lang.String)"></A>
+<A NAME="getUserPicture(java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -8136,7 +8224,7 @@ From class
         Byte[]
       </span>
       <span class="sympad">getUserPicture</span>
-      <span class="normal">(String user, String type)</span>
+      <span class="normal">(String accessToken, String user, String type)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -8153,6 +8241,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>user</td>
           <td>Represents the ID of the user object.</td>
@@ -8409,7 +8501,7 @@ From class
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>The photos, videos, and posts in which this user has been tagged. Requires the
- user_photo_tags, user_video_tags, friend_photo_tags, or friend_video_tags
+ user_photos, user_video_tags, friends_photos, or friend_video_tags
  permissions 
  </p></div>
   <div class="jd-tagdata">
@@ -8772,7 +8864,7 @@ From class
 </div>
 
 
-<A NAME="getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -8785,7 +8877,7 @@ From class
         List&lt;Comment&gt;
       </span>
       <span class="sympad">getVideoComments</span>
-      <span class="normal">(String video, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String video, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -8802,6 +8894,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request</td>
+        </tr>
         <tr>
           <th>video</td>
           <td>Represents the ID of the video object.</td>
@@ -9517,7 +9613,7 @@ From class
 </div>
 
 
-<A NAME="searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -9530,7 +9626,7 @@ From class
         List&lt;Page&gt;
       </span>
       <span class="sympad">searchPages</span>
-      <span class="normal">(String q, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String q, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -9548,6 +9644,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authentica the request to Facebook</td>
+        </tr>
         <tr>
           <th>q</td>
           <td>The search string</td>
@@ -9580,7 +9680,7 @@ From class
 </div>
 
 
-<A NAME="searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -9593,7 +9693,7 @@ From class
         List&lt;Post&gt;
       </span>
       <span class="sympad">searchPosts</span>
-      <span class="normal">(String q, String since, String until, String limit, String offset)</span>
+      <span class="normal">(String accessToken, String q, String since, String until, String limit, String offset)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -9611,6 +9711,10 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
+        <tr>
+          <th>accessToken</td>
+          <td>The access token to use to authenticate the request to Facebook</td>
+        </tr>
         <tr>
           <th>q</td>
           <td>The search string</td>
