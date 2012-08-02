@@ -21,7 +21,6 @@ import javax.imageio.ImageIO;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -634,7 +633,7 @@ public class FacebookConnector
      * @return The image as a Byte array
      */
     @Processor
-    public Byte[] getEventPicture(@OAuthAccessToken String accessToken, String eventId, @Optional @Default("small") String type)
+    public byte[] getEventPicture(@OAuthAccessToken String accessToken, String eventId, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/picture").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -648,7 +647,7 @@ public class FacebookConnector
         {
             MuleSoftException.soften(e);
         }
-        return ArrayUtils.toObject(baos.toByteArray());
+        return baos.toByteArray();
     }
 
     /**
@@ -745,7 +744,7 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Byte[] getGroupPicture(@OAuthAccessToken String accessToken, String group, @Optional @Default("small") String type)
+    public byte[] getGroupPicture(@OAuthAccessToken String accessToken, String group, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/picture").build(group);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -935,7 +934,7 @@ public class FacebookConnector
      * @return A byte array with the page picture
      */
     @Processor
-    public Byte[] getPagePicture(@OAuthAccessToken String accessToken, String page, @Optional @Default("small") String type)
+    public byte[] getPagePicture(@OAuthAccessToken String accessToken, String page, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1606,10 +1605,10 @@ public class FacebookConnector
      * @param user Represents the ID of the user object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
-     * @return Byte[] with the jpg image
+     * @return byte[] with the jpg image
      */
     @Processor
-    public Byte[] getUserPicture(@OAuthAccessToken String accessToken, String user, @Optional @Default("small") String type)
+    public byte[] getUserPicture(@OAuthAccessToken String accessToken, String user, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/picture").build(user);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2609,7 +2608,7 @@ public class FacebookConnector
      * @return The given application picture
      */
     @Processor
-    public Byte[] getApplicationPicture(@OAuthAccessToken String accessToken, String application, @Optional @Default("small") String type)
+    public byte[] getApplicationPicture(@OAuthAccessToken String accessToken, String application, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/picture").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -2845,6 +2844,7 @@ public class FacebookConnector
 
     /**
      * Usage metrics for this application 
+     * 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationInsights}
      *
      * @param accessToken the access token to use to authentica the request to Facebook
@@ -2871,7 +2871,24 @@ public class FacebookConnector
 							            .get(String.class), Insight.class);
     }
     
-    private Byte[] bufferedImageToByteArray(BufferedImage image)
+    /**
+     * This is a convinience processor that simply fetchs an uri which is expected to return an image
+     * and returns it as a Byte array. Notice that I'm using the word image instead of photo or picture which are
+     * words with a particular meaning in facebook. By image, I refer to a generic bitmap.
+     * 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:download-image}
+     * 
+     * @param accessToken the access token to use to authentica the request to Facebook
+     * @param imageUri the uri of an image resource
+     * @return a byte array with the image
+     */
+    @Processor
+    public byte[] downloadImage(@OAuthAccessToken String accessToken, String imageUri) {
+    	URI uri = URI.create(imageUri);
+    	return this.bufferedImageToByteArray(this.newWebResource(uri, accessToken).get(BufferedImage.class));
+    }
+    
+    private byte[] bufferedImageToByteArray(BufferedImage image)
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try
@@ -2887,7 +2904,7 @@ public class FacebookConnector
         {
             throw MuleSoftException.soften(iae);
         }
-        return ArrayUtils.toObject(baos.toByteArray());
+        return baos.toByteArray();
     }
     
     private WebResource newWebResource(URI uri, String accessToken) {

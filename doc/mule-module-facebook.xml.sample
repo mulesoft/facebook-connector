@@ -523,3 +523,7 @@
 <!-- BEGIN_INCLUDE(facebook:getApplicationInsights) -->
 <facebook:get-application-insights application="#[map-payload:application]"/>
 <!-- END_INCLUDE(facebook:getApplicationInsights) -->
+
+<!-- BEGIN_INCLUDE(facebook:download-image) -->
+<facebook:download-image uri="#[map-payload:uri]"/>
+<!-- END_INCLUDE(facebook:download-image) -->

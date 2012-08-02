@@ -226,7 +226,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEventPicture() throws Exception
     {
-        final Byte[] res = connector.getEventPicture(ACCESS_TOKEN, "234960973192305", "small");
+        final byte[] res = connector.getEventPicture(ACCESS_TOKEN, "234960973192305", "small");
         assertNotNull(res);
     }
     
@@ -267,7 +267,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getGroupPicture() throws Exception
     {
-        final Byte[] res = connector.getGroupPicture(ACCESS_TOKEN, "18708376680", "small");
+        final byte[] res = connector.getGroupPicture(ACCESS_TOKEN, "18708376680", "small");
         assertNotNull(res);
     }
     
@@ -349,7 +349,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPagePicture() throws Exception
     {
-        final Byte[] res = connector.getPagePicture(ACCESS_TOKEN, "cocacola", "large");
+        final byte[] res = connector.getPagePicture(ACCESS_TOKEN, "cocacola", "large");
         assertNotNull(res);
     }
     
@@ -612,7 +612,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserPicture() throws Exception
     {
-        final Byte[] res = connector.getUserPicture(ACCESS_TOKEN, "chackn", "large");
+        final byte[] res = connector.getUserPicture(ACCESS_TOKEN, "chackn", "large");
         assertNotNull(res);
     }
     
