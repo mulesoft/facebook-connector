@@ -44,7 +44,7 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
     @Test
     public void testGetAlbum() throws Exception
     {
-        connector.getAlbum("test", "");
+        connector.getAlbum("", "test", "");
         Mockito.verify(resource).get(String.class);
     }
     
@@ -58,14 +58,14 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
     @Test
     public void testGetEvent() throws Exception
     {
-        final Event res = connector.getEvent("", "");
+        final Event res = connector.getEvent("", "", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetGroup() throws Exception
     {
-        final Group res = connector.getGroup("", "");
+        final Group res = connector.getGroup("", "", "");
         assertNotNull(res);
     }
     
@@ -86,21 +86,21 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
     @Test
     public void testGetPage() throws Exception
     {
-        final Page res = connector.getPage("", "");
+        final Page res = connector.getPage("", "", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetPhoto() throws Exception
     {
-        final Photo res = connector.getPhoto("", "");
+        final Photo res = connector.getPhoto("", "", "");
         assertNotNull(res);
     }
     
     @Test
     public void testGetPost() throws Exception
     {
-        final Post res = connector.getPost("", "");
+        final Post res = connector.getPost("", "", "");
         assertNotNull(res);
     }
     
@@ -114,7 +114,7 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
     @Test
     public void testGetUser() throws Exception
     {
-        final User res = connector.getUser("", "");
+        final User res = connector.getUser("", "", "");
         assertNotNull(res);
     }
     
@@ -128,21 +128,21 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
     @Test
     public void testGetEventPicture()
     {
-        connector.getEventPicture("", "");
+        connector.getEventPicture("", "", "");
         Mockito.verify(resource).get(BufferedImage.class);
     }
     
     @Test
     public void testGetGroupPicture()
     {
-        connector.getGroupPicture("", "");
+        connector.getGroupPicture("", "", "");
         Mockito.verify(resource).get(BufferedImage.class);
     }
     
     @Test
     public void testGetNoteLikes()
     {
-        connector.getNoteLikes("", "", "", "", "");
+        connector.getNoteLikes("", "", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
     
@@ -150,28 +150,28 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
     public void testFailGetEventPicture()
     {
         Mockito.when(resource.get(BufferedImage.class)).thenReturn(null);
-        connector.getEventPicture("", "");
+        connector.getEventPicture("", "", "");
         Mockito.verify(resource).get(BufferedImage.class);
     }
     
     @Test
     public void testGetPagePicture()
     {
-        connector.getPagePicture("", "");
+        connector.getPagePicture("", "", "");
         Mockito.verify(resource).get(BufferedImage.class);
     }
     
     @Test
     public void testGetPhotoLikes()
     {
-        connector.getPhotoLikes("", "", "", "", "");
+        connector.getPhotoLikes("", "", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
     
     @Test
     public void testGetUserPicture()
     {
-        connector.getUserPicture("", "");
+        connector.getUserPicture("", "", "");
         Mockito.verify(resource).get(BufferedImage.class);
     }
     
@@ -193,7 +193,7 @@ public class FacebookConnectorUnitTest extends FacebookConnectorGenericUnitTest
     public void testFailGetApplicationPicture()
     {
         Mockito.when(resource.get(BufferedImage.class)).thenReturn(null);
-        connector.getEventPicture("", "");
+        connector.getEventPicture("", "", "");
         Mockito.verify(resource).get(BufferedImage.class);
     }
     

@@ -14,6 +14,7 @@
         <mule.modules.utils.version>1.0</mule.modules.utils.version>
         <restfb.version>1.6.9</restfb.version>
         <mule.devkit.version>3.3.0</mule.devkit.version>
+	    <devkit.studio.package.skip>false</devkit.studio.package.skip>
     </properties>
 
     <groupId>org.mule.modules</groupId>
