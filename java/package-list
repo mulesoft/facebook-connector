@@ -1,7 +1,10 @@
 org.mule.module.facebook
 org.mule.module.facebook.adapters
+org.mule.module.facebook.agents
 org.mule.module.facebook.config
 org.mule.module.facebook.config.spring
+org.mule.module.facebook.oauth
+org.mule.module.facebook.process
 org.mule.module.facebook.processors
 org.mule.module.facebook.types
 

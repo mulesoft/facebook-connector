@@ -207,9 +207,15 @@
     <li class="selected api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/adapters/package-summary.html">org.mule.module.facebook.adapters</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/agents/package-summary.html">org.mule.module.facebook.agents</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/package-summary.html">org.mule.module.facebook.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/spring/package-summary.html">org.mule.module.facebook.config.spring</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/oauth/package-summary.html">org.mule.module.facebook.oauth</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/process/package-summary.html">org.mule.module.facebook.process</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/processors/package-summary.html">org.mule.module.facebook.processors</a></li>
     <li class="api apilevel-">
@@ -226,7 +232,9 @@
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a></li>
           <li class="selected api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorHttpCallbackAdapter.html">FacebookConnectorHttpCallbackAdapter</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html">FacebookConnectorLifecycleAdapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html">FacebookConnectorMetadataAdapater</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html">FacebookConnectorOAuth2Adapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorProcessAdapter.html">FacebookConnectorProcessAdapter</a></li>
       </ul>
     </li>
               
@@ -288,56 +296,6 @@
    
   
   
-  
-   
-  
-  
-
-  
-   
-  
-  
-  
-  
-
-  
-   
-  
-  
-  
-  
-
-  
-   
-  
-  
-   
-  
-  
-  
-
-  
-   
-  
-  
-   
-  
-  
-  
-
-  
-   
-  
-  
-   
-  
-  
-  
-
-  
-   
-  
-  
    
   
   
@@ -361,9 +319,6 @@ Summary:
   &#124; <a href="#lfields">Fields</a>
   
 
-
-  &#124; <a href="#inhfields">Inherited Fields</a>
-  
 
 
   &#124; <a href="#pubctors">Ctors</a>
@@ -405,19 +360,7 @@ Summary:
 
 
   
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-
-  
-    extends <a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html">FacebookConnectorLifecycleAdapter</a><br/>
+    extends Object<br/>
   
   
   
@@ -425,6 +368,8 @@ Summary:
   
   
       implements 
+      
+        HttpCallbackAdapter 
       
         Initialisable 
       
@@ -442,47 +387,11 @@ Summary:
 
     <tr>
         
-        <td colspan="5" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
     <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
-        
-        <td colspan="4" class="jd-inheritance-class-cell"><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">org.mule.module.facebook.FacebookConnector</a></td>
-    </tr>
-    
-
-    <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
-        
-        <td colspan="3" class="jd-inheritance-class-cell"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter</a></td>
-    </tr>
-    
-
-    <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
-        
-        <td colspan="2" class="jd-inheritance-class-cell"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html">org.mule.module.facebook.adapters.FacebookConnectorLifecycleAdapter</a></td>
-    </tr>
-    
-
-    <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
@@ -509,7 +418,7 @@ Summary:
               >
           
             
-              <a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html">FacebookConnectorOAuth2Adapter</a>
+              <a href="../../../../../../java/org/mule/module/facebook/oauth/FacebookConnectorOAuthManager.html">FacebookConnectorOAuthManager</a>
             
           
       </div>
@@ -518,8 +427,8 @@ Summary:
               >
   <table class="jd-sumtable-expando">
         <tr class="alt-color api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html">FacebookConnectorOAuth2Adapter</a></td>
-              <td class="jd-descrcol" width="100%">A <code>FacebookConnectorOAuth2Adapter</code> is a wrapper around <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code> that adds OAuth capabilites to the pojo.&nbsp;</td>
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/oauth/FacebookConnectorOAuthManager.html">FacebookConnectorOAuthManager</a></td>
+              <td class="jd-descrcol" width="100%">A <code>FacebookConnectorOAuthManager</code> is a wrapper around <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code> that adds access token management capabilities to the pojo.&nbsp;</td>
           </tr>
   </table>
       </div>
@@ -583,43 +492,6 @@ Summary:
 
 
 
-
-
-
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Disposable" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.api.lifecycle.Disposable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From interface
-org.mule.api.lifecycle.Disposable
-<div id="inherited-constants-org.mule.api.lifecycle.Disposable">
-  <div id="inherited-constants-org.mule.api.lifecycle.Disposable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.api.lifecycle.Disposable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol">PHASE_NAME</td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
 <tr class="api apilevel-" >
 <td colspan="12">
 
@@ -633,68 +505,6 @@ org.mule.api.lifecycle.Initialisable
         class="jd-inheritedlinks">
   </div>
   <div id="inherited-constants-org.mule.api.lifecycle.Initialisable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol">PHASE_NAME</td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Startable" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.api.lifecycle.Startable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From interface
-org.mule.api.lifecycle.Startable
-<div id="inherited-constants-org.mule.api.lifecycle.Startable">
-  <div id="inherited-constants-org.mule.api.lifecycle.Startable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.api.lifecycle.Startable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol">PHASE_NAME</td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Stoppable" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.api.lifecycle.Stoppable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From interface
-org.mule.api.lifecycle.Stoppable
-<div id="inherited-constants-org.mule.api.lifecycle.Stoppable">
-  <div id="inherited-constants-org.mule.api.lifecycle.Stoppable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.api.lifecycle.Stoppable-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -782,6 +592,17 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorHttpCallbackAdapter.html#path">path</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
           Integer</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorHttpCallbackAdapter.html#remotePort">remotePort</a></td>
           <td class="jd-descrcol" width="100%"></td>
@@ -793,135 +614,6 @@ org.mule.api.lifecycle.Stoppable
 
 
 
-
-
-<!-- =========== FIELD SUMMARY =========== -->
-<table id="inhfields" class="jd-sumtable"><tr><th>
-  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
-  <div style="clear:left;">Inherited Fields</div></th></tr>
-
-
-
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.module.facebook.FacebookConnector" class="jd-expando-trigger closed"
-          ><img id="inherited-fields-org.mule.module.facebook.FacebookConnector-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From class
-<a href="../../../../../../org/mule/module/facebook/FacebookConnector.html">org.mule.module.facebook.FacebookConnector</a>
-<div id="inherited-fields-org.mule.module.facebook.FacebookConnector">
-  <div id="inherited-fields-org.mule.module.facebook.FacebookConnector-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-fields-org.mule.module.facebook.FacebookConnector-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          static
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#ACCESS_TOKEN_QUERY_PARAM_NAME">ACCESS_TOKEN_QUERY_PARAM_NAME</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          static
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#FACEBOOK_URI">FACEBOOK_URI</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#appId">appId</a></td>
-          <td class="jd-descrcol" width="100%">The application identifier as registered with Facebook
-</td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#appSecret">appSecret</a></td>
-          <td class="jd-descrcol" width="100%">The application secret
-</td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          Client</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#client">client</a></td>
-          <td class="jd-descrcol" width="100%">Jersey client
-</td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          static
-          
-          JsonMapper</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#mapper">mapper</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#scope">scope</a></td>
-          <td class="jd-descrcol" width="100%">Facebook permissions
-</td>
-      </tr>
-      
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</table>
 
 
 
@@ -1048,6 +740,26 @@ org.mule.api.lifecycle.Stoppable
             
             
             
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorHttpCallbackAdapter.html#getPath()">getPath</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves path
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             Integer</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1061,7 +773,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1077,7 +789,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1095,7 +807,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1113,7 +825,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1131,7 +843,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1144,6 +856,24 @@ org.mule.api.lifecycle.Stoppable
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorHttpCallbackAdapter.html#setLocalPort(java.lang.Integer)">setLocalPort</a></span>(Integer value)</nobr>
         
         <div class="jd-descrdiv">Sets localPort</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorHttpCallbackAdapter.html#setPath(java.lang.String)">setPath</a></span>(String value)</nobr>
+        
+        <div class="jd-descrdiv">Sets path</div>
   
   </td></tr>
 
@@ -1179,2276 +909,6 @@ org.mule.api.lifecycle.Stoppable
 <table id="inhmethods" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Methods</div></th></tr>
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorLifecycleAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorLifecycleAdapter-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From class
-
-  <a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html">org.mule.module.facebook.adapters.FacebookConnectorLifecycleAdapter</a>
-
-<div id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorLifecycleAdapter">
-  <div id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorLifecycleAdapter-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorLifecycleAdapter-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html#dispose()">dispose</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html#initialise()">initialise</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html#start()">start</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorLifecycleAdapter.html#stop()">stop</a></span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From class
-
-  <a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter</a>
-
-<div id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter">
-  <div id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.api.Capability)">isCapableOf</a></span>(Capability capability)</nobr>
-        
-        <div class="jd-descrdiv">Returns true if this module implements such capability
- 
-</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.FacebookConnector" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.facebook.FacebookConnector-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From class
-
-  <a href="../../../../../../org/mule/module/facebook/FacebookConnector.html">org.mule.module.facebook.FacebookConnector</a>
-
-<div id="inherited-methods-org.mule.module.facebook.FacebookConnector">
-  <div id="inherited-methods-org.mule.module.facebook.FacebookConnector-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.module.facebook.FacebookConnector-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#attendEvent(java.lang.String, java.lang.String)">attendEvent</a></span>(String accessToken, String eventId)</nobr>
-        
-        <div class="jd-descrdiv">Attend the given event.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#declineEvent(java.lang.String, java.lang.String)">declineEvent</a></span>(String accessToken, String eventId)</nobr>
-        
-        <div class="jd-descrdiv">Decline the given event.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#deleteObject(java.lang.String, java.lang.String)">deleteObject</a></span>(String accessToken, String objectId)</nobr>
-        
-        <div class="jd-descrdiv">Delete an object in the graph.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#dislike(java.lang.String, java.lang.String)">dislike</a></span>(String accessToken, String postId)</nobr>
-        
-        <div class="jd-descrdiv">Remove a 'like' from a post.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            byte[]</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#downloadImage(java.lang.String, java.lang.String)">downloadImage</a></span>(String accessToken, String imageUri)</nobr>
-        
-        <div class="jd-descrdiv">This is a convinience processor that simply fetchs an uri which is expected to return an image
- and returns it as a Byte array.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Album</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbum(java.lang.String, java.lang.String, java.lang.String)">getAlbum</a></span>(String accessToken, String album, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A photo album
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Comment&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumComments</a></span>(String accessToken, String album, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The comments made on this album
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Photo&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAlbumPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAlbumPhotos</a></span>(String accessToken, String album, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photos contained in this album
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAppId()">getAppId</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getAppSecret()">getAppSecret</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Application</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplication(java.lang.String, java.lang.String)">getApplication</a></span>(String accessToken, String application)</nobr>
-        
-        <div class="jd-descrdiv">An application's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Album&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationAlbums</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photo albums this application has created.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Event&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationEvents</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The events this page is managing 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Insight&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationInsights(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationInsights</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Usage metrics for this application 
- 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationLinks</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The application's posted links.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Note&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationNotes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationNotes</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The application's notes.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Photo&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationPhotos</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photos this application is tagged in.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            byte[]</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationPicture(java.lang.String, java.lang.String, java.lang.String)">getApplicationPicture</a></span>(String accessToken, String application, String type)</nobr>
-        
-        <div class="jd-descrdiv">The application's logo 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;StatusMessage&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationStatuses(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationStatuses</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The application's status updates.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../java/org/mule/module/facebook/types/GetApplicationTaggedResponseType.html">GetApplicationTaggedResponseType</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationTagged(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationTagged</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photos, videos, and posts in which this application has been tagged.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Video&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationVideos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationVideos</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The videos this application has created 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getApplicationWall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getApplicationWall</a></span>(String accessToken, String application, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The application's wall.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Checkin</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getCheckin(java.lang.String, java.lang.String, java.lang.String)">getCheckin</a></span>(String accessToken, String checkin, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A check-in that was made through Facebook Places.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Client</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getClient()">getClient</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Event</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEvent(java.lang.String, java.lang.String, java.lang.String)">getEvent</a></span>(String accessToken, String eventId, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">Specifies information about an event, including the location, event name, and
- which invitees plan to attend.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;User&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventAttending(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventAttending</a></span>(String accessToken, String eventId, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the users who are attending this event
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Event&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventDeclined(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventDeclined</a></span>(String accessToken, String eventId, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the users who declined their invitation to this event
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;User&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventInvited(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventInvited</a></span>(String accessToken, String eventId, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the users who have been invited to this event
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;User&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventMaybe(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventMaybe</a></span>(String accessToken, String eventId, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the users who have been responded "Maybe" to their invitation to this
- event
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;User&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventNoReply(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventNoReply</a></span>(String accessToken, String eventId, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the users who have been not yet responded to their invitation to this
- event
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            byte[]</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventPicture(java.lang.String, java.lang.String, java.lang.String)">getEventPicture</a></span>(String accessToken, String eventId, String type)</nobr>
-        
-        <div class="jd-descrdiv">The event's profile picture
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getEventWall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventWall</a></span>(String accessToken, String eventId, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">This event's wall
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Group</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroup(java.lang.String, java.lang.String, java.lang.String)">getGroup</a></span>(String accessToken, String group, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A Facebook group
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../java/org/mule/module/facebook/types/Member.html">Member</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroupMembers(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getGroupMembers</a></span>(String accessToken, String group, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the users who are members of this group
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            byte[]</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroupPicture(java.lang.String, java.lang.String, java.lang.String)">getGroupPicture</a></span>(String accessToken, String group, String type)</nobr>
-        
-        <div class="jd-descrdiv">The profile picture of this group
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getGroupWall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getGroupWall</a></span>(String accessToken, String group, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">This group's wall
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Link</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getLink(java.lang.String, java.lang.String, java.lang.String)">getLink</a></span>(String accessToken, String link, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A link shared on a user's wall 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Comment&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getLinkComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getLinkComments</a></span>(String accessToken, String link, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the comments on this link 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Note</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getNote(java.lang.String, java.lang.String, java.lang.String)">getNote</a></span>(String accessToken, String note, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A Facebook note
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Comment&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteComments</a></span>(String accessToken, String note, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the comments on this note 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Post.Likes</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getNoteLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getNoteLikes</a></span>(String accessToken, String note, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">People who like the note 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Page</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPage(java.lang.String, java.lang.String, java.lang.String)">getPage</a></span>(String accessToken, String page, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Album&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageAlbums</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photo albums this page has created 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Checkin&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageCheckins(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageCheckins</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Checkins made by the friends of the current session user 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Event&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageEvents</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The events this page is attending 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Group&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageGroups(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageGroups</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The groups this page is a member of 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Link&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageLinks</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The page's posted links 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Note&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageNotes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageNotes</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The page's notes 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Photo&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPagePhotos</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photos this page has uploaded 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            byte[]</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePicture(java.lang.String, java.lang.String, java.lang.String)">getPagePicture</a></span>(String accessToken, String page, String type)</nobr>
-        
-        <div class="jd-descrdiv">The page's profile picture 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPagePosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPagePosts</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The page's own posts 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;StatusMessage&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageStatuses(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageStatuses</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The page's status updates 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageTagged(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageTagged</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photos, videos, and posts in which this page has been tagged 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Video&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageVideos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageVideos</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The videos this page has created 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPageWall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPageWall</a></span>(String accessToken, String page, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The page's wall 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../java/org/mule/module/facebook/types/Photo.html">Photo</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhoto(java.lang.String, java.lang.String, java.lang.String)">getPhoto</a></span>(String accessToken, String photo, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">An individual photo 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Comment&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoComments</a></span>(String accessToken, String photo, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the comments on this photo 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Post.Likes</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPhotoLikes</a></span>(String accessToken, String photo, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">People who like the photo 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Post</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPost(java.lang.String, java.lang.String, java.lang.String)">getPost</a></span>(String accessToken, String post, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">An individual entry in a profile's feed 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Comment&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPostComments</a></span>(String accessToken, String post, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the comments on this post 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getScope()">getScope</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            StatusMessage</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getStatus(java.lang.String, java.lang.String, java.lang.String)">getStatus</a></span>(String accessToken, String status, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A status message on a user's wall 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Comment&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getStatusComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getStatusComments</a></span>(String accessToken, String status, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the comments on this message 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            User</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUser(java.lang.String, java.lang.String, java.lang.String)">getUser</a></span>(String accessToken, String user, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">A user profile.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../java/org/mule/module/facebook/types/GetUserAccountResponseType.html">GetUserAccountResponseType</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserAccounts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAccounts</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The Facebook pages owned by the current user 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;PageConnection&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserActivities(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserActivities</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The activities listed on the user's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Album&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAlbums</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photo albums this user has created.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;PageConnection&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserBooks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserBooks</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The books listed on the user's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Checkin&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserCheckins(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserCheckins</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The music listed on the user's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Event&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserEvents</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The events this user is attending.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;NamedFacebookType&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserFriends(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserFriends</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The user's friends 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Group&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserGroups(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserGroups</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The groups this user is a member of.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserHome(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserHome</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The user's News Feed.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../java/org/mule/module/facebook/types/Thread.html">Thread</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserInbox(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserInbox</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The threads in this user's inbox.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;PageConnection&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserInterests(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserInterests</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The interests listed on the user's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;PageConnection&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserLikes</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All the pages this user has liked.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Link&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserLinks</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The user's posted links.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;PageConnection&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserMovies(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserMovies</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The movies listed on the user's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;PageConnection&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserMusic(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserMusic</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The music listed on the user's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Note&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserNotes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserNotes</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The user's notes.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../java/org/mule/module/facebook/types/OutboxThread.html">OutboxThread</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserOutbox(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserOutbox</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The messages in this user's outbox.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Photo&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPhotos</a></span>(String user, String accessToken, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photos this user is tagged in.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            byte[]</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPicture(java.lang.String, java.lang.String, java.lang.String)">getUserPicture</a></span>(String accessToken, String user, String type)</nobr>
-        
-        <div class="jd-descrdiv">The user's profile picture 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPosts</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The user's own posts.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserSearch(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserSearch</a></span>(String accessToken, String user, String q, String metadata, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Search an individual user's News Feed, restricted to that user's friends
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;StatusMessage&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserStatuses(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserStatuses</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The user's status updates.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserTagged(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserTagged</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The photos, videos, and posts in which this user has been tagged.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;PageConnection&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserTelevision(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserTelevision</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The television listed on the user's profile 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../java/org/mule/module/facebook/types/OutboxThread.html">OutboxThread</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserUpdates(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserUpdates</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The updates in this user's inbox.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Video&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserVideos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserVideos</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The videos this user has been tagged in.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getUserWall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserWall</a></span>(String accessToken, String user, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">The user's wall.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Video</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getVideo(java.lang.String, java.lang.String, java.lang.String)">getVideo</a></span>(String accessToken, String video, String metadata)</nobr>
-        
-        <div class="jd-descrdiv">An individual video 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Comment&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getVideoComments</a></span>(String accessToken, String video, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">All of the comments on this video 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#like(java.lang.String, java.lang.String)">like</a></span>(String accessToken, String postId)</nobr>
-        
-        <div class="jd-descrdiv">Write to the given profile's feed/wall.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            User</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#loggedUserDetails(java.lang.String)">loggedUserDetails</a></span>(String accessToken)</nobr>
-        
-        <div class="jd-descrdiv">Gets the user logged details.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#publishAlbum(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishAlbum</a></span>(String accessToken, String profile_id, String msg, String name)</nobr>
-        
-        <div class="jd-descrdiv">Create an album.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#publishComment(java.lang.String, java.lang.String, java.lang.String)">publishComment</a></span>(String accessToken, String postId, String msg)</nobr>
-        
-        <div class="jd-descrdiv">Comment on the given post 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#publishEvent(java.lang.String, java.lang.String)">publishEvent</a></span>(String accessToken, String profile_id)</nobr>
-        
-        <div class="jd-descrdiv">Post an event in the given profile.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#publishLink(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishLink</a></span>(String accessToken, String profile_id, String msg, String link)</nobr>
-        
-        <div class="jd-descrdiv">Write a note on the given profile.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishMessage</a></span>(String accessToken, String profile_id, String msg, String picture, String link, String caption, String name, String description)</nobr>
-        
-        <div class="jd-descrdiv">Write to the given profile's feed/wall.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#publishNote(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishNote</a></span>(String accessToken, String profile_id, String msg, String subject)</nobr>
-        
-        <div class="jd-descrdiv">Write a note on the given profile.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#publishPhoto(java.lang.String, java.lang.String, java.lang.String, java.io.File)">publishPhoto</a></span>(String accessToken, String albumId, String caption, File photo)</nobr>
-        
-        <div class="jd-descrdiv">Upload a photo to an album.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Checkin&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchCheckins(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchCheckins</a></span>(String accessToken, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">This request returns you or your friend's latest checkins,
- or checkins where you or your friends have been tagged; currently,
- it does not accept a query parameter.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Event&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchEvents</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Search over all events in the social graph
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Group&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchGroups(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchGroups</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Search over all groups in the social graph
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Page&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPages</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Search over all pages in the social graph
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Post&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPosts</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Search over all public posts in the social graph
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;User&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#searchUsers(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchUsers</a></span>(String accessToken, String q, String since, String until, String limit, String offset)</nobr>
-        
-        <div class="jd-descrdiv">Search over all users in the social graph
- <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#setAppId(java.lang.String)">setAppId</a></span>(String appId)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#setAppSecret(java.lang.String)">setAppSecret</a></span>(String appSecret)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#setClient(com.sun.jersey.api.client.Client)">setClient</a></span>(Client client)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#setScope(java.lang.String)">setScope</a></span>(String scope)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/FacebookConnector.html#tentativeEvent(java.lang.String, java.lang.String)">tentativeEvent</a></span>(String accessToken, String eventId)</nobr>
-        
-        <div class="jd-descrdiv">Maybe attend the given event.</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
 
 
 <tr class="api apilevel-" >
@@ -3655,19 +1115,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.Capabilities" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.Capabilities-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.adapter.HttpCallbackAdapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.adapter.HttpCallbackAdapter-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.Capabilities
+  org.mule.api.adapter.HttpCallbackAdapter
 
-<div id="inherited-methods-org.mule.api.Capabilities">
-  <div id="inherited-methods-org.mule.api.Capabilities-list"
+<div id="inherited-methods-org.mule.api.adapter.HttpCallbackAdapter">
+  <div id="inherited-methods-org.mule.api.adapter.HttpCallbackAdapter-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.Capabilities-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.api.adapter.HttpCallbackAdapter-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -3680,38 +1140,28 @@ From interface
             
             
             
-            boolean</nobr>
+            Boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">isCapableOf</span>(Capability arg0)</nobr>
+        <span class="sympad">getAsync</span>()</nobr>
         
   </td></tr>
 
 
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Disposable" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.lifecycle.Disposable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.lifecycle.Disposable
-
-<div id="inherited-methods-org.mule.api.lifecycle.Disposable">
-  <div id="inherited-methods-org.mule.api.lifecycle.Disposable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.lifecycle.Disposable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Connector</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getConnector</span>()</nobr>
+        
+  </td></tr>
 
 
 	 
@@ -3722,10 +1172,58 @@ From interface
             
             
             
-            void</nobr>
+            String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">dispose</span>()</nobr>
+        <span class="sympad">getDomain</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Integer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getLocalPort</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getPath</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Integer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getRemotePort</span>()</nobr>
         
   </td></tr>
 
@@ -3768,90 +1266,6 @@ From interface
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">initialise</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Startable" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.lifecycle.Startable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.lifecycle.Startable
-
-<div id="inherited-methods-org.mule.api.lifecycle.Startable">
-  <div id="inherited-methods-org.mule.api.lifecycle.Startable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.lifecycle.Startable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">start</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Stoppable" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.lifecycle.Stoppable-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.lifecycle.Stoppable
-
-<div id="inherited-methods-org.mule.api.lifecycle.Stoppable">
-  <div id="inherited-methods-org.mule.api.lifecycle.Stoppable-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.lifecycle.Stoppable-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">stop</span>()</nobr>
         
   </td></tr>
 
@@ -4025,6 +1439,36 @@ From interface
         Integer
       </span>
         localPort
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="path"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        path
     </h4>
       <div class="api-level">
         
@@ -4261,6 +1705,39 @@ From interface
 </div>
 
 
+<A NAME="getPath()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getPath</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves path
+ 
+</p></div>
+
+    </div>
+</div>
+
+
 <A NAME="getRemotePort()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4320,6 +1797,15 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>InitialisationException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>
@@ -4474,6 +1960,47 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Sets localPort</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setPath(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setPath</span>
+      <span class="normal">(String value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets path</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
