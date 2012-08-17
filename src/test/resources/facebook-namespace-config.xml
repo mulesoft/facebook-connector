@@ -11,7 +11,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
 
-    <facebook:config appId="my_app_id" appSecret="my_app_secret"/>
+	<spring:beans>
+		<spring:bean id="my-object-store" class="org.mule.util.store.InMemoryObjectStore" />
+	</spring:beans>
+	
+    <facebook:config-with-oauth appId="my_app_id" appSecret="my_app_secret">
+    	<facebook:oauth-callback-config domain="localhost" localPort="8080" remotePort="80" async="false" path="oauth2callback" />
+    	<facebook:oauth-store-config objectStore-ref="my-object-store"/>
+    </facebook:config-with-oauth>
     
     <flow name="authorize-flow">
       <facebook:authorize />
@@ -108,7 +115,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <facebook:get-video video="#[map-payload:video]"/>
         <facebook:get-video-comments video="#[map-payload:video]"/>
         <facebook:like postId="#[map-payload:postId]"/>
-        <facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" name=""/>
+        <facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" albumName=""/>
         <facebook:publish-comment postId="#[map-payload:postId]" msg="#[map-payload:msg]"/>
         <facebook:publish-event profile_id="#[map-payload:profileId]"/>
         <facebook:publish-link profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"

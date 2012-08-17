@@ -13,7 +13,7 @@
  */
 package org.mule.module.facebook.config;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.mule.api.MuleContext;
@@ -33,6 +33,7 @@ public class FacebookNamespaceHandlerTestCase extends FunctionalTestCase {
     protected MuleContext createMuleContext() throws Exception {
         MuleContext muleContext = super.createMuleContext();
         muleContext.getRegistry().registerObject("connector.http.mule.default", new HttpConnector(muleContext));
+//        muleContext.getRegistry().registerObject("my-object-store", new InMemoryObjectStore<Serializable>());
         return muleContext;
     }
 

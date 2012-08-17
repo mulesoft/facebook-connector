@@ -1,29 +1,29 @@
 <!-- BEGIN_INCLUDE(facebook:logged-user-details) -->
 <facebook:logged-user-details />
-<!-- END_BEGIN(facebook:logged-user-details) -->
+<!-- END_INCLUDE(facebook:logged-user-details) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-posts) -->
-<facebook:search q="muelsoft"/>
+	<facebook:search-posts q="muelsoft"/>
 <!-- END_INCLUDE(facebook:search-posts) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-users) -->
-<facebook:search q="muelsoft"/>
+	<facebook:search-users q="muelsoft"/>
 <!-- END_INCLUDE(facebook:search-users) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-groups) -->
-<facebook:search q="muelsoft"/>
+	<facebook:search-groups q="muelsoft"/>
 <!-- END_INCLUDE(facebook:search-groups) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-checkins) -->
-<facebook:search q="muelsoft"/>
+	<facebook:search-checkins />
 <!-- END_INCLUDE(facebook:search-checkins) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-pages) -->
-<facebook:search q="muelsoft"/>
+	<facebook:search-pages q="muelsoft"/>
 <!-- END_INCLUDE(facebook:search-pages) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-events) -->
-<facebook:search q="muelsoft"/>
+	<facebook:search-events q="muelsoft"/>
 <!-- END_INCLUDE(facebook:search-events) -->
 
 
@@ -74,7 +74,7 @@
 
 <!-- BEGIN_INCLUDE(facebook:getEventDeclined) -->
 <facebook:get-event-declined eventId="#[map-payload:eventId]"/>
-<!-- END_INCLUDE(facebook:getEventDeclined -->
+<!-- END_INCLUDE(facebook:getEventDeclined) -->
 
 
 <!-- BEGIN_INCLUDE(facebook:getEventPicture) -->
@@ -435,7 +435,7 @@
 
 
 <!-- BEGIN_INCLUDE(facebook:publishAlbum) -->
-<facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" name=""/>
+<facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" albumName=""/>
 <!-- END_INCLUDE(facebook:publishAlbum) -->
 
 
@@ -525,5 +525,5 @@
 <!-- END_INCLUDE(facebook:getApplicationInsights) -->
 
 <!-- BEGIN_INCLUDE(facebook:download-image) -->
-<facebook:download-image uri="#[map-payload:uri]"/>
+	<facebook:download-image imageUri="#[map-payload:imageUri]"/>
 <!-- END_INCLUDE(facebook:download-image) -->

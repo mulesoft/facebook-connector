@@ -21,13 +21,16 @@ import javax.imageio.ImageIO;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.annotations.Configurable;
-import org.mule.api.annotations.Module;
+import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.oauth.OAuth2;
 import org.mule.api.annotations.oauth.OAuthAccessToken;
+import org.mule.api.annotations.oauth.OAuthAccessTokenIdentifier;
 import org.mule.api.annotations.oauth.OAuthConsumerKey;
 import org.mule.api.annotations.oauth.OAuthConsumerSecret;
+import org.mule.api.annotations.oauth.OAuthProtected;
 import org.mule.api.annotations.oauth.OAuthScope;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
@@ -70,11 +73,10 @@ import com.sun.jersey.multipart.FormDataMultiPart;
  * 
  * @author MuleSoft, inc.
  */
-@Module(name = "facebook", schemaVersion = "2.0")
+@Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook Cloud Connector", minMuleVersion="3.3", configElementName="config-with-oauth")
 @OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize",
         accessTokenRegex = "access_token=([^&]+?)&", expirationRegex = "expires_in=([^&]+?)$")
-public class FacebookConnector
-{
+public class FacebookConnector {
 
     private static String FACEBOOK_URI = "https://graph.facebook.com";
     private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
@@ -117,16 +119,36 @@ public class FacebookConnector
         client.addFilter(new LoggingFilter());
     }
     
+    @OAuthAccessToken
+    private String accessToken;
+    
+    private String userId;
+    
+    @OAuthAccessTokenIdentifier
+    public String getUserId() {
+    	if (this.userId == null) {
+    		
+    		if (StringUtils.isEmpty(this.accessToken)) {
+    			throw new IllegalStateException("No access token obtained");
+    		}
+    		
+    		User user = this.loggedUserDetails();
+    		this.userId = user.getUsername();
+    	}
+    	
+    	return this.userId;
+    }
+    
     /**
      * Gets the user logged details.
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:logged-user-details}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @return response from Facebook the actual user.
      */
     @Processor
-    public User loggedUserDetails(@OAuthAccessToken String accessToken)
+	@OAuthProtected
+    public User loggedUserDetails()
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("me").build();
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -139,7 +161,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-posts}
      * 
-     * @param accessToken the access token to use to authenticate the request to Facebook
      * @param q The search string
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -148,8 +169,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> searchPosts(@OAuthAccessToken String accessToken,
-    							  String q,
+	@OAuthProtected
+    public List<Post> searchPosts(String q,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -174,7 +195,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-users}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param q The search string
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -183,7 +203,8 @@ public class FacebookConnector
      * @return A list of users
      */
     @Processor
-    public List<User> searchUsers(@OAuthAccessToken String accessToken, String q,
+	@OAuthProtected
+    public List<User> searchUsers(String q,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -207,7 +228,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-pages}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
      * @param q The search string
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -216,8 +236,8 @@ public class FacebookConnector
      * @return A list of pages
      */
     @Processor
-    public List<Page> searchPages(@OAuthAccessToken String accessToken,
-    							 String q,
+	@OAuthProtected
+    public List<Page> searchPages(String q,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -240,7 +260,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-events}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param q The search string
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -249,7 +268,8 @@ public class FacebookConnector
      * @return A list of events
      */
     @Processor
-    public List<Event> searchEvents(@OAuthAccessToken String accessToken, String q,
+	@OAuthProtected
+    public List<Event> searchEvents(String q,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("100") String limit,
@@ -272,7 +292,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-groups}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param q The search string
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -281,7 +300,8 @@ public class FacebookConnector
      * @return A list of groups
      */
     @Processor
-    public List<Group> searchGroups(@OAuthAccessToken String accessToken, String q,
+	@OAuthProtected
+    public List<Group> searchGroups(String q,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("100") String limit,
@@ -306,7 +326,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:search-checkins}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
@@ -314,8 +333,8 @@ public class FacebookConnector
      * @return A list of checkins
      */
     @Processor
-    public List<Checkin> searchCheckins(@OAuthAccessToken String accessToken,
-                                        @Optional @Default("last week") String since,
+	@OAuthProtected
+    public List<Checkin> searchCheckins(@Optional @Default("last week") String since,
                                         @Optional @Default("yesterday") String until,
                                         @Optional @Default("100") String limit,
                                         @Optional @Default("0") String offset)
@@ -336,7 +355,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getAlbum}
      * 
-     * @param accessToken the access token to use to authenticate the request to Facebook
      * @param album Represents the ID of the album object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -344,7 +362,8 @@ public class FacebookConnector
      * @return The album
      */
     @Processor
-    public Album getAlbum(@OAuthAccessToken String accessToken, String album, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Album getAlbum(String album, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}").build(album);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -357,7 +376,6 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getAlbumPhotos}
      * 
-     * @param accessToken the access token to use to authenticate the request to Facebook
      * @param album Represents the ID of the album object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -366,8 +384,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Photo> getAlbumPhotos(@OAuthAccessToken String accessToken,
-    							 String album,
+	@OAuthProtected
+    public List<Photo> getAlbumPhotos(String album,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("100") String limit,
@@ -388,7 +406,6 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getAlbumComments}
      * 
-     * @param accessToken the access token to use to authenticate the request to Facebook
      * @param album Represents the ID of the album object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -397,8 +414,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Comment> getAlbumComments(@OAuthAccessToken String accessToken,
-    							  String album,
+	@OAuthProtected
+    public List<Comment> getAlbumComments(String album,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("100") String limit,
@@ -419,7 +436,6 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getEvent}
      * 
-     * @param accessToken the access token to use to authenticate the request to Facebook
      * @param eventId Represents the ID of the event object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -427,7 +443,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Event getEvent(@OAuthAccessToken String accessToken, String eventId, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Event getEvent(String eventId, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -442,7 +459,6 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventWall}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -451,7 +467,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Post> getEventWall(@OAuthAccessToken String accessToken, String eventId,
+	@OAuthProtected
+    public List<Post> getEventWall(String eventId,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -473,7 +490,6 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventNoReply}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -482,7 +498,8 @@ public class FacebookConnector
      * @return A list of users
      */
     @Processor
-    public List<User> getEventNoReply(@OAuthAccessToken String accessToken, String eventId,
+	@OAuthProtected
+    public List<User> getEventNoReply(String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -504,7 +521,6 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventMaybe}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -513,7 +529,8 @@ public class FacebookConnector
      * @return A list of users
      */
     @Processor
-    public List<User> getEventMaybe(@OAuthAccessToken String accessToken, String eventId,
+	@OAuthProtected
+    public List<User> getEventMaybe(String eventId,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -534,7 +551,6 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventInvited}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -543,7 +559,8 @@ public class FacebookConnector
      * @return A list of users
      */
     @Processor
-    public List<User> getEventInvited(@OAuthAccessToken String accessToken, String eventId,
+	@OAuthProtected
+    public List<User> getEventInvited(String eventId,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -564,7 +581,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventAttending}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -573,7 +590,8 @@ public class FacebookConnector
      * @return A list of users
      */
     @Processor
-    public List<User> getEventAttending(@OAuthAccessToken String accessToken, String eventId,
+	@OAuthProtected
+    public List<User> getEventAttending(String eventId,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("100") String limit,
@@ -592,10 +610,8 @@ public class FacebookConnector
     /**
      * All of the users who declined their invitation to this event
      * <p/>
-     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
-     * facebook:getEventDeclined}
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getEventDeclined}
      * 
-     * @param accessToken the access token to use to authenticate the request
      * @param eventId Represents the ID of the event object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -604,7 +620,8 @@ public class FacebookConnector
      * @return A list of events
      */
     @Processor
-    public List<Event> getEventDeclined(@OAuthAccessToken String accessToken, String eventId,
+	@OAuthProtected
+    public List<Event> getEventDeclined(String eventId,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("100") String limit,
@@ -626,14 +643,15 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getEventPicture}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param eventId Represents the ID of the event object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
      * @return The image as a Byte array
      */
     @Processor
-    public byte[] getEventPicture(@OAuthAccessToken String accessToken, String eventId, @Optional @Default("small") String type)
+	@OAuthProtected
+    public byte[] getEventPicture(String eventId, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/picture").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -655,7 +673,7 @@ public class FacebookConnector
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getGroup}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param group Represents the ID of the group object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -663,7 +681,8 @@ public class FacebookConnector
      * @return The group represented by the given id
      */
     @Processor
-    public Group getGroup(@OAuthAccessToken String accessToken, String group, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Group getGroup(String group, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}").build(group);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -676,7 +695,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getGroupWall}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param group Represents the ID of the group object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -685,7 +704,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getGroupWall(@OAuthAccessToken String accessToken, String group,
+	@OAuthProtected
+    public List<Post> getGroupWall(String group,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -707,7 +727,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getGroupMembers}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param group Represents the ID of the group object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -716,7 +736,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Member> getGroupMembers(@OAuthAccessToken String accessToken, String group,
+	@OAuthProtected
+    public List<Member> getGroupMembers(String group,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -737,14 +758,15 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getGroupPicture}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param group Represents the ID of the group object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
      * @return response from Facebook
      */
     @Processor
-    public byte[] getGroupPicture(@OAuthAccessToken String accessToken, String group, @Optional @Default("small") String type)
+	@OAuthProtected
+    public byte[] getGroupPicture(String group, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/picture").build(group);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -755,7 +777,7 @@ public class FacebookConnector
      * A link shared on a user's wall 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getLink}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param link Represents the ID of the link object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -763,7 +785,8 @@ public class FacebookConnector
      * @return The link from facebook
      */
     @Processor
-    public Link getLink(@OAuthAccessToken String accessToken, String link,
+	@OAuthProtected
+    public Link getLink(String link,
                         @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}").build(link);
@@ -775,7 +798,7 @@ public class FacebookConnector
      * All of the comments on this link 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getLinkComments}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param link Represents the ID of the link object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -784,7 +807,8 @@ public class FacebookConnector
      * @return A list of comments
      */
     @Processor
-    public List<Comment> getLinkComments(@OAuthAccessToken String accessToken, String link,
+	@OAuthProtected
+    public List<Comment> getLinkComments(String link,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -803,7 +827,7 @@ public class FacebookConnector
      * A Facebook note
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getNote}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param note Represents the ID of the note object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -811,7 +835,8 @@ public class FacebookConnector
      * @return The note represented by the given id
      */
     @Processor
-    public Note getNote(@OAuthAccessToken String accessToken, String note, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Note getNote(String note, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}").build(note);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -822,7 +847,7 @@ public class FacebookConnector
      * All of the comments on this note 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getNoteComments}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param note Represents the ID of the note object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -831,8 +856,8 @@ public class FacebookConnector
      * @return A list of comments from the given note
      */
     @Processor
-    public List<Comment> getNoteComments(@OAuthAccessToken String accessToken,
-    							  String note,
+	@OAuthProtected
+    public List<Comment> getNoteComments(String note,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -851,7 +876,7 @@ public class FacebookConnector
      * People who like the note 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getNoteLikes}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param note Represents the ID of the note object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -860,8 +885,8 @@ public class FacebookConnector
      * @return The links from the given note
      */
     @Processor
-    public Likes getNoteLikes(@OAuthAccessToken String accessToken,
-    						   String note,
+	@OAuthProtected
+    public Likes getNoteLikes(String note,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -880,7 +905,7 @@ public class FacebookConnector
      * A
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPage}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -888,7 +913,8 @@ public class FacebookConnector
      * @return The page represented by the given id
      */
     @Processor
-    public Page getPage(@OAuthAccessToken String accessToken, String page, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Page getPage(String page, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -899,7 +925,7 @@ public class FacebookConnector
      * The page's wall 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageWall}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -908,7 +934,8 @@ public class FacebookConnector
      * @return A list of posts from the given page wall
      */
     @Processor
-    public List<Post> getPageWall(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Post> getPageWall(String page,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("100") String limit,
@@ -927,14 +954,15 @@ public class FacebookConnector
      * The page's profile picture 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPagePicture}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
      * @return A byte array with the page picture
      */
     @Processor
-    public byte[] getPagePicture(@OAuthAccessToken String accessToken, String page, @Optional @Default("small") String type)
+	@OAuthProtected
+    public byte[] getPagePicture(String page, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -945,7 +973,7 @@ public class FacebookConnector
      * The photos, videos, and posts in which this page has been tagged 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageTagged}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -954,7 +982,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getPageTagged(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Post> getPageTagged(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -973,7 +1002,7 @@ public class FacebookConnector
      * The page's posted links 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageLinks}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -982,8 +1011,8 @@ public class FacebookConnector
      * @return A list of this page's links
      */
     @Processor
-    public List<Link> getPageLinks(@OAuthAccessToken String accessToken,
-    						   String page,
+	@OAuthProtected
+    public List<Link> getPageLinks(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -1002,7 +1031,7 @@ public class FacebookConnector
      * The photos this page has uploaded 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPagePhotos}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1011,8 +1040,8 @@ public class FacebookConnector
      * @return A list of photos from this page
      */
     @Processor
+	@OAuthProtected
     public List<Photo> getPagePhotos(
-    							@OAuthAccessToken String accessToken,
     							String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
@@ -1032,7 +1061,7 @@ public class FacebookConnector
      * The groups this page is a member of 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageGroups}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1041,7 +1070,8 @@ public class FacebookConnector
      * @return The list of groups
      */
     @Processor
-    public List<Group> getPageGroups(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Group> getPageGroups(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1060,7 +1090,7 @@ public class FacebookConnector
      * The photo albums this page has created 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageAlbums}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1069,8 +1099,8 @@ public class FacebookConnector
      * @return The list of albums
      */
     @Processor
+	@OAuthProtected
     public List<Album> getPageAlbums(
-    							@OAuthAccessToken String accessToken,
     							String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
@@ -1090,7 +1120,7 @@ public class FacebookConnector
      * The page's status updates 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageStatuses}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1099,7 +1129,8 @@ public class FacebookConnector
      * @return The list of status messages
      */
     @Processor
-    public List<StatusMessage> getPageStatuses(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<StatusMessage> getPageStatuses(String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -1118,7 +1149,7 @@ public class FacebookConnector
      * The videos this page has created 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageVideos}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1127,7 +1158,8 @@ public class FacebookConnector
      * @return The list of videos
      */
     @Processor
-    public List<Video> getPageVideos(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Video> getPageVideos(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1146,7 +1178,7 @@ public class FacebookConnector
      * The page's notes 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageNotes}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1155,7 +1187,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Note> getPageNotes(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Note> getPageNotes(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -1174,7 +1207,7 @@ public class FacebookConnector
      * The page's own posts 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPagePosts}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1183,7 +1216,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getPagePosts(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Post> getPagePosts(String page,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -1202,7 +1236,7 @@ public class FacebookConnector
      * The events this page is attending 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageEvents}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1211,7 +1245,8 @@ public class FacebookConnector
      * @return The list of events
      */
     @Processor
-    public List<Event> getPageEvents(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Event> getPageEvents(String page,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1230,7 +1265,7 @@ public class FacebookConnector
      * Checkins made by the friends of the current session user 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageCheckins}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param page Represents the ID of the page object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1239,7 +1274,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Checkin> getPageCheckins(@OAuthAccessToken String accessToken, String page,
+	@OAuthProtected
+    public List<Checkin> getPageCheckins(String page,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -1258,7 +1294,7 @@ public class FacebookConnector
      * An individual photo 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhoto}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param photo Represents the ID of the photo object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -1266,7 +1302,8 @@ public class FacebookConnector
      * @return The photo represented by the given id
      */
     @Processor
-    public org.mule.module.facebook.types.Photo getPhoto(@OAuthAccessToken String accessToken, String photo, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public org.mule.module.facebook.types.Photo getPhoto(String photo, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}").build(photo);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1277,7 +1314,7 @@ public class FacebookConnector
      * All of the comments on this photo 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoComments}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param photo Represents the ID of the photo object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1286,8 +1323,8 @@ public class FacebookConnector
      * @return The list of comments of the given photo
      */
     @Processor
+	@OAuthProtected
     public List<Comment> getPhotoComments(
-    							   @OAuthAccessToken String accessToken,
     							   String photo,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
@@ -1307,7 +1344,7 @@ public class FacebookConnector
      * People who like the photo 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoLikes}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param photo Represents the ID of the photo object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1316,7 +1353,8 @@ public class FacebookConnector
      * @return The likes from the given photo
      */
     @Processor
-    public Likes getPhotoLikes(@OAuthAccessToken String accessToken, String photo,
+	@OAuthProtected
+    public Likes getPhotoLikes(String photo,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1335,7 +1373,7 @@ public class FacebookConnector
      * An individual entry in a profile's feed 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPost}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param post Represents the ID of the post object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -1343,7 +1381,8 @@ public class FacebookConnector
      * @return The post represented by the given id
      */
     @Processor
-    public Post getPost(@OAuthAccessToken String accessToken, String post, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Post getPost(String post, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}").build(post);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1354,7 +1393,7 @@ public class FacebookConnector
      * All of the comments on this post 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPostComments}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param post Represents the ID of the post object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1363,7 +1402,8 @@ public class FacebookConnector
      * @return A list of comments from this post
      */
     @Processor
-    public List<Comment> getPostComments(@OAuthAccessToken String accessToken, String post,
+	@OAuthProtected
+    public List<Comment> getPostComments(String post,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -1382,7 +1422,7 @@ public class FacebookConnector
      * A status message on a user's wall 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getStatus}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param status Represents the ID of the status object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -1390,7 +1430,8 @@ public class FacebookConnector
      * @return The status represented by the given id
      */
     @Processor
-    public StatusMessage getStatus(@OAuthAccessToken String accessToken, String status, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public StatusMessage getStatus(String status, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}").build(status);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1401,7 +1442,7 @@ public class FacebookConnector
      * All of the comments on this message 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getStatusComments}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param status Represents the ID of the status object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1410,7 +1451,8 @@ public class FacebookConnector
      * @return The list of comments
      */
     @Processor
-    public List<Comment> getStatusComments(@OAuthAccessToken String accessToken, String status,
+	@OAuthProtected
+    public List<Comment> getStatusComments(String status,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("100") String limit,
@@ -1429,7 +1471,7 @@ public class FacebookConnector
      * A user profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUser}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -1437,7 +1479,8 @@ public class FacebookConnector
      * @return The user represented by the given id
      */
     @Processor
-    public User getUser(@OAuthAccessToken String accessToken, String user, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public User getUser(String user, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}").build(user);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1449,7 +1492,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserSearch}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param q The text for which to search.
      * @param metadata The Graph API supports introspection of objects, which enables
@@ -1462,7 +1505,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getUserSearch(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Post> getUserSearch(String user,
                                     @Optional @Default("facebook") String q,
                                     @Optional @Default("0") String metadata,
                                     @Optional @Default("last week") String since,
@@ -1485,7 +1529,7 @@ public class FacebookConnector
      * The user's News Feed. Requires the read_stream permission 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserHome}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1494,7 +1538,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getUserHome(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Post> getUserHome(String user,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("100") String limit,
@@ -1514,7 +1559,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserWall}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1523,7 +1568,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getUserWall(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Post> getUserWall(String user,
                               @Optional @Default("last week") String since,
                               @Optional @Default("yesterday") String until,
                               @Optional @Default("100") String limit,
@@ -1544,7 +1590,7 @@ public class FacebookConnector
      * permissions 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserTagged}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1553,7 +1599,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public List<Post> getUserTagged(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Post> getUserTagged(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1573,7 +1620,7 @@ public class FacebookConnector
      * posts. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserPosts}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1582,7 +1629,8 @@ public class FacebookConnector
      * @return A list of posts
      */
     @Processor
-    public List<Post> getUserPosts(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Post> getUserPosts(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -1601,14 +1649,15 @@ public class FacebookConnector
      * The user's profile picture 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserPicture}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
      * @return byte[] with the jpg image
      */
     @Processor
-    public byte[] getUserPicture(@OAuthAccessToken String accessToken, String user, @Optional @Default("small") String type)
+	@OAuthProtected
+    public byte[] getUserPicture(String user, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/picture").build(user);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1620,7 +1669,7 @@ public class FacebookConnector
      * The user's friends 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserFriends}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1629,7 +1678,8 @@ public class FacebookConnector
      * @return A list of objects with the name and id of the given user's friends
      */
     @Processor
-    public List<NamedFacebookType> getUserFriends(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<NamedFacebookType> getUserFriends(String user,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("100") String limit,
@@ -1648,7 +1698,7 @@ public class FacebookConnector
      * The activities listed on the user's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserActivities}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1657,7 +1707,8 @@ public class FacebookConnector
      * @return A list of objects containing activity id, name, category and create_time fields. 
      */
     @Processor
-    public List<PageConnection> getUserActivities(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<PageConnection> getUserActivities(String user,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("100") String limit,
@@ -1676,7 +1727,7 @@ public class FacebookConnector
      * The music listed on the user's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserCheckins}
      *
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1685,7 +1736,8 @@ public class FacebookConnector
      * @return A list with the user checkins
      */
     @Processor
-    public List<Checkin> getUserCheckins(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Checkin> getUserCheckins(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -1704,7 +1756,7 @@ public class FacebookConnector
      * The interests listed on the user's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserInterests}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1713,7 +1765,8 @@ public class FacebookConnector
      * @return A list with the user interests
      */
     @Processor
-    public List<PageConnection> getUserInterests(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<PageConnection> getUserInterests(String user,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("100") String limit,
@@ -1732,7 +1785,7 @@ public class FacebookConnector
      * The music listed on the user's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserMusic}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1741,7 +1794,8 @@ public class FacebookConnector
      * @return A list with the given user's music
      */
     @Processor
-    public List<PageConnection> getUserMusic(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<PageConnection> getUserMusic(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -1760,7 +1814,7 @@ public class FacebookConnector
      * The books listed on the user's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserBooks}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1769,7 +1823,8 @@ public class FacebookConnector
      * @return A list containing the given user's books
      */
     @Processor
-    public List<PageConnection> getUserBooks(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<PageConnection> getUserBooks(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -1788,7 +1843,7 @@ public class FacebookConnector
      * The movies listed on the user's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserMovies}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1797,7 +1852,8 @@ public class FacebookConnector
      * @return A list containing the given user's movies
      */
     @Processor
-    public List<PageConnection> getUserMovies(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<PageConnection> getUserMovies(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1816,7 +1872,7 @@ public class FacebookConnector
      * The television listed on the user's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserTelevision}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1825,7 +1881,8 @@ public class FacebookConnector
      * @return A list containing the television listed on the given user's profile
      */
     @Processor
-    public List<PageConnection> getUserTelevision(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<PageConnection> getUserTelevision(String user,
                                     @Optional @Default("last week") String since,
                                     @Optional @Default("yesterday") String until,
                                     @Optional @Default("100") String limit,
@@ -1846,7 +1903,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserLikes}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1855,7 +1912,8 @@ public class FacebookConnector
      * @return A list containing all the pages this user has liked
      */
     @Processor
-    public List<PageConnection> getUserLikes(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<PageConnection> getUserLikes(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -1876,7 +1934,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserPhotos}
      * 
-     * @param accessToken the access token to use to authenticate the request 
+     *  
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1885,8 +1943,8 @@ public class FacebookConnector
      * @return A list of photos the given user is tagged in
      */
     @Processor
+	@OAuthProtected
     public List<Photo> getUserPhotos(String user,
-                                @OAuthAccessToken String accessToken,
     							@Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1906,7 +1964,7 @@ public class FacebookConnector
      * friend_photos permission 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserAlbums}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1915,7 +1973,8 @@ public class FacebookConnector
      * @return A list containing the photo albums the given user has created
      */
     @Processor
-    public List<Album> getUserAlbums(@OAuthAccessToken String accessToken,
+	@OAuthProtected
+    public List<Album> getUserAlbums(
     							String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
@@ -1936,7 +1995,7 @@ public class FacebookConnector
      * friend_videos permission. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserVideos}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1945,7 +2004,8 @@ public class FacebookConnector
      * @return A list containing the videos the given user has been tagged in
      */
     @Processor
-    public List<Video> getUserVideos(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Video> getUserVideos(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1967,7 +2027,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserGroups}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -1976,7 +2036,8 @@ public class FacebookConnector
      * @return A list containing the Groups that the given user belongs to
      */
     @Processor
-    public List<Group> getUserGroups(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Group> getUserGroups(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -1996,7 +2057,7 @@ public class FacebookConnector
      * The user's status updates. Requires the read_stream permission 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserStatuses}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2005,7 +2066,8 @@ public class FacebookConnector
      * @return A list contining the user's status updates
      */
     @Processor
-    public List<StatusMessage> getUserStatuses(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<StatusMessage> getUserStatuses(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -2025,7 +2087,7 @@ public class FacebookConnector
      * The user's posted links. Requires the read_stream permission 
      * {@sample.xml../../../doc/mule-module-facebook.xml.sample facebook:getUserLinks}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2034,7 +2096,8 @@ public class FacebookConnector
      * @return A list containing the given user's posted links 
      */
     @Processor
-    public List<Link> getUserLinks(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Link> getUserLinks(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -2054,7 +2117,7 @@ public class FacebookConnector
      * The user's notes. Requires the read_stream permission 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserNotes}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2063,7 +2126,8 @@ public class FacebookConnector
      * @return A list containing the given user's notes
      */
     @Processor
-    public List<Note> getUserNotes(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Note> getUserNotes(String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
                                @Optional @Default("100") String limit,
@@ -2084,7 +2148,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserEvents}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2093,7 +2157,8 @@ public class FacebookConnector
      * @return A list containing the events the given user is attending
      */
     @Processor
-    public List<Event> getUserEvents(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<Event> getUserEvents(String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
                                 @Optional @Default("100") String limit,
@@ -2114,7 +2179,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserInbox}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2123,8 +2188,8 @@ public class FacebookConnector
      * @return A list containing the threads in the given user's inbox
      */
     @Processor
+	@OAuthProtected
     public List<org.mule.module.facebook.types.Thread> getUserInbox(
-                               @OAuthAccessToken String accessToken,
                                String user,
                                @Optional @Default("last week") String since,
                                @Optional @Default("yesterday") String until,
@@ -2145,7 +2210,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserOutbox}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2154,7 +2219,8 @@ public class FacebookConnector
      * @return A list of threads
      */
     @Processor
-    public List<OutboxThread> getUserOutbox(@OAuthAccessToken String accessToken, 
+	@OAuthProtected
+    public List<OutboxThread> getUserOutbox(
                                 String user,
                                 @Optional @Default("last week") String since,
                                 @Optional @Default("yesterday") String until,
@@ -2175,7 +2241,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getUserUpdates}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2184,7 +2250,8 @@ public class FacebookConnector
      * @return A list containing the given user updates
      */
     @Processor
-    public List<OutboxThread> getUserUpdates(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<OutboxThread> getUserUpdates(String user,
                                  @Optional @Default("last week") String since,
                                  @Optional @Default("yesterday") String until,
                                  @Optional @Default("100") String limit,
@@ -2203,7 +2270,7 @@ public class FacebookConnector
      * The Facebook pages owned by the current user 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getUserAccounts}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param user Represents the ID of the user object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2212,7 +2279,8 @@ public class FacebookConnector
      * @return A list of objects containing account name, access_token, category, id
      */
     @Processor
-    public List<GetUserAccountResponseType> getUserAccounts(@OAuthAccessToken String accessToken, String user,
+	@OAuthProtected
+    public List<GetUserAccountResponseType> getUserAccounts(String user,
                                   @Optional @Default("last week") String since,
                                   @Optional @Default("yesterday") String until,
                                   @Optional @Default("100") String limit,
@@ -2232,7 +2300,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getVideo}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param video Represents the ID of the video object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -2240,7 +2308,8 @@ public class FacebookConnector
      * @return response from Facebook
      */
     @Processor
-    public Video getVideo(@OAuthAccessToken String accessToken, String video, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Video getVideo(String video, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}").build(video);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2253,7 +2322,7 @@ public class FacebookConnector
      * All of the comments on this video 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getVideoComments}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param video Represents the ID of the video object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2262,8 +2331,8 @@ public class FacebookConnector
      * @return A list containing the given video's comments
      */
     @Processor
+	@OAuthProtected
     public List<Comment> getVideoComments(
-    							   @OAuthAccessToken String accessToken,
     							   String video,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
@@ -2283,25 +2352,26 @@ public class FacebookConnector
      * Write to the given profile's feed/wall. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishMessage}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param profile_id the profile where to publish the message
      * @param msg The message
      * @param picture If available, a link to the picture included with this post
      * @param link The link attached to this post
      * @param caption The caption of the link (appears beneath the link name)
-     * @param name The name of the link
+     * @param linkName The name of the link
      * @param description A description of the link (appears beneath the link
      *            caption)
      * @return The id of the published object
      */
     @Processor
-    public String publishMessage(@OAuthAccessToken String accessToken,
+	@OAuthProtected
+    public String publishMessage(
                                  String profile_id,
                                  String msg,
                                  @Optional String picture,
                                  @Optional String link,
                                  @Optional String caption,
-                                 @Optional String name,
+                                 @Optional String linkName,
                                  @Optional String description)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/feed").build(profile_id);
@@ -2313,7 +2383,7 @@ public class FacebookConnector
         if (picture != null) form.add("picture", picture);
         if (link != null) form.add("link", link);
         if (caption != null) form.add("caption", caption);
-        if (name != null) form.add("name", name);
+        if (linkName != null) form.add("name", linkName);
         if (description != null) form.add("description", description);
 
         return resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
@@ -2323,13 +2393,14 @@ public class FacebookConnector
      * Comment on the given post 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishComment}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param postId Represents the ID of the post object.
      * @param msg comment on the given post
      * @return The id of the published comment
      */
     @Processor
-    public String publishComment(@OAuthAccessToken String accessToken, String postId, String msg)
+	@OAuthProtected
+    public String publishComment(String postId, String msg)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/comments").build(postId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2346,11 +2417,12 @@ public class FacebookConnector
      * Write to the given profile's feed/wall. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:like}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param postId Represents the ID of the post object.
      */
     @Processor
-    public void like(@OAuthAccessToken String accessToken, String postId)
+	@OAuthProtected
+    public void like(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2361,13 +2433,14 @@ public class FacebookConnector
      * Write a note on the given profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishNote}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param profile_id the profile where to publish the note
      * @param msg The message
      * @param subject the subject of the note
      */
     @Processor
-    public void publishNote(@OAuthAccessToken String accessToken, String profile_id, String msg,
+	@OAuthProtected
+    public void publishNote(String profile_id, String msg,
                             String subject)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profile_id);
@@ -2383,13 +2456,14 @@ public class FacebookConnector
      * Write a note on the given profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishLink}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param profile_id the profile where to publish the link
      * @param msg The message
      * @param link the link
      */
     @Processor
-    public void publishLink(@OAuthAccessToken String accessToken, String profile_id, String msg, String link)
+	@OAuthProtected
+    public void publishLink(String profile_id, String msg, String link)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2404,11 +2478,12 @@ public class FacebookConnector
      * Post an event in the given profile. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishEvent}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param profile_id the profile where to publish the event
      */
     @Processor
-    public void publishEvent(@OAuthAccessToken String accessToken, String profile_id)
+	@OAuthProtected
+    public void publishEvent(String profile_id)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/events").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2419,11 +2494,12 @@ public class FacebookConnector
      * Attend the given event. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:attendEvent}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param eventId the id of the event to attend
      */
     @Processor
-    public void attendEvent(@OAuthAccessToken String accessToken, String eventId)
+	@OAuthProtected
+    public void attendEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/attending").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2434,11 +2510,12 @@ public class FacebookConnector
      * Maybe attend the given event. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:tentativeEvent}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param eventId Represents the id of the event object
      */
     @Processor
-    public void tentativeEvent(@OAuthAccessToken String accessToken, String eventId)
+	@OAuthProtected
+    public void tentativeEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/maybe").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2449,11 +2526,12 @@ public class FacebookConnector
      * Decline the given event. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:declineEvent}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param eventId Represents the id of the event object
      */
     @Processor
-    public void declineEvent(@OAuthAccessToken String accessToken, String eventId)
+	@OAuthProtected
+    public void declineEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/declined").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2465,19 +2543,20 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:publishAlbum}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param profile_id the id of the profile object
      * @param msg The message
-     * @param name the name of the album
+     * @param albumName the name of the album
      */
     @Processor
-    public void publishAlbum(@OAuthAccessToken String accessToken, String profile_id, String msg, String name)
+	@OAuthProtected
+    public void publishAlbum(String profile_id, String msg, String albumName)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/albums").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
         Form form = new Form();
         form.add("message", msg);
-        form.add("name", name);
+        form.add("name", albumName);
 
         resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
     }
@@ -2486,13 +2565,14 @@ public class FacebookConnector
      * Upload a photo to an album. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishPhoto}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param albumId the id of the album object
      * @param caption Caption of the photo
      * @param photo File containing the photo
      */
     @Processor
-    public void publishPhoto(@OAuthAccessToken String accessToken, String albumId, String caption, File photo)
+	@OAuthProtected
+    public void publishPhoto(String albumId, String caption, File photo)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{albumId}/photos").build(albumId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2507,11 +2587,12 @@ public class FacebookConnector
      * Delete an object in the graph. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:deleteObject}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param objectId The ID of the object to be deleted
      */
     @Processor
-    public void deleteObject(@OAuthAccessToken String accessToken, String objectId)
+	@OAuthProtected
+    public void deleteObject(String objectId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{object_id}").build(objectId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2523,11 +2604,12 @@ public class FacebookConnector
      * Remove a 'like' from a post. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:dislike}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param postId The ID of the post to be disliked
      */
     @Processor
-    public void dislike(@OAuthAccessToken String accessToken, String postId)
+	@OAuthProtected
+    public void dislike(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -2538,7 +2620,7 @@ public class FacebookConnector
      * A check-in that was made through Facebook Places. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getCheckin}
      * 
-     * @param accessToken the access token to use to authenticate the request
+     * 
      * @param checkin Represents the ID of the checkin object.
      * @param metadata The Graph API supports introspection of objects, which enables
      *            you to see all of the connections an object has without knowing its
@@ -2546,7 +2628,8 @@ public class FacebookConnector
      * @return The checkin represented by the given id
      */
     @Processor
-    public Checkin getCheckin(@OAuthAccessToken String accessToken, String checkin, @Optional @Default("0") String metadata)
+	@OAuthProtected
+    public Checkin getCheckin(String checkin, @Optional @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{checkin}").build(checkin);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -2557,12 +2640,13 @@ public class FacebookConnector
      * An application's profile 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplication}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @return The application represented by the given id
      */
     @Processor
-    public Application getApplication(@OAuthAccessToken String accessToken, String application)
+	@OAuthProtected
+    public Application getApplication(String application)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -2573,7 +2657,7 @@ public class FacebookConnector
      * The application's wall. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationWall}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2582,7 +2666,8 @@ public class FacebookConnector
      * @return A list containing the given application posts
      */
     @Processor
-    public List<Post> getApplicationWall(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Post> getApplicationWall(String application,
                                      @Optional @Default("last week") String since,
                                      @Optional @Default("yesterday") String until,
                                      @Optional @Default("100") String limit,
@@ -2601,14 +2686,15 @@ public class FacebookConnector
      * The application's logo 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPicture}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param type One of square (50x50), small (50 pixels wide, variable height),
      *            and large (about 200 pixels wide, variable height)
      * @return The given application picture
      */
     @Processor
-    public byte[] getApplicationPicture(@OAuthAccessToken String accessToken, String application, @Optional @Default("small") String type)
+	@OAuthProtected
+    public byte[] getApplicationPicture(String application, @Optional @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/picture").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -2622,7 +2708,7 @@ public class FacebookConnector
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:getApplicationTagged}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2631,7 +2717,8 @@ public class FacebookConnector
      * @return The posts where this application has been tagged
      */
     @Processor
-    public List<GetApplicationTaggedResponseType> getApplicationTagged(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<GetApplicationTaggedResponseType> getApplicationTagged(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("100") String limit,
@@ -2650,7 +2737,7 @@ public class FacebookConnector
      * The application's posted links. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationLinks}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2659,7 +2746,8 @@ public class FacebookConnector
      * @return A list containig the links of the given application
      */
     @Processor
-    public List<Post> getApplicationLinks(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Post> getApplicationLinks(String application,
                                       @Optional @Default("last week") String since,
                                       @Optional @Default("yesterday") String until,
                                       @Optional @Default("100") String limit,
@@ -2678,7 +2766,7 @@ public class FacebookConnector
      * The photos this application is tagged in. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationPhotos}
      *
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by shorttime
      * @param until A unix timestamp or any date accepted by shorttime
@@ -2687,7 +2775,8 @@ public class FacebookConnector
      * @return A list with photos
      */
     @Processor
-    public List<Photo> getApplicationPhotos(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Photo> getApplicationPhotos(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("100") String limit,
@@ -2706,7 +2795,7 @@ public class FacebookConnector
      * The photo albums this application has created. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationAlbums}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2715,7 +2804,8 @@ public class FacebookConnector
      * @return A list containing the given application's albums
      */
     @Processor
-    public List<Album> getApplicationAlbums(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Album> getApplicationAlbums(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("100") String limit,
@@ -2734,7 +2824,7 @@ public class FacebookConnector
      * The application's status updates. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationStatuses}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2743,7 +2833,8 @@ public class FacebookConnector
      * @return A list containing the status messages for the given application
      */
     @Processor
-    public List<StatusMessage> getApplicationStatuses(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<StatusMessage> getApplicationStatuses(String application,
                                          @Optional @Default("last week") String since,
                                          @Optional @Default("yesterday") String until,
                                          @Optional @Default("100") String limit,
@@ -2762,7 +2853,7 @@ public class FacebookConnector
      * The videos this application has created 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationVideos}
      *
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2771,7 +2862,8 @@ public class FacebookConnector
      * @return A list of videos for the given application
      */
     @Processor
-    public List<Video> getApplicationVideos(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Video> getApplicationVideos(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("100") String limit,
@@ -2790,7 +2882,7 @@ public class FacebookConnector
      * The application's notes. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationNotes}
      *
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2799,7 +2891,8 @@ public class FacebookConnector
      * @return A list containing the notes for the given application
      */
     @Processor
-    public List<Note> getApplicationNotes(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Note> getApplicationNotes(String application,
                                       @Optional @Default("last week") String since,
                                       @Optional @Default("yesterday") String until,
                                       @Optional @Default("100") String limit,
@@ -2818,7 +2911,7 @@ public class FacebookConnector
      * The events this page is managing 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationEvents}
      *
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2827,7 +2920,8 @@ public class FacebookConnector
      * @return A list containing the events for the given application
      */
     @Processor
-    public List<Event> getApplicationEvents(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Event> getApplicationEvents(String application,
                                        @Optional @Default("last week") String since,
                                        @Optional @Default("yesterday") String until,
                                        @Optional @Default("100") String limit,
@@ -2847,7 +2941,7 @@ public class FacebookConnector
      * 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getApplicationInsights}
      *
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param application Represents the ID of the application object.
      * @param since A unix timestamp or any date accepted by strtotime
      * @param until A unix timestamp or any date accepted by strtotime
@@ -2856,7 +2950,8 @@ public class FacebookConnector
      * @return A list containing the insights for the given application
      */
     @Processor
-    public List<Insight> getApplicationInsights(@OAuthAccessToken String accessToken, String application,
+	@OAuthProtected
+    public List<Insight> getApplicationInsights(String application,
                                          @Optional @Default("last week") String since,
                                          @Optional @Default("yesterday") String until,
                                          @Optional @Default("100") String limit,
@@ -2878,12 +2973,13 @@ public class FacebookConnector
      * 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:download-image}
      * 
-     * @param accessToken the access token to use to authentica the request to Facebook
+     * 
      * @param imageUri the uri of an image resource
      * @return a byte array with the image
      */
     @Processor
-    public byte[] downloadImage(@OAuthAccessToken String accessToken, String imageUri) {
+	@OAuthProtected
+    public byte[] downloadImage(String imageUri) {
     	URI uri = URI.create(imageUri);
     	return this.bufferedImageToByteArray(this.newWebResource(uri, accessToken).get(BufferedImage.class));
     }
@@ -2950,4 +3046,13 @@ public class FacebookConnector
     {
         this.client = client;
     }
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+    
 }

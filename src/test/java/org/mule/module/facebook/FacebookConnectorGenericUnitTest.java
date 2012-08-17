@@ -41,13 +41,14 @@ public abstract class FacebookConnectorGenericUnitTest
     public void setup() throws IOException
     {
         connector = new FacebookConnector();
+        connector.setAccessToken("ACCESS_TOKEN");
         client = mock(Client.class);
         connector.setClient(client);
         resource = mock(WebResource.class);
         final BufferedImage image = ImageIO.read(new ClassPathResource("image.jpg").getInputStream());
         
         when(client.resource((URI) anyObject())).thenReturn(resource);
-        when(resource.queryParam(eq(anyString()), "")).thenReturn(resource);
+        when(resource.queryParam(anyString(), anyString())).thenReturn(resource);
         when(resource.queryParam("type", "user")).thenReturn(resource);
         when(resource.queryParam("type", "event")).thenReturn(resource);
         when(resource.queryParam("type", "checkin")).thenReturn(resource);
