@@ -129,7 +129,7 @@ public class FacebookConnector {
     	if (this.userId == null) {
     		
     		if (StringUtils.isEmpty(this.accessToken)) {
-    			throw new IllegalStateException("No access token obtained");
+    			return null;
     		}
     		
     		User user = this.loggedUserDetails();
