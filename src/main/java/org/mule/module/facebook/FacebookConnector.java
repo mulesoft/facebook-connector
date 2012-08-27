@@ -22,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
@@ -78,7 +79,8 @@ import com.sun.jersey.multipart.FormDataMultiPart;
         accessTokenRegex = "access_token=([^&]+?)&", expirationRegex = "expires_in=([^&]+?)$")
 public class FacebookConnector {
 
-    private static String FACEBOOK_URI = "https://graph.facebook.com";
+    private static final Logger logger = Logger.getLogger(FacebookConnector.class);
+	private static String FACEBOOK_URI = "https://graph.facebook.com";
     private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
     private static JsonMapper mapper = new DefaultJsonMapper();
 
@@ -129,6 +131,9 @@ public class FacebookConnector {
     	if (this.userId == null) {
     		
     		if (StringUtils.isEmpty(this.accessToken)) {
+    			if (logger.isDebugEnabled()) {
+    				logger.debug("No access token yet available. Returning null as user id");
+    			}
     			return null;
     		}
     		
