@@ -118,7 +118,7 @@ public class FacebookConnector {
     public FacebookConnector()
     {
         client = new Client();
-        client.addFilter(new LoggingFilter());
+//        client.addFilter(new LoggingFilter());
     }
     
     @OAuthAccessToken
