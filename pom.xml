@@ -4,12 +4,15 @@
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
-        <version>3.3.1-SNAPSHOT</version>
+        <version>3.3.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
+        <category>Community</category>
+        <licensePath>LICENSE.md</licensePath>
+        <devkit.studio.package.skip>false</devkit.studio.package.skip>
         <jackson.version>1.9.5</jackson.version>
         <mule.modules.utils.version>1.0</mule.modules.utils.version>
         <restfb.version>1.6.9</restfb.version>
