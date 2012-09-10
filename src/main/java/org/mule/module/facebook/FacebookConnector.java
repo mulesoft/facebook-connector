@@ -83,7 +83,7 @@ public class FacebookConnector {
 	private static String FACEBOOK_URI = "https://graph.facebook.com";
     private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
     private static JsonMapper mapper = new DefaultJsonMapper();
-
+    
     /**
      * The application identifier as registered with Facebook
      */
@@ -907,7 +907,7 @@ public class FacebookConnector {
     }
 
     /**
-     * A
+     * Retrieves the page with the given ID
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPage}
      * 
      * 
