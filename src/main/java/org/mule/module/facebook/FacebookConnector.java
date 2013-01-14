@@ -62,7 +62,6 @@ import com.restfb.types.User;
 import com.restfb.types.Video;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.LoggingFilter;
 import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
@@ -116,7 +115,6 @@ public class FacebookConnector {
     public FacebookConnector()
     {
         client = new Client();
-//        client.addFilter(new LoggingFilter());
     }
     
     @OAuthAccessToken
