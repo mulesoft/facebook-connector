@@ -73,7 +73,7 @@ import com.sun.jersey.multipart.FormDataMultiPart;
  */
 @Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook Cloud Connector", minMuleVersion="3.3", configElementName="config-with-oauth")
 @OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize",
-        accessTokenRegex = "access_token=([^&]+?)&", expirationRegex = "expires_in=([^&]+?)$")
+        accessTokenRegex = "access_token=([^&]+?)&", expirationRegex = "expires=([^&]+?)$")
 public class FacebookConnector {
 
     private static final Logger logger = Logger.getLogger(FacebookConnector.class);
