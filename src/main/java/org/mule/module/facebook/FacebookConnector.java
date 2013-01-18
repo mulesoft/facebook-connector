@@ -71,7 +71,7 @@ import com.sun.jersey.multipart.FormDataMultiPart;
  * 
  * @author MuleSoft, inc.
  */
-@Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook Cloud Connector", minMuleVersion="3.3", configElementName="config-with-oauth")
+@Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook", minMuleVersion="3.3", configElementName="config-with-oauth")
 @OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize",
         accessTokenRegex = "access_token=([^&]+?)&", expirationRegex = "expires=([^&]+?)$")
 public class FacebookConnector {
