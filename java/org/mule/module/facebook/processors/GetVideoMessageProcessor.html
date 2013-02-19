@@ -474,6 +474,23 @@
   
   
 
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+  
+  
+  
+
 
 <div class="sum-details-links">
 
@@ -566,6 +583,8 @@ Summary:
         Stoppable 
       
         MessageProcessor 
+      
+        OperationMetaDataEnabled 
       
   
   
@@ -829,6 +848,12 @@ org.mule.api.lifecycle.Stoppable
 
 
 
+
+
+
+
+
+
 </table>
 
 
@@ -1022,6 +1047,12 @@ org.mule.api.lifecycle.Stoppable
 
 
 
+
+
+
+
+
+
 </table>
 
 
@@ -1073,6 +1104,38 @@ org.mule.api.lifecycle.Stoppable
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/processors/GetVideoMessageProcessor.html#dispose()">dispose</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Result&lt;MetaData&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/processors/GetVideoMessageProcessor.html#getInputMetaData()">getInputMetaData</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Result&lt;MetaData&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/processors/GetVideoMessageProcessor.html#getOutputMetaData(org.mule.common.metadata.MetaData)">getOutputMetaData</a></span>(MetaData inputMetadata)</nobr>
         
   </td></tr>
 
@@ -2173,6 +2236,68 @@ From interface
 </td></tr>
 
 
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.common.metadata.MetaDataDescriptor" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.common.metadata.MetaDataDescriptor-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.common.metadata.MetaDataDescriptor
+
+<div id="inherited-methods-org.mule.common.metadata.MetaDataDescriptor">
+  <div id="inherited-methods-org.mule.common.metadata.MetaDataDescriptor-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.common.metadata.MetaDataDescriptor-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Result&lt;MetaData&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getInputMetaData</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Result&lt;MetaData&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getOutputMetaData</span>(MetaData arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+
 </table>
 
 
@@ -2406,6 +2531,77 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getInputMetaData()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Result&lt;MetaData&gt;
+      </span>
+      <span class="sympad">getInputMetaData</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getOutputMetaData(org.mule.common.metadata.MetaData)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Result&lt;MetaData&gt;
+      </span>
+      <span class="sympad">getOutputMetaData</span>
+      <span class="normal">(MetaData inputMetadata)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>inputMetadata</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>
