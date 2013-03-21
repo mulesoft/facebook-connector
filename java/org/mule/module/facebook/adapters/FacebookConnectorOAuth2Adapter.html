@@ -204,14 +204,24 @@
                 
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/package-summary.html">org.mule.module.facebook</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/adapter/package-summary.html">org.mule.module.facebook.adapter</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/adapters/package-summary.html">org.mule.module.facebook.adapters</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/agents/package-summary.html">org.mule.module.facebook.agents</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/basic/package-summary.html">org.mule.module.facebook.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/callback/package-summary.html">org.mule.module.facebook.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/package-summary.html">org.mule.module.facebook.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/spring/package-summary.html">org.mule.module.facebook.config.spring</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/connection/package-summary.html">org.mule.module.facebook.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/devkit/package-summary.html">org.mule.module.facebook.devkit</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/oauth/package-summary.html">org.mule.module.facebook.oauth</a></li>
     <li class="api apilevel-">
@@ -335,20 +345,6 @@
    
   
   
-  
-  
-
-  
-   
-  
-  
-  
-  
-
-  
-   
-  
-  
    
   
   
@@ -377,6 +373,20 @@
   
   
    
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
   
   
   
@@ -501,7 +511,7 @@ Summary:
       
         Stoppable 
       
-        OAuth2Adapter 
+        <a href="../../../../../../java/org/mule/module/facebook/oauth/OAuth2Adapter.html">OAuth2Adapter</a> 
       
   
   
@@ -726,10 +736,6 @@ Summary:
 
 
 
-
-
-
-
 <tr class="api apilevel-" >
 <td colspan="12">
 
@@ -859,6 +865,10 @@ org.mule.api.lifecycle.Stoppable
 
 
 
+
+
+
+
 </table>
 
 
@@ -962,7 +972,7 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          RestoreAccessTokenCallback</nobr></td>
+          <a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#oauthRestoreAccessToken">oauthRestoreAccessToken</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -973,7 +983,7 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          SaveAccessTokenCallback</nobr></td>
+          <a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#oauthSaveAccessToken">oauthSaveAccessToken</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -1244,6 +1254,8 @@ org.mule.api.lifecycle.Stoppable
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#authorize(java.util.Map<java.lang.String, java.lang.String>, java.lang.String, java.lang.String)">authorize</a></span>(Map&lt;String,&nbsp;String&gt; extraParameters, String authorizationUrl, String redirectUri)</nobr>
         
+        <div class="jd-descrdiv">Build authorization URL and create the inbound endpoint for the callback</div>
+  
   </td></tr>
 
 
@@ -1260,6 +1272,8 @@ org.mule.api.lifecycle.Stoppable
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#fetchAccessToken(java.lang.String, java.lang.String)">fetchAccessToken</a></span>(String accessTokenUrl, String redirectUri)</nobr>
         
+        <div class="jd-descrdiv">Acquire access token and secret</div>
+  
   </td></tr>
 
 
@@ -1311,7 +1325,7 @@ org.mule.api.lifecycle.Stoppable
             
             
             
-            RestoreAccessTokenCallback</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#getOauthRestoreAccessToken()">getOauthRestoreAccessToken</a></span>()</nobr>
@@ -1331,7 +1345,7 @@ org.mule.api.lifecycle.Stoppable
             
             
             
-            SaveAccessTokenCallback</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#getOauthSaveAccessToken()">getOauthSaveAccessToken</a></span>()</nobr>
@@ -1371,7 +1385,7 @@ org.mule.api.lifecycle.Stoppable
             
             
             &lt;P&gt;
-            ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
@@ -1578,7 +1592,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#setOauthRestoreAccessToken(org.mule.api.oauth.RestoreAccessTokenCallback)">setOauthRestoreAccessToken</a></span>(RestoreAccessTokenCallback value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#setOauthRestoreAccessToken(org.mule.module.facebook.oauth.RestoreAccessTokenCallback)">setOauthRestoreAccessToken</a></span>(<a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a> value)</nobr>
         
         <div class="jd-descrdiv">Sets oauthRestoreAccessToken</div>
   
@@ -1596,7 +1610,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#setOauthSaveAccessToken(org.mule.api.oauth.SaveAccessTokenCallback)">setOauthSaveAccessToken</a></span>(SaveAccessTokenCallback value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#setOauthSaveAccessToken(org.mule.module.facebook.oauth.SaveAccessTokenCallback)">setOauthSaveAccessToken</a></span>(<a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a> value)</nobr>
         
         <div class="jd-descrdiv">Sets oauthSaveAccessToken</div>
   
@@ -1681,7 +1695,7 @@ From class
             
             
             &lt;P&gt;
-            ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorProcessAdapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
@@ -1818,6 +1832,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
+</div>
+  
   </td></tr>
 
 
@@ -1834,6 +1851,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
+</div>
+  
   </td></tr>
 
 
@@ -1850,6 +1870,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getModuleName()">getModuleName</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the user-friendly name of this module
+</div>
+  
   </td></tr>
 
 
@@ -1866,6 +1889,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the version of this module
+</div>
+  
   </td></tr>
 
 
@@ -1906,7 +1932,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.api.Capability)">isCapableOf</a></span>(Capability capability)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.module.facebook.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../java/org/mule/module/facebook/basic/Capability.html">Capability</a> capability)</nobr>
         
         <div class="jd-descrdiv">Returns true if this module implements such capability
  
@@ -4308,138 +4334,6 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.Capabilities" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.Capabilities-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.Capabilities
-
-<div id="inherited-methods-org.mule.api.Capabilities">
-  <div id="inherited-methods-org.mule.api.Capabilities-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.Capabilities-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">isCapableOf</span>(Capability arg0)</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.MetadataAware" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.MetadataAware-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.MetadataAware
-
-<div id="inherited-methods-org.mule.api.MetadataAware">
-  <div id="inherited-methods-org.mule.api.MetadataAware-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.MetadataAware-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getDevkitBuild</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getDevkitVersion</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getModuleName</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getModuleVersion</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
   <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.context.MuleContextAware" class="jd-expando-trigger closed"
           ><img id="inherited-methods-org.mule.api.context.MuleContextAware-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
@@ -4650,19 +4544,64 @@ From interface
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.oauth.OAuth2Adapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.oauth.OAuth2Adapter-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.basic.Capabilities" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.basic.Capabilities-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.oauth.OAuth2Adapter
+  <a href="../../../../../../org/mule/module/facebook/basic/Capabilities.html">org.mule.module.facebook.basic.Capabilities</a>
 
-<div id="inherited-methods-org.mule.api.oauth.OAuth2Adapter">
-  <div id="inherited-methods-org.mule.api.oauth.OAuth2Adapter-list"
+<div id="inherited-methods-org.mule.module.facebook.basic.Capabilities">
+  <div id="inherited-methods-org.mule.module.facebook.basic.Capabilities-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.oauth.OAuth2Adapter-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.module.facebook.basic.Capabilities-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/Capabilities.html#isCapableOf(org.mule.module.facebook.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../java/org/mule/module/facebook/basic/Capability.html">Capability</a> capability)</nobr>
+        
+        <div class="jd-descrdiv">Returns true if this module implements such
+ capability</div>
+  
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.basic.MetadataAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.basic.MetadataAware-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  <a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html">org.mule.module.facebook.basic.MetadataAware</a>
+
+<div id="inherited-methods-org.mule.module.facebook.basic.MetadataAware">
+  <div id="inherited-methods-org.mule.module.facebook.basic.MetadataAware-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.module.facebook.basic.MetadataAware-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -4678,8 +4617,11 @@ From interface
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">authorize</span>(Map&lt;String,&nbsp;String&gt; arg0, String arg1, String arg2)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
+</div>
+  
   </td></tr>
 
 
@@ -4691,11 +4633,14 @@ From interface
             
             
             
-            void</nobr>
+            String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">fetchAccessToken</span>(String arg0, String arg1)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
+</div>
+  
   </td></tr>
 
 
@@ -4710,7 +4655,107 @@ From interface
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getRefreshToken</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getModuleName()">getModuleName</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the user-friendly name of this module
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the version of this module
+</div>
+  
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.oauth.OAuth2Adapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.oauth.OAuth2Adapter-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  <a href="../../../../../../org/mule/module/facebook/oauth/OAuth2Adapter.html">org.mule.module.facebook.oauth.OAuth2Adapter</a>
+
+<div id="inherited-methods-org.mule.module.facebook.oauth.OAuth2Adapter">
+  <div id="inherited-methods-org.mule.module.facebook.oauth.OAuth2Adapter-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.module.facebook.oauth.OAuth2Adapter-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuth2Adapter.html#authorize(java.util.Map<java.lang.String, java.lang.String>, java.lang.String, java.lang.String)">authorize</a></span>(Map&lt;String,&nbsp;String&gt; extraParameters, String accessTokenUrl, String redirectUri)</nobr>
+        
+        <div class="jd-descrdiv">Build authorization URL and create the inbound endpoint for the callback</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuth2Adapter.html#fetchAccessToken(java.lang.String, java.lang.String)">fetchAccessToken</a></span>(String accessTokenUrl, String redirectUri)</nobr>
+        
+        <div class="jd-descrdiv">Acquire access token and secret</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuth2Adapter.html#getRefreshToken()">getRefreshToken</a></span>()</nobr>
         
   </td></tr>
 
@@ -4726,7 +4771,7 @@ From interface
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">hasTokenExpired</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuth2Adapter.html#hasTokenExpired()">hasTokenExpired</a></span>()</nobr>
         
   </td></tr>
 
@@ -4742,7 +4787,7 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">refreshAccessToken</span>(String arg0)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuth2Adapter.html#refreshAccessToken(java.lang.String)">refreshAccessToken</a></span>(String accessTokenUrl)</nobr>
         
   </td></tr>
 
@@ -4758,7 +4803,7 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setExpiration</span>(Date arg0)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuth2Adapter.html#setExpiration(java.util.Date)">setExpiration</a></span>(Date value)</nobr>
         
   </td></tr>
 
@@ -4772,19 +4817,19 @@ From interface
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.oauth.OAuthAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.oauth.OAuthAdapter-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.oauth.OAuthAdapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.oauth.OAuthAdapter-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.oauth.OAuthAdapter
+  <a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html">org.mule.module.facebook.oauth.OAuthAdapter</a>
 
-<div id="inherited-methods-org.mule.api.oauth.OAuthAdapter">
-  <div id="inherited-methods-org.mule.api.oauth.OAuthAdapter-list"
+<div id="inherited-methods-org.mule.module.facebook.oauth.OAuthAdapter">
+  <div id="inherited-methods-org.mule.module.facebook.oauth.OAuthAdapter-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.oauth.OAuthAdapter-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.module.facebook.oauth.OAuthAdapter-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -4800,8 +4845,11 @@ From interface
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getAccessToken</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#getAccessToken()">getAccessToken</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Retrieve access token
+</div>
+  
   </td></tr>
 
 
@@ -4813,11 +4861,14 @@ From interface
             
             
             
-            RestoreAccessTokenCallback</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getOauthRestoreAccessToken</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#getOauthRestoreAccessToken()">getOauthRestoreAccessToken</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Get the callback to be called when the access token and secret need to be restored
+</div>
+  
   </td></tr>
 
 
@@ -4829,11 +4880,15 @@ From interface
             
             
             
-            SaveAccessTokenCallback</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getOauthSaveAccessToken</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#getOauthSaveAccessToken()">getOauthSaveAccessToken</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Get the callback to be called when the access token and secret need to be saved for
+ later restoration
+</div>
+  
   </td></tr>
 
 
@@ -4848,8 +4903,10 @@ From interface
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getOauthVerifier</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#getOauthVerifier()">getOauthVerifier</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Retrieve OAuth verifier</div>
+  
   </td></tr>
 
 
@@ -4864,7 +4921,7 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">hasBeenAuthorized</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#hasBeenAuthorized()">hasBeenAuthorized</a></span>()</nobr>
         
   </td></tr>
 
@@ -4880,8 +4937,10 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setAccessToken</span>(String arg0)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#setAccessToken(java.lang.String)">setAccessToken</a></span>(String value)</nobr>
         
+        <div class="jd-descrdiv">Set access token</div>
+  
   </td></tr>
 
 
@@ -4896,8 +4955,10 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setOauthRestoreAccessToken</span>(RestoreAccessTokenCallback arg0)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#setOauthRestoreAccessToken(org.mule.module.facebook.oauth.RestoreAccessTokenCallback)">setOauthRestoreAccessToken</a></span>(<a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a> restoreCallback)</nobr>
         
+        <div class="jd-descrdiv">Set the callback to be called when the access token and secret need to be restored</div>
+  
   </td></tr>
 
 
@@ -4912,8 +4973,11 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setOauthSaveAccessToken</span>(SaveAccessTokenCallback arg0)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#setOauthSaveAccessToken(org.mule.module.facebook.oauth.SaveAccessTokenCallback)">setOauthSaveAccessToken</a></span>(<a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a> saveCallback)</nobr>
         
+        <div class="jd-descrdiv">Set the callback to be called when the access token and secret need to be saved for
+ later restoration</div>
+  
   </td></tr>
 
 
@@ -4928,8 +4992,10 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setOauthVerifier</span>(String arg0)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthAdapter.html#setOauthVerifier(java.lang.String)">setOauthVerifier</a></span>(String value)</nobr>
         
+        <div class="jd-descrdiv">Set OAuth verifier</div>
+  
   </td></tr>
 
 
@@ -4942,19 +5008,19 @@ From interface
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.process.ProcessAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.process.ProcessAdapter-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.process.ProcessAdapter
+  <a href="../../../../../../org/mule/module/facebook/process/ProcessAdapter.html">org.mule.module.facebook.process.ProcessAdapter</a>
 
-<div id="inherited-methods-org.mule.api.process.ProcessAdapter">
-  <div id="inherited-methods-org.mule.api.process.ProcessAdapter-list"
+<div id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter">
+  <div id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.process.ProcessAdapter-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -4967,10 +5033,10 @@ From interface
             
             
             &lt;T&gt;
-            ProcessTemplate&lt;T,&nbsp;O&gt;</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;T,&nbsp;O&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getProcessTemplate</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/process/ProcessAdapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
         
   </td></tr>
 
@@ -5261,7 +5327,7 @@ From interface
         private 
          
          
-        RestoreAccessTokenCallback
+        <a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a>
       </span>
         oauthRestoreAccessToken
     </h4>
@@ -5291,7 +5357,7 @@ From interface
         private 
          
          
-        SaveAccessTokenCallback
+        <a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a>
       </span>
         oauthSaveAccessToken
     </h4>
@@ -5483,13 +5549,13 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Build authorization URL and create the inbound endpoint for the callback</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
         <tr>
           <th>extraParameters</td>
-          <td></td>
+          <td>Extra query string parameters that should be added to the authorization URL</td>
         </tr>
         <tr>
           <th>authorizationUrl</td>
@@ -5500,6 +5566,11 @@ From interface
           <td></td>
         </tr>
       </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>The authorization URL
+</li></ul>
   </div>
 
     </div>
@@ -5531,7 +5602,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Acquire access token and secret</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
@@ -5549,7 +5620,7 @@ From interface
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
         <tr>
-            <th>UnableToAcquireAccessTokenException</td>
+            <th><a href="../../../../../../java/org/mule/module/facebook/oauth/UnableToAcquireAccessTokenException.html">UnableToAcquireAccessTokenException</a></td>
             <td></td>
         </tr>
       </table>
@@ -5635,7 +5706,7 @@ From interface
          
          
          
-        RestoreAccessTokenCallback
+        <a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a>
       </span>
       <span class="sympad">getOauthRestoreAccessToken</span>
       <span class="normal">()</span>
@@ -5668,7 +5739,7 @@ From interface
          
          
          
-        SaveAccessTokenCallback
+        <a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a>
       </span>
       <span class="sympad">getOauthSaveAccessToken</span>
       <span class="normal">()</span>
@@ -5719,6 +5790,11 @@ From interface
   <div class="jd-tagdata jd-tagdescr"><p>Retrieves oauthVerifier
  
 </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>A String representing the OAuth verifier
+</li></ul>
+  </div>
 
     </div>
 </div>
@@ -5734,7 +5810,7 @@ From interface
          
          
          
-        ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;
+        <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;
       </span>
       <span class="sympad">getProcessTemplate</span>
       <span class="normal">()</span>
@@ -5818,7 +5894,7 @@ From interface
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
         <tr>
-            <th>NotAuthorizedException</td>
+            <th><a href="../../../../../../java/org/mule/module/facebook/oauth/NotAuthorizedException.html">NotAuthorizedException</a></td>
             <td></td>
         </tr>
       </table>
@@ -5938,7 +6014,7 @@ From interface
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
         <tr>
-            <th>UnableToAcquireAccessTokenException</td>
+            <th><a href="../../../../../../java/org/mule/module/facebook/oauth/UnableToAcquireAccessTokenException.html">UnableToAcquireAccessTokenException</a></td>
             <td></td>
         </tr>
       </table>
@@ -6174,7 +6250,7 @@ From interface
 </div>
 
 
-<A NAME="setOauthRestoreAccessToken(org.mule.api.oauth.RestoreAccessTokenCallback)"></A>
+<A NAME="setOauthRestoreAccessToken(org.mule.module.facebook.oauth.RestoreAccessTokenCallback)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6187,7 +6263,7 @@ From interface
         void
       </span>
       <span class="sympad">setOauthRestoreAccessToken</span>
-      <span class="normal">(RestoreAccessTokenCallback value)</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a> value)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -6215,7 +6291,7 @@ From interface
 </div>
 
 
-<A NAME="setOauthSaveAccessToken(org.mule.api.oauth.SaveAccessTokenCallback)"></A>
+<A NAME="setOauthSaveAccessToken(org.mule.module.facebook.oauth.SaveAccessTokenCallback)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -6228,7 +6304,7 @@ From interface
         void
       </span>
       <span class="sympad">setOauthSaveAccessToken</span>
-      <span class="normal">(SaveAccessTokenCallback value)</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a> value)</span>
     </h4>
       <div class="api-level">
         <div>

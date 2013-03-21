@@ -205,13 +205,23 @@
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/package-summary.html">org.mule.module.facebook</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/adapter/package-summary.html">org.mule.module.facebook.adapter</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/adapters/package-summary.html">org.mule.module.facebook.adapters</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/agents/package-summary.html">org.mule.module.facebook.agents</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/basic/package-summary.html">org.mule.module.facebook.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/callback/package-summary.html">org.mule.module.facebook.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/package-summary.html">org.mule.module.facebook.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/spring/package-summary.html">org.mule.module.facebook.config.spring</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/connection/package-summary.html">org.mule.module.facebook.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/devkit/package-summary.html">org.mule.module.facebook.devkit</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/oauth/package-summary.html">org.mule.module.facebook.oauth</a></li>
     <li class="api apilevel-">
@@ -226,6 +236,16 @@
           <div id="classes-nav">
             <ul>
               
+    <li><h2>Interfaces</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/OAuth1Adapter.html">OAuth1Adapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/OAuth2Adapter.html">OAuth2Adapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/OAuthAdapter.html">OAuthAdapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/OAuthManager.html">OAuthManager</a>&lt;C&nbsp;extends&nbsp;<a href="../../../../../../java/org/mule/module/facebook/oauth/OAuthAdapter.html">OAuthAdapter</a>&gt;</li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></li>
+      </ul>
+    </li>
               
     <li><h2>Classes</h2>
       <ul>
@@ -243,6 +263,13 @@
               
               
               
+    <li><h2>Exceptions</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/NotAuthorizedException.html">NotAuthorizedException</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/UnableToAcquireAccessTokenException.html">UnableToAcquireAccessTokenException</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/oauth/UnableToAcquireRequestTokenException.html">UnableToAcquireRequestTokenException</a></li>
+      </ul>
+    </li>
               
             </ul><br/>
           </div><!-- end classes -->
@@ -360,7 +387,7 @@ Summary:
   
       implements 
       
-        ProcessTemplate&lt;T,&nbsp;O&gt; 
+        <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;T,&nbsp;O&gt; 
       
   
   
@@ -512,7 +539,7 @@ Summary:
             P</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthProcessTemplate.html#execute(org.mule.api.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.processor.MessageProcessor, org.mule.api.MuleEvent)">execute</a></span>(ProcessCallback&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, MessageProcessor messageProcessor, MuleEvent event)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthProcessTemplate.html#execute(org.mule.module.facebook.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.processor.MessageProcessor, org.mule.api.MuleEvent)">execute</a></span>(<a href="../../../../../../java/org/mule/module/facebook/process/ProcessCallback.html">ProcessCallback</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, MessageProcessor messageProcessor, MuleEvent event)</nobr>
         
   </td></tr>
 
@@ -528,7 +555,7 @@ Summary:
             P</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthProcessTemplate.html#execute(org.mule.api.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.routing.filter.Filter, org.mule.api.MuleMessage)">execute</a></span>(ProcessCallback&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, Filter filter, MuleMessage message)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/OAuthProcessTemplate.html#execute(org.mule.module.facebook.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.routing.filter.Filter, org.mule.api.MuleMessage)">execute</a></span>(<a href="../../../../../../java/org/mule/module/facebook/process/ProcessCallback.html">ProcessCallback</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, Filter filter, MuleMessage message)</nobr>
         
   </td></tr>
 
@@ -752,19 +779,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.process.ProcessTemplate" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.process.ProcessTemplate-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.process.ProcessTemplate" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.process.ProcessTemplate-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.process.ProcessTemplate
+  <a href="../../../../../../org/mule/module/facebook/process/ProcessTemplate.html">org.mule.module.facebook.process.ProcessTemplate</a>
 
-<div id="inherited-methods-org.mule.api.process.ProcessTemplate">
-  <div id="inherited-methods-org.mule.api.process.ProcessTemplate-list"
+<div id="inherited-methods-org.mule.module.facebook.process.ProcessTemplate">
+  <div id="inherited-methods-org.mule.module.facebook.process.ProcessTemplate-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.process.ProcessTemplate-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.module.facebook.process.ProcessTemplate-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -780,7 +807,7 @@ From interface
             T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">execute</span>(ProcessCallback&lt;T,&nbsp;O&gt; arg0, Filter arg1, MuleMessage arg2)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/process/ProcessTemplate.html#execute(org.mule.module.facebook.process.ProcessCallback<T, O>, org.mule.api.routing.filter.Filter, org.mule.api.MuleMessage)">execute</a></span>(<a href="../../../../../../java/org/mule/module/facebook/process/ProcessCallback.html">ProcessCallback</a>&lt;T,&nbsp;O&gt; callback, Filter filter, MuleMessage message)</nobr>
         
   </td></tr>
 
@@ -796,7 +823,7 @@ From interface
             T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">execute</span>(ProcessCallback&lt;T,&nbsp;O&gt; arg0, MessageProcessor arg1, MuleEvent arg2)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/process/ProcessTemplate.html#execute(org.mule.module.facebook.process.ProcessCallback<T, O>, org.mule.api.processor.MessageProcessor, org.mule.api.MuleEvent)">execute</a></span>(<a href="../../../../../../java/org/mule/module/facebook/process/ProcessCallback.html">ProcessCallback</a>&lt;T,&nbsp;O&gt; callback, MessageProcessor messageProcessor, MuleEvent event)</nobr>
         
   </td></tr>
 
@@ -933,7 +960,7 @@ From interface
 
 
 
-<A NAME="execute(org.mule.api.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.processor.MessageProcessor, org.mule.api.MuleEvent)"></A>
+<A NAME="execute(org.mule.module.facebook.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.processor.MessageProcessor, org.mule.api.MuleEvent)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -946,7 +973,7 @@ From interface
         P
       </span>
       <span class="sympad">execute</span>
-      <span class="normal">(ProcessCallback&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, MessageProcessor messageProcessor, MuleEvent event)</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/module/facebook/process/ProcessCallback.html">ProcessCallback</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, MessageProcessor messageProcessor, MuleEvent event)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -990,7 +1017,7 @@ From interface
 </div>
 
 
-<A NAME="execute(org.mule.api.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.routing.filter.Filter, org.mule.api.MuleMessage)"></A>
+<A NAME="execute(org.mule.module.facebook.process.ProcessCallback<P, org.mule.module.facebook.adapters.FacebookConnectorCapabilitiesAdapter>, org.mule.api.routing.filter.Filter, org.mule.api.MuleMessage)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1003,7 +1030,7 @@ From interface
         P
       </span>
       <span class="sympad">execute</span>
-      <span class="normal">(ProcessCallback&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, Filter filter, MuleMessage message)</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/module/facebook/process/ProcessCallback.html">ProcessCallback</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt; processCallback, Filter filter, MuleMessage message)</span>
     </h4>
       <div class="api-level">
         <div>

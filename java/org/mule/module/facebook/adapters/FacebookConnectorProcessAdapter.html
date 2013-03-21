@@ -204,14 +204,24 @@
                 
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/package-summary.html">org.mule.module.facebook</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/adapter/package-summary.html">org.mule.module.facebook.adapter</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/adapters/package-summary.html">org.mule.module.facebook.adapters</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/agents/package-summary.html">org.mule.module.facebook.agents</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/basic/package-summary.html">org.mule.module.facebook.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/callback/package-summary.html">org.mule.module.facebook.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/package-summary.html">org.mule.module.facebook.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/spring/package-summary.html">org.mule.module.facebook.config.spring</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/connection/package-summary.html">org.mule.module.facebook.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/devkit/package-summary.html">org.mule.module.facebook.devkit</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/oauth/package-summary.html">org.mule.module.facebook.oauth</a></li>
     <li class="api apilevel-">
@@ -321,20 +331,6 @@
    
   
   
-  
-  
-
-  
-   
-  
-  
-  
-  
-
-  
-   
-  
-  
    
   
   
@@ -363,6 +359,20 @@
   
   
    
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
   
   
   
@@ -458,7 +468,7 @@ Summary:
   
       implements 
       
-        ProcessAdapter&lt;O&gt; 
+        <a href="../../../../../../java/org/mule/module/facebook/process/ProcessAdapter.html">ProcessAdapter</a>&lt;O&gt; 
       
   
   
@@ -692,10 +702,6 @@ Summary:
 
 
 
-
-
-
-
 <tr class="api apilevel-" >
 <td colspan="12">
 
@@ -817,6 +823,10 @@ org.mule.api.lifecycle.Stoppable
   </div>
 </div>
 </td></tr>
+
+
+
+
 
 
 
@@ -1041,7 +1051,7 @@ org.mule.api.lifecycle.Stoppable
             
             
             &lt;P&gt;
-            ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorProcessAdapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
@@ -1186,6 +1196,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
+</div>
+  
   </td></tr>
 
 
@@ -1202,6 +1215,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
+</div>
+  
   </td></tr>
 
 
@@ -1218,6 +1234,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getModuleName()">getModuleName</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the user-friendly name of this module
+</div>
+  
   </td></tr>
 
 
@@ -1234,6 +1253,9 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorMetadataAdapater.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Returns the version of this module
+</div>
+  
   </td></tr>
 
 
@@ -1274,7 +1296,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.api.Capability)">isCapableOf</a></span>(Capability capability)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.module.facebook.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../java/org/mule/module/facebook/basic/Capability.html">Capability</a> capability)</nobr>
         
         <div class="jd-descrdiv">Returns true if this module implements such capability
  
@@ -3676,138 +3698,6 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.Capabilities" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.Capabilities-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.Capabilities
-
-<div id="inherited-methods-org.mule.api.Capabilities">
-  <div id="inherited-methods-org.mule.api.Capabilities-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.Capabilities-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">isCapableOf</span>(Capability arg0)</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.MetadataAware" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.MetadataAware-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.MetadataAware
-
-<div id="inherited-methods-org.mule.api.MetadataAware">
-  <div id="inherited-methods-org.mule.api.MetadataAware-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.MetadataAware-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getDevkitBuild</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getDevkitVersion</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getModuleName</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getModuleVersion</span>()</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
   <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Disposable" class="jd-expando-trigger closed"
           ><img id="inherited-methods-org.mule.api.lifecycle.Disposable-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
@@ -3976,19 +3866,166 @@ From interface
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.process.ProcessAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.process.ProcessAdapter-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.basic.Capabilities" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.basic.Capabilities-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.process.ProcessAdapter
+  <a href="../../../../../../org/mule/module/facebook/basic/Capabilities.html">org.mule.module.facebook.basic.Capabilities</a>
 
-<div id="inherited-methods-org.mule.api.process.ProcessAdapter">
-  <div id="inherited-methods-org.mule.api.process.ProcessAdapter-list"
+<div id="inherited-methods-org.mule.module.facebook.basic.Capabilities">
+  <div id="inherited-methods-org.mule.module.facebook.basic.Capabilities-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.process.ProcessAdapter-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.module.facebook.basic.Capabilities-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/Capabilities.html#isCapableOf(org.mule.module.facebook.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../java/org/mule/module/facebook/basic/Capability.html">Capability</a> capability)</nobr>
+        
+        <div class="jd-descrdiv">Returns true if this module implements such
+ capability</div>
+  
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.basic.MetadataAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.basic.MetadataAware-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  <a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html">org.mule.module.facebook.basic.MetadataAware</a>
+
+<div id="inherited-methods-org.mule.module.facebook.basic.MetadataAware">
+  <div id="inherited-methods-org.mule.module.facebook.basic.MetadataAware-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.module.facebook.basic.MetadataAware-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getModuleName()">getModuleName</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the user-friendly name of this module
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/basic/MetadataAware.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the version of this module
+</div>
+  
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  <a href="../../../../../../org/mule/module/facebook/process/ProcessAdapter.html">org.mule.module.facebook.process.ProcessAdapter</a>
+
+<div id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter">
+  <div id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.module.facebook.process.ProcessAdapter-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -4001,10 +4038,10 @@ From interface
             
             
             &lt;T&gt;
-            ProcessTemplate&lt;T,&nbsp;O&gt;</nobr>
+            <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;T,&nbsp;O&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getProcessTemplate</span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/process/ProcessAdapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
         
   </td></tr>
 
@@ -4105,7 +4142,7 @@ From interface
          
          
          
-        ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;
+        <a href="../../../../../../java/org/mule/module/facebook/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../java/org/mule/module/facebook/adapters/FacebookConnectorCapabilitiesAdapter.html">FacebookConnectorCapabilitiesAdapter</a>&gt;
       </span>
       <span class="sympad">getProcessTemplate</span>
       <span class="normal">()</span>
