@@ -93,7 +93,7 @@ It's time to build the flows that download user's profile picture now that we ha
 
 **Authorize flow**: Start by dropping an HTTP endpoint on the flow from the palette. The only parameters you need to configure for this endpoint is "Host" and "Port". Change host to "localhost" and port to "8082". This is the URL you'd call to start this flow. Then drop a Facebook connector from the palette onto the endpoint. In the configuration dialog box, change "Config Reference" to "Facebook-config", the configuration you set up in the previous section. Also, select "Authorize" from the list of operations in the "Operation" dropdown. In the next step, you need to store the OAuth token that the previous step returns as a flow variable. This is needed in the other flow that downloads user's profile picture. As you know, flow variables cannot cross flow boundaries and thus you need to save the OAuth token in a session variable. Drop a Session Variable from the palette onto the Facebook connector and in the configuration dialog box, choose "Set Session Variable" for the "Operation". Furthermore, enter "accessTokenId" in the name field and "\#[flowVars['OAuthAccessTokenId']]" in the value field. This saves the OAuth token in a session variable called accessTokenId. The final step is to call the second flow. Drop a Flow Reference onto the Session Variable and in the configuration dialog box choose the second flow for "Flow Name". I've named the second flow "PhotoDownload". You are done with this flow.     
 
-![](imagesimages/image008.png)
+![](images/image008.png)
 
 Figure 8. Creating flows in Mule app
 
