@@ -2,15 +2,15 @@
 
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:context="http://www.springframework.org/schema/context" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
-http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/2.3/mule-twitter.xsd 
-http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/2.0/mule-facebook.xsd 
+http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/current/mule-twitter.xsd 
+http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd 
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
-    <facebook:config name="Facebook" appId="${facebookAppId}" appSecret="${facebookAppSecret}" doc:name="Facebook">
+    <facebook:config-with-oauth name="Facebook" appId="${facebookAppId}" appSecret="${facebookAppSecret}" doc:name="Facebook">
         <facebook:oauth-callback-config domain="localhost" localPort="8081" remotePort="8081"/>
-    </facebook:config>
+    </facebook:config-with-oauth>
     <twitter:config name="Twitter" accessKey="${twitterAccessKey}" accessSecret="${twitterAccessSecret}" consumerKey="${twitterConsumerKey}" consumerSecret="${twitterConsumerSecret}" doc:name="Twitter"/>
     <data-mapper:config name="get-first-friend-username" transformationGraphPath="get-first-friend-username.grf" doc:name="get-first-friend-username"/>
     <data-mapper:config name="get-like-id" transformationGraphPath="get-like-id.grf" doc:name="get-like-id"/>
