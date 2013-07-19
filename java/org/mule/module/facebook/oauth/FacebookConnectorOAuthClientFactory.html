@@ -313,6 +313,15 @@
   
   
   
+   
+  
+  
+
+  
+   
+  
+  
+  
   
 
   
@@ -334,9 +343,9 @@ Summary:
 
 
 
-  <a href="#lfields">Fields</a>
-  
 
+  <a href="#inhfields">Inherited Fields</a>
+  
 
 
   &#124; <a href="#pubctors">Ctors</a>
@@ -344,9 +353,9 @@ Summary:
 
 
 
-  &#124; <a href="#pubmethods">Methods</a>
-  
 
+  &#124; <a href="#promethods">Protected Methods</a>
+  
 
 
   &#124; <a href="#inhmethods">Inherited Methods</a>
@@ -378,17 +387,16 @@ Summary:
 
 
   
-    extends Object<br/>
+  
+  
+
+  
+    extends BaseOAuthClientFactory<br/>
   
   
   
 
   
-  
-      implements 
-      
-        KeyedPoolableObjectFactory 
-      
   
   
 
@@ -403,11 +411,21 @@ Summary:
 
     <tr>
         
-        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="3" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
     <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="2" class="jd-inheritance-class-cell">org.mule.security.oauth.BaseOAuthClientFactory</td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
@@ -469,27 +487,87 @@ Summary:
 
 
 
-<!-- =========== FIELD SUMMARY =========== -->
-<table id="lfields" class="jd-sumtable"><tr><th colspan="12">Fields</th></tr>
 
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+<table id="inhfields" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Fields</div></th></tr>
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.security.oauth.BaseOAuthClientFactory" class="jd-expando-trigger closed"
+          ><img id="inherited-fields-org.mule.security.oauth.BaseOAuthClientFactory-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+org.mule.security.oauth.BaseOAuthClientFactory
+<div id="inherited-fields-org.mule.security.oauth.BaseOAuthClientFactory">
+  <div id="inherited-fields-org.mule.security.oauth.BaseOAuthClientFactory-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-fields-org.mule.security.oauth.BaseOAuthClientFactory-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
 
     
       <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
+          static
           
-          
-          <a href="../../../../../../java/org/mule/module/facebook/oauth/FacebookConnectorOAuthManager.html">FacebookConnectorOAuthManager</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#oauthManager">oauthManager</a></td>
+          Logger</nobr></td>
+          <td class="jd-linkcol">logger</td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          OAuth2Manager&lt;OAuth2Adapter&gt;</nobr></td>
+          <td class="jd-linkcol">oauthManager</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          static
+          
+          Map&lt;String,&nbsp;PropertyDescriptor&gt;</nobr></td>
+          <td class="jd-linkcol">oauthStateProperties</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          ObjectStore&lt;Serializable&gt;</nobr></td>
+          <td class="jd-linkcol">objectStore</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+
+
 
 </table>
-
-
-
 
 
 
@@ -510,13 +588,15 @@ Summary:
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#FacebookConnectorOAuthClientFactory(org.mule.module.facebook.oauth.FacebookConnectorOAuthManager)">FacebookConnectorOAuthClientFactory</a></span>(<a href="../../../../../../java/org/mule/module/facebook/oauth/FacebookConnectorOAuthManager.html">FacebookConnectorOAuthManager</a> oauthManager)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#FacebookConnectorOAuthClientFactory(org.mule.security.oauth.OAuth2Manager<org.mule.security.oauth.OAuth2Adapter>, org.mule.api.store.ObjectStore<java.io.Serializable>)">FacebookConnectorOAuthClientFactory</a></span>(OAuth2Manager&lt;OAuth2Adapter&gt; oauthManager, ObjectStore&lt;Serializable&gt; objectStore)</nobr>
         
   </td></tr>
 
 
 
 </table>
+
+
 
 
 
@@ -524,7 +604,7 @@ Summary:
 
 
 <!-- ========== METHOD SUMMARY =========== -->
-<table id="pubmethods" class="jd-sumtable"><tr><th colspan="12">Public Methods</th></tr>
+<table id="promethods" class="jd-sumtable"><tr><th colspan="12">Protected Methods</th></tr>
 
 
 
@@ -536,10 +616,10 @@ Summary:
             
             
             
-            void</nobr>
+            Class&lt;?&nbsp;extends&nbsp;OAuth2Adapter&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#activateObject(java.lang.Object, java.lang.Object)">activateObject</a></span>(Object key, Object obj)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#getAdapterClass()">getAdapterClass</a></span>()</nobr>
         
   </td></tr>
 
@@ -555,29 +635,13 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#destroyObject(java.lang.Object, java.lang.Object)">destroyObject</a></span>(Object key, Object obj)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#setCustomAdapterProperties(org.mule.security.oauth.OAuth2Adapter, org.mule.common.security.oauth.OAuthState)">setCustomAdapterProperties</a></span>(OAuth2Adapter adapter, OAuthState state)</nobr>
         
   </td></tr>
 
 
 	 
     <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Object</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#makeObject(java.lang.Object)">makeObject</a></span>(Object key)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -587,31 +651,13 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#passivateObject(java.lang.Object, java.lang.Object)">passivateObject</a></span>(Object key, Object obj)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#validateObject(java.lang.Object, java.lang.Object)">validateObject</a></span>(Object key, Object obj)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/oauth/FacebookConnectorOAuthClientFactory.html#setCustomStateProperties(org.mule.security.oauth.OAuth2Adapter, org.mule.common.security.oauth.OAuthState)">setCustomStateProperties</a></span>(OAuth2Adapter adapter, OAuthState state)</nobr>
         
   </td></tr>
 
 
 
 </table>
-
-
 
 
 
@@ -621,6 +667,160 @@ Summary:
 <table id="inhmethods" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Methods</div></th></tr>
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.BaseOAuthClientFactory" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.security.oauth.BaseOAuthClientFactory-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  org.mule.security.oauth.BaseOAuthClientFactory
+
+<div id="inherited-methods-org.mule.security.oauth.BaseOAuthClientFactory">
+  <div id="inherited-methods-org.mule.security.oauth.BaseOAuthClientFactory-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.security.oauth.BaseOAuthClientFactory-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">activateObject</span>(Object arg0, Object arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">destroyObject</span>(Object arg0, Object arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Class&lt;?&nbsp;extends&nbsp;OAuth2Adapter&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getAdapterClass</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">makeObject</span>(Object arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">passivateObject</span>(Object arg0, Object arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setCustomAdapterProperties</span>(OAuth2Adapter arg0, OAuthState arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setCustomStateProperties</span>(OAuth2Adapter arg0, OAuthState arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">validateObject</span>(Object arg0, Object arg1)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
 
 
 <tr class="api apilevel-" >
@@ -956,43 +1156,6 @@ From interface
 <!-- Fields -->
 
 
-<!-- ========= FIELD DETAIL ======== -->
-<h2>Fields</h2>
-
-
-
-
-<A NAME="oauthManager"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        <a href="../../../../../../java/org/mule/module/facebook/oauth/FacebookConnectorOAuthManager.html">FacebookConnectorOAuthManager</a>
-      </span>
-        oauthManager
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-
 <!-- Public ctors -->
 
 
@@ -1001,7 +1164,7 @@ From interface
 
 
 
-<A NAME="FacebookConnectorOAuthClientFactory(org.mule.module.facebook.oauth.FacebookConnectorOAuthManager)"></A>
+<A NAME="FacebookConnectorOAuthClientFactory(org.mule.security.oauth.OAuth2Manager<org.mule.security.oauth.OAuth2Adapter>, org.mule.api.store.ObjectStore<java.io.Serializable>)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1014,7 +1177,7 @@ From interface
         
       </span>
       <span class="sympad">FacebookConnectorOAuthClientFactory</span>
-      <span class="normal">(<a href="../../../../../../java/org/mule/module/facebook/oauth/FacebookConnectorOAuthManager.html">FacebookConnectorOAuthManager</a> oauthManager)</span>
+      <span class="normal">(OAuth2Manager&lt;OAuth2Adapter&gt; oauthManager, ObjectStore&lt;Serializable&gt; objectStore)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1032,6 +1195,10 @@ From interface
       <table class="jd-tagtable">
         <tr>
           <th>oauthManager</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>objectStore</td>
           <td></td>
         </tr>
       </table>
@@ -1052,266 +1219,133 @@ From interface
 <!-- ========= METHOD DETAIL ======== -->
 <!-- Public methdos -->
 
-<h2>Public Methods</h2>
-
-
-
-<A NAME="activateObject(java.lang.Object, java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">activateObject</span>
-      <span class="normal">(Object key, Object obj)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>key</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>obj</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>Exception</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="destroyObject(java.lang.Object, java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">destroyObject</span>
-      <span class="normal">(Object key, Object obj)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>key</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>obj</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>Exception</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="makeObject(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Object
-      </span>
-      <span class="sympad">makeObject</span>
-      <span class="normal">(Object key)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>key</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>Exception</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="passivateObject(java.lang.Object, java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">passivateObject</span>
-      <span class="normal">(Object key, Object obj)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>key</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>obj</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>Exception</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="validateObject(java.lang.Object, java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        boolean
-      </span>
-      <span class="sympad">validateObject</span>
-      <span class="normal">(Object key, Object obj)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>key</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>obj</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-
 
 
 <!-- ========= METHOD DETAIL ======== -->
+
+<h2>Protected Methods</h2>
+
+
+
+<A NAME="getAdapterClass()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        Class&lt;?&nbsp;extends&nbsp;OAuth2Adapter&gt;
+      </span>
+      <span class="sympad">getAdapterClass</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="setCustomAdapterProperties(org.mule.security.oauth.OAuth2Adapter, org.mule.common.security.oauth.OAuthState)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setCustomAdapterProperties</span>
+      <span class="normal">(OAuth2Adapter adapter, OAuthState state)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>adapter</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>state</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setCustomStateProperties(org.mule.security.oauth.OAuth2Adapter, org.mule.common.security.oauth.OAuthState)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setCustomStateProperties</span>
+      <span class="normal">(OAuth2Adapter adapter, OAuthState state)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>adapter</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>state</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 
 
 

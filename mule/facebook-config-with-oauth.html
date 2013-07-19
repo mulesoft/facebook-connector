@@ -240,7 +240,7 @@ Summary:
           <th>Schema Version</th><td>2.0</td>
         </tr>
 <tr>
-          <th>Minimum Mule Version</th><td>3.4</td>
+          <th>Minimum Mule Version</th><td>3.5</td>
         </tr>
     </tbody></table>
   </div>
@@ -1488,7 +1488,7 @@ specify which configuration to use.</p>
       <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           xs:string</nobr></td>
-          <td class="jd-linkcol"><nobr>appId</nobr></td>
+          <td class="jd-linkcol"><nobr>consumerKey</nobr></td>
           <td class="jd-descrcol"></td>
           <td class="jd-descrcol" width="100%">The application identifier as registered with Facebook
 </td>
@@ -1501,7 +1501,7 @@ specify which configuration to use.</p>
       <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           xs:string</nobr></td>
-          <td class="jd-linkcol"><nobr>appSecret</nobr></td>
+          <td class="jd-linkcol"><nobr>consumerSecret</nobr></td>
           <td class="jd-descrcol"></td>
           <td class="jd-descrcol" width="100%">The application secret
 </td>
@@ -1552,28 +1552,32 @@ specify which configuration to use.</p>
 
 
 
-<!-- ========= OAUTH DETAIL ======== -->
-<h2>OAuth</h2>
-<p>This connector uses OAuth as an authorization and authentication mechanism with automatic saving and restoring
-of access tokens. Every message processor in this connector has an extra attribute entitled <i>accessTokenId</i> which is
-an identification of the user authorizing the conenctor. In order to obtain an access token identification you need to
-first call the authroize message processor.</p>
+
+
+
+
+<!-- ========= OAUTH2 DETAIL ======== -->
+<h2>OAuth2</h2>
+<p>This connector uses OAuth2 as an authorization and authentication mechanism with automatic saving and restoring
+of access tokens. Every message processor in this connector keeps track of an attribute called <i>accessTokenId</i> which
+ identifies each of the users that were authorized by the connector. In order to obtain an access token identification you need to
+ first call the <i>authorize message processor</i>.</p>
 <p>Authorizing the connector is a simple process of calling:</p>
 <pre>
     &lt;facebook:authorize/&gt;
 </pre>
-<p>The call to authorize message processor must be made from a message coming from an HTTP inbound endpoint as the authorize process will
-reply with a redirect to the service provider. The following is an example of how to use it in a flow with an HTTP inbound endpoint:</p>
+<p>The call to authorize the message processor must be made though a message coming from an HTTP inbound endpoint as the authorize process will
+ reply with a redirect to the service provider. The following is an example of how to use it in a flow with an HTTP inbound endpoint:</p>
 <pre>
     &lt;flow name="authorizationAndAuthenticationFlow"&gt;
         &lt;http:inbound-endpoint host="localhost" port="8080" path="oauth-authorize"/&gt;
         &lt;facebook:authorize/&gt;
     &lt;/flow&gt;
 </pre>
-<p>If you hit that endpoint via a web-browser it will initiate the OAuth dance, redirecting the user to the service provider page
-and creating a callback endpoint so the service provider can redirect back once the user has been authenticated and properly
-authorized the connector. Once the callback gets called then the connector will automatically issue an access token identifier
-that you need to save as either a cookie or a database record for any subsequent calls.</p>
+<p>If you hit that endpoint via a web-browser it will initiate the OAuth dance, redirecting the user to the service provider page.
+It will also create a callback endpoint so the service provider can redirect the user back once the user has been authenticated and properly authorized.
+ Once the callback gets called the connector will automatically issue an access token identifier that will be stored in an ObjectStore.
+ By default, this ObjectStore's OauthAccessTokenId will be the connector's config name.</p>
 <p>The authorize message processor also supports the following attributes:</p>
 <table id="lconfig" class="jd-sumtable">
 <tr><th colspan="12">Authorize Attributes</th></tr>
@@ -1598,13 +1602,25 @@ that you need to save as either a cookie or a database record for any subsequent
     
 
 </table>
+
+<p>When dealing with multi-tenant on-premise implementations, leaving the accessTokenId parameter in the authorize message processor to it's
+default value could lead to token overwriting. This is not a problem when running on CloudHub, but can be a serious issue when running on-premise.
+In these cases it is recommended to set the parameter to:</p>
+<pre>
+    &lt;google-calendars:authorize accessTokenId=&quot;#[flowVars['myTenantId']]&quot;/&gt;
+</pre>
+<p>If you do this, keep in mind that message processors will still be searching for the default OauthAccessTokenId unless told differently.
+You must then overwrite this property on message processors as well:</p>
+<pre>
+    &lt;google-calendars:get-events accessTokenId=&quot;[flowVars['myTenantId']]&quot;/&gt;
+</pre>
+
 <h3>After Authorization</h3>
-<p>The <i>authorize</i> message processor is an intercepting one. If the connector is not authorized yet, it will redirect
-to the service provider so the user can authorize the connector. This is the reason as to why the authorize needs to be behind
-and <i>http:inbound-endpoint</i>. The service provider upon successful authentication and authorization then will call back the
-connector. The connector will extract information from that call, set its internal state to authorized, and then continue
-execution. Continuing execution means executing everything that was after the authorize whose execution got
-interrupted because the connector was not authorized.</p>
+<p>The <i>authorize</i> message processor is an intercepting one. If something that requires authentication is requested but the connector
+is not authorized yet, the authorize message processor will be triggered. It will redirect the user to the service provider so that he can authorize
+the connector. This is why the authorize message processor needs to be behind an <i>http:inbound-endpoint</i>. Once authentication and authorization
+are successful, the service provider will respond to the connector with a callback. The connector will extract information from this callback, set
+its own internal state to authorized, and then move on to executing anything that had been interrupted by the authorization method.</p>
 <pre>
   &lt;flow name="authorizationAndAuthenticationFlow"&gt;
       &lt;http:inbound-endpoint host="localhost" port="8080" path="oauth-authorize"/&gt;
@@ -1614,12 +1630,11 @@ interrupted because the connector was not authorized.</p>
       &lt;/http:response-builder&gt;
   &lt;/flow&gt;
 </pre>
-<p>In the previous example we added the <i>http:response-build</i> (notice that this element is available only in Mule 3.3.0 and later). If
-the connector is not authorized, the execution of the response builder will be delayed up to the point of the callback execution.</p>
-<p>On the other hand if the connector has been authorized and you call <i>authorize</i> again then the flow execution will not stop, it will
-rather continue and the <i>http:response-builder</i> will get executed right away rather than after the callback.</p>
-<p>The following is an example of the authorize message processor, after which it will print the access token identifier to the
-log:</p>
+<p>In the above example we added the <i>http:response-builder</i> (keep in mind that this element is available only in Mule 3.3.0 and later). If
+the connector is not yet authorized, the execution of the response builder will be delayed until the callback is received.</p>
+<p>On the other hand, if the connector had already been <i>authorized</i> before, then the flow execution will not be delayed; it will
+continue and the <i>http:response-builder</i> will get executed right away rather than after the callback.</p>
+<p>The following is an example of the authorize message processor, after running it will print the access token identifier to the log:</p>
 <pre>
     &lt;flow name="authorizationAndAuthenticationFlow"&gt;
         &lt;http:inbound-endpoint host="localhost" port="8080" path="oauth-authorize"/&gt;
@@ -1627,8 +1642,7 @@ log:</p>
 		&lt;log level="INFO" message="The connector has been properly authorized. The access token identifier is #[flowVars['OAuthAccessTokenId']]"/&gt;
     &lt;/flow&gt;
 </pre>
-<p>The <i>OAuthAccessTokenId</i> flow variable is a special variable available to all the message processors executing after the authorize call. The following
-snippet shows how you can save it as a HTTP protocol cookie:</p>
+<p>The <i>OAuthAccessTokenId</i> flow variable is stored into an ObjectStore by default. As an alternative, the following snippet shows how you can save it as a HTTP protocol cookie</p>
 <pre>
     &lt;flow name="authorizationAndAuthenticationFlow"&gt;
         &lt;http:inbound-endpoint host="localhost" port="8080" path="oauth-authorize"/&gt;
@@ -1639,11 +1653,11 @@ snippet shows how you can save it as a HTTP protocol cookie:</p>
         &lt;/http:response-builder&gt;
     &lt;/flow&gt;
 </pre>
-<p>The access token identifier is unique per user and therefore the connector can be authorized for many users. If the user authorizes
-the connector twice it will have the same access token identifier both times.</p>
+<p>The access token identifier is unique per user and therefore the connector can be authorized for many users. If the user authorizes the connector
+ twice it will have the same access token identifier both times.</p>
 <h3>Error Handling during Authorization</h3>
-<p>If for any reason, an errors ocurrs while processing the callback, the exception strategy of the flow containing the authorize will be
-executed. So, if the callback sent the wrong information you can handle that situation by setting up an exception strategy as follows:</p>
+<p>If for any reason, an error occurs while processing the callback, the exception strategy of the flow containing the authorize will be executed.
+So, if the callback sent the wrong information you can handle that situation by setting up an exception strategy as follows:</p>
 <pre>
   &lt;flow name="authorizationAndAuthenticationFlow"&gt;
       &lt;http:inbound-endpoint host="localhost" port="8080" path="oauth-authorize"/&gt;
@@ -1658,18 +1672,30 @@ executed. So, if the callback sent the wrong information you can handle that sit
       &lt;/catch-exception-strategy&gt;
   &lt;/flow&gt;
 </pre>
+<p> What happens if a tenant who is not yet authorized wants to perform an OAuth protected operation? You can set this with the <b>onNoToken</b> property: </p>
+<pre>
+&lt;google-calendars:config-with-oauth name=&quot;google-calendars&quot; consumerKey=&quot;${google.apiclient}&quot; consumerSecret=&quot;${google.apisecret}&quot; onNoToken=&quot;[STOP_FLOW|EXCEPTION]&quot;&gt;
+    &lt;google-calendars:oauth-callback-config connector-ref=&quot;${oauth.http.connector}&quot; domain=&quot;${oauth.url}&quot; localPort=&quot;${https.port}&quot; async=&quot;false&quot; path=&quot;oauth2callback&quot; /&gt;
+&lt;/google-calendars:config-with-oauth&gt;
+</pre>
+<p>The <b>onNoToken</b> property can be set to two different values:</p>
+<ul>
+<li>STOP_FLOW: acts as a filter and kills the execution of the flow</li>
+<li>EXCEPTION: throws an exception informing that the token is still not acquired</li>
+</ul>
+<p>Keep in mind that after the connector is unauthorized all future calls that attempt to access protected resources will fail until the connector is re-authorized.</p>
 <h3>Unauthorize</h3>
-<p>Once this connector has been authorized further calls to the <i>authorize</i> message processor will be no-ops. If you wish to reset
-the state of the connector back to a non-authorized state you can call:</p>
+<p>Once this connector has been authorized further calls to the <i>authorize</i> message processor will be no-ops.
+If you wish to reset the state of the connector back to a non-authorized state you must call:</p>
 <pre>
     &lt;facebook:unauthorize/&gt;
 </pre>
 <p>Keep in mind that after the connector is unauthorized all future calls that attempt to access protected resources will fail until
  the connector is re-authorized.</p>
 <h3>Callback Customization</h3>
-<p>As mentioned earlier once authorize gets called and before we redirect the user to the service provider we create a callback
-endpoint. The callback endpoint will get called automatically by the service provider once the user is authenticated and he
-grants authorization to the connector to access his private information.</p>
+<p>As mentioned earlier, once authorize gets called and before we redirect the user to the service provider, we create a callback endpoint.
+The callback endpoint will get called automatically by the service provider once the user is authenticated and he grants authorization to
+the connector to access his private information.</p>
 <p>The callback can be customized in the config element of the this connector as follows:</p>
 <pre>
     &lt;facebook:config&gt;
@@ -1714,6 +1740,7 @@ or a user-defined one the acquired access tokens, refresh tokens, and any other 
 </pre>
 <p>There is only a single attribute entitled <i>objectStore-ref</i> in the <i>oauth-store-config</i> element that allows the user to specify the name
 of the object store that he wishes to use to save and restore access tokens.</p>
+
 
 
 
