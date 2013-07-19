@@ -47,7 +47,7 @@ public class GetUserTestCases extends FacebookTestParent {
     	
     	testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
     	
-		MessageProcessor flow = lookupFlowConstruct("get-user");
+		MessageProcessor flow = lookupMessageProcessor("get-user");
     	
 		try {
 
