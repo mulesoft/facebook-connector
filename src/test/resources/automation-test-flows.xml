@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:context="http://www.springframework.org/schema/context" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/2.0/mule-facebook.xsd">
+    
+    <context:property-placeholder location="automation-credentials.properties" />
+    
+    <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook">
+        <facebook:oauth-callback-config domain="${facebook.domain}" localPort="${facebook.localPort}" remotePort="${facebook.remotePort}" path="${facebook.path}"/>
+    </facebook:config-with-oauth>
+    
+    <flow name="get-user" doc:name="get-user">
+        <facebook:get-user config-ref="Facebook" user="#[payload.username]" accessTokenId="accessTokenId" doc:name="Facebook" />
+    </flow>
+    
+</mule>
