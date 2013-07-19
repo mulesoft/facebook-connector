@@ -46,15 +46,15 @@ Configuration
 
 You can configure the connector as follows:
 
-    <facebook:config appId="value" appSecret="value" scope="value"/>
+    <facebook:config consumerKey="value" consumerSecret="value" scope="value"/>
 
 Here is detailed list of all the configuration attributes:
 
 | attribute | description | optional | default value |
 |:-----------|:-----------|:---------|:--------------|
 |name|Give a name to this configuration so it can be later referenced by config-ref.|yes||
-|appId|The application identifier as registered with Facebook|no|
-|appSecret|The application secret|no|
+|consumerKey|The application identifier as registered with Facebook|no|
+|consumerSecret|The application secret|no|
 |scope|Facebook permissions|yes|     email,read_stream,publish_stream
 |oauth-save-access-token|A chain of message processors processed synchronously that can be used to save OAuth state. They will be executed once the connector acquires an OAuth access token|yes|
 |oauth-restore-access-token|A chain of message processors processed synchronously that can be used to restore OAuth state. They will be executed whenever access to a protected resource is requested and the connector is not authorized yet|yes|

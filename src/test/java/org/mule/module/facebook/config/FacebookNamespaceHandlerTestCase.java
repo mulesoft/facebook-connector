@@ -57,13 +57,13 @@ public class FacebookNamespaceHandlerTestCase extends FunctionalTestCase {
     
     public void testFlow() throws Exception
     {
-        MessageProcessor flow = lookupFlowConstruct("flow-name");
+        MessageProcessor flow = lookupMessageProcessor("flow-name");
         assertNotNull(flow);
         MuleEvent response = flow.process(getTestEvent(null));
         assertNotNull(response);
     }
 
-    private MessageProcessor lookupFlowConstruct(String name) {
+    private MessageProcessor lookupMessageProcessor(String name) {
         return (MessageProcessor) muleContext.getRegistry().lookupFlowConstruct(name);
     }
 }

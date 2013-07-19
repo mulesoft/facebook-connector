@@ -27,7 +27,7 @@
         
         
   <as2:config urlServer="${as2UrlServer}" />
-  <facebook:config appId="#{appId}" appSecret="#{appSecret}" />
+  <facebook:config consumerKey="#{consumerKey}" consumerSecret="#{consumerSecret}" />
         
   <flow name="get-photo-and-send-to-as2">
     <http:inbound-endpoint host="localhost" port="9090" path="facebook-get-photo-and-send-to-as2"/>

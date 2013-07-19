@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 		<spring:bean id="my-object-store" class="org.mule.util.store.InMemoryObjectStore" />
 	</spring:beans>
 	
-    <facebook:config-with-oauth appId="my_app_id" appSecret="my_app_secret">
+    <facebook:config-with-oauth consumerKey="my_app_id" consumerSecret="my_app_secret">
     	<facebook:oauth-callback-config domain="localhost" localPort="8080" remotePort="80" async="false" path="oauth2callback" />
     	<facebook:oauth-store-config objectStore-ref="my-object-store"/>
     </facebook:config-with-oauth>

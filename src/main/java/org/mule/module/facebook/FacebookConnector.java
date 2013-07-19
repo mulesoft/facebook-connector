@@ -71,7 +71,7 @@ import com.sun.jersey.multipart.FormDataMultiPart;
  * 
  * @author MuleSoft, inc.
  */
-@Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook", minMuleVersion="3.4", configElementName="config-with-oauth")
+@Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook", minMuleVersion="3.5", configElementName="config-with-oauth")
 @OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize",
         accessTokenRegex = "access_token=([^&]+?)&", expirationRegex = "expires=([^&]+?)$")
 public class FacebookConnector {
@@ -86,14 +86,14 @@ public class FacebookConnector {
      */
     @Configurable
     @OAuthConsumerKey
-    private String appId;
+    private String consumerKey;
 
     /**
      * The application secret
      */
     @Configurable
     @OAuthConsumerSecret
-    private String appSecret;
+    private String consumerSecret;
 
     /**
      * Facebook permissions
@@ -3008,24 +3008,24 @@ public class FacebookConnector {
     	return this.client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
     }
 
-    public String getAppId()
+    public String getConsumerKey()
     {
-        return appId;
+        return consumerKey;
     }
 
-    public void setAppId(String appId)
+    public void setConsumerKey(String consumerKey)
     {
-        this.appId = appId;
+        this.consumerKey = consumerKey;
     }
 
-    public String getAppSecret()
+    public String getConsumerSecret()
     {
-        return appSecret;
+        return consumerSecret;
     }
 
-    public void setAppSecret(String appSecret)
+    public void setConsumerSecret(String consumerSecret)
     {
-        this.appSecret = appSecret;
+        this.consumerSecret = consumerSecret;
     }
 
     public String getScope()

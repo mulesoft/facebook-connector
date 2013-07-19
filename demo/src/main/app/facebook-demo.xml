@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
-    <facebook:config-with-oauth name="Facebook" appId="${facebookAppId}" appSecret="${facebookAppSecret}" doc:name="Facebook">
+    <facebook:config-with-oauth name="Facebook" consumerKey="${facebookAppId}" consumerSecret="${facebookAppSecret}" doc:name="Facebook">
         <facebook:oauth-callback-config domain="localhost" localPort="8081" remotePort="8081"/>
     </facebook:config-with-oauth>
     <twitter:config name="Twitter" accessKey="${twitterAccessKey}" accessSecret="${twitterAccessSecret}" consumerKey="${twitterConsumerKey}" consumerSecret="${twitterConsumerSecret}" doc:name="Twitter"/>
