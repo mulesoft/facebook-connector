@@ -1599,6 +1599,12 @@ It will also create a callback endpoint so the service provider can redirect the
           <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The URL defined by the Service Provider to obtain an access token</td>
       </tr>
       
+      <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+            <td class="jd-descrcol">&nbsp;</td>
+            <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The Id with which the obtained access token will be stored. If not provided, then it will be the config name</td>
+      </tr>
+      
     
 
 </table>
@@ -1674,8 +1680,8 @@ So, if the callback sent the wrong information you can handle that situation by 
 </pre>
 <p> What happens if a tenant who is not yet authorized wants to perform an OAuth protected operation? You can set this with the <b>onNoToken</b> property: </p>
 <pre>
-&lt;google-calendars:config-with-oauth name=&quot;google-calendars&quot; consumerKey=&quot;${google.apiclient}&quot; consumerSecret=&quot;${google.apisecret}&quot; onNoToken=&quot;[STOP_FLOW|EXCEPTION]&quot;&gt;
-    &lt;google-calendars:oauth-callback-config connector-ref=&quot;${oauth.http.connector}&quot; domain=&quot;${oauth.url}&quot; localPort=&quot;${https.port}&quot; async=&quot;false&quot; path=&quot;oauth2callback&quot; /&gt;
+&lt;facebook:config name=&quot;facebooks&quot; consumerKey=&quot;${consumerKey}&quot; consumerSecret=&quot;${consumerSecret}&quot; onNoToken=&quot;[STOP_FLOW|EXCEPTION]&quot;&gt;
+    &lt;facebook:oauth-callback-config connector-ref=&quot;${oauth.http.connector}&quot; domain=&quot;${oauth.url}&quot; localPort=&quot;${https.port}&quot; async=&quot;false&quot; path=&quot;oauth2callback&quot; /&gt;
 &lt;/google-calendars:config-with-oauth&gt;
 </pre>
 <p>The <b>onNoToken</b> property can be set to two different values:</p>
@@ -1699,7 +1705,7 @@ the connector to access his private information.</p>
 <p>The callback can be customized in the config element of the this connector as follows:</p>
 <pre>
     &lt;facebook:config&gt;
-        &lt;facebook:oauth-callback-config domain="${fullDomain}" localPort="${http.port}" remotePort="80"/&gt;
+        &lt;facebook:oauth-callback-config domain="${fullDomain}" localPort="10010" remotePort="80"/&gt;
     &lt;/facebook:config&gt;
 </pre>
 <p>The <i>oauth-callback-config</i> element can be used to customize the endpoint that gets created for the callback. It
@@ -1717,7 +1723,7 @@ features the following attributes:</p>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>localPort</nobr></td>
-<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable ${http.port}.</td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable 10010.</td>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>remotePort</nobr></td>
@@ -1726,6 +1732,10 @@ features the following attributes:</p>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>path</nobr></td>
 <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Path under which the callback should be exposed. If not specified a random path will be generated.</td>
+</tr>
+<tr class="api" >
+<td class="jd-linkcol"><nobr>defaultAccessTokenId</nobr></td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>A Mule Expression to use as access token id. If provided, this expression will be evaluated for all obtained access tokens and the result will be used as their id (except in the cases in which a specific acessTokenId was provided on the authorize processor</td>
 </tr>
 </table>
 <p class="caution">The example shown above is what the configuration would look like if your app would be deployed to CloudHub.</p>
