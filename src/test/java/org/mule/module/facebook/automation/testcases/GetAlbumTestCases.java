@@ -13,6 +13,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
@@ -25,28 +26,6 @@ public class GetAlbumTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String, Object>) context
-					.getBean("createRelationship");
-			String rootFolderId = rootFolderId();
-
-			ObjectId file1ObjectId = createDocumentById(rootFolderId,
-					(String) testObjects.get("filename1"),
-					(String) testObjects.get("content"),
-					(String) testObjects.get("mimeType"),
-					(VersioningState) testObjects.get("versioningState"),
-					(String) testObjects.get("objectType"),
-					(Map<String, Object>) testObjects.get("propertiesRef"));
-			
-			ObjectId file2ObjectId = createDocumentById(rootFolderId,
-					(String) testObjects.get("filename2"),
-					(String) testObjects.get("content"),
-					(String) testObjects.get("mimeType"),
-					(VersioningState) testObjects.get("versioningState"),
-					(String) testObjects.get("objectType"),
-					(Map<String, Object>) testObjects.get("propertiesRef"));
-
-			testObjects.put("parentObjectId", file1ObjectId.getId());
-			testObjects.put("childObjectId", file2ObjectId.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
