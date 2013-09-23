@@ -8,7 +8,6 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -37,13 +36,7 @@ public class GetUserTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			User user = (User) response.getMessage().getPayload();
 			
-			// if the User's username is null, then we are querying it by id
-			if(user.getUsername() == null) {
-				assertEquals(testObjects.get("username").toString(), user.getId());
-			} else {
-				assertTrue(user.getUsername().equals(testObjects.get("username").toString()));
-			}
-
+			assertTrue(user.getUsername().equals(testObjects.get("username").toString()));
 
 		} catch (Exception e) {
 			e.printStackTrace();
