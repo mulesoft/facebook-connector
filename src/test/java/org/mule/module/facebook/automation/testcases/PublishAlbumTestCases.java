@@ -21,29 +21,22 @@ import org.mule.api.processor.MessageProcessor;
 
 import com.restfb.types.User;
 
-public class GetUserTestCases extends FacebookTestParent {
+public class PublishAlbumTestCases extends FacebookTestParent {
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetUser() {
+	public void testPublishAlbum() {
     	
-    	testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user");
+    	testObjects = (HashMap<String,Object>) context.getBean("publishAlbumTestData");
     	
 		try {
-
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User user = (User) response.getMessage().getPayload();
+			publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
 			
-			// if the User's username is null, then we are querying it by id
-			if(user.getUsername() == null) {
-				assertEquals(testObjects.get("username").toString(), user.getId());
-			} else {
-				assertTrue(user.getUsername().equals(testObjects.get("username").toString()));
-			}
-
+			
+			// get back a HashMap: {albumName=albumForTest, profileId=100006563414301, msg=msgForTest}
+			// i.e. void return type
+			System.out.println();
 
 		} catch (Exception e) {
 			e.printStackTrace();

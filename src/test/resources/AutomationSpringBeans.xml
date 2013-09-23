@@ -18,11 +18,95 @@
 		<property name="accessToken" value="${facebook.accessToken}" />
 	</bean>
 	
-	<!-- get-user-by-id  -->
-
+<!-- 	 get-user-by-id -->
 	<util:map id="getUserTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="username" value="${facebook.userId}" />
+	</util:map>	
+	
+<!-- 	get-user-home -->
+	<util:map id="getUserHomeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="username" value="${facebook.username}" />
 	</util:map>	
 
+<!-- 	get-album -->
+	<util:map id="getAlbumTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="album" value="1403591603202940" />
+	</util:map>	
+	
+<!-- 	publish-album -->
+	<util:map id="publishAlbumTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="albumName" value="albumForTest" />
+		<entry key="msg" value="msgForTest" />
+		<!-- 		<entry key="profileId" value="100006563414301" /> -->
+<!-- test user profile id (in login_url): -->
+		<entry key="profileId" value="${facebook.profileId}" />
+	</util:map>	
+	
+<!-- 	get-application-albums -->
+	<util:map id="getApplicationAlbumsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="application" value="1395238287373095" />
+<!-- 		<entry key="since" value="#{T(java.lang.management.ManagementFactory).getRuntimeMXBean().getStartTime()}" /> -->
+		<entry key="until" value="now"/>
+		
+		<entry key="albumName" value="albumForTest" />
+		<entry key="msg" value="msgForTest" />
+		<entry key="profileId" value="100006563414301" />
+	</util:map>	
+	
+<!-- 	get-page -->
+	<util:map id="getPageTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+<!-- 		Facebook developer's page:  -->
+		<entry key="page" value="19292868552" />
+	</util:map>	
+	
+<!-- 	get-page-albums -->
+	<util:map id="getPageAlbumsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+<!-- 		Facebook developer's page:  -->
+		<entry key="page" value="19292868552" />
+	</util:map>	
+	
+<!-- 	delete-object -->
+	<util:map id="deleteObjectTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+<!-- 		for delete-object -->
+		<entry key="objectId" value="toGetDynamically" />
+<!-- 	for get-user-albums -->
+		<entry key="user" value="${facebook.userId}" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+<!-- 		for publish-album -->
+		<entry key="albumName" value="albumForTest" />
+		<entry key="msg" value="msgForTest" />
+		<entry key="profileId" value="100006563414301" />
+	</util:map>	
+	
+<!-- 	get-user-albums -->
+	<util:map id="getUserAlbumsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="${facebook.userId}" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+		<entry key="albumName" value="albumForTest" />
+		<entry key="msg" value="msgForTest" />
+		<entry key="profileId" value="${facebook.userId}" />
+	</util:map>	
+	
+<!-- 	get-user-albums -->
+	<util:map id="downloadImageTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="imageUri" value="${facebook.imageUri}" />
+	</util:map>	
+	
+	
 </beans>
