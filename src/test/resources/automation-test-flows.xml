@@ -6,7 +6,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     
     <context:property-placeholder location="automation-credentials.properties" />
     
-    <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook" 
+    <facebook:config-with-oauth  name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook" 
     scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions">
 <!--     <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook"> -->
         <facebook:oauth-callback-config domain="${facebook.domain}" localPort="${facebook.localPort}" remotePort="${facebook.remotePort}" path="${facebook.path}"/>
@@ -60,6 +60,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     </flow>
     
     <flow name="download-image">
-   		<facebook:download-image accessTokenId="accessTokenId" config-ref="Facebook" imageUri="#[payload.imageUri]"/>
+   		<facebook:download-image accessTokenId="accessTokenId"  config-ref="Facebook" imageUri="#[payload.imageUri]"/>
     </flow>
 </mule>
