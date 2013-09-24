@@ -26,6 +26,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
+import com.restfb.types.User;
 
 
 
@@ -86,6 +87,16 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("get-user-albums");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Collection<Album>) response.getMessage().getPayload();
+    }
+    
+    public User getLoggedUserDetails() throws Exception {
+    	MessageProcessor flow = lookupFlowConstruct("logged-user-details");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (User) response.getMessage().getPayload();
+    }
+    
+    public String getProfileId() throws Exception {
+    	return getLoggedUserDetails().getId();
     }
     
 }
