@@ -27,11 +27,13 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String, Object>) context
-					.getBean("getUserAlbumsTestData");
-			publishAlbum((String) testObjects.get("albumName"),
-					(String) testObjects.get("msg"),
-					(String) testObjects.get("profileId"));
+			testObjects = (HashMap<String, Object>) context.getBean("getUserAlbumsTestData");
+			
+			String profileId = getProfileId();
+			String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), profileId);
+
+			testObjects.put("profileId", profileId);
+			testObjects.put("albumId", albumId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -41,17 +43,16 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 	@Category({ RegressionTests.class })
 	@Test
 	public void testGetUserAlbums() {
-
 		try {
-			Collection<Album> albums = requestUserAlbums(
-					(String) testObjects.get("user"),
-					(String) testObjects.get("since"),
-					(String) testObjects.get("until"),
-					(String) testObjects.get("limit"),
-					(String) testObjects.get("offset"));
+			String profileId = (String) testObjects.get("profileId");
+			String since = (String) testObjects.get("since");
+			String until = (String) testObjects.get("until");
+			String limit = (String) testObjects.get("limit");
+			String offset = (String) testObjects.get("offset");
+			
+			Collection<Album> albums = requestUserAlbums(profileId,	since, until, limit, offset);
 
 			Album firstAlbum = (Album) albums.toArray()[0];
-
 			assertEquals(testObjects.get("albumName"), firstAlbum.getName());
 
 		} catch (Exception e) {

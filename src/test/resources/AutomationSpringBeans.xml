@@ -89,14 +89,12 @@
 <!-- 	get-user-albums -->
 	<util:map id="getUserAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="${facebook.userId}" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-		<entry key="profileId" value="${facebook.userId}" />
 	</util:map>	
 	
 <!-- 	download-image -->
