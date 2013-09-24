@@ -151,11 +151,14 @@
 	</util:map>	
 	
 	
-	<!-- 	publish-note -->
+	<!-- publish-note -->
 	<util:map id="publishNoteTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="profileId" value="${facebook.profileId}" />
 		<entry key="msg" value="message123" />
 		<entry key="subject" value="subject123" />
 	</util:map>	
+	
+	
+	
 </beans>
