@@ -39,7 +39,7 @@ public class DownloadImageTestCases extends FacebookTestParent {
 			Object obj = response.getMessage().getPayload();
 			
 			
-			//TODO:Implement this in a better way.
+			//TODO Implement this in a better way.
 			assertNotNull(obj);
 
 		} catch (Exception e) {

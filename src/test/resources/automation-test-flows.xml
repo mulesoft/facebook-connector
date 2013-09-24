@@ -60,6 +60,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     </flow>
     
     <flow name="download-image">
-   		<facebook:download-image accessTokenId="accessTokenId"  config-ref="Facebook" imageUri="#[payload.imageUri]"/>
+   		<facebook:download-image accessTokenId="accessTokenId" config-ref="Facebook" imageUri="#[payload.imageUri]"/>
+    </flow>
+    
+    
+    <flow name="publish-comment">
+    	<facebook:publish-comment accessTokenId="accessTokenId" config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]"/>    
     </flow>
 </mule>
