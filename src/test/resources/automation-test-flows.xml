@@ -62,4 +62,18 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     <flow name="download-image">
    		<facebook:download-image accessTokenId="accessTokenId" config-ref="Facebook" imageUri="#[payload.imageUri]"/>
     </flow>
+    
+    <flow name="get-album-photos">
+   		<facebook:get-album-photos accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]"
+   			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
+    </flow>
+    
+    <flow name="get-album-comments">
+   		<facebook:get-album-comments accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]" 
+   			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
+    </flow>
+    
+    <flow name="get-application">
+   		<facebook:get-application accessTokenId="accessTokenId" config-ref="Facebook" application="#[payload.application]"/>
+    </flow>
 </mule>
