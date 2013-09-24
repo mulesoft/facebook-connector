@@ -55,12 +55,9 @@
 		<entry key="profileId" value="100006563414301" />
 	</util:map>	
 	
-	
-	
 		<!--  publish-message -->	
 	<util:map id="publishMessageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="profileId" value="${facebook.profileId}" />
 		<entry key="msg" value="getDynamically" />
 	</util:map>	
 	
