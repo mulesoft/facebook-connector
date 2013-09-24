@@ -102,11 +102,37 @@
 		<entry key="profileId" value="${facebook.userId}" />
 	</util:map>	
 	
-<!-- 	get-user-albums -->
+<!-- 	download-image -->
 	<util:map id="downloadImageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="imageUri" value="${facebook.imageUri}" />
 	</util:map>	
 	
+<!-- 	get-album-photos -->
+	<util:map id="getAlbumPhotosTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="${facebook.userId}" />
+		<entry key="album" value="getIdDynamically" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="3" />
+		<entry key="offset" value="0" />
+	</util:map>	
 	
+<!-- 	get-album-comments -->
+	<util:map id="getAlbumCommentsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="${facebook.userId}" />
+		<entry key="album" value="getIdDynamically" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="3" />
+		<entry key="offset" value="0" />
+	</util:map>	
+	
+<!-- 	get-application -->
+	<util:map id="getApplicationTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="application" value="${facebook.appId}" />
+	</util:map>	
 </beans>
