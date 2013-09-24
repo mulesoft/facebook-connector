@@ -41,9 +41,6 @@
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-		<!-- 		<entry key="profileId" value="100006563414301" /> -->
-<!-- test user profile id (in login_url): -->
-		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>	
 	
 <!-- 	get-application-albums -->
