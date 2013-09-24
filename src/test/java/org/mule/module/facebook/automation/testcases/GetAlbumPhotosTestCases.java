@@ -11,16 +11,19 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Album;
 import com.restfb.types.Photo;
 
 public class GetAlbumPhotosTestCases extends FacebookTestParent {
@@ -28,6 +31,24 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() {
 		try {
+			testObjects = (HashMap<String,Object>) context.getBean("getAlbumPhotosTestData");
+			
+			String profileId = getProfileId();
+			testObjects.put("profileId", profileId);
+			
+			String msg = (String) testObjects.get("msg");
+			String albumName = (String) testObjects.get("albumName");
+			
+			String albumId = publishAlbum(albumName, msg, profileId);
+			testObjects.put("albumId", albumId);
+			
+			String caption = (String) testObjects.get("caption");
+			String photoFileName = (String) testObjects.get("photoFileName");
+			
+			File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
+			String photoId = publishPhoto(albumId, caption, photo);
+			
+			testObjects.put("photoId", photoId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -39,27 +60,24 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetAlbumPhotos() {
-    	
-    	testObjects = (HashMap<String,Object>) context.getBean("getAlbumPhotosTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-album-photos");
-    	
 		try {
-			Collection<Album> albums = requestUserAlbums((String) testObjects.get("user"),
-					(String) testObjects.get("since"),
-					(String) testObjects.get("until"),
-					(String) testObjects.get("limit"),
-					(String) testObjects.get("offset"));
+			String profileId = (String) testObjects.get("profileId");
+			final String photoId = (String) testObjects.get("photoId");
 			
-			Album album = (Album) albums.toArray()[0];
-			
-			testObjects.put("album", album.getId());
-
+			MessageProcessor flow = lookupFlowConstruct("get-album-photos");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			Collection<Photo> photos = (Collection<Photo>) response.getMessage().getPayload();
-			
-			assertTrue(photos.size() != 0);
 
+			Collection<Photo> matchingPhotos = CollectionUtils.select(photos, new Predicate() {
+				
+				@Override
+				public boolean evaluate(Object object) {
+					Photo photo = (Photo) object;
+					return photo.getId().equals(photoId);
+				}
+			});
+			
+			assertTrue(matchingPhotos.size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

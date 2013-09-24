@@ -8,6 +8,8 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Collection;
 import java.util.Map;
 
@@ -28,8 +30,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.restfb.types.Album;
 import com.restfb.types.User;
 
-
-
 public class FacebookTestParent extends TestParent {
 	
 	protected static final String[] SPRING_CONFIG_FILES = new String[] {"AutomationSpringBeans.xml"};
@@ -47,16 +47,13 @@ public class FacebookTestParent extends TestParent {
 	
     @BeforeClass
     public static void beforeClass() {
-    	
     	context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILES);
     }
     
     @Before
     public void init() throws ObjectStoreException {
-    	
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
     	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) context.getBean("connectorOAuthState"));
-
     }
     
     protected Album requestAlbum(String albumId) throws Exception {
@@ -98,6 +95,16 @@ public class FacebookTestParent extends TestParent {
     
     public String getProfileId() throws Exception {
     	return getLoggedUserDetails().getId();
+    }
+    
+    public String publishPhoto(String albumId, String caption, File photo) throws Exception {
+    	testObjects.put("albumId", albumId);
+    	testObjects.put("caption", caption);
+    	testObjects.put("photoRef", photo);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("publish-photo");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (String) response.getMessage().getPayload();
     }
     
     public void deleteObject(String objectId) throws Exception {
