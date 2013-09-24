@@ -63,6 +63,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     	<facebook:logged-user-details config-ref="Facebook" accessTokenId="accessTokenId" />
     </flow>
     
+    
+    <flow name="publish-message">
+    <logger level="ERROR" message="#[payload.profileId]" />
+    <logger level="ERROR" message="#[payload.msg]" />
+    <logger level="ERROR" message="accessTokenId" />
+    	<facebook:publish-message profile_id="#[payload.profileId]" msg="#[payload.msg]"  accessTokenId="accessTokenId" />
+    </flow>
+    
     <flow name="download-image">
    		<facebook:download-image accessTokenId="accessTokenId" config-ref="Facebook" imageUri="#[payload.imageUri]"/>
     </flow>
