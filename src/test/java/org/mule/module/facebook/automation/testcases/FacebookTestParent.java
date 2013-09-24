@@ -67,13 +67,14 @@ public class FacebookTestParent extends TestParent {
 		return (Album) response.getMessage().getPayload();
     }
     
-    protected void publishAlbum(String albumName, String msg, String profileId) throws Exception {
+    protected String publishAlbum(String albumName, String msg, String profileId) throws Exception {
     	testObjects.put("albumName", albumName);
     	testObjects.put("msg", msg);
     	testObjects.put("profileId", profileId);
     	
 		MessageProcessor flow = lookupFlowConstruct("publish-album");
-		flow.process(getTestEvent(testObjects));
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (String) response.getMessage().getPayload();
     }
     
     @SuppressWarnings("unchecked")
@@ -97,6 +98,13 @@ public class FacebookTestParent extends TestParent {
     
     public String getProfileId() throws Exception {
     	return getLoggedUserDetails().getId();
+    }
+    
+    public void deleteObject(String objectId) throws Exception {
+    	testObjects.put("objectId", objectId);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("delete-object");
+    	flow.process(getTestEvent(testObjects));
     }
     
 }
