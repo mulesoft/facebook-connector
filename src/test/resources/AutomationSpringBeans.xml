@@ -23,7 +23,7 @@
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="username" value="${facebook.username}" />
 	</util:map>	
-	
+		
 <!-- 	get-user-home -->
 	<util:map id="getUserHomeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -41,9 +41,6 @@
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-		<!-- 		<entry key="profileId" value="100006563414301" /> -->
-<!-- test user profile id (in login_url): -->
-		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>	
 	
 <!-- 	get-application-albums -->
@@ -102,14 +99,12 @@
 <!-- 	get-user-albums -->
 	<util:map id="getUserAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="${facebook.userId}" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-		<entry key="profileId" value="${facebook.userId}" />
 	</util:map>	
 	
 <!-- 	download-image -->
@@ -118,15 +113,17 @@
 		<entry key="imageUri" value="${facebook.imageUri}" />
 	</util:map>	
 	
-<!-- 	get-album-photos -->
+<!-- get-album-photos -->
 	<util:map id="getAlbumPhotosTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="${facebook.userId}" />
-		<entry key="album" value="getIdDynamically" />
-		<entry key="since" value="yesterday" />
-		<entry key="until" value="now" />
-		<entry key="limit" value="3" />
-		<entry key="offset" value="0" />
+		<entry key="msg" value="Album Msg" />
+		<entry key="albumName" value="My Test Album" />
+		<entry key="caption" value="My Photo Caption" />
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="photoFileName" value="image.jpg" />
 	</util:map>	
 	
 <!-- 	get-album-comments -->

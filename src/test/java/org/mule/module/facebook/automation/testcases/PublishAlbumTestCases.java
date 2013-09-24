@@ -8,41 +8,59 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import org.apache.commons.lang.StringUtils;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
-
-import com.restfb.types.User;
 
 public class PublishAlbumTestCases extends FacebookTestParent {
 	
+	@Before
+	public void setUp() {
+		try {
+			testObjects = (HashMap<String,Object>) context.getBean("publishAlbumTestData");
+			String profileId = getProfileId();
+			testObjects.put("profileId", profileId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testPublishAlbum() {
-    	
-    	testObjects = (HashMap<String,Object>) context.getBean("publishAlbumTestData");
-    	
 		try {
-			publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
+			String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
+			assertTrue(StringUtils.isNotEmpty(albumId));
 			
-			
-			// get back a HashMap: {albumName=albumForTest, profileId=100006563414301, msg=msgForTest}
-			// i.e. void return type
-			System.out.println();
-
+			testObjects.put("albumId", albumId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
+
+    @After
+    public void tearDown() {
+    	try {
+    		String albumId = (String) testObjects.get("albumId");
+    		
+    		// Deletion of albums cannot be done by the Facebook API.
+//    		deleteObject(albumId);
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    		fail();
+    	}
+    }
     
 }

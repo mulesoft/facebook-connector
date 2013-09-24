@@ -59,6 +59,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	    		accessTokenId="accessTokenId" />
     </flow>
     
+    <flow name="publish-event">
+    	<facebook:publish-event config-ref="Facebook" profile_id="#[payload.profileId]" accessTokenId="accessTokenId" />
+    </flow>
+    
+    <flow name="publish-photo">
+    	<facebook:publish-photo config-ref="Facebook" albumId="#[payload.albumId]" caption="#[payload.caption]" photo-ref="#[payload.photoRef]" accessTokenId="accessTokenId" />
+    </flow>
+    
     <flow name="logged-user-details">
     	<facebook:logged-user-details config-ref="Facebook" accessTokenId="accessTokenId" />
     </flow>

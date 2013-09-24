@@ -42,6 +42,7 @@ import org.mule.modules.utils.MuleSoftException;
 
 import com.restfb.DefaultJsonMapper;
 import com.restfb.JsonMapper;
+import com.restfb.json.JsonObject;
 import com.restfb.types.Album;
 import com.restfb.types.Application;
 import com.restfb.types.Checkin;
@@ -2548,10 +2549,11 @@ public class FacebookConnector {
      * @param profile_id the id of the profile object
      * @param msg The message
      * @param albumName the name of the album
+     * @return The ID of the album that was just created
      */
     @Processor
 	@OAuthProtected
-    public void publishAlbum(String profile_id, String msg, String albumName)
+    public String publishAlbum(String profile_id, String msg, String albumName)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/albums").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2559,7 +2561,12 @@ public class FacebookConnector {
         form.add("message", msg);
         form.add("name", albumName);
 
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        String json = resource.type(MediaType.APPLICATION_FORM_URLENCODED).accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+        JsonObject jsonObject = mapper.toJavaObject(json, JsonObject.class);
+        String albumId = (String) jsonObject.get("id");
+        
+        return albumId;
     }
 
     /**
@@ -2570,10 +2577,11 @@ public class FacebookConnector {
      * @param albumId the id of the album object
      * @param caption Caption of the photo
      * @param photo File containing the photo
+     * @return The ID of the photo that was just published
      */
     @Processor
 	@OAuthProtected
-    public void publishPhoto(String albumId, String caption, File photo)
+    public String publishPhoto(String albumId, String caption, File photo)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{albumId}/photos").build(albumId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2581,7 +2589,11 @@ public class FacebookConnector {
         multiPart.bodyPart(new BodyPart(photo, MediaType.APPLICATION_OCTET_STREAM_TYPE));
         multiPart.field("message", caption);
 
-        resource.type(MediaType.MULTIPART_FORM_DATA).post(multiPart);
+        String jsonId = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, multiPart);
+        
+        JsonObject obj = mapper.toJavaObject(jsonId, JsonObject.class);
+        String photoId = (String) obj.get("id");
+        return photoId;
     }
 
     /**

@@ -8,10 +8,8 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.fail;
-
+import java.io.File;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
@@ -46,46 +44,38 @@ public class FacebookTestParent extends TestParent {
 	protected String getConfigResources() {
 		return "automation-test-flows.xml";
 	}
-
-	@BeforeClass
-	public static void beforeClass() {
-
-		context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILES);
-	}
-
-	@Before
-	public void init() throws ObjectStoreException {
-
-		ObjectStore objectStore = muleContext.getRegistry().lookupObject(
-				MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-		objectStore.store("accessTokenId",
-				(FacebookConnectorOAuthState) context
-						.getBean("connectorOAuthState"));
-
-	}
-
+	
+    @BeforeClass
+    public static void beforeClass() {
+    	context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILES);
+    }
+    
+    @Before
+    public void init() throws ObjectStoreException {
+    	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
+    	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) context.getBean("connectorOAuthState"));
+    }
+    
 	protected Album requestAlbum(String albumId) throws Exception {
 		testObjects.put("album", albumId);
 
 		MessageProcessor flow = lookupFlowConstruct("get-album");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Album) response.getMessage().getPayload();
-	}
-
-	protected void publishAlbum(String albumName, String msg, String profileId)
-			throws Exception {
-		testObjects.put("albumName", albumName);
-		testObjects.put("msg", msg);
-		testObjects.put("profileId", profileId);
-
-		MessageProcessor flow = lookupFlowConstruct("publish-album");
-		flow.process(getTestEvent(testObjects));
-	}
-
+    }
+    
+    protected String publishAlbum(String albumName, String msg, String profileId) throws Exception {
+    	testObjects.put("albumName", albumName);
+    	testObjects.put("msg", msg);
+    	testObjects.put("profileId", profileId);
+    	
+  		MessageProcessor flow = lookupFlowConstruct("publish-album");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (String) response.getMessage().getPayload();
+    }
+    
 	@SuppressWarnings("unchecked")
-	public String publishMessage(String ProfileID, String Msg)
-			throws MuleException, Exception {
-
+	public String publishMessage(String ProfileID, String Msg) throws Exception {
 		testObjects.put("profileId", ProfileID);
 		testObjects.put("msg", Msg);
 
@@ -98,8 +88,7 @@ public class FacebookTestParent extends TestParent {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Collection<Album> requestUserAlbums(String user, String since,
-			String until, String limit, String offset) throws Exception {
+	protected Collection<Album> requestUserAlbums(String user, String since, String until, String limit, String offset) throws Exception {
 		testObjects.put("user", user);
 		testObjects.put("since", since);
 		testObjects.put("until", until);
@@ -109,16 +98,33 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("get-user-albums");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Collection<Album>) response.getMessage().getPayload();
-	}
-
-	public User getLoggedUserDetails() throws Exception {
-		MessageProcessor flow = lookupFlowConstruct("logged-user-details");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (User) response.getMessage().getPayload();
-	}
-
-	public String getProfileId() throws Exception {
-		return getLoggedUserDetails().getId();
-	}
+    }
+    
+    public User getLoggedUserDetails() throws Exception {
+    	MessageProcessor flow = lookupFlowConstruct("logged-user-details");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (User) response.getMessage().getPayload();
+    }
+    
+    public String getProfileId() throws Exception {
+    	return getLoggedUserDetails().getId();
+    }
+    
+    public String publishPhoto(String albumId, String caption, File photo) throws Exception {
+    	testObjects.put("albumId", albumId);
+    	testObjects.put("caption", caption);
+    	testObjects.put("photoRef", photo);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("publish-photo");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (String) response.getMessage().getPayload();
+    }
+    
+    public void deleteObject(String objectId) throws Exception {
+    	testObjects.put("objectId", objectId);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("delete-object");
+    	flow.process(getTestEvent(testObjects));
+    }
 
 }
