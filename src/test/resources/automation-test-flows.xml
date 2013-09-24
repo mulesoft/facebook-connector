@@ -89,4 +89,8 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     <flow name="get-application">
    		<facebook:get-application accessTokenId="accessTokenId" config-ref="Facebook" application="#[payload.application]"/>
     </flow>
+    <flow name="publish-note">
+    <facebook:publish-note profile_id="#[payload.profileId]" msg="#[payload.msg]"
+                              accessTokenId="accessTokenId"  subject="#[payload.subject]"/>
+    </flow>
 </mule>
