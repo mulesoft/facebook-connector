@@ -65,9 +65,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     
     
     <flow name="publish-message">
-    <logger level="ERROR" message="#[payload.profileId]" />
-    <logger level="ERROR" message="#[payload.msg]" />
-    <logger level="ERROR" message="accessTokenId" />
     	<facebook:publish-message profile_id="#[payload.profileId]" msg="#[payload.msg]"  accessTokenId="accessTokenId" />
     </flow>
     
@@ -75,8 +72,21 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
    		<facebook:download-image accessTokenId="accessTokenId" config-ref="Facebook" imageUri="#[payload.imageUri]"/>
     </flow>
     
-    
     <flow name="publish-comment">
     	<facebook:publish-comment accessTokenId="accessTokenId" config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]"/>    
+    </flow>
+
+    <flow name="get-album-photos">
+   		<facebook:get-album-photos accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]"
+   			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
+    </flow>
+    
+    <flow name="get-album-comments">
+   		<facebook:get-album-comments accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]" 
+   			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
+    </flow>
+    
+    <flow name="get-application">
+   		<facebook:get-application accessTokenId="accessTokenId" config-ref="Facebook" application="#[payload.application]"/>
     </flow>
 </mule>
