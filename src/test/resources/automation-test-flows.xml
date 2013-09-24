@@ -1,100 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:context="http://www.springframework.org/schema/context" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+<mule xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/2.0/mule-facebook.xsd">
-    
-    <context:property-placeholder location="automation-credentials.properties" />
-    
-    <facebook:config-with-oauth  name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook" 
-    scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions">
-<!--     <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook"> -->
-        <facebook:oauth-callback-config domain="${facebook.domain}" localPort="${facebook.localPort}" remotePort="${facebook.remotePort}" path="${facebook.path}"/>
-    </facebook:config-with-oauth>
-    
-    <flow name="get-user" doc:name="get-user">
-        <facebook:get-user config-ref="Facebook" user="#[payload.username]" accessTokenId="accessTokenId" doc:name="Facebook" />
-    </flow>
-    
-    <flow name="get-user-home" doc:name="get-user-home">
-<!-- 		<facebook:get-user-home config-ref="Facebook" user="100006785671987" accessTokenId="accessTokenId" /> -->
-		<facebook:get-user-home config-ref="Facebook" user="100006735154543" accessTokenId="accessTokenId" />
-    </flow>
-    
-<!--     <flow name="search" doc:name="search"> -->
-<!-- 		<facebook:search config-ref="Facebook" q="muelsoft" obj="photo" accessTokenId="accessTokenId" /> -->
-<!--         <facebook:get-user-search user="#[map-payload:user]"/> -->
-<!--         <facebook:get-user-search config-ref="Facebook" user="1115181285" accessTokenId="accessTokenId" /> -->
-<!--         <facebook:get-user-search config-ref="Facebook" user="100006785222166" accessTokenId="accessTokenId" /> -->
-<!-- 		<facebook:search q="muelsoft" obj="photo" accessTokenId="accessTokenId" /> -->
-<!-- 		<facebook:search q="hello" obj="photo"/> -->
-<!--     </flow> -->
-    
-    <flow name="get-album">
-	    <facebook:get-album config-ref="Facebook" album="#[payload.album]" accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="publish-album">
-	    <facebook:publish-album config-ref="Facebook" albumName="#[payload.albumName]" msg="#[payload.msg]" profile_id="#[payload.profileId]" accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="get-application-albums">
-	    <facebook:get-application-albums config-ref="Facebook" application="#[payload.application]" accessTokenId="accessTokenId" until="#[payload.until]" />
-    </flow>
-    
-    <flow name="get-page">
-	     <facebook:get-page config-ref="Facebook" page="#[payload.page]" accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="get-page-albums">
-	    <facebook:get-page-albums config-ref="Facebook" page="#[payload.page]" accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="delete-object">
-	    <facebook:delete-object config-ref="Facebook" objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="get-user-albums">
-	    <facebook:get-user-albums config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]" limit="#[payload.limit]" offset="#[payload.offset]" 
-	    		accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="publish-event">
-    	<facebook:publish-event config-ref="Facebook" profile_id="#[payload.profileId]" accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="publish-photo">
-    	<facebook:publish-photo config-ref="Facebook" albumId="#[payload.albumId]" caption="#[payload.caption]" photo-ref="#[payload.photoRef]" accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="logged-user-details">
-    	<facebook:logged-user-details config-ref="Facebook" accessTokenId="accessTokenId" />
-    </flow>
-    
-    
-    <flow name="publish-message">
-    	<facebook:publish-message profile_id="#[payload.profileId]" msg="#[payload.msg]"  accessTokenId="accessTokenId" />
-    </flow>
-    
-    <flow name="download-image">
-   		<facebook:download-image accessTokenId="accessTokenId" config-ref="Facebook" imageUri="#[payload.imageUri]"/>
-    </flow>
-    
-    <flow name="publish-comment">
-    	<facebook:publish-comment accessTokenId="accessTokenId" config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]"/>    
-    </flow>
 
-    <flow name="get-album-photos">
-   		<facebook:get-album-photos accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]"
-   			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
-    </flow>
-    
-    <flow name="get-album-comments">
-   		<facebook:get-album-comments accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]" 
-   			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
-    </flow>
-    
-    <flow name="get-application">
-   		<facebook:get-application accessTokenId="accessTokenId" config-ref="Facebook" application="#[payload.application]"/>
-    </flow>
+	<context:property-placeholder location="automation-credentials.properties" />
+
+	<facebook:config-with-oauth name="Facebook"
+		appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook"
+		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions">
+		<!-- <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" 
+			appSecret="${facebook.appSecret}" doc:name="Facebook"> -->
+		<facebook:oauth-callback-config domain="${facebook.domain}"
+			localPort="${facebook.localPort}" remotePort="${facebook.remotePort}"
+			path="${facebook.path}" />
+	</facebook:config-with-oauth>
+
+	<flow name="get-user" doc:name="get-user">
+		<facebook:get-user config-ref="Facebook" user="#[payload.username]"
+			accessTokenId="accessTokenId" doc:name="Facebook" />
+	</flow>
+
+	<flow name="get-user-home" doc:name="get-user-home">
+		<!-- <facebook:get-user-home config-ref="Facebook" user="100006785671987" 
+			accessTokenId="accessTokenId" /> -->
+		<facebook:get-user-home config-ref="Facebook"
+			user="100006735154543" accessTokenId="accessTokenId" />
+	</flow>
+
+	<!-- <flow name="search" doc:name="search"> -->
+	<!-- <facebook:search config-ref="Facebook" q="muelsoft" obj="photo" accessTokenId="accessTokenId" 
+		/> -->
+	<!-- <facebook:get-user-search user="#[map-payload:user]"/> -->
+	<!-- <facebook:get-user-search config-ref="Facebook" user="1115181285" accessTokenId="accessTokenId" 
+		/> -->
+	<!-- <facebook:get-user-search config-ref="Facebook" user="100006785222166" 
+		accessTokenId="accessTokenId" /> -->
+	<!-- <facebook:search q="muelsoft" obj="photo" accessTokenId="accessTokenId" 
+		/> -->
+	<!-- <facebook:search q="hello" obj="photo"/> -->
+	<!-- </flow> -->
+
+	<flow name="get-album">
+		<facebook:get-album config-ref="Facebook" album="#[payload.album]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-album">
+		<facebook:publish-album config-ref="Facebook"
+			albumName="#[payload.albumName]" msg="#[payload.msg]" profile_id="#[payload.profileId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-application-albums">
+		<facebook:get-application-albums
+			config-ref="Facebook" application="#[payload.application]"
+			accessTokenId="accessTokenId" until="#[payload.until]" />
+	</flow>
+
+	<flow name="get-page">
+		<facebook:get-page config-ref="Facebook" page="#[payload.page]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-page-albums">
+		<facebook:get-page-albums config-ref="Facebook"
+			page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="delete-object">
+		<facebook:delete-object config-ref="Facebook"
+			objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-albums">
+		<facebook:get-user-albums config-ref="Facebook"
+			user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-event">
+		<facebook:publish-event config-ref="Facebook"
+			profile_id="#[payload.profileId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-photo">
+		<facebook:publish-photo config-ref="Facebook"
+			albumId="#[payload.albumId]" caption="#[payload.caption]" photo-ref="#[payload.photoRef]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="logged-user-details">
+		<facebook:logged-user-details config-ref="Facebook"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+
+	<flow name="publish-message">
+		<facebook:publish-message profile_id="#[payload.profileId]"
+			msg="#[payload.msg]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="download-image">
+		<facebook:download-image accessTokenId="accessTokenId"
+			config-ref="Facebook" imageUri="#[payload.imageUri]" />
+	</flow>
+
+	<flow name="publish-comment">
+		<facebook:publish-comment accessTokenId="accessTokenId"
+			config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]" />
+	</flow>
+
+	<flow name="get-album-photos">
+		<facebook:get-album-photos accessTokenId="accessTokenId"
+			config-ref="Facebook" album="#[payload.album]" limit="#[payload.limit]"
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
+	</flow>
+
+	<flow name="get-album-comments">
+		<facebook:get-album-comments
+			accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]"
+			until="#[payload.until]" />
+	</flow>
+
+	<flow name="get-application">
+		<facebook:get-application accessTokenId="accessTokenId"
+			config-ref="Facebook" application="#[payload.application]" />
+	</flow>
+	<flow name="publish-note">
+		<facebook:publish-note profile_id="#[payload.profileId]"
+			msg="#[payload.msg]" config-ref="Facebook"  accessTokenId="accessTokenId" subject="#[payload.subject]" />
+	</flow>
+	
+	
 </mule>
