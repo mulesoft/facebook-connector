@@ -2577,10 +2577,11 @@ public class FacebookConnector {
      * @param albumId the id of the album object
      * @param caption Caption of the photo
      * @param photo File containing the photo
+     * @return The ID of the photo that was just published
      */
     @Processor
 	@OAuthProtected
-    public void publishPhoto(String albumId, String caption, File photo)
+    public String publishPhoto(String albumId, String caption, File photo)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{albumId}/photos").build(albumId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2588,7 +2589,11 @@ public class FacebookConnector {
         multiPart.bodyPart(new BodyPart(photo, MediaType.APPLICATION_OCTET_STREAM_TYPE));
         multiPart.field("message", caption);
 
-        resource.type(MediaType.MULTIPART_FORM_DATA).post(multiPart);
+        String jsonId = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, multiPart);
+        
+        JsonObject obj = mapper.toJavaObject(jsonId, JsonObject.class);
+        String photoId = (String) obj.get("id");
+        return photoId;
     }
 
     /**
