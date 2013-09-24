@@ -9,7 +9,6 @@
 package org.mule.module.facebook.automation.testcases;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.Collection;
 import java.util.Map;
 
@@ -18,6 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.MuleEvent;
+import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
@@ -31,15 +31,15 @@ import com.restfb.types.Album;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends TestParent {
-	
-	protected static final String[] SPRING_CONFIG_FILES = new String[] {"AutomationSpringBeans.xml"};
+
+	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml" };
 	protected static ApplicationContext context;
-	protected Map<String,Object> testObjects;
+	protected Map<String, Object> testObjects;
 
 	// Set global timeout of tests to 10minutes
-    @Rule
-    public Timeout globalTimeout = new Timeout(600000);
-	
+	@Rule
+	public Timeout globalTimeout = new Timeout(600000);
+
 	@Override
 	protected String getConfigResources() {
 		return "automation-test-flows.xml";
@@ -56,9 +56,9 @@ public class FacebookTestParent extends TestParent {
     	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) context.getBean("connectorOAuthState"));
     }
     
-    protected Album requestAlbum(String albumId) throws Exception {
-    	testObjects.put("album", albumId);
-    	
+	protected Album requestAlbum(String albumId) throws Exception {
+		testObjects.put("album", albumId);
+
 		MessageProcessor flow = lookupFlowConstruct("get-album");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Album) response.getMessage().getPayload();
@@ -69,19 +69,32 @@ public class FacebookTestParent extends TestParent {
     	testObjects.put("msg", msg);
     	testObjects.put("profileId", profileId);
     	
-		MessageProcessor flow = lookupFlowConstruct("publish-album");
+  		MessageProcessor flow = lookupFlowConstruct("publish-album");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
     }
     
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
+	public String publishMessage(String ProfileID, String Msg) throws Exception {
+		testObjects.put("profileId", ProfileID);
+		testObjects.put("msg", Msg);
+
+		MessageProcessor flow = lookupFlowConstruct("publish-message");
+
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		String objectID = (String) response.getMessage().getPayload();
+
+		return objectID;
+	}
+
+	@SuppressWarnings("unchecked")
 	protected Collection<Album> requestUserAlbums(String user, String since, String until, String limit, String offset) throws Exception {
-    	testObjects.put("user", user);
-    	testObjects.put("since", since);
-    	testObjects.put("until", until);
-    	testObjects.put("limit", limit);
-    	testObjects.put("offset", offset);
-    	
+		testObjects.put("user", user);
+		testObjects.put("since", since);
+		testObjects.put("until", until);
+		testObjects.put("limit", limit);
+		testObjects.put("offset", offset);
+
 		MessageProcessor flow = lookupFlowConstruct("get-user-albums");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Collection<Album>) response.getMessage().getPayload();
@@ -113,5 +126,5 @@ public class FacebookTestParent extends TestParent {
     	MessageProcessor flow = lookupFlowConstruct("delete-object");
     	flow.process(getTestEvent(testObjects));
     }
-    
+
 }

@@ -55,6 +55,16 @@
 		<entry key="profileId" value="100006563414301" />
 	</util:map>	
 	
+	
+	
+		<!--  publish-message -->	
+	<util:map id="publishMessageTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="profileId" value="${facebook.profileId}" />
+		<entry key="msg" value="getDynamically" />
+	</util:map>	
+	
+	
 <!-- 	get-page -->
 	<util:map id="getPageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -127,6 +137,13 @@
 		<entry key="offset" value="0" />
 	</util:map>	
 	
+	<!--  publish-comment -->	
+	<util:map id="publishCommentTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="postId" value="getDynamically" />
+		<entry key="msg" value="getDynamically" />
+	</util:map>	
+
 <!-- 	get-application -->
 	<util:map id="getApplicationTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">

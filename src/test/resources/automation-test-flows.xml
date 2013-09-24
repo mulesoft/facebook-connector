@@ -6,7 +6,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     
     <context:property-placeholder location="automation-credentials.properties" />
     
-    <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook" 
+    <facebook:config-with-oauth  name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook" 
     scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions">
 <!--     <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook"> -->
         <facebook:oauth-callback-config domain="${facebook.domain}" localPort="${facebook.localPort}" remotePort="${facebook.remotePort}" path="${facebook.path}"/>
@@ -71,10 +71,19 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
     	<facebook:logged-user-details config-ref="Facebook" accessTokenId="accessTokenId" />
     </flow>
     
+    
+    <flow name="publish-message">
+    	<facebook:publish-message profile_id="#[payload.profileId]" msg="#[payload.msg]"  accessTokenId="accessTokenId" />
+    </flow>
+    
     <flow name="download-image">
    		<facebook:download-image accessTokenId="accessTokenId" config-ref="Facebook" imageUri="#[payload.imageUri]"/>
     </flow>
     
+    <flow name="publish-comment">
+    	<facebook:publish-comment accessTokenId="accessTokenId" config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]"/>    
+    </flow>
+
     <flow name="get-album-photos">
    		<facebook:get-album-photos accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]"
    			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
