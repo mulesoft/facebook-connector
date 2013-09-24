@@ -8,6 +8,7 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
@@ -27,11 +28,13 @@ public class DeleteObjectTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String, Object>) context
-					.getBean("deleteObjectTestData");
-			publishAlbum((String) testObjects.get("albumName"),
-					(String) testObjects.get("msg"),
-					(String) testObjects.get("profileId"));
+			testObjects = (HashMap<String, Object>) context.getBean("deleteObjectTestData");
+			
+			String profileId = getProfileId();
+			testObjects.put("profileId", profileId);
+			
+			String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), profileId);
+			testObjects.put("albumId", albumId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -42,33 +45,14 @@ public class DeleteObjectTestCases extends FacebookTestParent {
 	@Category({ RegressionTests.class })
 	@Test
 	public void testDeleteObject() {
-
-		testObjects = (HashMap<String, Object>) context
-				.getBean("deleteObjectTestData");
-
 		try {
-			Collection<Album> albums = requestUserAlbums((String) testObjects.get("user"),
-					(String) testObjects.get("since"),
-					(String) testObjects.get("until"),
-					(String) testObjects.get("limit"),
-					(String) testObjects.get("offset"));
-
-			Album album = (Album) albums.toArray()[0];
-			
-			String albumId = album.getId();
-			
-			testObjects.put("objectId", albumId);
+			String albumId = (String) testObjects.get("albumId");
 			
 			MessageProcessor flow = lookupFlowConstruct("delete-object");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Object res = (Object) response.getMessage().getPayload();
-			
-			// get back a HashMap: {albumName=albumForTest,
-			// profileId=100006563414301, msg=msgForTest}
-			// i.e. void return type
-			System.out.println();
 
+			Album album = getAlbum(albumId);
+			assertTrue(album == null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

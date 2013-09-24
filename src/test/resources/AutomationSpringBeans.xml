@@ -79,18 +79,9 @@
 <!-- 	delete-object -->
 	<util:map id="deleteObjectTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-<!-- 		for delete-object -->
-		<entry key="objectId" value="toGetDynamically" />
-<!-- 	for get-user-albums -->
-		<entry key="user" value="${facebook.userId}" />
-		<entry key="since" value="yesterday" />
-		<entry key="until" value="now" />
-		<entry key="limit" value="100" />
-		<entry key="offset" value="0" />
-<!-- 		for publish-album -->
+		<!-- for publish-album -->
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-		<entry key="profileId" value="100006563414301" />
 	</util:map>	
 	
 <!-- 	get-user-albums -->

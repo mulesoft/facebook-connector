@@ -99,6 +99,14 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Collection<Album>) response.getMessage().getPayload();
     }
+	
+	public Album getAlbum(String albumId) throws Exception {
+		testObjects.put("album", albumId);
+		
+		MessageProcessor flow = lookupFlowConstruct("get-album");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Album) response.getMessage().getPayload();
+	}
     
     public User getLoggedUserDetails() throws Exception {
     	MessageProcessor flow = lookupFlowConstruct("logged-user-details");
