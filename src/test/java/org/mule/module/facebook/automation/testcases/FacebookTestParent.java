@@ -136,11 +136,12 @@ public class FacebookTestParent extends TestParent {
     	return (String) response.getMessage().getPayload();
     }
     
-    protected void deleteObject(String objectId) throws Exception {
+    protected Boolean deleteObject(String objectId) throws Exception {
     	testObjects.put("objectId", objectId);
     	
     	MessageProcessor flow = lookupFlowConstruct("delete-object");
-    	flow.process(getTestEvent(testObjects));
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (Boolean) response.getMessage().getPayload();
     }
     
     protected void publishEvent(String profileId) throws Exception {

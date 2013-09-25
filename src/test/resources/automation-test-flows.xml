@@ -145,5 +145,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-event">
 		<facebook:get-event config-ref="Facebook" accessTokenId="accessTokenId" eventId="#[payload.eventId]"/>
 	</flow>
-	
+		
+	<flow name="search-checkins">
+	       <facebook:search-checkins config-ref="Facebook"  until="now"  accessTokenId="accessTokenId"  />
+	</flow>
+
 </mule>

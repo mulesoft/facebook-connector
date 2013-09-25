@@ -2602,14 +2602,16 @@ public class FacebookConnector {
      * 
      * 
      * @param objectId The ID of the object to be deleted
+     * @return The result of the deletion
      */
     @Processor
 	@OAuthProtected
-    public void deleteObject(String objectId)
+    public Boolean deleteObject(String objectId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{object_id}").build(objectId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete();
+        String result = resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(String.class);
+        return Boolean.valueOf(result);
     }
 
     /**
