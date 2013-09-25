@@ -99,6 +99,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="get-post-comments">
+		<facebook:get-post-comments config-ref="Facebook" post="#[payload.post]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="get-user-albums">
 		<facebook:get-user-albums config-ref="Facebook"
 			user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
