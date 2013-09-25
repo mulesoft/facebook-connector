@@ -60,6 +60,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-status">
 		<facebook:get-status config-ref="Facebook" status="#[payload.status]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-post">
+		<facebook:get-post config-ref="Facebook" post="#[payload.post]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-application-albums">
 		<facebook:get-application-albums

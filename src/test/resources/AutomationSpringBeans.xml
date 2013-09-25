@@ -171,7 +171,11 @@
 		<entry key="application" value="${facebook.appId}" />
 	</util:map>	
 	
-	
+	<!-- get-post -->
+	<util:map id="getPostTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="This is message" />
+	</util:map>	
+
 	<!-- publish-note -->
 	<util:map id="publishNoteTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
