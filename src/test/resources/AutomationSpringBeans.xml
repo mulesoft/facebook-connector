@@ -91,6 +91,10 @@
 		<entry key="page" value="19292868552" />
 	</util:map>	
 	
+	<util:map id="likeTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="Hello msg" />
+	</util:map>
+	
 <!-- 	get-page-albums -->
 	<util:map id="getPageAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
