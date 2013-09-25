@@ -41,7 +41,7 @@ public class GetAlbumCommentsTestCases extends FacebookTestParent {
 			
 			String commentMsg = (String) testObjects.get("commentMsg");
 			String commentId = publishComment(albumId, commentMsg);
-			testObjects.put("commentId", FacebookConnectorTestUtils.getId(commentId));
+			testObjects.put("commentId", commentId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
