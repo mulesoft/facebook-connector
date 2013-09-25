@@ -59,9 +59,27 @@
 		<entry key="profileId" value="100006563414301" />
 	</util:map>	
 	
+	<!-- get-status -->
 	<util:map id="getStatusTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="Hello everyone. This is a status message." />
 	</util:map>
+	
+	<!-- get-status-comments -->
+	<util:map id="getStatusCommentsTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="This is a status message" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+		<entry key="comments">
+			<list value-type="java.lang.String">
+				<value>This is one comment.</value>
+				<value>This is another comment.</value>
+				<value>This is a third comment.</value>
+			</list>
+		</entry>
+	</util:map>
+	
 	
 		<!--  publish-message -->	
 	<util:map id="publishMessageTestData" map-class="java.util.HashMap"
@@ -76,6 +94,14 @@
 <!-- 		Facebook developer's page:  -->
 		<entry key="page" value="19292868552" />
 	</util:map>	
+	
+	<util:map id="likeTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="Hello msg" />
+	</util:map>
+	
+	<util:map id="dislikeTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="I hate this message" />
+	</util:map>
 	
 <!-- 	get-page-albums -->
 	<util:map id="getPageAlbumsTestData" map-class="java.util.HashMap"
@@ -138,7 +164,8 @@
 	<util:map id="publishCommentTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="postId" value="getDynamically" />
-		<entry key="msg" value="getDynamically" />
+		<entry key="msg" value="Hello from comment 123" />
+		<entry key="statusmsg" value="Hello From status 123" />
 		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>	
 

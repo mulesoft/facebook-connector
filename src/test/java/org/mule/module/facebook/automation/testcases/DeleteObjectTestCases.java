@@ -11,7 +11,6 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -33,15 +32,14 @@ public class DeleteObjectTestCases extends FacebookTestParent {
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
 			
-			String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), profileId);
-			testObjects.put("albumId", albumId);
+			String msgId = publishMessage(profileId, (String) testObjects.get("msg"));
+			testObjects.put("objectId", msgId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Category({ RegressionTests.class })
 	@Test
 	public void testDeleteObject() {

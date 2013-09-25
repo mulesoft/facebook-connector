@@ -10,6 +10,7 @@ package org.mule.module.facebook.automation.testcases;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -27,6 +28,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
+import com.restfb.types.Comment;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends TestParent {
@@ -135,6 +137,31 @@ public class FacebookTestParent extends TestParent {
     	MessageProcessor flow = lookupFlowConstruct("publish-photo");
     	MuleEvent response = flow.process(getTestEvent(testObjects));
     	return (String) response.getMessage().getPayload();
+    }
+    
+    public boolean like(String postId) throws Exception {
+    	testObjects.put("postId", postId);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("like");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (Boolean) response.getMessage().getPayload();
+    }
+    
+    public List<Comment> getStatusComments(String statusId) throws Exception {
+    	return getStatusComments(statusId, "now", "yesterday", "100", "0");
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<Comment> getStatusComments(String statusId, String until, String since, String limit, String offset) throws Exception {
+    	testObjects.put("status", statusId);
+    	testObjects.put("until", until);
+    	testObjects.put("since", since);
+    	testObjects.put("limit", limit);
+    	testObjects.put("offset", offset);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("get-status-comments");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (List<Comment>) response.getMessage().getPayload();
     }
     
     protected Boolean deleteObject(String objectId) throws Exception {

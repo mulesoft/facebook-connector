@@ -12,23 +12,21 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.StatusMessage;
+public class DislikeTestCases extends FacebookTestParent {
 
-public class GetStatusTestCases extends FacebookTestParent {
-
-	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getStatusTestData");
+			testObjects = (Map<String, Object>) context.getBean("dislikeTestData");
 			
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
 			
 			String msg = (String) testObjects.get("msg");
-			
 			String messageId = publishMessage(profileId, msg);
 			testObjects.put("messageId", messageId);
+			
+			like(messageId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -36,21 +34,18 @@ public class GetStatusTestCases extends FacebookTestParent {
 		}
 	}
 	
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({RegressionTests.class})
 	@Test
-	public void testGetStatus() {
+	public void testDislike() {
 		try {
-			String msg = (String) testObjects.get("msg");
 			String messageId = (String) testObjects.get("messageId");
-			testObjects.put("status", messageId);
+			testObjects.put("postId", messageId);
 			
-			MessageProcessor flow = lookupFlowConstruct("get-status");
+			MessageProcessor flow = lookupFlowConstruct("dislike");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			StatusMessage status = (StatusMessage) response.getMessage().getPayload();
-			
-			assertTrue(status.getId().equals(messageId));
-			assertTrue(status.getMessage().equals(msg));
+						
+			Boolean result = (Boolean) response.getMessage().getPayload();
+			assertTrue(result);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -69,5 +64,4 @@ public class GetStatusTestCases extends FacebookTestParent {
 			fail();
 		}
 	}
-	
 }

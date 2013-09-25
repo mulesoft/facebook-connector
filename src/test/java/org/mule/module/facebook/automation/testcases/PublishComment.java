@@ -1,51 +1,79 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
+import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Page;
+import com.restfb.types.Comment;
 
 public class PublishComment extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-public void PublishComment() {
-		
-		
-    	
-    	
-    	
-    	testObjects = (HashMap<String,Object>) context.getBean("publishCommentTestData");
-    	
-    	
-    	
-    	
-		MessageProcessor flow = lookupFlowConstruct("publish-comment");
-    	
+	@Before
+	public void setUp() {
 		try {
-			String postedMessageID = publishMessage(testObjects.get("profileId").toString(), "TestMessage");
+			//create comment for message
+			testObjects = (HashMap<String, Object>) context.getBean("publishCommentTestData");
 			
-			testObjects.put("postId", postedMessageID);
-			
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			String commentID = (String) response.getMessage().getPayload();
-			
-			System.out.println(commentID);
-//			assertEquals("Facebook Developers", page.getName());
-
+			String statusMsg = (String) testObjects.get("msg");
+			String postId = publishMessage(getProfileId(), statusMsg);
+			testObjects.put("postId", postId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
+
 	}
+
+	@Category({ SmokeTests.class, RegressionTests.class })
+	@Test
+	public void PublishCommentTestCase() {
+		try {
+			String postId = (String) testObjects.get("postId");
+			String msg = (String) testObjects.get("msg");
+			
+			MessageProcessor flow = lookupFlowConstruct("publish-comment");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+
+			String commentJson = (String) response.getMessage().getPayload();
+			String commentId =  FacebookConnectorTestUtils.getId(commentJson);
+
+			List<Comment> comments = getStatusComments(postId);
+			boolean commentFound = false;
+			for (Comment comment : comments) {
+				if (comment.getId().equals(commentId)) {
+					commentFound = true;
+					assertEquals(msg, comment.getMessage());
+					break;
+				}
+			}
+
+			assertTrue("Comment not found", commentFound);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+
+	}
+	
+	@After
+	public void tearDown(){
+		try {
+			deleteObject(testObjects.get("postId").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 }

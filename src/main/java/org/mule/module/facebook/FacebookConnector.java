@@ -2421,14 +2421,17 @@ public class FacebookConnector {
      * 
      * 
      * @param postId Represents the ID of the post object.
+     * @return Returns true if successfully liked
      */
     @Processor
 	@OAuthProtected
-    public void like(String postId)
+    public Boolean like(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String response = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.valueOf(response);
     }
 
     /**
@@ -2651,14 +2654,16 @@ public class FacebookConnector {
      * 
      * 
      * @param postId The ID of the post to be disliked
+     * @return Returns true if API call was successfull
      */
     @Processor
 	@OAuthProtected
-    public void dislike(String postId)
+    public Boolean dislike(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String response = resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(String.class);
+        return Boolean.valueOf(response);
     }
 
     /**

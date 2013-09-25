@@ -54,6 +54,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="like">
+		<facebook:like config-ref="Facebook" postId="#[payload.postId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="dislike">
+		<facebook:dislike config-ref="Facebook" postId="#[payload.postId]" accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="get-page-albums">
 		<facebook:get-page-albums config-ref="Facebook"
 			page="#[payload.page]" accessTokenId="accessTokenId" />
@@ -62,6 +70,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="delete-object">
 		<facebook:delete-object config-ref="Facebook"
 			objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-status-comments">
+		<facebook:get-status-comments config-ref="Facebook" status="#[payload.status]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-user-albums">
