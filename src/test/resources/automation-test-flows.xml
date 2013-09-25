@@ -42,6 +42,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-status">
 		<facebook:get-status config-ref="Facebook" status="#[payload.status]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-post">
+		<facebook:get-post config-ref="Facebook" post="#[payload.post]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-application-albums">
 		<facebook:get-application-albums
@@ -74,6 +78,21 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	
 	<flow name="get-status-comments">
 		<facebook:get-status-comments config-ref="Facebook" status="#[payload.status]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-posts">
+		<facebook:get-user-posts config-ref="Facebook" user="#[payload.user]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-wall">
+		<facebook:get-user-wall config-ref="Facebook" user="#[payload.user]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-post-comments">
+		<facebook:get-post-comments config-ref="Facebook" post="#[payload.post]" until="#[payload.until]" since="#[payload.since]" 
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
 
@@ -144,12 +163,22 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	       <facebook:search-checkins config-ref="Facebook"  until="now"  accessTokenId="accessTokenId"  />
 	</flow>
 
+	<flow name="publish-link">
+			<facebook:publish-link profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]"/>	
+	</flow>
+
+	<flow name="get-link">
+			<facebook:get-link config-ref="Facebook" link="#[payload.link]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="get-event-attending">
 		<facebook:get-event-attending accessTokenId="accessTokenId" config-ref="Facebook" 
 			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
+
 	</flow>
 	
 	<flow name="attend-event">
        <facebook:attend-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
+
 </mule>

@@ -29,6 +29,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
 import com.restfb.types.Comment;
+import com.restfb.types.Link;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends TestParent {
@@ -169,6 +170,14 @@ public class FacebookTestParent extends TestParent {
     	return (Boolean) response.getMessage().getPayload();
     }
     
+    public Link getLink(String linkId) throws Exception{
+    	testObjects.put("link", linkId);
+    	MessageProcessor flow = lookupFlowConstruct("get-link");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	Link myLink = (Link) response.getMessage().getPayload();
+    	return myLink;
+	}
+
     protected String publishEvent(String profileId, String eventName, String startTime) throws Exception {
     	testObjects.put("profileId", profileId);
     	testObjects.put("eventName", eventName);
