@@ -2609,8 +2609,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{object_id}").build(objectId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
-
+        resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete();
     }
 
     /**
