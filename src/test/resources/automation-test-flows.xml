@@ -99,6 +99,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="get-user-posts">
+		<facebook:get-user-posts config-ref="Facebook" user="#[payload.user]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="get-user-wall">
 		<facebook:get-user-wall config-ref="Facebook" user="#[payload.user]" until="#[payload.until]" since="#[payload.since]" 
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
