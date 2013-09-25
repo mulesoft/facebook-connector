@@ -56,6 +56,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			albumName="#[payload.albumName]" msg="#[payload.msg]" profile_id="#[payload.profileId]"
 			accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-status">
+		<facebook:get-status config-ref="Facebook" status="#[payload.status]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-application-albums">
 		<facebook:get-application-albums

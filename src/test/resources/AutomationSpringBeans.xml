@@ -55,6 +55,10 @@
 		<entry key="profileId" value="100006563414301" />
 	</util:map>	
 	
+	<util:map id="getStatusTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="Hello everyone. This is a status message." />
+	</util:map>
+	
 		<!--  publish-message -->	
 	<util:map id="publishMessageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
