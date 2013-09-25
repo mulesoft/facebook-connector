@@ -139,6 +139,14 @@ public class FacebookTestParent extends TestParent {
     	return (String) response.getMessage().getPayload();
     }
     
+    public boolean like(String postId) throws Exception {
+    	testObjects.put("postId", postId);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("like");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (Boolean) response.getMessage().getPayload();
+    }
+    
     public List<Comment> getStatusComments(String statusId) throws Exception {
     	return getStatusComments(statusId, "now", "yesterday", "100", "0");
     }
