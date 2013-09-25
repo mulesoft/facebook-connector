@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.MuleEvent;
+import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
@@ -200,7 +201,18 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		String objectID = (String) response.getMessage().getPayload();
 
-		return FacebookConnectorTestUtils.getId(objectID);
+		return objectID;
+	}
+	
+
+	protected String publishNote(String profileId, String msg, String subject ) throws Exception{
+		testObjects.put("profileId", profileId);
+		testObjects.put("msg", msg);
+		testObjects.put("subject", subject);
+		
+		MessageProcessor flow = lookupFlowConstruct("publish-note");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return response.getMessage().getPayloadAsString();
 	}
 
 }

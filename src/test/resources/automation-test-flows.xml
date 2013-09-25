@@ -186,4 +186,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
 	</flow>
 
+	<flow name="get-user-notes">
+		<facebook:get-user-notes user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
