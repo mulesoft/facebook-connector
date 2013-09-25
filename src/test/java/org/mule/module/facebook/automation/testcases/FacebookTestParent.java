@@ -74,9 +74,9 @@ public class FacebookTestParent extends TestParent {
 		return (String) response.getMessage().getPayload();
     }
     
-	protected String publishMessage(String ProfileID, String Msg) throws Exception {
-		testObjects.put("profileId", ProfileID);
-		testObjects.put("msg", Msg);
+	protected String publishMessage(String profileId, String msg) throws Exception {
+		testObjects.put("profileId", profileId);
+		testObjects.put("msg", msg);
 
 		MessageProcessor flow = lookupFlowConstruct("publish-message");
 
