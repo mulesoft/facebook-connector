@@ -141,5 +141,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			msg="#[payload.msg]" config-ref="Facebook"  accessTokenId="accessTokenId" subject="#[payload.subject]" />
 	</flow>
 	
+		
+	<flow name="search-checkins">
+	       <facebook:search-checkins config-ref="Facebook"  until="now"  accessTokenId="accessTokenId"  />
+	</flow>
+
+	
 	
 </mule>
