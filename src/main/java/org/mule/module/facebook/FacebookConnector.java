@@ -2482,14 +2482,45 @@ public class FacebookConnector {
      * 
      * 
      * @param profile_id the profile where to publish the event
+     * @param event_name the name of the event
+     * @param start_time the event start time, in ISO-8601 
+     * @param end_time the event end time, in ISO-8601
+     * @param description the event description
+     * @param location the event location
+     * @param location_id Facebook Place ID of the place the Event is taking place 
+     * @param privacy_type string containing 'OPEN' (default), 'SECRET', or 'FRIENDS' 
+     * @return The id of the published event
      */
     @Processor
 	@OAuthProtected
-    public void publishEvent(String profile_id)
+    public String publishEvent(String profile_id, String event_name, String start_time, @Optional String end_time, @Optional String description, @Optional String location,
+    		@Optional String location_id, @Optional String privacy_type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/events").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        
+               
+        resource = resource.queryParam("access_token", accessToken)
+        		.queryParam("name", event_name)
+        		.queryParam("start_time", start_time);
+        
+        if(end_time != null) {
+        	resource = resource.queryParam("end_time", end_time);
+        }
+        if(description != null) {
+        	resource = resource.queryParam("description", description);
+        }
+        if(location != null) {
+        	resource = resource.queryParam("location", location);
+        }
+        if(location_id != null) {
+        	resource = resource.queryParam("location_id", location_id);
+        }
+        if(privacy_type != null) {
+        	resource = resource.queryParam("privacy_type", privacy_type);
+        }
+        		
+        return resource.post(String.class);
     }
 
     /**

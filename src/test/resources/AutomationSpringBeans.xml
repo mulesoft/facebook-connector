@@ -33,12 +33,16 @@
 <!-- 	get-album -->
 	<util:map id="getAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="album" value="1403591603202940" />
+		<entry key="profileId" value="getDynamically" />
+		<entry key="album" value="getDynamically" />
+		<entry key="albumName" value="albumForTest" />
+		<entry key="msg" value="msgForTest" />
 	</util:map>	
 	
 <!-- 	publish-album -->
 	<util:map id="publishAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="profileId" value="getDynamically" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
 	</util:map>	
@@ -83,8 +87,8 @@
 <!-- 	delete-object -->
 	<util:map id="deleteObjectTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<!-- for publish-album -->
-		<entry key="albumName" value="albumForTest" />
+		<!-- for publish-message -->
+		<entry key="profileId" value="getDynamically" />
 		<entry key="msg" value="msgForTest" />
 	</util:map>	
 	
@@ -165,4 +169,27 @@
 		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>	
 	
+	<!-- get-event-attending -->
+	<util:map id="getEventAttendingTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="451993061587326" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- attend-event -->
+	<util:map id="attendEventTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="451993061587326" />
+	</util:map>	
+	
+	<!-- publish-event -->
+	<util:map id="publishEventTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="profileId" value="getDynamically" />
+		<entry key="eventName" value="testEventName" />
+		<entry key="startTime" value="2013-10-04" />
+	</util:map>	
 </beans>

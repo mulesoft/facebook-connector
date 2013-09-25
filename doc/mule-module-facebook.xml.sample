@@ -415,7 +415,7 @@
 
 
 <!-- BEGIN_INCLUDE(facebook:publishEvent) -->
-<facebook:publish-event profile_id="#[map-payload:profileId]"/>
+<facebook:publish-event profile_id="#[map-payload:profileId]" event_name="#[map-payload:eventName]" start_time="#[map-payload:startTime]" />
 <!-- END_INCLUDE(facebook:publishEvent) -->
 
 
