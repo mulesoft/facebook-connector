@@ -193,5 +193,20 @@ public class FacebookTestParent extends TestParent {
     	response.getMessage().getPayload();
 
     }
+    
+    
+    
+	protected String publishMessage(String profileId, String msg, String link) throws Exception {
+		testObjects.put("profileId", profileId);
+		testObjects.put("msg", msg);
+		testObjects.put("link", link);
+
+		MessageProcessor flow = lookupFlowConstruct("publish-message-with-link");
+
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		String objectID = (String) response.getMessage().getPayload();
+
+		return FacebookConnectorTestUtils.getId(objectID);
+	}
 
 }
