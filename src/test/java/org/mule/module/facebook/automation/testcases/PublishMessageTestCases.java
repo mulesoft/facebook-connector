@@ -10,6 +10,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.api.MuleEvent;
+import org.mule.api.processor.MessageProcessor;
+
+import com.restfb.types.StatusMessage;
 
 public class PublishMessageTestCases extends FacebookTestParent {
 
@@ -20,6 +24,8 @@ public class PublishMessageTestCases extends FacebookTestParent {
 			
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
+				
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -32,14 +38,47 @@ public class PublishMessageTestCases extends FacebookTestParent {
 	@Test
 	public void testPublishMessage() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
+
 			String msg = (String) testObjects.get("msg");
 			
-			String messageId = publishMessage(profileId, msg);
-			assertTrue(StringUtils.isNotEmpty(messageId));
+			
+			String messageId = publishMessage(testObjects.get("profileId").toString(), msg);
+			testObjects.put("messageId", messageId);
+			
+
+			testObjects.put("status", messageId);
+			
+			MessageProcessor flow = lookupFlowConstruct("get-status");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			
+			StatusMessage status = (StatusMessage) response.getMessage().getPayload();
+			
+			assertTrue(status.getId().equals(messageId));
+			assertTrue(status.getMessage().equals(msg));
+			
+			
+			//do get status.
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
+	}
+	
+	
+	@After
+	public void tearDown(){
+		
+		try {
+			
+			deleteObject(testObjects.get("messageID").toString());
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		
+		
 	}
 }
