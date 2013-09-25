@@ -21,6 +21,7 @@ import org.junit.experimental.categories.Category;
 
 public class PublishAlbumTestCases extends FacebookTestParent {
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -34,7 +35,6 @@ public class PublishAlbumTestCases extends FacebookTestParent {
 		}
 	}
 	
-    @SuppressWarnings("unchecked")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testPublishAlbum() {
