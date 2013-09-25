@@ -98,6 +98,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-status-comments config-ref="Facebook" status="#[payload.status]" until="#[payload.until]" since="#[payload.since]" 
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-wall">
+		<facebook:get-user-wall config-ref="Facebook" user="#[payload.user]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-post-comments">
 		<facebook:get-post-comments config-ref="Facebook" post="#[payload.post]" until="#[payload.until]" since="#[payload.since]" 
