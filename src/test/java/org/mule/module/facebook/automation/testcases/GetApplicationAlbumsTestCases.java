@@ -8,10 +8,12 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Date;
 import java.util.HashMap;
+import java.util.RandomAccess;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -30,18 +32,14 @@ public class GetApplicationAlbumsTestCases extends FacebookTestParent {
 		MessageProcessor flow = lookupFlowConstruct("get-application-albums");
     	
 		try {
-			publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
-			
-			String until = String.valueOf(new Date().getTime());
-			testObjects.put("until", until);
 
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Object albums = (Object) response.getMessage().getPayload();
+			RandomAccess albums = (RandomAccess) response.getMessage().getPayload();
 			
 			// albums is an empty collection
+			assertNotNull(albums);
+			assertTrue(albums instanceof RandomAccess);
 			
-			System.out.println();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

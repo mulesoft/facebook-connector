@@ -17,6 +17,7 @@ import com.restfb.types.StatusMessage;
 
 public class PublishMessageTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -33,7 +34,6 @@ public class PublishMessageTestCases extends FacebookTestParent {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Category({SmokeTests.class,RegressionTests.class})
 	@Test
 	public void testPublishMessage() {

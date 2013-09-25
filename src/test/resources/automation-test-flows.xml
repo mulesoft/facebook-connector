@@ -11,11 +11,8 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 
 	<context:property-placeholder location="automation-credentials.properties" />
 
-	<facebook:config-with-oauth name="Facebook"
-		appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook"
-		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions">
-		<!-- <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" 
-			appSecret="${facebook.appSecret}" doc:name="Facebook"> -->
+	<facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" 
+			scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions">
 		<facebook:oauth-callback-config domain="${facebook.domain}"
 			localPort="${facebook.localPort}" remotePort="${facebook.remotePort}"
 			path="${facebook.path}" />
@@ -27,24 +24,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-user-home" doc:name="get-user-home">
-		<!-- <facebook:get-user-home config-ref="Facebook" user="100006785671987" 
-			accessTokenId="accessTokenId" /> -->
 		<facebook:get-user-home config-ref="Facebook"
 			user="100006735154543" accessTokenId="accessTokenId" />
 	</flow>
-
-	<!-- <flow name="search" doc:name="search"> -->
-	<!-- <facebook:search config-ref="Facebook" q="muelsoft" obj="photo" accessTokenId="accessTokenId" 
-		/> -->
-	<!-- <facebook:get-user-search user="#[map-payload:user]"/> -->
-	<!-- <facebook:get-user-search config-ref="Facebook" user="1115181285" accessTokenId="accessTokenId" 
-		/> -->
-	<!-- <facebook:get-user-search config-ref="Facebook" user="100006785222166" 
-		accessTokenId="accessTokenId" /> -->
-	<!-- <facebook:search q="muelsoft" obj="photo" accessTokenId="accessTokenId" 
-		/> -->
-	<!-- <facebook:search q="hello" obj="photo"/> -->
-	<!-- </flow> -->
 
 	<flow name="get-album">
 		<facebook:get-album config-ref="Facebook" album="#[payload.album]"
@@ -122,7 +104,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 
 	<flow name="publish-event">
 		<facebook:publish-event config-ref="Facebook"
-			profile_id="#[payload.profileId]" accessTokenId="accessTokenId" />
+			profile_id="#[payload.profileId]" start_time="#[payload.startTime]" event_name="#[payload.eventName]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="publish-photo">
@@ -135,7 +117,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:logged-user-details config-ref="Facebook"
 			accessTokenId="accessTokenId" />
 	</flow>
-
 
 	<flow name="publish-message">
 		<facebook:publish-message profile_id="#[payload.profileId]"
@@ -168,16 +149,36 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-application accessTokenId="accessTokenId"
 			config-ref="Facebook" application="#[payload.application]" />
 	</flow>
+	
 	<flow name="publish-note">
 		<facebook:publish-note profile_id="#[payload.profileId]"
 			msg="#[payload.msg]" config-ref="Facebook"  accessTokenId="accessTokenId" subject="#[payload.subject]" />
 	</flow>
 	
+	<flow name="get-event">
+		<facebook:get-event config-ref="Facebook" accessTokenId="accessTokenId" eventId="#[payload.eventId]"/>
+	</flow>
 		
 	<flow name="search-checkins">
 	       <facebook:search-checkins config-ref="Facebook"  until="now"  accessTokenId="accessTokenId"  />
 	</flow>
 
+	<flow name="publish-link">
+			<facebook:publish-link profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]"/>	
+	</flow>
+
+	<flow name="get-link">
+			<facebook:get-link config-ref="Facebook" link="#[payload.link]" accessTokenId="accessTokenId" />
+	</flow>
 	
+	<flow name="get-event-attending">
+		<facebook:get-event-attending accessTokenId="accessTokenId" config-ref="Facebook" 
+			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
+
+	</flow>
 	
+	<flow name="attend-event">
+       <facebook:attend-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
+
 </mule>
