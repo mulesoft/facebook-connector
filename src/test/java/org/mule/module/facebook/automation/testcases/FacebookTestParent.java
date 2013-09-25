@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.MuleEvent;
+import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
@@ -29,6 +30,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
 import com.restfb.types.Comment;
+import com.restfb.types.Link;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends TestParent {
@@ -169,6 +171,16 @@ public class FacebookTestParent extends TestParent {
     	MessageProcessor flow = lookupFlowConstruct("delete-object");
     	MuleEvent response = flow.process(getTestEvent(testObjects));
     	return (Boolean) response.getMessage().getPayload();
+    }
+    
+    
+    public Link getLink(String linkId) throws Exception{
+    	testObjects.put("link", linkId);
+    	MessageProcessor flow = lookupFlowConstruct("get-link");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	Link myLink = (Link) response.getMessage().getPayload();
+    	return myLink;
+    	
     }
 
 }
