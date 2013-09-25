@@ -81,6 +81,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:delete-object config-ref="Facebook"
 			objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-status-comments">
+		<facebook:get-status-comments config-ref="Facebook" status="#[payload.status]" until="#[payload.until]" since="#[payload.since]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-user-albums">
 		<facebook:get-user-albums config-ref="Facebook"
