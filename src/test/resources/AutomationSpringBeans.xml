@@ -160,7 +160,8 @@
 	<util:map id="publishCommentTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="postId" value="getDynamically" />
-		<entry key="msg" value="getDynamically" />
+		<entry key="msg" value="Hello from comment 123" />
+		<entry key="statusmsg" value="Hello From status 123" />
 		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>	
 
