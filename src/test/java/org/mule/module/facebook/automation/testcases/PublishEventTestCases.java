@@ -36,8 +36,7 @@ public class PublishEventTestCases extends FacebookTestParent {
 		try {
 			MessageProcessor flow = lookupFlowConstruct("publish-event");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			String eventIdJson = (String) response.getMessage().getPayload();
-			String eventId = FacebookConnectorTestUtils.getId(eventIdJson);
+			String eventId = (String) response.getMessage().getPayload();
 			
 			testObjects.put("objectId", eventId);
 			

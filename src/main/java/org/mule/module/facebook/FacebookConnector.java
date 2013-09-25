@@ -2388,7 +2388,9 @@ public class FacebookConnector {
         if (linkName != null) form.add("name", linkName);
         if (description != null) form.add("description", description);
 
-        return resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+        String json = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
@@ -2411,8 +2413,10 @@ public class FacebookConnector {
         form.add("message", msg);
 
         WebResource.Builder type = resource.type(MediaType.APPLICATION_FORM_URLENCODED);
-        return type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE)
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE)
                         .post(String.class, form);
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
@@ -2522,8 +2526,10 @@ public class FacebookConnector {
         if(privacy_type != null) {
         	resource = resource.queryParam("privacy_type", privacy_type);
         }
-        		
-        return resource.post(String.class);
+        
+        String json = resource.post(String.class);
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**

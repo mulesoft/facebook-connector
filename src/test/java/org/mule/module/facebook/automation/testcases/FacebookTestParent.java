@@ -83,9 +83,7 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("publish-message");
 
 		MuleEvent response = flow.process(getTestEvent(testObjects));
-		String objectID = (String) response.getMessage().getPayload();
-
-		return FacebookConnectorTestUtils.getId(objectID);
+		return (String) response.getMessage().getPayload();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -125,8 +123,7 @@ public class FacebookTestParent extends TestParent {
 
     	MessageProcessor flow = lookupFlowConstruct("publish-comment");
     	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	String commentId = (String) response.getMessage().getPayload();
-    	return FacebookConnectorTestUtils.getId(commentId);
+    	return (String) response.getMessage().getPayload();
     }
     
     protected String publishPhoto(String albumId, String caption, File photo) throws Exception {
@@ -172,12 +169,14 @@ public class FacebookTestParent extends TestParent {
     	return (Boolean) response.getMessage().getPayload();
     }
     
-    protected void publishEvent(String profileId) throws Exception {
+    protected String publishEvent(String profileId, String eventName, String startTime) throws Exception {
     	testObjects.put("profileId", profileId);
+    	testObjects.put("eventName", eventName);
+    	testObjects.put("startTime", startTime);
     	
     	MessageProcessor flow = lookupFlowConstruct("publish-event");
     	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	response.getMessage().getPayload();
+    	return (String) response.getMessage().getPayload();
     }
 
 }

@@ -45,8 +45,7 @@ public class PublishComment extends FacebookTestParent {
 			MessageProcessor flow = lookupFlowConstruct("publish-comment");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
-			String commentJson = (String) response.getMessage().getPayload();
-			String commentId =  FacebookConnectorTestUtils.getId(commentJson);
+			String commentId = (String) response.getMessage().getPayload();
 
 			List<Comment> comments = getStatusComments(postId);
 			boolean commentFound = false;
