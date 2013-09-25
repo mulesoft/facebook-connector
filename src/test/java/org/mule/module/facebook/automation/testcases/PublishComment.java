@@ -18,13 +18,23 @@ public class PublishComment extends FacebookTestParent {
 	@Category({RegressionTests.class})
 	@Test
 public void PublishComment() {
+		
+		
+    	
+    	
     	
     	testObjects = (HashMap<String,Object>) context.getBean("publishCommentTestData");
+    	
+    	
+    	
     	
 		MessageProcessor flow = lookupFlowConstruct("publish-comment");
     	
 		try {
-//TODO: Get and set OBJECT ID before.
+			String postedMessageID = publishMessage(testObjects.get("profileId").toString(), "TestMessage");
+			
+			testObjects.put("postId", postedMessageID);
+			
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			String commentID = (String) response.getMessage().getPayload();

@@ -135,6 +135,7 @@
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="postId" value="getDynamically" />
 		<entry key="msg" value="getDynamically" />
+		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>	
 
 <!-- 	get-application -->
@@ -152,6 +153,11 @@
 		<entry key="subject" value="subject123" />
 	</util:map>	
 	
-	
+		
+	<!-- search-checkins -->
+	<util:map id="searchCheckinsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="profileId" value="${facebook.profileId}" />
+	</util:map>	
 	
 </beans>
