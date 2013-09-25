@@ -95,6 +95,10 @@
 		<entry key="msg" value="Hello msg" />
 	</util:map>
 	
+	<util:map id="dislikeTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="I hate this message" />
+	</util:map>
+	
 <!-- 	get-page-albums -->
 	<util:map id="getPageAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">

@@ -76,6 +76,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:like config-ref="Facebook" postId="#[payload.postId]" accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="dislike">
+		<facebook:dislike config-ref="Facebook" postId="#[payload.postId]" accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="get-page-albums">
 		<facebook:get-page-albums config-ref="Facebook"
 			page="#[payload.page]" accessTokenId="accessTokenId" />
