@@ -14,13 +14,14 @@ import static org.junit.Assert.fail;
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Album;
 import com.restfb.types.Comment;
 
 public class GetAlbumCommentsTestCases extends FacebookTestParent {
@@ -28,38 +29,49 @@ public class GetAlbumCommentsTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() {
 		try {
+			testObjects = (HashMap<String,Object>) context.getBean("getAlbumCommentsTestData");
+
+			String albumName = (String) testObjects.get("albumName");
+			String msg = (String) testObjects.get("msg");
+			String profileId = getProfileId();
+			testObjects.put("profileId", profileId);
+			
+			String albumId = publishAlbum(albumName, msg, profileId);
+			testObjects.put("albumId", albumId);
+			
+			String commentMsg = (String) testObjects.get("commentMsg");
+			String commentId = publishComment(albumId, commentMsg);
+			testObjects.put("commentId", FacebookConnectorTestUtils.getId(commentId));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 	
-	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetAlbumComments() {
-    	
-    	testObjects = (HashMap<String,Object>) context.getBean("getAlbumCommentsTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-album-comments");
-    	
 		try {
-			Collection<Album> albums = requestUserAlbums((String) testObjects.get("user"),
-					(String) testObjects.get("since"),
-					(String) testObjects.get("until"),
-					(String) testObjects.get("limit"),
-					(String) testObjects.get("offset"));
+			String albumId = (String) testObjects.get("albumId");
+			testObjects.put("album", albumId);
+			final String commentId = (String) testObjects.get("commentId");
 			
-			Album album = (Album) albums.toArray()[0];
-			
-			testObjects.put("album", album.getId());
-
+			MessageProcessor flow = lookupFlowConstruct("get-album-comments");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			Collection<Comment> comments = (Collection<Comment>) response.getMessage().getPayload();
 			
-			assertTrue(comments.size() != 0);
-
+			Collection<Comment> matching = CollectionUtils.select(comments, new Predicate() {
+				
+				@Override
+				public boolean evaluate(Object object) {
+					Comment comment = (Comment) object;
+					return comment.getId().equals(commentId);
+				}
+			});
+			
+			assertTrue(matching.size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

@@ -118,6 +118,15 @@ public class FacebookTestParent extends TestParent {
     	return getLoggedUserDetails().getId();
     }
     
+    public String publishComment(String postId, String msg) throws Exception {
+    	testObjects.put("postId", postId);
+    	testObjects.put("msg", msg);
+
+    	MessageProcessor flow = lookupFlowConstruct("publish-comment");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (String) response.getMessage().getPayload();
+    }
+    
     public String publishPhoto(String albumId, String caption, File photo) throws Exception {
     	testObjects.put("albumId", albumId);
     	testObjects.put("caption", caption);

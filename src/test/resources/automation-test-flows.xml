@@ -112,8 +112,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="publish-comment">
-		<facebook:publish-comment accessTokenId="accessTokenId"
-			config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]" />
+		<facebook:publish-comment accessTokenId="accessTokenId"	config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]" />
 	</flow>
 
 	<flow name="get-album-photos">
