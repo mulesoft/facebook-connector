@@ -16,6 +16,7 @@ import com.restfb.types.StatusMessage;
 
 public class GetStatusTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
