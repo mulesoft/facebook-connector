@@ -2421,14 +2421,17 @@ public class FacebookConnector {
      * 
      * 
      * @param postId Represents the ID of the post object.
+     * @return Returns true if successfully liked
      */
     @Processor
 	@OAuthProtected
-    public void like(String postId)
+    public Boolean like(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String response = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.valueOf(response);
     }
 
     /**
