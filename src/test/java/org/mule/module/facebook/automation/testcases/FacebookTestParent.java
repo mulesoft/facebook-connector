@@ -84,7 +84,7 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		String objectID = (String) response.getMessage().getPayload();
 
-		return objectID;
+		return FacebookConnectorTestUtils.getId(objectID);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -124,7 +124,8 @@ public class FacebookTestParent extends TestParent {
 
     	MessageProcessor flow = lookupFlowConstruct("publish-comment");
     	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (String) response.getMessage().getPayload();
+    	String commentId = (String) response.getMessage().getPayload();
+    	return FacebookConnectorTestUtils.getId(commentId);
     }
     
     public String publishPhoto(String albumId, String caption, File photo) throws Exception {

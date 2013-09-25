@@ -27,7 +27,7 @@ public class GetStatusTestCases extends FacebookTestParent {
 			String msg = (String) testObjects.get("msg");
 			
 			String messageId = publishMessage(profileId, msg);
-			testObjects.put("messageId", FacebookConnectorTestUtils.getId(messageId));
+			testObjects.put("messageId", messageId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
