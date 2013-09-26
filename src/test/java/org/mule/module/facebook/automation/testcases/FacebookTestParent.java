@@ -24,6 +24,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.module.facebook.oauth.FacebookConnectorOAuthState;
+import org.mule.module.facebook.types.Photo;
 import org.mule.modules.tests.TestParent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -117,6 +118,14 @@ public class FacebookTestParent extends TestParent {
     
     protected String getProfileId() throws Exception {
     	return getLoggedUserDetails().getId();
+    }
+    
+    protected Photo getPhoto(String photoId) throws Exception {
+    	testObjects.put("photoId", photoId);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("get-photo");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (Photo) response.getMessage().getPayload();
     }
     
     protected String publishComment(String postId, String msg) throws Exception {
@@ -213,6 +222,7 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("publish-note");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return response.getMessage().getPayloadAsString();
+
 	}
 
 }
