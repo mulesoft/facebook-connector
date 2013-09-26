@@ -161,7 +161,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 	
 	<flow name="get-event">
-		<facebook:get-event config-ref="Facebook" accessTokenId="accessTokenId" eventId="#[payload.eventId]"/>
+		<facebook:get-event config-ref="Facebook" accessTokenId="accessTokenId" eventId="#[payload.eventId]" />
 	</flow>
 		
 	<flow name="search-checkins">
@@ -169,7 +169,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="publish-link">
-			<facebook:publish-link profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]"/>	
+			<facebook:publish-link profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />	
 	</flow>
 
 	<flow name="get-link">
@@ -178,7 +178,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	
 	<flow name="get-event-attending">
 		<facebook:get-event-attending accessTokenId="accessTokenId" config-ref="Facebook" 
-			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
+			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
 	</flow>
 	
 	<flow name="attend-event">
@@ -200,10 +200,15 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	
 	<flow name="get-event-declined">
 		<facebook:get-event-declined accessTokenId="accessTokenId" config-ref="Facebook" 
-			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
+			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
 	</flow>
 
 	<flow name="get-note">
 		<facebook:get-note note="#[payload.note]" config-ref="Facebook" accessTokenId="accessTokenId"/>
+	</flow>	
+	
+	<flow name="get-event-invited">
+		<facebook:get-event-invited config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
 	</flow>	
 </mule>
