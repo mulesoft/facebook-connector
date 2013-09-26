@@ -2451,10 +2451,11 @@ public class FacebookConnector {
      * @param profile_id the profile where to publish the note
      * @param msg The message
      * @param subject the subject of the note
+     * @return note id
      */
     @Processor
 	@OAuthProtected
-    public void publishNote(String profile_id, String msg,
+    public String publishNote(String profile_id, String msg,
                             String subject)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profile_id);
@@ -2462,8 +2463,14 @@ public class FacebookConnector {
         Form form = new Form();
         form.add("message", msg);
         form.add("subject", subject);
-
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        WebResource.Builder type = resource
+				.type(MediaType.APPLICATION_FORM_URLENCODED);
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE,
+				MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+        
+		return obj.getString("id");
     }
 
     /**
@@ -2474,10 +2481,11 @@ public class FacebookConnector {
      * @param profile_id the profile where to publish the link
      * @param msg The message
      * @param link the link
+     * @return link id
      */
     @Processor
 	@OAuthProtected
-    public void publishLink(String profile_id, String msg, String link)
+    public String publishLink(String profile_id, String msg, String link)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2485,7 +2493,13 @@ public class FacebookConnector {
         form.add("message", msg);
         form.add("link", link);
 
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        WebResource.Builder type = resource
+				.type(MediaType.APPLICATION_FORM_URLENCODED);
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE,
+				MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
@@ -2543,14 +2557,17 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId the id of the event to attend
+     * @return Boolean result indicating success or failure of operation
      */
     @Processor
 	@OAuthProtected
-    public void attendEvent(String eventId)
+    public Boolean attendEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/attending").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
@@ -2575,14 +2592,19 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId Represents the id of the event object
+     * @return Boolean result indicating success or failure of operation
      */
     @Processor
 	@OAuthProtected
-    public void declineEvent(String eventId)
+    public Boolean declineEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/declined").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        Form form = new Form();
+        form.add("eventId", eventId);
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
@@ -3042,9 +3064,6 @@ public class FacebookConnector {
 	@OAuthProtected
     public byte[] downloadImage(String imageUri) {
     	URI uri = URI.create(imageUri);
-//    	WebResource webR = this.newWebResource(uri, accessToken);
-//    	webR.setProperty("", value)
-//    	get(BufferedImage.class);
     	return this.bufferedImageToByteArray(this.newWebResource(uri, accessToken).get(BufferedImage.class));
     }
     

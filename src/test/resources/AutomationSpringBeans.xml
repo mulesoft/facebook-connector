@@ -8,64 +8,69 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
 			<value>automation-credentials.properties</value>
 		</property>
 	</bean>
-	
-	<bean id="connectorOAuthState" class="org.mule.module.facebook.oauth.FacebookConnectorOAuthState" >
+
+	<bean id="connectorOAuthState"
+		class="org.mule.module.facebook.oauth.FacebookConnectorOAuthState">
 		<property name="accessToken" value="${facebook.accessToken}" />
 	</bean>
-	
-<!-- 	 get-user-by-id -->
+
+	<!-- get-user-by-id -->
 	<util:map id="getUserTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="username" value="${facebook.username}" />
-	</util:map>	
-		
-<!-- 	get-user-home -->
+	</util:map>
+
+	<!-- get-user-home -->
 	<util:map id="getUserHomeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="username" value="${facebook.username}" />
-	</util:map>	
+	</util:map>
 
-<!-- 	get-album -->
+	<!-- get-album -->
 	<util:map id="getAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="profileId" value="getDynamically" />
 		<entry key="album" value="getDynamically" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-	</util:map>	
-	
-<!-- 	publish-album -->
+	</util:map>
+
+	<!-- publish-album -->
 	<util:map id="publishAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="profileId" value="getDynamically" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-	</util:map>	
-	
-<!-- 	get-application-albums -->
+	</util:map>
+
+	<!-- get-application-albums -->
 	<util:map id="getApplicationAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="application" value="1395238287373095" />
-<!-- 		<entry key="since" value="#{T(java.lang.management.ManagementFactory).getRuntimeMXBean().getStartTime()}" /> -->
-		<entry key="until" value="now"/>
-		
+		<!-- <entry key="since" value="#{T(java.lang.management.ManagementFactory).getRuntimeMXBean().getStartTime()}" 
+			/> -->
+		<entry key="until" value="now" />
+
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
 		<entry key="profileId" value="100006563414301" />
-	</util:map>	
-	
+	</util:map>
+
 	<!-- get-status -->
-	<util:map id="getStatusTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="getStatusTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="Hello everyone. This is a status message." />
 	</util:map>
-	
+
 	<!-- get-status-comments -->
-	<util:map id="getStatusCommentsTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="getStatusCommentsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="This is a status message" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
@@ -79,10 +84,12 @@
 			</list>
 		</entry>
 	</util:map>
-	
+
 	<!-- get-post-comments -->
-	<util:map id="getPostCommentsTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="msg" value="This is a status message specifically to get its comments" />
+	<util:map id="getPostCommentsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg"
+			value="This is a status message specifically to get its comments" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -105,9 +112,10 @@
 			-->
 		<entry key="photoFilePath" value="image.jpg" />
 	</util:map>
-	
+
 	<!-- get-user-wall -->
-	<util:map id="getUserWallTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="getUserWallTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="messages">
 			<list value-type="java.lang.String">
 				<value>First message</value>
@@ -120,9 +128,10 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
-	
+
 	<!-- get-user-posts -->
-	<util:map id="getUserPostsTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="getUserPostsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="messages">
 			<list value-type="java.lang.String">
 				<value>First message</value>
@@ -135,45 +144,47 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
-	
-		<!--  publish-message -->	
+
+	<!-- publish-message -->
 	<util:map id="publishMessageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="getDynamically" />
-	</util:map>	
-	
-	
-<!-- 	get-page -->
+	</util:map>
+
+
+	<!-- get-page -->
 	<util:map id="getPageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-<!-- 		Facebook developer's page:  -->
+		<!-- Facebook developer's page: -->
 		<entry key="page" value="19292868552" />
-	</util:map>	
-	
-	<util:map id="likeTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	</util:map>
+
+	<util:map id="likeTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="Hello msg" />
 	</util:map>
-	
-	<util:map id="dislikeTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+
+	<util:map id="dislikeTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="I hate this message" />
 	</util:map>
-	
-<!-- 	get-page-albums -->
+
+	<!-- get-page-albums -->
 	<util:map id="getPageAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-<!-- 		Facebook developer's page:  -->
+		<!-- Facebook developer's page: -->
 		<entry key="page" value="19292868552" />
-	</util:map>	
-	
-<!-- 	delete-object -->
+	</util:map>
+
+	<!-- delete-object -->
 	<util:map id="deleteObjectTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<!-- for publish-message -->
 		<entry key="profileId" value="getDynamically" />
 		<entry key="msg" value="msgForTest" />
-	</util:map>	
-	
-<!-- 	get-user-albums -->
+	</util:map>
+
+	<!-- get-user-albums -->
 	<util:map id="getUserAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="since" value="yesterday" />
@@ -182,28 +193,26 @@
 		<entry key="offset" value="0" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-	</util:map>	
-	
-<!-- 	download-image -->
+	</util:map>
+
+	<!-- download-image -->
 	<util:map id="downloadImageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="imageUri" value="${facebook.imageUri}" />
-	</util:map>	
-	
-<!-- get-album-photos -->
+	</util:map>
+
+	<!-- get-album-photos -->
 	<util:map id="getAlbumPhotosTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="Album Msg" />
 		<entry key="albumName" value="My Test Album" />
 		<entry key="caption" value="My Photo Caption" />
-		<!-- 
-			This file must be present in your classpath 
-			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
-			-->
+		<!-- This file must be present in your classpath This file is loaded as 
+			follows: getClass().getClassLoader().getResource(fileName) -->
 		<entry key="photoFileName" value="image.jpg" />
-	</util:map>	
-	
-<!-- 	get-album-comments -->
+	</util:map>
+
+	<!-- get-album-comments -->
 	<util:map id="getAlbumCommentsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="Album Msg" />
@@ -213,27 +222,28 @@
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
-	</util:map>	
-	
-	<!--  publish-comment -->	
+	</util:map>
+
+	<!-- publish-comment -->
 	<util:map id="publishCommentTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="postId" value="getDynamically" />
 		<entry key="msg" value="Hello from comment 123" />
 		<entry key="statusmsg" value="Hello From status 123" />
 		<entry key="profileId" value="${facebook.profileId}" />
-	</util:map>	
+	</util:map>
 
 	<!-- get-application -->
 	<util:map id="getApplicationTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="application" value="${facebook.appId}" />
-	</util:map>	
-	
+	</util:map>
+
 	<!-- get-post -->
-	<util:map id="getPostTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="getPostTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="This is message" />
-	</util:map>	
+	</util:map>
 
 	<!-- publish-note -->
 	<util:map id="publishNoteTestData" map-class="java.util.HashMap"
@@ -241,48 +251,51 @@
 		<entry key="profileId" value="${facebook.profileId}" />
 		<entry key="msg" value="message123" />
 		<entry key="subject" value="subject123" />
-	</util:map>	
-	
+	</util:map>
+
 	<!-- get-event -->
 	<util:map id="getEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="451993061587326" />
+		<entry key="eventId" value="getDynamically" />
+		<entry key="profileId" value="getDynamically" />
+		<entry key="eventName" value="testEventName" />
+		<entry key="startTime" value="2013-10-04" />
 	</util:map>	
-		
+
 	<!-- search-checkins -->
 	<util:map id="searchCheckinsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="profileId" value="${facebook.profileId}" />
-	</util:map>	
-	
+	</util:map>
+
 	<!-- publish-link -->
-		<util:map id="publishLinkTestData" map-class="java.util.HashMap"
+	<util:map id="publishLinkTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="link attached" />
-		<entry key="link" value="http://google.com/"/>
-	</util:map>	
-	
+		<entry key="link" value="http://google.com/" />
+	</util:map>
+
 	<!-- get-link -->
 	<util:map id="getLinkTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="link" value="http://google.com"/>
+		<entry key="link" value="http://google.com" />
 		<entry key="msg" value="hello" />
-	</util:map>	
-	
+	</util:map>
+
 	<!-- get-event-attending -->
 	<util:map id="getEventAttendingTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="451993061587326" />
+		<entry key="eventId" value="${facebook.event}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
-	
+
 	<!-- attend-event -->
 	<util:map id="attendEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="451993061587326" />
+		<entry key="eventId" value="${facebook.event}" />
 	</util:map>	
 	
 	<!-- publish-event -->
@@ -291,6 +304,41 @@
 		<entry key="profileId" value="getDynamically" />
 		<entry key="eventName" value="testEventName" />
 		<entry key="startTime" value="2013-10-04" />
-	</util:map>	
+	</util:map>
 
+	<!-- decline-event -->
+	<util:map id="declineEventTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+	</util:map>	
+	
+	<!-- get-user-notes -->
+	<util:map id="getUserNotesTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="profileId" value="getDynamically" />
+		<entry key="until" value="now" />
+		<entry key="msg" value="This is a test note" />
+		<entry key="subject" value="This is a test subject for a test note" />
+		<entry key="noteid" value="dynamicallyset" />
+	</util:map>
+
+	<!-- get-note -->
+	<util:map id="getNoteTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="until" value="now" />
+		<entry key="msg" value="This is a test note for note test" />
+		<entry key="subject" value="This is a test subject for a test note for note test" />
+		<entry key="noteid" value="getDynamically" />
+		<entry key="profileId" value="getDynamically" />
+	</util:map>
+
+	<!-- get-event-declined -->
+	<util:map id="getEventDeclinedTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 </beans>

@@ -30,6 +30,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
 import com.restfb.types.Comment;
+import com.restfb.types.Event;
 import com.restfb.types.Link;
 import com.restfb.types.User;
 
@@ -197,8 +198,6 @@ public class FacebookTestParent extends TestParent {
     	return (String) response.getMessage().getPayload();
     }
     
-    
-    
 	protected String publishMessage(String profileId, String msg, String link) throws Exception {
 		testObjects.put("profileId", profileId);
 		testObjects.put("msg", msg);
@@ -207,9 +206,40 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("publish-message-with-link");
 
 		MuleEvent response = flow.process(getTestEvent(testObjects));
-		String objectID = (String) response.getMessage().getPayload();
-
-		return objectID;
+		return (String) response.getMessage().getPayload();
 	}
 
+	protected String publishNote(String profileId, String msg, String subject ) throws Exception{
+		testObjects.put("profileId", profileId);
+		testObjects.put("msg", msg);
+		testObjects.put("subject", subject);
+		
+		MessageProcessor flow = lookupFlowConstruct("publish-note");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return response.getMessage().getPayloadAsString();
+	}
+	
+	protected Boolean attendEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("attend-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Boolean) response.getMessage().getPayload();
+	}
+
+	protected Boolean declineEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("decline-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Boolean) response.getMessage().getPayload();
+	}
+	
+	protected Event getEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("get-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Event) response.getMessage().getPayload();
+	}
 }
