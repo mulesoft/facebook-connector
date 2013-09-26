@@ -96,6 +96,16 @@
 		</entry>
 	</util:map>
 	
+	<!-- publish-photo -->
+	<util:map id="publishPhotoTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="caption" value="Photo Caption" />
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="photoFilePath" value="image.jpg" />
+	</util:map>
+	
 	<!-- get-user-wall -->
 	<util:map id="getUserWallTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="messages">
