@@ -2538,14 +2538,17 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId the id of the event to attend
+     * @return Boolean result indicating success or failure of operation
      */
     @Processor
 	@OAuthProtected
-    public void attendEvent(String eventId)
+    public Boolean attendEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/attending").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
@@ -2570,14 +2573,19 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId Represents the id of the event object
+     * @return Boolean result indicating success or failure of operation
      */
     @Processor
 	@OAuthProtected
-    public void declineEvent(String eventId)
+    public Boolean declineEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/declined").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        Form form = new Form();
+        form.add("eventId", eventId);
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
