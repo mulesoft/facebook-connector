@@ -318,5 +318,13 @@
 		<entry key="noteid" value="getDynamically" />
 		<entry key="profileId" value="getDynamically" />
 	</util:map>
+	
+		<!-- get-note-comments -->
+	<util:map id="getNoteCommentsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="until" value="now" />
+		<entry key="msg" value="This is a test note for note test" />
+		<entry key="subject" value="This is a test subject for a test note for note test" />
+	</util:map>
 
 </beans>
