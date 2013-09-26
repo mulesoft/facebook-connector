@@ -203,6 +203,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-note">
-		<facebook:get-note note="#[payload.noteid]" config-ref="Facebook" accessTokenId="accessTokenId"/>
+		<facebook:get-note note="#[payload.note]" config-ref="Facebook" accessTokenId="accessTokenId"/>
 	</flow>	
 </mule>

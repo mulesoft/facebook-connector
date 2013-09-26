@@ -32,6 +32,7 @@ import com.restfb.types.Album;
 import com.restfb.types.Comment;
 import com.restfb.types.Event;
 import com.restfb.types.Link;
+import com.restfb.types.Note;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends TestParent {
@@ -217,6 +218,14 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("publish-note");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return response.getMessage().getPayloadAsString();
+	}
+	
+	protected Note getNote(String note) throws Exception {
+		testObjects.put("note", note);
+		
+		MessageProcessor flow = lookupFlowConstruct("get-note");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Note) response.getMessage().getPayload();
 	}
 	
 	protected Boolean attendEvent(String eventId) throws Exception {
