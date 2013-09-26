@@ -30,6 +30,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
 import com.restfb.types.Comment;
+import com.restfb.types.Event;
 import com.restfb.types.Link;
 import com.restfb.types.User;
 
@@ -232,5 +233,13 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("decline-event");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Boolean) response.getMessage().getPayload();
+	}
+	
+	protected Event getEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("get-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Event) response.getMessage().getPayload();
 	}
 }

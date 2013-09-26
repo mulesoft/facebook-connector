@@ -10,8 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 
 public class PublishEventTestCases extends FacebookTestParent {
 
@@ -34,9 +32,8 @@ public class PublishEventTestCases extends FacebookTestParent {
 	@Test
 	public void testPublishEvent() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("publish-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			String eventId = (String) response.getMessage().getPayload();
+			String eventId = publishEvent((String) testObjects.get("profileId"), (String) testObjects.get("eventName"), 
+					(String) testObjects.get("startTime"));
 			
 			testObjects.put("objectId", eventId);
 			
