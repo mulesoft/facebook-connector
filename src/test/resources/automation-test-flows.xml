@@ -12,7 +12,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<context:property-placeholder location="automation-credentials.properties" />
 
 	<facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" 
-			scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions">
+			scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event">
 		<facebook:oauth-callback-config domain="${facebook.domain}"
 			localPort="${facebook.localPort}" remotePort="${facebook.remotePort}"
 			path="${facebook.path}" />
@@ -174,7 +174,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-event-attending">
 		<facebook:get-event-attending accessTokenId="accessTokenId" config-ref="Facebook" 
 			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
-
 	</flow>
 	
 	<flow name="attend-event">
@@ -186,10 +185,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
 	</flow>
 
+	<flow name="decline-event">
+       <facebook:decline-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+    </flow>
+    
 	<flow name="get-user-notes">
 		<facebook:get-user-notes config-ref="Facebook" user="#[payload.profileId]" until="now" accessTokenId="accessTokenId" />
 	</flow>
-	
+
 	<flow name="get-note">
 		<facebook:get-note note="#[payload.noteid]" config-ref="Facebook" accessTokenId="accessTokenId"/>
 	</flow>	

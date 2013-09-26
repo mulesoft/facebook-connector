@@ -18,7 +18,6 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.MuleEvent;
-import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
@@ -198,8 +197,6 @@ public class FacebookTestParent extends TestParent {
     	return (String) response.getMessage().getPayload();
     }
     
-    
-    
 	protected String publishMessage(String profileId, String msg, String link) throws Exception {
 		testObjects.put("profileId", profileId);
 		testObjects.put("msg", msg);
@@ -208,9 +205,7 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("publish-message-with-link");
 
 		MuleEvent response = flow.process(getTestEvent(testObjects));
-		String objectID = (String) response.getMessage().getPayload();
-
-		return objectID;
+		return (String) response.getMessage().getPayload();
 	}
 	
 
@@ -222,7 +217,6 @@ public class FacebookTestParent extends TestParent {
 		MessageProcessor flow = lookupFlowConstruct("publish-note");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return response.getMessage().getPayloadAsString();
-
 	}
 
 }

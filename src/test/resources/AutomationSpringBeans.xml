@@ -282,9 +282,9 @@
 	<!-- attend-event -->
 	<util:map id="attendEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="451993061587326" />
-	</util:map>
-
+		<entry key="eventId" value="${facebook.event}" />
+	</util:map>	
+	
 	<!-- publish-event -->
 	<util:map id="publishEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -293,6 +293,12 @@
 		<entry key="startTime" value="2013-10-04" />
 	</util:map>
 
+	<!-- decline-event -->
+	<util:map id="declineEventTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+	</util:map>	
+	
 	<!-- get-user-notes -->
 	<util:map id="getUserNotesTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
