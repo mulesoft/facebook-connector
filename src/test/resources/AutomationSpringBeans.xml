@@ -29,7 +29,11 @@
 	<!-- get-user-home -->
 	<util:map id="getUserHomeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="username" value="${facebook.username}" />
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
 	</util:map>
 
 	<!-- get-album -->
@@ -331,6 +335,36 @@
 
 	<!-- get-event-declined -->
 	<util:map id="getEventDeclinedTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-event-invited -->
+	<util:map id="getEventInvitedTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-event-maybe -->
+	<util:map id="getEventMaybeTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-event-no-reply -->
+	<util:map id="getEventNoReplyTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="eventId" value="${facebook.event}" />
 		<entry key="since" value="last week" />

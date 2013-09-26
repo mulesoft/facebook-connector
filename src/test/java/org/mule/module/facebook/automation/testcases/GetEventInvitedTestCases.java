@@ -20,38 +20,34 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Post;
+import com.restfb.types.User;
 
-public class GetUserHomeTestCases extends FacebookTestParent {
-	
+public class GetEventInvitedTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserHomeTestData");
-			
-	    	String profileId = getProfileId();
-	    	testObjects.put("user", profileId);
+	    	testObjects = (HashMap<String,Object>) context.getBean("getEventInvitedTestData");
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 	
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetUserHome() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-home");
+	public void testEventInvited() {
+		
+		MessageProcessor flow = lookupFlowConstruct("get-event-invited");
     	
 		try {
 
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Collection<Post> posts = (Collection<Post>) response.getMessage().getPayload();
+			Collection<User> users =  (Collection<User>) response.getMessage().getPayload();
 			
-			assertTrue(posts instanceof Collection);
+			assertTrue(users instanceof Collection);
 
 		} catch (Exception e) {
 			e.printStackTrace();
