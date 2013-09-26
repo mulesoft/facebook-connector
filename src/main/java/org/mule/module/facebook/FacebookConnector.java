@@ -2368,6 +2368,7 @@ public class FacebookConnector {
      * @param linkName The name of the link
      * @param description A description of the link (appears beneath the link
      *            caption)
+     * @param place The page ID of the place that this message is associated with
      * @return The id of the published object
      */
     @Processor
@@ -2379,7 +2380,8 @@ public class FacebookConnector {
                                  @Optional String link,
                                  @Optional String caption,
                                  @Optional String linkName,
-                                 @Optional String description)
+                                 @Optional String description,
+                                 @Optional String place)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/feed").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2392,6 +2394,7 @@ public class FacebookConnector {
         if (caption != null) form.add("caption", caption);
         if (linkName != null) form.add("name", linkName);
         if (description != null) form.add("description", description);
+        if (place != null) form.add("place", place);
 
         String json = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
 		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);

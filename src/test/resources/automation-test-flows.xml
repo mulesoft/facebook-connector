@@ -25,8 +25,8 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-user-home" doc:name="get-user-home">
-		<facebook:get-user-home config-ref="Facebook"
-			user="100006735154543" accessTokenId="accessTokenId" />
+		<facebook:get-user-home config-ref="Facebook" user="#[payload.user]" limit="#[payload.limit]" offset="#[payload.offset]" 
+			since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-album">
@@ -203,10 +203,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:attend-event config-ref="Facebook"
 			eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
-
-	<flow name="publish-message-with-link">
-		<facebook:publish-message profile_id="#[payload.profileId]"
-			msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
+	
+	<flow name="publish-message-all-attributes">
+		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]" place="#[payload.place]"
+			linkName="#[payload.linkName]" picture="#[payload.picture]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
 	</flow>
 
 	<flow name="decline-event">
@@ -235,5 +235,21 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-note-comments note="#[payload.note]"
 			until="now" since="last week" limit="100" offset="0" config-ref="Facebook"
 			accessTokenId="accessTokenId" />
+		<facebook:get-note note="#[payload.note]" config-ref="Facebook" accessTokenId="accessTokenId"/>
+	</flow>	
+	
+	<flow name="get-event-invited">
+		<facebook:get-event-invited config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>	
+	
+	<flow name="get-event-maybe">
+		<facebook:get-event-maybe config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>
+	
+	<flow name="get-event-no-reply">
+		<facebook:get-event-no-reply config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
 	</flow>
 </mule>
