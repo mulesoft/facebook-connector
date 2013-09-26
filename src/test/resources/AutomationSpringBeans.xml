@@ -362,4 +362,14 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
+	
+	<!-- get-event-no-reply -->
+	<util:map id="getEventNoReplyTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 </beans>

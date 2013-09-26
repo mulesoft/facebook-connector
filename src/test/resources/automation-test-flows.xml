@@ -215,5 +215,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-event-maybe">
 		<facebook:get-event-maybe config-ref="Facebook" limit="#[payload.limit]" 
 			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
-	</flow>	
+	</flow>
+	
+	<flow name="get-event-no-reply">
+		<facebook:get-event-no-reply config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>
 </mule>
