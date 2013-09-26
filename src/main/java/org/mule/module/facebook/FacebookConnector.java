@@ -2476,10 +2476,11 @@ public class FacebookConnector {
      * @param profile_id the profile where to publish the link
      * @param msg The message
      * @param link the link
+     * @return link id
      */
     @Processor
 	@OAuthProtected
-    public void publishLink(String profile_id, String msg, String link)
+    public String publishLink(String profile_id, String msg, String link)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2487,7 +2488,13 @@ public class FacebookConnector {
         form.add("message", msg);
         form.add("link", link);
 
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        WebResource.Builder type = resource
+				.type(MediaType.APPLICATION_FORM_URLENCODED);
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE,
+				MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
