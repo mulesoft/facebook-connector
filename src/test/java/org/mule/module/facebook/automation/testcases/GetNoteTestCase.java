@@ -30,7 +30,7 @@ public class GetNoteTestCase extends FacebookTestParent {
 				String profileId = getProfileId();
 				testObjects.put("profileId", profileId);
 				String noteid = publishNote(getProfileId(), msg, subject);
-				testObjects.put("noteid", noteid);
+				testObjects.put("note", noteid);
 			} catch (Exception e) {
 
 				e.printStackTrace();
@@ -40,7 +40,7 @@ public class GetNoteTestCase extends FacebookTestParent {
 
 		@Test
 		public void testGetNote() {
-			String noteId = testObjects.get("noteid").toString();
+			String noteId = testObjects.get("note").toString();
 
 			MessageProcessor flow = lookupFlowConstruct("get-note");
 			try {
@@ -59,7 +59,7 @@ public class GetNoteTestCase extends FacebookTestParent {
 
 		@After
 		public void tearDown() {
-			String noteId = testObjects.get("noteid").toString();
+			String noteId = testObjects.get("note").toString();
 			try {
 				deleteObject(noteId);
 			} catch (Exception e) {

@@ -79,13 +79,13 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 	
 	
 //note cannot be deleted with delete object
-//	@After
-//	public void tearDown(){
-//		try {
-//			deleteObject(testObjects.get("noteId").toString());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	@After
+	public void tearDown(){
+		try {
+			deleteObject(testObjects.get("note").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
