@@ -3051,9 +3051,6 @@ public class FacebookConnector {
 	@OAuthProtected
     public byte[] downloadImage(String imageUri) {
     	URI uri = URI.create(imageUri);
-//    	WebResource webR = this.newWebResource(uri, accessToken);
-//    	webR.setProperty("", value)
-//    	get(BufferedImage.class);
     	return this.bufferedImageToByteArray(this.newWebResource(uri, accessToken).get(BufferedImage.class));
     }
     
