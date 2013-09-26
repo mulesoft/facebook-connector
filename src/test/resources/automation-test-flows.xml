@@ -77,6 +77,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="get-photo">
+		<facebook:get-photo config-ref="Facebook" photo="#[payload.photo]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="get-status-comments">
 		<facebook:get-status-comments config-ref="Facebook" status="#[payload.status]" until="#[payload.until]" since="#[payload.since]" 
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
@@ -200,6 +204,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-note">
-		<facebook:get-note note="#[payload.noteid]" config-ref="Facebook" accessTokenId="accessTokenId"/>
+		<facebook:get-note note="#[payload.note]" config-ref="Facebook" accessTokenId="accessTokenId"/>
 	</flow>	
 </mule>

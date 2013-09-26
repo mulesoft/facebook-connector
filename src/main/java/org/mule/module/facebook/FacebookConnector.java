@@ -63,9 +63,12 @@ import com.restfb.types.User;
 import com.restfb.types.Video;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.multipart.impl.MultiPartWriter;
 
 /**
  * Facebook is a social networking service and website launched in February 2004.
@@ -115,7 +118,9 @@ public class FacebookConnector {
      */
     public FacebookConnector()
     {
-        client = new Client();
+    	ClientConfig config = new DefaultClientConfig();
+    	config.getClasses().add(MultiPartWriter.class);
+        client = Client.create(config);
     }
     
     @OAuthAccessToken
