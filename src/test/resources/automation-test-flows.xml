@@ -24,8 +24,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-user-home" doc:name="get-user-home">
-		<facebook:get-user-home config-ref="Facebook"
-			user="100006735154543" accessTokenId="accessTokenId" />
+		<facebook:get-user-home config-ref="Facebook" user="#[payload.user]" limit="#[payload.limit]" offset="#[payload.offset]" 
+			since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+<!-- 		<facebook:get-user-home config-ref="Facebook" user="100006735154543" accessTokenId="accessTokenId" /> -->
 	</flow>
 
 	<flow name="get-album">
