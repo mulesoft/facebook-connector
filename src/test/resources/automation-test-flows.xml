@@ -211,4 +211,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-event-invited config-ref="Facebook" limit="#[payload.limit]" 
 			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
 	</flow>	
+	
+	<flow name="get-event-maybe">
+		<facebook:get-event-maybe config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>	
 </mule>
