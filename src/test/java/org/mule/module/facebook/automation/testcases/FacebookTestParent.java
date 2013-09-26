@@ -23,6 +23,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.module.facebook.oauth.FacebookConnectorOAuthState;
+import org.mule.module.facebook.types.Photo;
 import org.mule.modules.tests.TestParent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -118,6 +119,14 @@ public class FacebookTestParent extends TestParent {
     	return getLoggedUserDetails().getId();
     }
     
+    protected Photo getPhoto(String photoId) throws Exception {
+    	testObjects.put("photoId", photoId);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("get-photo");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (Photo) response.getMessage().getPayload();
+    }
+    
     protected String publishComment(String postId, String msg) throws Exception {
     	testObjects.put("postId", postId);
     	testObjects.put("msg", msg);
@@ -200,7 +209,7 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		String objectID = (String) response.getMessage().getPayload();
 
-		return FacebookConnectorTestUtils.getId(objectID);
+		return objectID;
 	}
 
 }
