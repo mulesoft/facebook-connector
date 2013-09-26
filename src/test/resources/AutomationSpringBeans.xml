@@ -102,6 +102,16 @@
 			</list>
 		</entry>
 	</util:map>
+	
+	<!-- publish-photo -->
+	<util:map id="publishPhotoTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="caption" value="Photo Caption" />
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="photoFilePath" value="image.jpg" />
+	</util:map>
 
 	<!-- get-user-wall -->
 	<util:map id="getUserWallTestData" map-class="java.util.HashMap"
@@ -220,7 +230,6 @@
 		<entry key="postId" value="getDynamically" />
 		<entry key="msg" value="Hello from comment 123" />
 		<entry key="statusmsg" value="Hello From status 123" />
-		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>
 
 	<!-- get-application -->
@@ -238,7 +247,6 @@
 	<!-- publish-note -->
 	<util:map id="publishNoteTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="profileId" value="${facebook.profileId}" />
 		<entry key="msg" value="message123" />
 		<entry key="subject" value="subject123" />
 	</util:map>
@@ -246,13 +254,15 @@
 	<!-- get-event -->
 	<util:map id="getEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="451993061587326" />
-	</util:map>
+		<entry key="eventId" value="getDynamically" />
+		<entry key="profileId" value="getDynamically" />
+		<entry key="eventName" value="testEventName" />
+		<entry key="startTime" value="2013-10-04" />
+	</util:map>	
 
 	<!-- search-checkins -->
 	<util:map id="searchCheckinsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="profileId" value="${facebook.profileId}" />
 	</util:map>
 
 	<!-- publish-link -->
@@ -272,7 +282,7 @@
 	<!-- get-event-attending -->
 	<util:map id="getEventAttendingTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="451993061587326" />
+		<entry key="eventId" value="${facebook.event}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -327,4 +337,13 @@
 		<entry key="subject" value="This is a test subject for a test note for note test" />
 	</util:map>
 
+	<!-- get-event-declined -->
+	<util:map id="getEventDeclinedTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="${facebook.event}" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 </beans>

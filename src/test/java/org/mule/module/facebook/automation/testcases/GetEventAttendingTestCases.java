@@ -11,37 +11,51 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.api.MuleEvent;
+import org.mule.api.processor.MessageProcessor;
 
-public class AttendEventTestCases extends FacebookTestParent {
+import com.restfb.types.User;
+
+public class GetEventAttendingTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("attendEventTestData");
+	    	testObjects = (HashMap<String,Object>) context.getBean("getEventAttendingTestData");
+			
+	    	attendEvent((String) testObjects.get("eventId"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testAttendEvent() {
+	public void testEventAttending() {
+		
+		MessageProcessor flow = lookupFlowConstruct("get-event-attending");
     	
 		try {
-			Boolean result = attendEvent((String) testObjects.get("eventId"));
+
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			Collection<User> users = (Collection<User>) response.getMessage().getPayload();
 			
-			assertTrue(result);
+			assertTrue(users.size() > 0);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
      
 	}
+    
 }

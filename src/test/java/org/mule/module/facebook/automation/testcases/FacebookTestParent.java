@@ -30,7 +30,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
 import com.restfb.types.Comment;
+import com.restfb.types.Event;
 import com.restfb.types.Link;
+import com.restfb.types.Note;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends TestParent {
@@ -207,7 +209,6 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
 	}
-	
 
 	protected String publishNote(String profileId, String msg, String subject ) throws Exception{
 		testObjects.put("profileId", profileId);
@@ -218,5 +219,36 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return response.getMessage().getPayloadAsString();
 	}
+	
+	protected Note getNote(String note) throws Exception {
+		testObjects.put("note", note);
+		
+		MessageProcessor flow = lookupFlowConstruct("get-note");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Note) response.getMessage().getPayload();
+	}
+	
+	protected Boolean attendEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("attend-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Boolean) response.getMessage().getPayload();
+	}
 
+	protected Boolean declineEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("decline-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Boolean) response.getMessage().getPayload();
+	}
+	
+	protected Event getEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("get-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Event) response.getMessage().getPayload();
+	}
 }

@@ -20,15 +20,15 @@ public class GetUserNotesTestCases extends FacebookTestParent {
 
 	@Before
 	public void tearUp() {
-		testObjects = (HashMap<String, Object>) context
-				.getBean("publishNoteTestData");
-		String msg = testObjects.get("msg").toString();
-		String subject = testObjects.get("subject").toString();
-
 		try {
+			testObjects = (HashMap<String, Object>) context
+					.getBean("publishNoteTestData");
+			String msg = testObjects.get("msg").toString();
+			String subject = testObjects.get("subject").toString();
+
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
-			String noteid = publishNote(getProfileId(), msg, subject);
+			String noteid = publishNote(profileId, msg, subject);
 			testObjects.put("noteid", noteid);
 		} catch (Exception e) {
 
@@ -39,10 +39,10 @@ public class GetUserNotesTestCases extends FacebookTestParent {
 
 	@Test
 	public void testGetUserNotes() {
-		String noteId = testObjects.get("noteid").toString();
-
-		MessageProcessor flow = lookupFlowConstruct("get-user-notes");
 		try {
+			String noteId = testObjects.get("noteid").toString();
+
+			MessageProcessor flow = lookupFlowConstruct("get-user-notes");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			List<Note> notes = (List<Note>) response.getMessage().getPayload();
 

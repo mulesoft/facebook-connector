@@ -16,8 +16,6 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 
 public class DeclineEventTestCases extends FacebookTestParent {
 	
@@ -26,9 +24,6 @@ public class DeclineEventTestCases extends FacebookTestParent {
 	public void setUp() {
 		try {
 	    	testObjects = (HashMap<String,Object>) context.getBean("declineEventTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -39,12 +34,8 @@ public class DeclineEventTestCases extends FacebookTestParent {
 	@Test
 	public void testDeclineEvent() {
 		
-		MessageProcessor flow = lookupFlowConstruct("decline-event");
-    	
 		try {
-
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Boolean result = (Boolean) response.getMessage().getPayload();
+			Boolean result = declineEvent((String) testObjects.get("eventId"));
 			
 			assertTrue(result);
 		} catch (Exception e) {
