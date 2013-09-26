@@ -197,4 +197,8 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-event-declined accessTokenId="accessTokenId" config-ref="Facebook" 
 			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
 	</flow>
+
+	<flow name="get-note">
+		<facebook:get-note note="#[payload.noteid]" config-ref="Facebook" accessTokenId="accessTokenId"/>
+	</flow>	
 </mule>
