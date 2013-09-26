@@ -199,15 +199,24 @@ public class FacebookTestParent extends TestParent {
     	return (String) response.getMessage().getPayload();
     }
     
-	protected String publishMessage(String profileId, String msg, String link) throws Exception {
-		testObjects.put("profileId", profileId);
-		testObjects.put("msg", msg);
-		testObjects.put("link", link);
+    protected String publishMessage(String profileId, String msg, String link, String linkName, String description, String picture, String caption, String place) throws Exception {
+    	testObjects.put("profileId", profileId);
+    	testObjects.put("msg", msg);
+    	testObjects.put("link", link);
+    	testObjects.put("linkName", linkName);
+    	testObjects.put("description", description);
+    	testObjects.put("picture", picture);
+    	testObjects.put("caption", caption);
+    	testObjects.put("place", place);
 
-		MessageProcessor flow = lookupFlowConstruct("publish-message-with-link");
+		MessageProcessor flow = lookupFlowConstruct("publish-message-all-attributes");
 
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
+	}
+    
+	protected String publishMessage(String profileId, String msg, String link) throws Exception {
+		return publishMessage(profileId, msg, link, null, null, null, null, null);
 	}
 
 	protected String publishNote(String profileId, String msg, String subject ) throws Exception{

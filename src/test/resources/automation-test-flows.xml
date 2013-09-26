@@ -184,9 +184,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
        <facebook:attend-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
 	
-	<flow name="publish-message-with-link">
-		<facebook:publish-message profile_id="#[payload.profileId]"
-			msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
+	<flow name="publish-message-all-attributes">
+		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]" place="#[payload.place]"
+			linkName="#[payload.linkName]" picture="#[payload.picture]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
 	</flow>
 
 	<flow name="decline-event">
