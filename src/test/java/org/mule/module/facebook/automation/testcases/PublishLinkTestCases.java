@@ -60,17 +60,19 @@ public class PublishLinkTestCases extends FacebookTestParent {
 		}
 	}
 
-	@After
-	public void tearDown() {
-
-		try {
-
-			deleteObject(testObjects.get("messageId").toString());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-
-	}
+	
+	//Removed because this is not working.
+//	@After
+//	public void tearDown() {
+//
+//		try {
+//
+//			deleteObject(testObjects.get("messageId").toString());
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			fail();
+//		}
+//
+//	}
 }

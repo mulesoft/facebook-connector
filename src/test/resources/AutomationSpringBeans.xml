@@ -288,4 +288,14 @@
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="eventId" value="${facebook.event}" />
 	</util:map>	
+	
+	<!-- get-user-notes -->
+	<util:map id="getUserNotesTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="until" value="now" />
+		<entry key="msg" value="This is a test note" />
+		<entry key="subject" value="This is a test subject for a test note" />
+	</util:map>	
+
 </beans>

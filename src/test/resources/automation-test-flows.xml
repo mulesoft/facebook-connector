@@ -174,7 +174,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-event-attending">
 		<facebook:get-event-attending accessTokenId="accessTokenId" config-ref="Facebook" 
 			eventId="#[payload.eventId]" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]"/>
-
 	</flow>
 	
 	<flow name="attend-event">
@@ -188,5 +187,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 
 	<flow name="decline-event">
        <facebook:decline-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+    </flow>
+    
+	<flow name="get-user-notes">
+		<facebook:get-user-notes config-ref="Facebook" user="#[payload.profileId]" until="now" accessTokenId="accessTokenId" />
 	</flow>
 </mule>
