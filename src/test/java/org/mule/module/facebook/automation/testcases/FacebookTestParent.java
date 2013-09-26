@@ -207,7 +207,6 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
 	}
-	
 
 	protected String publishNote(String profileId, String msg, String subject ) throws Exception{
 		testObjects.put("profileId", profileId);
@@ -218,5 +217,20 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return response.getMessage().getPayloadAsString();
 	}
+	
+	protected Boolean attendEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("attend-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Boolean) response.getMessage().getPayload();
+	}
 
+	protected Boolean declineEvent(String eventId) throws Exception {
+		testObjects.put("eventId", eventId);
+		
+		MessageProcessor flow = lookupFlowConstruct("decline-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Boolean) response.getMessage().getPayload();
+	}
 }

@@ -262,7 +262,7 @@
 	<!-- get-event-attending -->
 	<util:map id="getEventAttendingTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="451993061587326" />
+		<entry key="eventId" value="${facebook.event}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
