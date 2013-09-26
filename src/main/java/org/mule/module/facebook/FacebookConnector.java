@@ -2446,10 +2446,11 @@ public class FacebookConnector {
      * @param profile_id the profile where to publish the note
      * @param msg The message
      * @param subject the subject of the note
+     * @return note id
      */
     @Processor
 	@OAuthProtected
-    public void publishNote(String profile_id, String msg,
+    public String publishNote(String profile_id, String msg,
                             String subject)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profile_id);
@@ -2457,8 +2458,14 @@ public class FacebookConnector {
         Form form = new Form();
         form.add("message", msg);
         form.add("subject", subject);
-
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        WebResource.Builder type = resource
+				.type(MediaType.APPLICATION_FORM_URLENCODED);
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE,
+				MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+        
+		return obj.getString("id");
     }
 
     /**

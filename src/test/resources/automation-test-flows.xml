@@ -187,6 +187,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-user-notes">
-		<facebook:get-user-notes user="#[payload.user]" accessTokenId="accessTokenId" />
+		<facebook:get-user-notes config-ref="Facebook" user="#[payload.profileId]" until="now" accessTokenId="accessTokenId" />
 	</flow>
 </mule>
