@@ -1,11 +1,11 @@
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,13 +32,14 @@ public class PublishEventTestCases extends FacebookTestParent {
 	@Test
 	public void testPublishEvent() {
 		try {
-			String eventId = publishEvent((String) testObjects.get("profileId"), (String) testObjects.get("eventName"), 
-					(String) testObjects.get("startTime"));
+			String profileId = (String) testObjects.get("profileId");
+			String eventName = (String) testObjects.get("eventName");
+			String startTime = (String) testObjects.get("startTime");
 			
+			String eventId = publishEvent(profileId, eventName, startTime);
 			testObjects.put("objectId", eventId);
 			
-			assertNotNull(eventId);
-			assertFalse("".equals(eventId));
+			assertTrue(StringUtils.isNotEmpty(eventId));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
