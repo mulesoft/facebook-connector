@@ -72,6 +72,8 @@ public class GetEventWallTestCases extends FacebookTestParent {
 			for (String messageId : messageIds) {
 				deleteObject(messageId);
 			}
+			String eventId = (String) testObjects.get("eventId");
+			deleteObject(eventId);
 		}
 		catch (Exception e) { 
 			e.printStackTrace();
