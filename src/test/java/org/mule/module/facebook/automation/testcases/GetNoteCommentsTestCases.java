@@ -2,6 +2,7 @@ package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +36,7 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 			testObjects.put("commentId", commentId);
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
@@ -61,6 +63,7 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 			assertTrue(found);
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 	
@@ -72,6 +75,7 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 			deleteObject(note);
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 		
 	}

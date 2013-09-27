@@ -230,7 +230,6 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-note-comments">
 		<facebook:get-note-comments note="#[payload.note]" until="#[payload.until]" since="#[payload.since]" limit="#[payload.limit]" offset="#[payload.offset]" 
 			config-ref="Facebook" accessTokenId="accessTokenId" />
-		<facebook:get-note note="#[payload.note]" config-ref="Facebook" accessTokenId="accessTokenId"/>
 	</flow>	
 	
 	<flow name="get-event-invited">
