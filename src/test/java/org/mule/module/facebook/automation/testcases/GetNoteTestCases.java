@@ -14,7 +14,7 @@ import org.mule.api.processor.MessageProcessor;
 
 import com.restfb.types.Note;
 
-public class GetNoteTestCase extends FacebookTestParent {
+public class GetNoteTestCases extends FacebookTestParent {
 
 	@Before
 	public void tearUp() {
