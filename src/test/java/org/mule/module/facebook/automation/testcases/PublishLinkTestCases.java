@@ -11,22 +11,18 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.module.facebook.FacebookConnectorUnitTest;
 
 import com.restfb.types.Link;
-import com.restfb.types.StatusMessage;
 
 public class PublishLinkTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String, Object>) context
-					.getBean("publishLinkTestData");
+			testObjects = (HashMap<String, Object>) context.getBean("publishLinkTestData");
 
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -38,41 +34,30 @@ public class PublishLinkTestCases extends FacebookTestParent {
 	@Test
 	public void testPublishLink() {
 		try {
-			String profileId = testObjects.get("profileId").toString();
-
-			String msg = (String) testObjects.get("msg");
-			String link = testObjects.get("link").toString();
-
 			MessageProcessor flow = lookupFlowConstruct("publish-link");
-
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			String messageId = response.getMessage().getPayloadAsString();
+			String messageId = (String) response.getMessage().getPayload();
+			
 			testObjects.put("messageId", messageId);
-
 			Link resultLink = getLink(messageId);
-
-			assertTrue(resultLink.getMessage().equals(msg));
-			assertTrue(resultLink.getLink().equals(link));
-
+			
+			assertTrue(messageId.equals(resultLink.getId()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
-
 	
-	//Removed because this is not working.
-//	@After
-//	public void tearDown() {
-//
-//		try {
-//
-//			deleteObject(testObjects.get("messageId").toString());
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			fail();
-//		}
-//
-//	}
+	@After
+	public void tearDown() {
+		try {
+			String profileId = (String) testObjects.get("profileId");
+			String messageId = (String) testObjects.get("messageId");
+			deleteObject(profileId + "_" + messageId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+
+	}
 }
