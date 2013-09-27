@@ -24,58 +24,48 @@ public class GetLinkTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp(){
-		testObjects = (HashMap<String, Object>) context
-				.getBean("publishLinkTestData");
-		String profileId;
-		
-		
 		try {
-			profileId = getProfileId();
+			testObjects = (HashMap<String, Object>) context.getBean("publishLinkTestData");
+			String profileId = getProfileId();
+			testObjects.put("profileId", profileId);
+
 			String msg = testObjects.get("msg").toString();
 			String link = testObjects.get("link").toString();
-			testObjects.put("profileId", profileId);
-			String messageId = publishMessage(profileId, msg , link);
+			
+			String messageId = publishLink(profileId, msg, link);
 			testObjects.put("messageId", messageId);
 		} catch (Exception e) {
-			fail();
 			e.printStackTrace();
+			fail();
 		}
-		
-
 	}
 
-	
-	
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetLink(){
-		MessageProcessor flow = lookupFlowConstruct("get-link");
-    	MuleEvent response;
-		Link myLink = null;
-    	
 		try {
-			response = flow.process(getTestEvent(testObjects));
-			myLink = (Link) response.getMessage().getPayload();
+			String messageId = (String) testObjects.get("messageId");
 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			MessageProcessor flow = lookupFlowConstruct("get-link");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			Link link = (Link) response.getMessage().getPayload();
     
-		assertNotNull(myLink);
-		assertEquals(testObjects.get("link").toString(), myLink.getLink());
-		assertEquals(testObjects.get("msg"), myLink.getMessage());
-		
+			assertEquals(messageId, link.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
-	
 	
 	@After
 	public void tearDown() {
-		String messageId = testObjects.get("messageId").toString();
 		try {
-			deleteObject(messageId);
+			String profileId = (String) testObjects.get("profileId");
+			String messageId = (String) testObjects.get("messageId");
+			deleteObject(profileId + "_" + messageId);
 		} catch (Exception e) {
-			fail();
 			e.printStackTrace();
+			fail();
 		}
 	}
 

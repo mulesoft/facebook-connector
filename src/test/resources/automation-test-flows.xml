@@ -182,7 +182,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="publish-link">
-		<facebook:publish-link profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />	
+		<facebook:publish-link config-ref="Facebook" profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />	
 	</flow>
 
 	<flow name="get-link">

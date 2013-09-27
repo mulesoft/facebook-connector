@@ -138,6 +138,16 @@ public class FacebookTestParent extends TestParent {
     	return (String) response.getMessage().getPayload();
     }
     
+    protected String publishLink(String profileId, String msg, String link) throws Exception {
+    	testObjects.put("profileId", profileId);
+    	testObjects.put("msg", msg);
+    	testObjects.put("link", link);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("publish-link");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (String) response.getMessage().getPayload();
+    }
+    
     protected String publishPhoto(String albumId, String caption, File photo) throws Exception {
     	testObjects.put("albumId", albumId);
     	testObjects.put("caption", caption);
