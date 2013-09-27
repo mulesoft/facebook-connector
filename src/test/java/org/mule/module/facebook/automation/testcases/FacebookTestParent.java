@@ -33,6 +33,7 @@ import com.restfb.types.Comment;
 import com.restfb.types.Event;
 import com.restfb.types.Link;
 import com.restfb.types.Note;
+import com.restfb.types.StatusMessage;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends TestParent {
@@ -89,7 +90,7 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	protected Collection<Album> requestUserAlbums(String user, String since, String until, String limit, String offset) throws Exception {
 		testObjects.put("user", user);
@@ -102,6 +103,14 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Collection<Album>) response.getMessage().getPayload();
     }
+	
+	protected StatusMessage getStatus(String statusId) throws Exception {
+		testObjects.put("status", statusId);
+
+		MessageProcessor flow = lookupFlowConstruct("get-status");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (StatusMessage) response.getMessage().getPayload();
+	}
 	
 	protected Album getAlbum(String albumId) throws Exception {
 		testObjects.put("album", albumId);
@@ -223,10 +232,6 @@ public class FacebookTestParent extends TestParent {
 
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
-	}
-    
-	protected String publishMessage(String profileId, String msg, String link) throws Exception {
-		return publishMessage(profileId, msg, link, null, null, null, null, null);
 	}
 
 	protected String publishNote(String profileId, String msg, String subject ) throws Exception{

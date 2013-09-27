@@ -152,9 +152,8 @@
 	<!-- publish-message -->
 	<util:map id="publishMessageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="msg" value="getDynamically" />
+		<entry key="msg" value="Publishing this message" />
 	</util:map>
-
 
 	<!-- get-page -->
 	<util:map id="getPageTestData" map-class="java.util.HashMap"

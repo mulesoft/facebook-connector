@@ -22,12 +22,10 @@ public class PublishMessageTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String, Object>) context
-					.getBean("publishMessageTestData");
+			testObjects = (HashMap<String, Object>) context.getBean("publishMessageTestData");
 
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -38,21 +36,13 @@ public class PublishMessageTestCases extends FacebookTestParent {
 	@Test
 	public void testPublishMessage() {
 		try {
-
+			String profileId = (String) testObjects.get("profileId");
 			String msg = (String) testObjects.get("msg");
 
-			String messageId = publishMessage(testObjects.get("profileId")
-					.toString(), msg);
+			String messageId = publishMessage(profileId, msg);
 			testObjects.put("messageId", messageId);
-
-			testObjects.put("status", messageId);
-
-			MessageProcessor flow = lookupFlowConstruct("get-status");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			StatusMessage status = (StatusMessage) response.getMessage()
-					.getPayload();
-
+			
+			StatusMessage status = getStatus(messageId);
 
 			assertEquals(messageId, status.getId());
 			assertEquals(msg, status.getMessage());
@@ -65,11 +55,9 @@ public class PublishMessageTestCases extends FacebookTestParent {
 
 	@After
 	public void tearDown() {
-
 		try {
-
-			deleteObject(testObjects.get("messageID").toString());
-
+			String messageId = (String) testObjects.get("messageId");
+			deleteObject(messageId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
