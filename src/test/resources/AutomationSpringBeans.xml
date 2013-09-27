@@ -132,6 +132,41 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
+	
+	<!-- get-user-television -->
+	<util:map id="getUserTelevisionTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!--  -->
+	<util:map id="getEventWallTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="messages">
+			<list value-type="java.lang.String">
+				<value>First Message</value>			
+				<value>Second Message</value>
+				<value>Third Message</value>
+			</list>
+		</entry>
+		<entry key="eventName" value="My Event" />
+		<entry key="startTime" value="2013-10-04" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-tagged -->
+	<util:map id="getUserTaggedTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="Hello @[345538702156232:MuleSoft]" />
+		<entry key="user" value="345538702156232" />
+		<entry key="offset" value="0" />
+		<entry key="limit" value="100" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+	</util:map>
 
 	<!-- get-user-posts -->
 	<util:map id="getUserPostsTestData" map-class="java.util.HashMap"
@@ -402,6 +437,38 @@
 		<entry key="group" value="dynamicallySet" />
 		<entry key="q" value="${facebook.groupQuery}" />
 		<entry key="since" value="2005-01-01" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-event-picture -->
+	<util:map id="getEventPictureTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="getDynamically" />
+		<entry key="eventName" value="testEventName" />
+		<entry key="startTime" value="2013-10-04" />
+		<entry key="type" value="small" />
+	</util:map>
+	
+	<!-- get-link-comments -->
+	<util:map id="getLinkCommentsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="msg" value="link attached" />
+		<entry key="commentMsg" value="link comment message" />
+		<entry key="link" value="http://google.com/" />
+	</util:map>
+	
+	<!-- get-note-likes -->
+	<util:map id="getNoteLikesTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="message123" />
+		<entry key="subject" value="subject123" />
+		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />

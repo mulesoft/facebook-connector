@@ -91,6 +91,12 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			status="#[payload.status]" until="#[payload.until]" since="#[payload.since]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-television">
+		<facebook:get-user-television config-ref="Facebook"
+			user="#[payload.user]" until="#[payload.until]" since="#[payload.since]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-user-posts">
 		<facebook:get-user-posts config-ref="Facebook"
@@ -103,6 +109,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			user="#[payload.user]" until="#[payload.until]" since="#[payload.since]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-event-wall">
+		<facebook:get-event-wall config-ref="Facebook" eventId="#[payload.eventId]" limit="#[payload.limit]" 
+			offset="#[payload.offset]" until="#[payload.until]" since="#[payload.since]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-post-comments">
 		<facebook:get-post-comments config-ref="Facebook"
@@ -114,6 +125,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-albums config-ref="Facebook"
 			user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-tagged">
+		<facebook:get-user-tagged config-ref="Facebook" user="#[payload.user]" offset="#[payload.offset]"
+			since="#[payload.since]" until="#[payload.until]" limit="#[payload.limit]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="publish-event">
@@ -186,7 +202,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-link">
-		<facebook:get-link config-ref="Facebook" link="#[payload.messageId]" accessTokenId="accessTokenId" />
+		<facebook:get-link config-ref="Facebook" link="#[payload.link]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-event-attending">
@@ -254,5 +270,19 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	
 	<flow name="get-group">
 		<facebook:get-group group="#[payload.group]" accessTokenId="accessTokenId" config-ref="Facebook"/>
+	</flow>
+
+	<flow name="get-event-picture">
+		<facebook:get-event-picture config-ref="Facebook" eventId="#[payload.eventId]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-link-comments">
+		<facebook:get-link-comments config-ref="Facebook" limit="#[payload.limit]" link="#[payload.link]" 
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-note-likes">
+		<facebook:get-note-likes config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" note="#[payload.note]" accessTokenId="accessTokenId" />
 	</flow>
 </mule>
