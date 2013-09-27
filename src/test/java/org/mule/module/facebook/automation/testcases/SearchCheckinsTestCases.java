@@ -24,8 +24,8 @@ public class SearchCheckinsTestCases extends FacebookTestParent {
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
 			
-			// Check-in at London
-			String messageId = publishMessage(profileId, "Hello", null, null, null, null, null, "106078429431815");
+			// Check-in at Pizza place
+			String messageId = publishMessage(profileId, "I like pizza", null, null, null, null, null, "132738745815");
 			testObjects.put("messageId", messageId);
 		}
 		catch (Exception e) {

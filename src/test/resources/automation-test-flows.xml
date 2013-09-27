@@ -165,15 +165,15 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 		
 	<flow name="search-checkins">
-	       <facebook:search-checkins config-ref="Facebook"  until="now"  accessTokenId="accessTokenId"  />
+	     <facebook:search-checkins config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId"  />
 	</flow>
 
 	<flow name="publish-link">
-			<facebook:publish-link profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />	
+		<facebook:publish-link profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />	
 	</flow>
 
 	<flow name="get-link">
-			<facebook:get-link config-ref="Facebook" link="#[payload.messageId]" accessTokenId="accessTokenId" />
+		<facebook:get-link config-ref="Facebook" link="#[payload.messageId]" accessTokenId="accessTokenId" />
 	</flow>
 	
 	<flow name="get-event-attending">
@@ -182,7 +182,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 	
 	<flow name="attend-event">
-       <facebook:attend-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+    	<facebook:attend-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
 	
 	<flow name="publish-message-all-attributes">

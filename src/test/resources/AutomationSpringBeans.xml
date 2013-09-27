@@ -265,8 +265,11 @@
 	</util:map>	
 
 	<!-- search-checkins -->
-	<util:map id="searchCheckinsTestData" map-class="java.util.HashMap"
-		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="searchCheckinsTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
 	</util:map>
 
 	<!-- publish-link -->
