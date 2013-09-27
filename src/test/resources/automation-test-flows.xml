@@ -109,6 +109,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			user="#[payload.user]" until="#[payload.until]" since="#[payload.since]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-event-wall">
+		<facebook:get-event-wall config-ref="Facebook" eventId="#[payload.eventId]" limit="#[payload.limit]" 
+			offset="#[payload.offset]" until="#[payload.until]" since="#[payload.since]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-post-comments">
 		<facebook:get-post-comments config-ref="Facebook"

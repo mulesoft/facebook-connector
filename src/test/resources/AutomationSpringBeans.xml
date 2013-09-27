@@ -135,8 +135,23 @@
 	
 	<!-- get-user-television -->
 	<util:map id="getUserTelevisionTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<!-- Breaking Bad -->
-		<entry key="postId" value="6798562721" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!--  -->
+	<util:map id="getEventWallTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="messages">
+			<list value-type="java.lang.String">
+				<value>First Message</value>			
+				<value>Second Message</value>
+				<value>Third Message</value>
+			</list>
+		</entry>
+		<entry key="eventName" value="My Event" />
+		<entry key="startTime" value="2013-10-04" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
