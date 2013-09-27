@@ -91,6 +91,12 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			status="#[payload.status]" until="#[payload.until]" since="#[payload.since]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-television">
+		<facebook:get-user-television config-ref="Facebook"
+			user="#[payload.user]" until="#[payload.until]" since="#[payload.since]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-user-posts">
 		<facebook:get-user-posts config-ref="Facebook"
@@ -114,6 +120,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-albums config-ref="Facebook"
 			user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-tagged">
+		<facebook:get-user-tagged config-ref="Facebook" user="#[payload.user]" offset="#[payload.offset]"
+			since="#[payload.since]" until="#[payload.until]" limit="#[payload.limit]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="publish-event">

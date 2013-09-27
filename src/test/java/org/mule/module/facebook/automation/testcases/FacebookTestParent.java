@@ -166,11 +166,19 @@ public class FacebookTestParent extends TestParent {
     	MuleEvent response = flow.process(getTestEvent(testObjects));
     	return (String) response.getMessage().getPayload();
     }
-    
+
     public boolean like(String postId) throws Exception {
     	testObjects.put("postId", postId);
     	
     	MessageProcessor flow = lookupFlowConstruct("like");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (Boolean) response.getMessage().getPayload();
+    }
+
+    public boolean dislike(String postId) throws Exception {
+    	testObjects.put("postId", postId);
+    	
+    	MessageProcessor flow = lookupFlowConstruct("dislike");
     	MuleEvent response = flow.process(getTestEvent(testObjects));
     	return (Boolean) response.getMessage().getPayload();
     }
