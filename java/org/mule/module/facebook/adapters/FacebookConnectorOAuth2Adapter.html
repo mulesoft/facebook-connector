@@ -65,6 +65,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -1018,28 +1061,6 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          RestoreAccessTokenCallback</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#oauthRestoreAccessToken">oauthRestoreAccessToken</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          SaveAccessTokenCallback</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#oauthSaveAccessToken">oauthSaveAccessToken</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#oauthVerifier">oauthVerifier</a></td>
           <td class="jd-descrcol" width="100%"></td>
@@ -1494,46 +1515,6 @@ org.mule.api.lifecycle.Stoppable
             
             
             
-            RestoreAccessTokenCallback</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#getOauthRestoreAccessToken()">getOauthRestoreAccessToken</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Retrieves oauthRestoreAccessToken
- 
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            SaveAccessTokenCallback</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#getOauthSaveAccessToken()">getOauthSaveAccessToken</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Retrieves oauthSaveAccessToken
- 
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1729,7 +1710,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#refreshAccessToken()">refreshAccessToken</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#refreshAccessToken(java.lang.String)">refreshAccessToken</a></span>(String accessTokenId)</nobr>
         
   </td></tr>
 
@@ -1758,22 +1739,6 @@ org.mule.api.lifecycle.Stoppable
             
             
             
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#restoreAccessToken()">restoreAccessToken</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1785,7 +1750,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1803,7 +1768,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1821,7 +1786,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1839,43 +1804,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#setOauthRestoreAccessToken(org.mule.security.oauth.callback.RestoreAccessTokenCallback)">setOauthRestoreAccessToken</a></span>(RestoreAccessTokenCallback value)</nobr>
-        
-        <div class="jd-descrdiv">Sets oauthRestoreAccessToken</div>
-  
-  </td></tr>
-
-
-	 
     <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/facebook/adapters/FacebookConnectorOAuth2Adapter.html#setOauthSaveAccessToken(org.mule.security.oauth.callback.SaveAccessTokenCallback)">setOauthSaveAccessToken</a></span>(SaveAccessTokenCallback value)</nobr>
-        
-        <div class="jd-descrdiv">Sets oauthSaveAccessToken</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1893,7 +1822,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1911,7 +1840,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -5213,7 +5142,7 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">refreshAccessToken</span>()</nobr>
+        <span class="sympad">refreshAccessToken</span>(String arg0)</nobr>
         
   </td></tr>
 
@@ -5534,38 +5463,6 @@ From interface
             
             
             
-            RestoreAccessTokenCallback</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getOauthRestoreAccessToken</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            SaveAccessTokenCallback</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getOauthSaveAccessToken</span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -5634,38 +5531,6 @@ From interface
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">setAuthorizationUrl</span>(String arg0)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setOauthRestoreAccessToken</span>(RestoreAccessTokenCallback arg0)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setOauthSaveAccessToken</span>(SaveAccessTokenCallback arg0)</nobr>
         
   </td></tr>
 
@@ -6033,66 +5898,6 @@ From interface
         OAuth2Manager&lt;OAuth2Adapter&gt;
       </span>
         oauthManager
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="oauthRestoreAccessToken"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        RestoreAccessTokenCallback
-      </span>
-        oauthRestoreAccessToken
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="oauthSaveAccessToken"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        SaveAccessTokenCallback
-      </span>
-        oauthSaveAccessToken
     </h4>
       <div class="api-level">
         
@@ -6651,72 +6456,6 @@ From interface
 </div>
 
 
-<A NAME="getOauthRestoreAccessToken()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        RestoreAccessTokenCallback
-      </span>
-      <span class="sympad">getOauthRestoreAccessToken</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves oauthRestoreAccessToken
- 
-</p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getOauthSaveAccessToken()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        SaveAccessTokenCallback
-      </span>
-      <span class="sympad">getOauthSaveAccessToken</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves oauthSaveAccessToken
- 
-</p></div>
-
-    </div>
-</div>
-
-
 <A NAME="getOauthVerifier()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -7084,7 +6823,7 @@ From interface
 </div>
 
 
-<A NAME="refreshAccessToken()"></A>
+<A NAME="refreshAccessToken(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -7097,7 +6836,7 @@ From interface
         void
       </span>
       <span class="sympad">refreshAccessToken</span>
-      <span class="normal">()</span>
+      <span class="normal">(String accessTokenId)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -7110,6 +6849,15 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>accessTokenId</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
@@ -7137,37 +6885,6 @@ From interface
         void
       </span>
       <span class="sympad">reset</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="restoreAccessToken()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        boolean
-      </span>
-      <span class="sympad">restoreAccessToken</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -7335,88 +7052,6 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Sets name</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setOauthRestoreAccessToken(org.mule.security.oauth.callback.RestoreAccessTokenCallback)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setOauthRestoreAccessToken</span>
-      <span class="normal">(RestoreAccessTokenCallback value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets oauthRestoreAccessToken</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setOauthSaveAccessToken(org.mule.security.oauth.callback.SaveAccessTokenCallback)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setOauthSaveAccessToken</span>
-      <span class="normal">(SaveAccessTokenCallback value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets oauthSaveAccessToken</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
