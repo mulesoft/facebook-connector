@@ -17,6 +17,7 @@ import com.restfb.types.Note;
 
 public class PublishNoteTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -30,7 +31,6 @@ public class PublishNoteTestCases extends FacebookTestParent {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testPublishNote() {

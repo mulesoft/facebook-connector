@@ -271,4 +271,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-link-comments config-ref="Facebook" limit="#[payload.limit]" link="#[payload.link]" 
 			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-note-likes">
+		<facebook:get-note-likes config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" note="#[payload.note]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>

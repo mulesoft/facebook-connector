@@ -1,10 +1,10 @@
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,15 +12,16 @@ import org.junit.Test;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Note;
+import com.restfb.types.NamedFacebookType;
+import com.restfb.types.Post.Likes;
 
-public class GetNoteTestCases extends FacebookTestParent {
+public class GetNoteLikesTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
 	public void tearUp() {
 		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getNoteTestData");
+			testObjects = (HashMap<String, Object>) context.getBean("getNoteLikesTestData");
 
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
@@ -30,6 +31,9 @@ public class GetNoteTestCases extends FacebookTestParent {
 
 			String noteid = publishNote(getProfileId(), msg, subject);
 			testObjects.put("note", noteid);
+			
+			like(noteid);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -37,19 +41,14 @@ public class GetNoteTestCases extends FacebookTestParent {
 	}
 
 	@Test
-	public void testGetNote() {
+	public void testGetNoteLikes() {
 		try {
-			String noteId = (String) testObjects.get("note");
-			String msg = (String) testObjects.get("msg");
-			String subject = (String) testObjects.get("subject");
-			
-			MessageProcessor flow = lookupFlowConstruct("get-note");
+			MessageProcessor flow = lookupFlowConstruct("get-note-likes");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Note note = (Note) response.getMessage().getPayload();
+			Likes likes = (Likes) response.getMessage().getPayload();
 			
-			assertEquals(noteId, note.getId());
-			assertTrue(note.getMessage().contains(msg));
-			assertEquals(note.getSubject(), subject);
+			List<NamedFacebookType> data = likes.getData();
+			assertTrue(data.size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

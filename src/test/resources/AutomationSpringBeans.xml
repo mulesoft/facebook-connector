@@ -441,4 +441,15 @@
 		<entry key="commentMsg" value="link comment message" />
 		<entry key="link" value="http://google.com/" />
 	</util:map>
+	
+	<!-- get-note-likes -->
+	<util:map id="getNoteLikesTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="message123" />
+		<entry key="subject" value="subject123" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 </beans>
