@@ -32,7 +32,9 @@ public class DeleteObjectTestCases extends FacebookTestParent {
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
 			
-			String msgId = publishMessage(profileId, (String) testObjects.get("msg"));
+			String msg = (String) testObjects.get("msg");
+			
+			String msgId = publishMessage(profileId, msg);
 			testObjects.put("objectId", msgId);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,13 +46,11 @@ public class DeleteObjectTestCases extends FacebookTestParent {
 	@Test
 	public void testDeleteObject() {
 		try {
-			String albumId = (String) testObjects.get("albumId");
-			
 			MessageProcessor flow = lookupFlowConstruct("delete-object");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			Album album = getAlbum(albumId);
-			assertTrue(album == null);
+			
+			Boolean result = (Boolean) response.getMessage().getPayload();
+			assertTrue(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
