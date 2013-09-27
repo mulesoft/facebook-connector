@@ -201,7 +201,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 	
 	<flow name="publish-message-all-attributes">
-		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]" place="#[payload.place]"
+		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]" 
 			linkName="#[payload.linkName]" picture="#[payload.picture]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
 	</flow>
 
@@ -245,5 +245,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-event-no-reply">
 		<facebook:get-event-no-reply config-ref="Facebook" limit="#[payload.limit]" 
 			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>
+	
+	<flow name="get-event-picture">
+		<facebook:get-event-picture config-ref="Facebook" eventId="#[payload.eventId]" type="#[payload.type]" accessTokenId="accessTokenId" />
 	</flow>
 </mule>

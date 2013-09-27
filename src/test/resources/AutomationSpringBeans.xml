@@ -385,4 +385,13 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
+	
+	<!-- get-event-picture -->
+	<util:map id="getEventPictureTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventId" value="getDynamically" />
+		<entry key="eventName" value="testEventName" />
+		<entry key="startTime" value="2013-10-04" />
+		<entry key="type" value="small" />
+	</util:map>
 </beans>
