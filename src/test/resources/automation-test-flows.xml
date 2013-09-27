@@ -116,6 +116,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="get-user-tagged">
+		<facebook:get-user-tagged config-ref="Facebook" user="#[payload.user]" offset="#[payload.offset]"
+			since="#[payload.since]" until="#[payload.until]" limit="#[payload.limit]" accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="publish-event">
 		<facebook:publish-event config-ref="Facebook"
 			profile_id="#[payload.profileId]" start_time="#[payload.startTime]"

@@ -132,6 +132,16 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
+	
+	<!-- get-user-tagged -->
+	<util:map id="getUserTaggedTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="msg" value="Hello @[MuleSoft]" />
+		<entry key="user" value="MuleSoft" />
+		<entry key="offset" value="0" />
+		<entry key="limit" value="100" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+	</util:map>
 
 	<!-- get-user-posts -->
 	<util:map id="getUserPostsTestData" map-class="java.util.HashMap"
