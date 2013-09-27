@@ -197,7 +197,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-link">
-		<facebook:get-link config-ref="Facebook" link="#[payload.messageId]" accessTokenId="accessTokenId" />
+		<facebook:get-link config-ref="Facebook" link="#[payload.link]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-event-attending">
@@ -260,5 +260,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	
 	<flow name="get-event-picture">
 		<facebook:get-event-picture config-ref="Facebook" eventId="#[payload.eventId]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-link-comments">
+		<facebook:get-link-comments config-ref="Facebook" limit="#[payload.limit]" link="#[payload.link]" 
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
 	</flow>
 </mule>
