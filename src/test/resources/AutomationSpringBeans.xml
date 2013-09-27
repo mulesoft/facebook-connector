@@ -385,4 +385,25 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
+	
+	<!-- search-group -->
+	<util:map id="searchGroupTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="q" value="${facebook.groupQuery}" />
+		<entry key="since" value="2005-01-01" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-group -->
+	<util:map id="getGroupTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="group" value="dynamicallySet" />
+		<entry key="q" value="${facebook.groupQuery}" />
+		<entry key="since" value="2005-01-01" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 </beans>
