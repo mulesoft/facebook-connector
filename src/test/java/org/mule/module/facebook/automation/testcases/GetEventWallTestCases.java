@@ -1,5 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -55,6 +56,8 @@ public class GetEventWallTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<Post> wall = (List<Post>) response.getMessage().getPayload();
+			
+			assertEquals(wall.size(), messageIds.size());
 			for (Post post : wall) {
 				assertTrue(messageIds.contains(post.getId()));
 			}
@@ -68,10 +71,6 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	@After
 	public void tearDown() {
 		try {
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
-			for (String messageId : messageIds) {
-				deleteObject(messageId);
-			}
 			String eventId = (String) testObjects.get("eventId");
 			deleteObject(eventId);
 		}
