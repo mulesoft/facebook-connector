@@ -189,6 +189,15 @@
 		<entry key="offset" value="0" />
 	</util:map>
 	
+	<!-- get-application-statuses -->
+	<util:map id="getApplicationStatusesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="application" value="${facebook.appId}" />
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
 	<!-- get-user-links -->
 	<util:map id="getUserLinksTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="Google is a well-known search engine" />
@@ -357,7 +366,7 @@
 	<!-- get-link -->
 	<util:map id="getLinkTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="link" value="http://google.com" />
+		<entry key="link" value="http://www.google.com" />
 		<entry key="msg" value="hello" />
 	</util:map>
 
