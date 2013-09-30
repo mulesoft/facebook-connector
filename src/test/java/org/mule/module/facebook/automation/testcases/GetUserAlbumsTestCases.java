@@ -54,15 +54,6 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 			
 			Collection<Album> albums = requestUserAlbums(profileId,	since, until, limit, offset);
 			assertTrue(albums.size() > 0);
-			
-			boolean found = false;
-			for (Album album : albums) {
-				if (album.getId().equals(albumId)) {
-					found = true;
-					break;
-				}
-			}
-			assertTrue(found);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
