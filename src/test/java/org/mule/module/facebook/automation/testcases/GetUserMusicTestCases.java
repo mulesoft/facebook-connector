@@ -14,13 +14,13 @@ import org.mule.api.processor.MessageProcessor;
 
 import com.restfb.types.PageConnection;
 
-public class GetUserMoviesTestCases extends FacebookTestParent {
+public class GetUserMusicTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserMoviesTestData");
+			testObjects = (Map<String, Object>) context.getBean("getUserMusicTestData");
 			
 			String profileId = getProfileId();
 			testObjects.put("user", profileId);
@@ -34,10 +34,10 @@ public class GetUserMoviesTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetUserMovies() {
+	public void testGetUserMusic() {
 		try {
 			
-			MessageProcessor flow = lookupFlowConstruct("get-user-movies");
+			MessageProcessor flow = lookupFlowConstruct("get-user-music");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<PageConnection> result = (List<PageConnection>) response.getMessage().getPayload();
