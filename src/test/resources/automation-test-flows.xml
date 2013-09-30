@@ -60,6 +60,16 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-page config-ref="Facebook" page="#[payload.page]"
 			accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-statuses">
+		<facebook:get-user-statuses config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-likes">
+		<facebook:get-user-likes config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="like">
 		<facebook:like config-ref="Facebook" postId="#[payload.postId]"
@@ -263,6 +273,15 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
 	</flow>
 	
+	<flow name="search-groups">
+		<facebook:search-groups q="#[payload.q]" accessTokenId="accessTokenId" config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" />
+	</flow>
+	
+	<flow name="get-group">
+		<facebook:get-group group="#[payload.group]" accessTokenId="accessTokenId" config-ref="Facebook"/>
+	</flow>
+
 	<flow name="get-event-picture">
 		<facebook:get-event-picture config-ref="Facebook" eventId="#[payload.eventId]" type="#[payload.type]" accessTokenId="accessTokenId" />
 	</flow>

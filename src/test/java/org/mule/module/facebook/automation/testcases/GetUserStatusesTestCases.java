@@ -15,26 +15,21 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Post;
+import com.restfb.types.StatusMessage;
 
-public class GetEventWallTestCases extends FacebookTestParent {
+public class GetUserStatusesTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getEventWallTestData");
+			testObjects = (Map<String, Object>) context.getBean("getUserStatusesTestData");
 			
 			String profileId = getProfileId();
-			
-			String eventName = (String) testObjects.get("eventName");
-			String startTime = (String) testObjects.get("startTime");
-			String eventId = publishEvent(profileId, eventName, startTime);
-			testObjects.put("eventId", eventId);
 			
 			List<String> messages = (List<String>) testObjects.get("messages");
 			List<String> messageIds = new ArrayList<String>();
 			for (String message : messages) {
-				String messageId = publishMessage(eventId, message);
+				String messageId = publishMessage(profileId, message);
 				messageIds.add(messageId);
 			}
 			testObjects.put("messageIds", messageIds);
@@ -47,19 +42,24 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetEventWall() {
+	public void testGetUserStatuses() {
 		try {
 			String profileId = (String) testObjects.get("profileId");
+			testObjects.put("user", profileId);
+			
 			List<String> messageIds = (List<String>) testObjects.get("messageIds");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-event-wall");
+			MessageProcessor flow = lookupFlowConstruct("get-user-statuses");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			List<Post> wall = (List<Post>) response.getMessage().getPayload();
+			List<StatusMessage> statuses = (List<StatusMessage>) response.getMessage().getPayload();
 			
-			assertEquals(wall.size(), messageIds.size());
-			for (Post post : wall) {
-				assertTrue(messageIds.contains(post.getId()));
+			assertEquals(statuses.size(), messageIds.size());
+			for (StatusMessage status : statuses) {
+				// MessageId is of the form {userId}_{messageId}
+				// StatusId is of the form {messageId}
+				// So we assert by concatenating profileId (our userId) with statusId
+				assertTrue(messageIds.contains(profileId + "_" + status.getId()));
 			}
 		}
 		catch (Exception e) {
@@ -71,8 +71,10 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String eventId = (String) testObjects.get("eventId");
-			deleteObject(eventId);
+			List<String> messageIds = (List<String>) testObjects.get("messageIds");
+			for (String messageId : messageIds) {
+				deleteObject(messageId);
+			}
 		}
 		catch (Exception e) { 
 			e.printStackTrace();

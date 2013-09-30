@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.MuleEvent;
+import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
@@ -31,6 +32,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.restfb.types.Album;
 import com.restfb.types.Comment;
 import com.restfb.types.Event;
+import com.restfb.types.Group;
 import com.restfb.types.Link;
 import com.restfb.types.Note;
 import com.restfb.types.StatusMessage;
@@ -283,4 +285,16 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Event) response.getMessage().getPayload();
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	protected List<Group> searchGroups(String query) throws Exception {
+		testObjects.put("q", query);
+		
+		MessageProcessor flow = lookupFlowConstruct("search-groups");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (List<Group>) response.getMessage().getPayload();
+		
+	}
+	
 }
