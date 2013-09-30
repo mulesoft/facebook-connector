@@ -42,7 +42,7 @@ public class GetUserActivitiesTestCases extends FacebookTestParent {
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetUserHome() {
+	public void testGetUserActivities() {
     	
 		MessageProcessor flow = lookupFlowConstruct("get-user-activities");
     	

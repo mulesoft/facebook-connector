@@ -354,7 +354,8 @@
 	<!-- get-event-attending -->
 	<util:map id="getEventAttendingTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="${facebook.event}" />
+<!-- 		The Facebook Developer Garage Austin Event -->
+		<entry key="eventId" value="331218348435" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -364,7 +365,8 @@
 	<!-- attend-event -->
 	<util:map id="attendEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="${facebook.event}" />
+<!-- 		The Facebook Developer Garage Austin Event -->
+		<entry key="eventId" value="331218348435" />
 	</util:map>	
 	
 	<!-- publish-event -->
@@ -378,7 +380,8 @@
 	<!-- decline-event -->
 	<util:map id="declineEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="${facebook.event}" />
+<!-- 		The Facebook Developer Garage Austin Event -->
+		<entry key="eventId" value="331218348435" />
 	</util:map>	
 	
 	<!-- get-user-notes -->
@@ -415,7 +418,8 @@
 	<!-- get-event-declined -->
 	<util:map id="getEventDeclinedTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="${facebook.event}" />
+<!-- 		The Facebook Developer Garage Austin Event -->
+		<entry key="eventId" value="331218348435" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -425,7 +429,8 @@
 	<!-- get-event-invited -->
 	<util:map id="getEventInvitedTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="${facebook.event}" />
+<!-- 		The Facebook Developer Garage Austin Event -->
+		<entry key="eventId" value="331218348435" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -435,7 +440,8 @@
 	<!-- get-event-maybe -->
 	<util:map id="getEventMaybeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="${facebook.event}" />
+<!-- 		The Facebook Developer Garage Austin Event -->
+		<entry key="eventId" value="331218348435" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -445,7 +451,8 @@
 	<!-- get-event-no-reply -->
 	<util:map id="getEventNoReplyTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="${facebook.event}" />
+<!-- 		The Facebook Developer Garage Austin Event -->
+		<entry key="eventId" value="331218348435" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -455,7 +462,7 @@
 	<!-- search-group -->
 	<util:map id="searchGroupTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="q" value="${facebook.groupQuery}" />
+		<entry key="q" value="mulesoft" />
 		<entry key="since" value="2005-01-01" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -466,7 +473,7 @@
 	<util:map id="getGroupTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="group" value="dynamicallySet" />
-		<entry key="q" value="${facebook.groupQuery}" />
+		<entry key="q" value="mulesoft" />
 		<entry key="since" value="2005-01-01" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -517,6 +524,16 @@
 	
 	<!-- get-user-activities -->
 	<util:map id="getUserActivitiesTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-books -->
+	<util:map id="getUserBooksTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />

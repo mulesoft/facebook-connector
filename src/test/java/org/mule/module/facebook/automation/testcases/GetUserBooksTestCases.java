@@ -19,16 +19,17 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.module.facebook.types.GetUserAccountResponseType;
 
-public class GetUserAccountsTestCases extends FacebookTestParent {
+import com.restfb.types.PageConnection;
+
+public class GetUserBooksTestCases extends FacebookTestParent {
 	
 	
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserAccountsTestData");
+	    	testObjects = (HashMap<String,Object>) context.getBean("getUserBooksTestData");
 			
 	    	String profileId = getProfileId();
 	    	testObjects.put("user", profileId);
@@ -41,14 +42,14 @@ public class GetUserAccountsTestCases extends FacebookTestParent {
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetUserAccounts() {
+	public void testGetUserBooks() {
     	
-		MessageProcessor flow = lookupFlowConstruct("get-user-accounts");
+		MessageProcessor flow = lookupFlowConstruct("get-user-books");
     	
 		try {
 
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			List<GetUserAccountResponseType> result = (List<GetUserAccountResponseType>) response.getMessage().getPayload();
+			List<PageConnection> result = (List<PageConnection>) response.getMessage().getPayload();
 			
 			assertTrue(result.size() == 0);
 		} catch (Exception e) {
