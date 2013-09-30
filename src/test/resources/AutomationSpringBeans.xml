@@ -185,6 +185,7 @@
 	
 	<!-- get-user-likes -->
 	<util:map id="getUserLikesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -617,6 +618,16 @@
 	
 	<!-- get-user-interests -->
 	<util:map id="getUserInterestsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-movies -->
+	<util:map id="getUserMoviesTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />

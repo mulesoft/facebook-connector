@@ -356,4 +356,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-interests config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-movies">
+		<facebook:get-user-movies config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
