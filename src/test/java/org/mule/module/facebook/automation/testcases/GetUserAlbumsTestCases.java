@@ -9,6 +9,7 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
@@ -45,16 +46,14 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 	public void testGetUserAlbums() {
 		try {
 			String profileId = (String) testObjects.get("profileId");
+			String albumId = (String) testObjects.get("albumId");
 			String since = (String) testObjects.get("since");
 			String until = (String) testObjects.get("until");
 			String limit = (String) testObjects.get("limit");
 			String offset = (String) testObjects.get("offset");
 			
 			Collection<Album> albums = requestUserAlbums(profileId,	since, until, limit, offset);
-
-			Album firstAlbum = (Album) albums.toArray()[0];
-			assertEquals(testObjects.get("albumName"), firstAlbum.getName());
-
+			assertTrue(albums.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -64,6 +63,7 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 	@After
 	public void tearDown() {
 		try {
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

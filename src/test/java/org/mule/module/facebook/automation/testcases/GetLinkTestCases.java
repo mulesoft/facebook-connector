@@ -39,13 +39,13 @@ public class GetLinkTestCases extends FacebookTestParent {
 	@Test
 	public void testGetLink(){
 		try {
-			String messageId = (String) testObjects.get("messageId");
+			String link = (String) testObjects.get("link");
 			
 			MessageProcessor flow = lookupFlowConstruct("get-link");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Link link = (Link) response.getMessage().getPayload();
+			Link result = (Link) response.getMessage().getPayload();
     
-			assertEquals(messageId, link.getId());
+			assertEquals(link, result.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
