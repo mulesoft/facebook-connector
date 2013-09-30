@@ -60,8 +60,10 @@ public class GetUserEventsTestCases extends FacebookTestParent {
 			String eventId = (String) testObjects.get("objectId");
 			boolean containsPublishedEvent = false;
 			for(Event event : result) {
-				if(eventId.equals(event.getId()))
+				if(eventId.equals(event.getId())) {
 					containsPublishedEvent = true;
+					break;
+				}
 			}
 			
 			assertTrue(containsPublishedEvent);
