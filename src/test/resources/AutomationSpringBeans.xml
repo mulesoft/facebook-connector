@@ -45,6 +45,14 @@
 		<entry key="msg" value="msgForTest" />
 	</util:map>
 
+	<!-- get-user-updates -->
+	<util:map id="getUserUpdatesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+
 	<!-- publish-album -->
 	<util:map id="publishAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">

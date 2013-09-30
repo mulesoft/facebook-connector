@@ -61,6 +61,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="get-user-updates">
+		<facebook:get-user-updates config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="get-application-statuses">
 		<facebook:get-application-statuses config-ref="Facebook" application="#[payload.application]" since="#[payload.since]" until="#[payload.until]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
