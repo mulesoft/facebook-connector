@@ -551,4 +551,16 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
+	
+	<!-- get-user-events -->
+	<util:map id="getUserEventsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+		<entry key="eventName" value="testEventName" />
+		<entry key="startTime" value="#{new java.text.SimpleDateFormat('yyyy-MM-dd').format(new java.util.Date())}" />
+	</util:map>
 </beans>
