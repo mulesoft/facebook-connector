@@ -305,4 +305,19 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-note-likes config-ref="Facebook" limit="#[payload.limit]" 
 			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" note="#[payload.note]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-accounts">
+		<facebook:get-user-accounts config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-activities">
+		<facebook:get-user-activities config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-books">
+		<facebook:get-user-books config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
