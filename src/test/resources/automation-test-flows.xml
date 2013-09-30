@@ -60,6 +60,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-page config-ref="Facebook" page="#[payload.page]"
 			accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-statuses">
+		<facebook:get-user-statuses config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="like">
 		<facebook:like config-ref="Facebook" postId="#[payload.postId]"
