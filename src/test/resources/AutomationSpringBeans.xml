@@ -173,6 +173,22 @@
 		<entry key="offset" value="0" />
 	</util:map>
 	
+	<!-- get-user-likes -->
+	<util:map id="getUserLikesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="pagesToLike">
+			<list value-type="java.lang.String">
+				<!-- MuleSoft -->
+				<value>345538702156232</value>
+				<!-- Metallica -->
+				<value>10212595263</value>			
+			</list>
+		</entry>
+		<entry key="since" value="yesterday" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
 	<!-- get-user-tagged -->
 	<util:map id="getUserTaggedTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="msg" value="Hello @[345538702156232:MuleSoft]" />
