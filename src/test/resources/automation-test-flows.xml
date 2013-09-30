@@ -66,6 +66,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="get-user-links">
+		<facebook:get-user-links config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="get-user-likes">
 		<facebook:get-user-likes config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
