@@ -9,7 +9,11 @@
 package org.mule.module.facebook.automation.testcases;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -295,6 +299,19 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (List<Group>) response.getMessage().getPayload();
 		
+	}
+	
+	public static String today() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = GregorianCalendar.getInstance();
+		return format.format(calendar.getTime());
+	}
+
+	public static String tomorrow() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, 1);
+		return format.format(calendar.getTime());
 	}
 	
 }

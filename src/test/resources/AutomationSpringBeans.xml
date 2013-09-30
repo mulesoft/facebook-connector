@@ -116,6 +116,16 @@
 			-->
 		<entry key="photoFilePath" value="image.jpg" />
 	</util:map>
+	
+	<!-- search-events -->
+	<util:map id="searchEventsTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<!-- query facebook events -->
+		<entry key="q" value="facebook" />
+		<entry key="since" value="last month" />
+		<entry key="until" value="next year" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 
 	<!-- get-user-wall -->
 	<util:map id="getUserWallTestData" map-class="java.util.HashMap"

@@ -214,7 +214,13 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="search-checkins">
-	     <facebook:search-checkins config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId"  />
+	     <facebook:search-checkins config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
+	     	since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="search-events">
+		<facebook:search-events config-ref="Facebook" q="#[payload.q]" limit="#[payload.limit]" offset="#[payload.offset]" 
+			since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="publish-link">
