@@ -256,6 +256,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:decline-event config-ref="Facebook"
 			eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="tentative-event">
+		<facebook:tentative-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="get-user-notes">
 		<facebook:get-user-notes config-ref="Facebook"
