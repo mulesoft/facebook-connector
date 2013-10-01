@@ -102,6 +102,15 @@
 		<!-- Facebook Developer Garage Austin  -->
 		<entry key="eventId" value="331218348435" />
 	</util:map>
+	
+	<!-- search-users -->
+	<util:map id="searchUsersTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="q" value="John" />
+		<entry key="until" value="next year" />
+		<entry key="since" value="last year" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 
 	<!-- get-post-comments -->
 	<util:map id="getPostCommentsTestData" map-class="java.util.HashMap"
