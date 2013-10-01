@@ -2582,11 +2582,13 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public void tentativeEvent(String eventId)
+    public boolean tentativeEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/maybe").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
