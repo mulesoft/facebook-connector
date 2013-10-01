@@ -314,4 +314,10 @@ public class FacebookTestParent extends TestParent {
 		return format.format(calendar.getTime());
 	}
 	
+	public static String yesterday() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, -1);
+		return format.format(calendar.getTime());
+	}
 }

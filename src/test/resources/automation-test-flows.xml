@@ -376,4 +376,13 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-photos config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-picture">
+		<facebook:get-user-picture config-ref="Facebook" user="#[payload.user]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-search">
+		<facebook:get-user-search config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
+			since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" metadata="#[payload.metadata]" q="#[payload.q]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
