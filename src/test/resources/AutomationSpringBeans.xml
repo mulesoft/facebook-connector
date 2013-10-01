@@ -193,14 +193,7 @@
 	
 	<!-- get-user-likes -->
 	<util:map id="getUserLikesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="pagesToLike">
-			<list value-type="java.lang.String">
-				<!-- MuleSoft -->
-				<value>345538702156232</value>
-				<!-- Metallica -->
-				<value>10212595263</value>			
-			</list>
-		</entry>
+		<entry key="user" value="getDynamically" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -619,5 +612,71 @@
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-inbox -->
+	<util:map id="getUserInboxTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-interests -->
+	<util:map id="getUserInterestsTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-movies -->
+	<util:map id="getUserMoviesTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-music -->
+	<util:map id="getUserMusicTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-outbox -->
+	<util:map id="getUserOutboxTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
+	<!-- get-user-photos -->
+	<util:map id="getUserPhotosTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="user" value="getDynamically" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+		<entry key="caption" value="Photo Caption" />
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="photoFilePath" value="image.jpg" />
 	</util:map>
 </beans>

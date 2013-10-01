@@ -11,16 +11,15 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.facebook.types.OutboxThread;
 
-import com.restfb.types.PageConnection;
-
-public class GetUserLikesTestCases extends FacebookTestParent {
+public class GetUserOutboxTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserLikesTestData");
+			testObjects = (Map<String, Object>) context.getBean("getUserOutboxTestData");
 			
 			String profileId = getProfileId();
 			testObjects.put("user", profileId);
@@ -34,15 +33,15 @@ public class GetUserLikesTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetUserLikes() {
+	public void testGetUserOutbox() {
 		try {
 			
-			MessageProcessor flow = lookupFlowConstruct("get-user-likes");
+			MessageProcessor flow = lookupFlowConstruct("get-user-outbox");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			List<PageConnection> likes = (List<PageConnection>) response.getMessage().getPayload();
+			List<OutboxThread> result = (List<OutboxThread>) response.getMessage().getPayload();
 			
-			assertNotNull(likes);
+			assertNotNull(result);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

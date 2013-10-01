@@ -18,6 +18,7 @@ import com.restfb.types.Link;
 
 public class GetUserLinksTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -38,6 +39,7 @@ public class GetUserLinksTestCases extends FacebookTestParent {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserLinks() {
