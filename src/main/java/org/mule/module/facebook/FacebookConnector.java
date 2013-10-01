@@ -2579,6 +2579,7 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId Represents the id of the event object
+     * @return The result of the API request
      */
     @Processor
 	@OAuthProtected
