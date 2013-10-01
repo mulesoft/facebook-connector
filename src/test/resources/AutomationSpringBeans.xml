@@ -45,6 +45,14 @@
 		<entry key="msg" value="msgForTest" />
 	</util:map>
 
+	<!-- get-user-updates -->
+	<util:map id="getUserUpdatesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="since" value="last week" />
+		<entry key="until" value="now" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+
 	<!-- publish-album -->
 	<util:map id="publishAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -87,6 +95,21 @@
 				<value>This is a third comment.</value>
 			</list>
 		</entry>
+	</util:map>
+	
+	<!-- tentative-event -->
+	<util:map id="tentativeEventTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<!-- Facebook Developer Garage Austin  -->
+		<entry key="eventId" value="331218348435" />
+	</util:map>
+	
+	<!-- search-users -->
+	<util:map id="searchUsersTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="q" value="John" />
+		<entry key="until" value="next year" />
+		<entry key="since" value="last year" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
 	</util:map>
 
 	<!-- get-post-comments -->

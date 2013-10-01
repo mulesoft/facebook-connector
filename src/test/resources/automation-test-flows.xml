@@ -61,6 +61,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="get-user-updates">
+		<facebook:get-user-updates config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="get-application-statuses">
 		<facebook:get-application-statuses config-ref="Facebook" application="#[payload.application]" since="#[payload.since]" until="#[payload.until]"
 			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
@@ -246,10 +251,19 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]" 
 			linkName="#[payload.linkName]" picture="#[payload.picture]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
 	</flow>
+	
+	<flow name="search-users">
+		<facebook:search-users config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" 
+			until="#[payload.until]" q="#[payload.q]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="decline-event">
 		<facebook:decline-event config-ref="Facebook"
 			eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="tentative-event">
+		<facebook:tentative-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-user-notes">
