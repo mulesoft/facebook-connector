@@ -399,4 +399,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-search config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
 			since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" metadata="#[payload.metadata]" q="#[payload.q]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-user-videos">
+		<facebook:get-user-videos config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>

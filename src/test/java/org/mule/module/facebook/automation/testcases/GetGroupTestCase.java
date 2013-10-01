@@ -17,8 +17,9 @@ import com.restfb.types.Group;
 
 public class GetGroupTestCase extends FacebookTestParent {
 	
+	@SuppressWarnings("unchecked")
 	@Before
-	public void tearUp(){
+	public void setUp(){
 		try {
 	    	testObjects = (HashMap<String,Object>) context.getBean("getGroupTestData");
 			String query = (String) testObjects.get("q");
