@@ -15,7 +15,7 @@ import org.mule.api.processor.MessageProcessor;
 
 import com.restfb.types.Group;
 
-public class GetGroupTestCase extends FacebookTestParent {
+public class GetGroupTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
