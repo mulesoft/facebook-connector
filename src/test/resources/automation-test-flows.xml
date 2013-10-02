@@ -423,4 +423,24 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-video-comments config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" video="#[payload.video]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-page-checkins">
+		<facebook:get-page-checkins config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-events">
+		<facebook:get-page-events config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-groups">
+		<facebook:get-page-groups config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-links">
+		<facebook:get-page-links config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
