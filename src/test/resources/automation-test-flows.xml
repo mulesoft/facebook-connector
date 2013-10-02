@@ -443,4 +443,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-page-links config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-page-notes">
+		<facebook:get-page-notes config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-photos">
+		<facebook:get-page-photos config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
