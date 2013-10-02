@@ -8,34 +8,47 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
+import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
+import com.restfb.types.Album;
+
 public class GetPageAlbumsTestCases extends FacebookTestParent {
+	
+	@SuppressWarnings("unchecked")
+	@Before
+	public void setUp() {
+		try {
+			testObjects = (HashMap<String,Object>) context.getBean("getPageAlbumsTestData");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPageAlbums() {
     	
-    	testObjects = (HashMap<String,Object>) context.getBean("getPageAlbumsTestData");
-    	
 		MessageProcessor flow = lookupFlowConstruct("get-page-albums");
     	
 		try {
 
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Object albums = (Object) response.getMessage().getPayload();
+			List<Album> albums = (List<Album>) response.getMessage().getPayload();
 			
-			// albums is an empty collection
-			
-			System.out.println();
+			assertNotNull(albums);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,5 +56,6 @@ public class GetPageAlbumsTestCases extends FacebookTestParent {
 		}
      
 	}
+    
     
 }
