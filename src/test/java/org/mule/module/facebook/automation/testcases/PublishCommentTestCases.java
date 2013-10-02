@@ -16,7 +16,7 @@ import org.mule.api.processor.MessageProcessor;
 
 import com.restfb.types.Comment;
 
-public class PublishComment extends FacebookTestParent {
+public class PublishCommentTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before

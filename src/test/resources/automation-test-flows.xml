@@ -418,4 +418,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:search-pages config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" q="#[payload.q]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-video-comments">
+		<facebook:get-video-comments config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" video="#[payload.video]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
