@@ -453,4 +453,19 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-page-photos config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-page-posts">
+		<facebook:get-page-posts config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-statuses">
+		<facebook:get-page-statuses config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-page-tagged">
+		<facebook:get-page-tagged config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
