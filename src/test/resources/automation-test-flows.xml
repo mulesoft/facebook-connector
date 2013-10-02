@@ -468,4 +468,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-page-tagged config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-page-videos">
+		<facebook:get-page-videos config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-wall">
+		<facebook:get-page-wall config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
