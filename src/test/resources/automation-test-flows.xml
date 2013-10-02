@@ -409,4 +409,13 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:search-posts config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
 			since="#[payload.since]" until="#[payload.until]" q="#[payload.q]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-video">
+		<facebook:get-video config-ref="Facebook" metadata="#[payload.metadata]" video="#[payload.video]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="search-pages">
+		<facebook:search-pages config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" q="#[payload.q]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
