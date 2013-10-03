@@ -1,23 +1,23 @@
 package org.mule.module.facebook.automation.testcases;
 
-import java.util.HashMap;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.HashMap;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleEvent;
-import org.mule.api.MuleException;
 import org.mule.api.processor.MessageProcessor;
 
 import com.restfb.types.Note;
 
 public class GetUserNotesTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void tearUp() {
 		try {
@@ -37,6 +37,7 @@ public class GetUserNotesTestCases extends FacebookTestParent {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetUserNotes() {
 		try {

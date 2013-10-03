@@ -481,4 +481,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-photo">
 		<facebook:get-photo config-ref="Facebook" metadata="#[payload.metadata]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-photo-comments">
+		<facebook:get-photo-comments config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-photo-likes">
+		<facebook:get-photo-likes config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
