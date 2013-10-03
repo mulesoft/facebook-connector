@@ -19,6 +19,7 @@ import com.restfb.types.Post;
 
 public class GetEventWallTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -45,11 +46,11 @@ public class GetEventWallTestCases extends FacebookTestParent {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEventWall() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
 			List<String> messageIds = (List<String>) testObjects.get("messageIds");
 			
 			MessageProcessor flow = lookupFlowConstruct("get-event-wall");
