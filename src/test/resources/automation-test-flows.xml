@@ -491,4 +491,9 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-photo-likes config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-group-members">
+		<facebook:get-group-members config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" group="#[payload.group]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
