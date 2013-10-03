@@ -923,4 +923,15 @@
 		<entry key="group" value="getDynamically" />
 		<entry key="q" value="facebook" />
 	</util:map>
+	
+	<!-- get-group-picture -->
+	<util:map id="getGroupPictureTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="group" value="getDynamically" />
+		<entry key="type" value="small" />
+		<entry key="q" value="facebook" />
+		<entry key="since" value="last week" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
 </beans>
