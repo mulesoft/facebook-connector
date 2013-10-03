@@ -15,12 +15,14 @@ import org.mule.module.facebook.types.OutboxThread;
 
 public class GetUserUpdatesTestCases extends FacebookTestParent {
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
 			testObjects = (Map<String, Object>) context.getBean("getUserUpdatesTestData");
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
+			testObjects.put("user", profileId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -28,13 +30,11 @@ public class GetUserUpdatesTestCases extends FacebookTestParent {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserUpdates() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
-			testObjects.put("user", profileId);
-			
 			MessageProcessor flow = lookupFlowConstruct("get-user-updates");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			

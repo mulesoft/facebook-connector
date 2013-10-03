@@ -8,38 +8,48 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-public class DownloadImageTestCases extends FacebookTestParent {
+public class GetPhotoTestCases extends FacebookTestParent {
 	
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
+	@Before
+	public void setUp() {
+		try {
+			testObjects = (HashMap<String,Object>) context.getBean("getPhotoTestData");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
 	@Category({RegressionTests.class})
 	@Test
-	public void testDownloadImage() {
+	public void testGetPhoto() {
     	
-    	testObjects = (HashMap<String,Object>) context.getBean("downloadImageTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("download-image");
+		MessageProcessor flow = lookupFlowConstruct("get-photo");
     	
 		try {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+			org.mule.module.facebook.types.Photo result = (org.mule.module.facebook.types.Photo) response.getMessage().getPayload();
 			
-			byte[] result = (byte[]) response.getMessage().getPayload();
-			
-			assertTrue(result.length > 0);
+			assertNotNull(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
      
 	}
+    
     
 }
