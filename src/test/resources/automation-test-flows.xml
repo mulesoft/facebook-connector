@@ -478,4 +478,8 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-page-wall config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-page-picture">
+		<facebook:get-page-picture config-ref="Facebook" page="#[payload.page]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>

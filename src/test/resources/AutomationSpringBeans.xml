@@ -878,4 +878,11 @@
 		<entry key="offset" value="0" />
 		<entry key="page" value="19292868552" />
 	</util:map>
+	
+	<!-- get-page-picture -->
+	<util:map id="getPagePictureTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="type" value="small" />
+		<entry key="page" value="19292868552" />
+	</util:map>
 </beans>
