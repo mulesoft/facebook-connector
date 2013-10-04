@@ -9,16 +9,17 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
-import java.util.RandomAccess;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+
+import com.restfb.types.Album;
 
 public class GetApplicationAlbumsTestCases extends FacebookTestParent {
 	
@@ -34,11 +35,9 @@ public class GetApplicationAlbumsTestCases extends FacebookTestParent {
 		try {
 
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			RandomAccess albums = (RandomAccess) response.getMessage().getPayload();
+			List<Album> albums = (List<Album>) response.getMessage().getPayload();
 			
-			// albums is an empty collection
 			assertNotNull(albums);
-			assertTrue(albums instanceof RandomAccess);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
