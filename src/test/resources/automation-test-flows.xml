@@ -515,4 +515,23 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-application-insights config-ref="Facebook" application="#[payload.application]" 
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-application-links">
+		<facebook:get-application-links config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-notes">
+		<facebook:get-application-notes config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-photos">
+		<facebook:get-application-photos config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-picture">
+		<facebook:get-application-picture config-ref="Facebook" application="#[payload.application]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
