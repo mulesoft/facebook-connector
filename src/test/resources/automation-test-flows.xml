@@ -534,4 +534,19 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="get-application-picture">
 		<facebook:get-application-picture config-ref="Facebook" application="#[payload.application]" type="#[payload.type]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-application-tagged">
+		<facebook:get-application-tagged config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-videos">
+		<facebook:get-application-videos config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-wall">
+		<facebook:get-application-wall config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
