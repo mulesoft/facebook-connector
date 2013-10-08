@@ -8,12 +8,14 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -29,6 +31,17 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
 	public void setUp() {
 		try {
 			testObjects = (HashMap<String,Object>) context.getBean("getPhotoCommentsTestData");
+			String profileId = getProfileId();
+			testObjects.put("user", profileId);
+			
+			String caption = (String) testObjects.get("caption");
+			File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+			
+			String photoId = publishPhoto(profileId, caption, photoFile);
+			testObjects.put("photo", photoId);
+			
+			String commentId = publishComment((String) testObjects.get("photo"), (String) testObjects.get("msg"));
+			testObjects.put("commentId", commentId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -47,7 +60,9 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			List<Comment> result = (List<Comment>) response.getMessage().getPayload();
 			
-			assertNotNull(result);
+			assertTrue(result.size() == 1);
+			Comment comment = result.get(0);
+			comment.getId().equals((String) testObjects.get("commentId"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -55,5 +70,17 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
      
 	}
     
+	@After
+	public void tearDown() {
+		try {
+			deleteObject((String) testObjects.get("commentId"));
+			String photoId = (String) testObjects.get("photo");
+			deleteObject(photoId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
     
 }
