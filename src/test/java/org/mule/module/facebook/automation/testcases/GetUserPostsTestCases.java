@@ -60,6 +60,7 @@ public class GetUserPostsTestCases extends FacebookTestParent {
 						
 			Collection<Post> posts = (Collection<Post>) response.getMessage().getPayload();
 
+			// Assert that the inserted posts can be found in the user's list of posts
 			Collection<Post> matching = CollectionUtils.select(posts, new Predicate() {
 
 				@Override
