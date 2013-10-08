@@ -280,7 +280,7 @@
 
 	<util:map id="dislikeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="msg" value="I hate this message" />
+		<entry key="msg" value="I do not like this message" />
 	</util:map>
 
 	<!-- get-page-albums -->
