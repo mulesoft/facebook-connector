@@ -14,10 +14,10 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -28,6 +28,7 @@ import com.restfb.types.Photo;
 
 public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -61,7 +62,6 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	@Test
 	public void testGetAlbumPhotos() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
 			final String photoId = (String) testObjects.get("photoId");
 			
 			MessageProcessor flow = lookupFlowConstruct("get-album-photos");
@@ -85,4 +85,15 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
      
 	}
     
+    @After
+	public void tearDown() {
+		try {
+			deleteObject((String) testObjects.get("photoId"));
+			deleteObject((String) testObjects.get("albumId"));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +19,7 @@ import com.restfb.types.Comment;
 
 public class GetStatusCommentsTestCases extends FacebookTestParent {
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -47,6 +47,7 @@ public class GetStatusCommentsTestCases extends FacebookTestParent {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetStatusComments() {

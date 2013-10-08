@@ -1,13 +1,10 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +21,7 @@ import com.restfb.types.Post;
 
 public class GetUserWallTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -79,6 +77,7 @@ public class GetUserWallTestCases extends FacebookTestParent {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@After
 	public void tearDown() {
 		try {

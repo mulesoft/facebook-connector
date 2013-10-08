@@ -865,7 +865,7 @@ public class FacebookConnectorTestDriver
     public void testPublishMessage() throws Exception
     {
         final String res = connector.publishMessage("me", "Hello World!",
-            "", "", "", "", "");
+            "", "", "", "", "", "");
         assertNotNull(res);
     }
     

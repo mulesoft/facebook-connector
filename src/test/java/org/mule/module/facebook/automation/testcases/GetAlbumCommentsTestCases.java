@@ -26,6 +26,7 @@ import com.restfb.types.Comment;
 
 public class GetAlbumCommentsTestCases extends FacebookTestParent {
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {

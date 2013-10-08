@@ -8,11 +8,13 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.HashMap;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -28,6 +30,25 @@ public class GetPhotoLikesTestCases extends FacebookTestParent {
 	public void setUp() {
 		try {
 			testObjects = (HashMap<String,Object>) context.getBean("getPhotoLikesTestData");
+			
+			String profileId = getProfileId();
+			testObjects.put("profileId", profileId);
+			
+			String msg = (String) testObjects.get("msg");
+			String albumName = (String) testObjects.get("albumName");
+			
+			String albumId = publishAlbum(albumName, msg, profileId);
+			testObjects.put("albumId", albumId);
+			
+			String caption = (String) testObjects.get("caption");
+			String photoFileName = (String) testObjects.get("photoFileName");
+			
+			File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
+			String photoId = publishPhoto(albumId, caption, photo);
+			
+			testObjects.put("photoId", photoId);
+			
+			like(photoId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -45,13 +66,24 @@ public class GetPhotoLikesTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			Likes result = (Likes) response.getMessage().getPayload();
 			
-			assertNotNull(result);
+			assertTrue(result.getCount().equals(1));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
      
 	}
-    
+	
+    @After
+	public void tearDown() {
+		try {
+			deleteObject((String) testObjects.get("photoId"));
+			deleteObject((String) testObjects.get("albumId"));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
     
 }

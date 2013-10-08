@@ -17,6 +17,7 @@ import com.restfb.types.Post;
 
 public class GetUserTaggedTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {

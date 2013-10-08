@@ -17,6 +17,7 @@ import com.restfb.types.PageConnection;
 
 public class GetUserTelevisionTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -31,6 +32,7 @@ public class GetUserTelevisionTestCases extends FacebookTestParent {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserTelevision() {

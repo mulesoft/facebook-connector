@@ -19,6 +19,7 @@ import com.restfb.types.Comment;
 
 public class GetPostCommentsTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -46,6 +47,7 @@ public class GetPostCommentsTestCases extends FacebookTestParent {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPostComments() {
