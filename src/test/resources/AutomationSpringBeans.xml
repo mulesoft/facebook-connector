@@ -890,7 +890,14 @@
 	<util:map id="getPhotoTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="metadata" value="0" />
-		<entry key="photo" value="${facebook.photo}" />
+<!-- 		This is to be fetched dynamically: -->
+		<entry key="photo" value="100006563414301_1412821138946653" />
+		<entry key="caption" value="Photo Caption" />
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="photoFilePath" value="image.jpg" />
 	</util:map>
 	
 	<!-- get-photo-comments -->

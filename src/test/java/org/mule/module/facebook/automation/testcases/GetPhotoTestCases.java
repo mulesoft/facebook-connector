@@ -8,11 +8,13 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.HashMap;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -26,6 +28,14 @@ public class GetPhotoTestCases extends FacebookTestParent {
 	public void setUp() {
 		try {
 			testObjects = (HashMap<String,Object>) context.getBean("getPhotoTestData");
+			String profileId = getProfileId();
+			testObjects.put("user", profileId);
+			
+			String caption = (String) testObjects.get("caption");
+			File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+			
+			String photoId = publishPhoto(profileId, caption, photoFile);
+			testObjects.put("photo", photoId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -43,12 +53,24 @@ public class GetPhotoTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			org.mule.module.facebook.types.Photo result = (org.mule.module.facebook.types.Photo) response.getMessage().getPayload();
 			
-			assertNotNull(result);
+			assertTrue(result.getId().equals((String) testObjects.get("photo")));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
      
+	}
+	
+	@After
+	public void tearDown() {
+		try {
+			String photoId = (String) testObjects.get("photo");
+			deleteObject(photoId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
     
     
