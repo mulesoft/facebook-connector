@@ -35,7 +35,7 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void GetVideoCommentsTestCase() {
+	public void testGetVideoComments() {
 		try {
 			MessageProcessor flow = lookupFlowConstruct("get-video-comments");
 			MuleEvent response = flow.process(getTestEvent(testObjects));

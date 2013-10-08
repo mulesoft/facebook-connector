@@ -44,7 +44,7 @@ public class GetEventPictureTestCases extends FacebookTestParent {
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void testEventPicture() {
+	public void testGetEventPicture() {
     	
 		try {
 			MessageProcessor flow = lookupFlowConstruct("get-event-picture");

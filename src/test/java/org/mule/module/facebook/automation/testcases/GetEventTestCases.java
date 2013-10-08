@@ -45,7 +45,7 @@ public class GetEventTestCases extends FacebookTestParent {
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void testEvent() {
+	public void testGetEvent() {
     	
 		try {
 			Event event = getEvent((String) testObjects.get("eventId"));

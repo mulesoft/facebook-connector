@@ -43,7 +43,7 @@ public class GetLinkCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testGetLink(){
+	public void testGetLinkComments(){
 		try {
 			String messageId = (String) testObjects.get("messageId");
 			// link is the graph object id here

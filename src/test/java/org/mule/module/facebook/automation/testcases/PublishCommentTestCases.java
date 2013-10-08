@@ -37,7 +37,7 @@ public class PublishCommentTestCases extends FacebookTestParent {
 
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void PublishCommentTestCase() {
+	public void testPublishComment() {
 		try {
 			String postId = (String) testObjects.get("postId");
 			String msg = (String) testObjects.get("msg");

@@ -38,7 +38,7 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testEventMaybe() {
+	public void testGetEventMaybe() {
 		
 		MessageProcessor flow = lookupFlowConstruct("get-event-maybe");
     	

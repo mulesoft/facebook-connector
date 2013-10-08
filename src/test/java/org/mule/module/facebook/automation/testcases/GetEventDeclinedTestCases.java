@@ -40,7 +40,7 @@ public class GetEventDeclinedTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testEventDeclined() {
+	public void testGetEventDeclined() {
 		
 		MessageProcessor flow = lookupFlowConstruct("get-event-declined");
     	

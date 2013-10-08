@@ -40,7 +40,7 @@ public class GetEventAttendingTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testEventAttending() {
+	public void testGetEventAttending() {
 		
 		MessageProcessor flow = lookupFlowConstruct("get-event-attending");
     	

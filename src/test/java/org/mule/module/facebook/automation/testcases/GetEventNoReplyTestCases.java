@@ -38,7 +38,7 @@ public class GetEventNoReplyTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testEventNoReply() {
+	public void testGetEventNoReply() {
 		
 		MessageProcessor flow = lookupFlowConstruct("get-event-no-reply");
     	

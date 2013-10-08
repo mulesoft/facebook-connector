@@ -28,7 +28,7 @@ public class SearchGroupsTestCases extends FacebookTestParent {
 	}
 
 	@Test
-	public void searchGroupTestCase() {
+	public void testSearchGroup() {
 		try {
 			MessageProcessor flow = lookupFlowConstruct("search-groups");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
