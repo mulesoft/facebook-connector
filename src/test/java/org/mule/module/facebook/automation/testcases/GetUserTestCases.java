@@ -8,11 +8,12 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
@@ -22,22 +23,30 @@ import com.restfb.types.User;
 
 public class GetUserTestCases extends FacebookTestParent {
 	
+	@Before
+	public void setUp() {
+		try {
+			testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
+
+			User loggedInUser = getLoggedUserDetails();
+			testObjects.put("username", loggedInUser.getId());
+		}
+		catch (Exception e) {
+			e.printStackTrace(); 
+			fail();
+		}
+	}
+	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUser() {
-    	
-    	testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			User user = (User) response.getMessage().getPayload();
-			
-			assertTrue(user.getUsername().equals(testObjects.get("username").toString()));
 
+			assertEquals(user.getId(), (String) testObjects.get("username"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

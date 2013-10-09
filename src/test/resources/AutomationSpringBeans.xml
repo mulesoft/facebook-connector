@@ -23,7 +23,7 @@
 	<!-- get-user-by-id -->
 	<util:map id="getUserTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="username" value="${facebook.username}" />
+<!-- 		<entry key="username" value="${facebook.username}" /> -->
 	</util:map>
 
 	<!-- get-user-home -->
@@ -317,7 +317,6 @@
 	<!-- download-image -->
 	<util:map id="downloadImageTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="imageUri" value="${facebook.imageUri}" />
 		<entry key="caption" value="My Photo Caption" />
 		<entry key="photoFilePath" value="image.jpg" />
 	</util:map>
