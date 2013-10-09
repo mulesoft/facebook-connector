@@ -1,5 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -31,7 +32,7 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 			File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
 			
 			String photoId = publishPhoto(profileId, caption, photoFile);
-			testObjects.put("objectId", photoId);
+			testObjects.put("photoId", photoId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -44,13 +45,16 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserPhotos() {
 		try {
+			String photoId = (String) testObjects.get("photoId");
 			
 			MessageProcessor flow = lookupFlowConstruct("get-user-photos");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<Photo> result = (List<Photo>) response.getMessage().getPayload();
+			assertEquals(result.size(), 1);
 			
-			assertTrue(result.size() > 0);
+			Photo photo = result.get(0);
+			assertEquals(photo.getId(), photoId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +65,7 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String photoId = (String) testObjects.get("objectId");
+			String photoId = (String) testObjects.get("photoId");
 			deleteObject(photoId);
 		}
 		catch (Exception e) {
