@@ -8,6 +8,7 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -41,15 +42,16 @@ public class GetAlbumTestCases extends FacebookTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetAlbum() {
-		MessageProcessor flow = lookupFlowConstruct("get-album");
-    	
 		try {
-
+			String id = (String) testObjects.get("album");
+			String albumName = (String) testObjects.get("albumName");
+			
+			MessageProcessor flow = lookupFlowConstruct("get-album");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			Album album = (Album) response.getMessage().getPayload();
 
-			assertTrue(album instanceof Album);
-
+			assertEquals(album.getId(), id);
+			assertEquals(album.getName(), albumName);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
