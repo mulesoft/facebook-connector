@@ -53,21 +53,18 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPhotoComments() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-photo-comments");
-    	
 		try {
+			MessageProcessor flow = lookupFlowConstruct("get-photo-comments");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			List<Comment> result = (List<Comment>) response.getMessage().getPayload();
 			
 			assertTrue(result.size() == 1);
 			Comment comment = result.get(0);
-			comment.getId().equals((String) testObjects.get("commentId"));
+			assertTrue(comment.getId().equals((String) testObjects.get("commentId")));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 	@After
