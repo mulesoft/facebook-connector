@@ -1,7 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -51,7 +50,7 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<Photo> result = (List<Photo>) response.getMessage().getPayload();
-			assertEquals(result.size(), 1);
+			assertEquals("should have one photo", 1, result.size());
 			
 			Photo photo = result.get(0);
 			assertEquals(photo.getId(), photoId);
