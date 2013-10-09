@@ -34,19 +34,14 @@ public class GetPhotoLikesTestCases extends FacebookTestParent {
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
 			
-			String msg = (String) testObjects.get("msg");
-			String albumName = (String) testObjects.get("albumName");
-			
-			String albumId = publishAlbum(albumName, msg, profileId);
-			testObjects.put("albumId", albumId);
-			
 			String caption = (String) testObjects.get("caption");
 			String photoFileName = (String) testObjects.get("photoFileName");
 			
 			File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
-			String photoId = publishPhoto(albumId, caption, photo);
+			String photoId = publishPhoto(profileId, caption, photo);
 			
-			testObjects.put("photoId", photoId);
+			// for "get-photo-likes"
+			testObjects.put("photo", photoId);
 			
 			like(photoId);
 		}
@@ -66,19 +61,17 @@ public class GetPhotoLikesTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			Likes result = (Likes) response.getMessage().getPayload();
 			
-			assertTrue(result.getCount().equals(1));
+			assertTrue(result.getData().size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
 	
     @After
 	public void tearDown() {
 		try {
-			deleteObject((String) testObjects.get("photoId"));
-			deleteObject((String) testObjects.get("albumId"));
+			deleteObject((String) testObjects.get("photo"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
