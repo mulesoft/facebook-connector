@@ -138,6 +138,7 @@
 			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
 			-->
 		<entry key="photoFilePath" value="image.jpg" />
+		<entry key="metadata" value="0" />
 	</util:map>
 	
 	<!-- search-events -->

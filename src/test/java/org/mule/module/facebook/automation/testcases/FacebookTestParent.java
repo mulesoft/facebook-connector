@@ -136,8 +136,9 @@ public class FacebookTestParent extends TestParent {
     	return getLoggedUserDetails().getId();
     }
     
-    protected Photo getPhoto(String photoId) throws Exception {
-    	testObjects.put("photoId", photoId);
+    protected Photo getPhoto(String photoId, String metadata) throws Exception {
+    	testObjects.put("photo", photoId);
+    	testObjects.put("metadata", metadata);
     	
     	MessageProcessor flow = lookupFlowConstruct("get-photo");
     	MuleEvent response = flow.process(getTestEvent(testObjects));

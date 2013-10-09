@@ -23,7 +23,6 @@ public class PublishPhotoTestCases extends FacebookTestParent {
 			
 			String profileId = getProfileId();
 			testObjects.put("profileId", profileId);
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +45,9 @@ public class PublishPhotoTestCases extends FacebookTestParent {
 
 			testObjects.put("photoId", photoId);
 			
-			Photo photo = getPhoto(photoId);
+			String metadata = (String) testObjects.get("metadata");
+			
+			Photo photo = getPhoto(photoId, metadata);
 			assertEquals(photo.getId(), photoId);
 		}
 		catch (Exception e) {

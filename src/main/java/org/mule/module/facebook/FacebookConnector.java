@@ -66,8 +66,8 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
-import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.multipart.file.FileDataBodyPart;
 import com.sun.jersey.multipart.impl.MultiPartWriter;
 
 /**
@@ -2659,9 +2659,9 @@ public class FacebookConnector {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{albumId}/photos").build(albumId);
         WebResource resource = this.newWebResource(uri, accessToken);
         FormDataMultiPart multiPart = new FormDataMultiPart();
-        multiPart.bodyPart(new BodyPart(photo, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+        multiPart.bodyPart(new FileDataBodyPart("source", photo, MediaType.APPLICATION_OCTET_STREAM_TYPE));
         multiPart.field("message", caption);
-
+        
         String jsonId = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, multiPart);
         
         JsonObject obj = mapper.toJavaObject(jsonId, JsonObject.class);
