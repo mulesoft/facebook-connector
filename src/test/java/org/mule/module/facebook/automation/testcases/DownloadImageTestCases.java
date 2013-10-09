@@ -29,6 +29,7 @@ import org.mule.module.facebook.types.Photo;
 
 public class DownloadImageTestCases extends FacebookTestParent {
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
@@ -48,7 +49,6 @@ public class DownloadImageTestCases extends FacebookTestParent {
 		}
 	}
 	
-    @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testDownloadImage() {
