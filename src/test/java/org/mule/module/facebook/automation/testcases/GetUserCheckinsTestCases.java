@@ -8,10 +8,11 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,39 +20,43 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.User;
+import com.restfb.types.Checkin;
 
-public class GetUserTestCases extends FacebookTestParent {
-
+public class GetUserCheckinsTestCases extends FacebookTestParent {
+	
+	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
-
-			User loggedInUser = getLoggedUserDetails();
-			testObjects.put("username", loggedInUser.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-    @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetUser() {
-		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User user = (User) response.getMessage().getPayload();
-
-			assertEquals(user.getId(), (String) testObjects.get("username"));
+	    	testObjects = (HashMap<String,Object>) context.getBean("getUserCheckinsTestData");
+			
+	    	String profileId = getProfileId();
+	    	testObjects.put("user", profileId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-
 	}
+	
+    @SuppressWarnings("unchecked")
+	@Category({RegressionTests.class})
+	@Test
+	public void testGetUserCheckins() {
+    	
+		MessageProcessor flow = lookupFlowConstruct("get-user-checkins");
+    	
+		try {
 
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			List<Checkin> result = (List<Checkin>) response.getMessage().getPayload();
+			
+			assertTrue(result.size() == 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+     
+	}
+    
 }

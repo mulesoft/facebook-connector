@@ -42,6 +42,7 @@ import org.mule.modules.utils.MuleSoftException;
 
 import com.restfb.DefaultJsonMapper;
 import com.restfb.JsonMapper;
+import com.restfb.json.JsonObject;
 import com.restfb.types.Album;
 import com.restfb.types.Application;
 import com.restfb.types.Checkin;
@@ -62,9 +63,12 @@ import com.restfb.types.User;
 import com.restfb.types.Video;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
-import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.multipart.file.FileDataBodyPart;
+import com.sun.jersey.multipart.impl.MultiPartWriter;
 
 /**
  * Facebook is a social networking service and website launched in February 2004.
@@ -114,7 +118,9 @@ public class FacebookConnector {
      */
     public FacebookConnector()
     {
-        client = new Client();
+    	ClientConfig config = new DefaultClientConfig();
+    	config.getClasses().add(MultiPartWriter.class);
+        client = Client.create(config);
     }
     
     @OAuthAccessToken
@@ -2362,6 +2368,7 @@ public class FacebookConnector {
      * @param linkName The name of the link
      * @param description A description of the link (appears beneath the link
      *            caption)
+     * @param place The page ID of the place that this message is associated with
      * @return The id of the published object
      */
     @Processor
@@ -2373,7 +2380,8 @@ public class FacebookConnector {
                                  @Optional String link,
                                  @Optional String caption,
                                  @Optional String linkName,
-                                 @Optional String description)
+                                 @Optional String description,
+                                 @Optional String place)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/feed").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2386,8 +2394,11 @@ public class FacebookConnector {
         if (caption != null) form.add("caption", caption);
         if (linkName != null) form.add("name", linkName);
         if (description != null) form.add("description", description);
+        if (place != null) form.add("place", place);
 
-        return resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+        String json = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
@@ -2410,8 +2421,10 @@ public class FacebookConnector {
         form.add("message", msg);
 
         WebResource.Builder type = resource.type(MediaType.APPLICATION_FORM_URLENCODED);
-        return type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE)
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE)
                         .post(String.class, form);
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
@@ -2420,14 +2433,17 @@ public class FacebookConnector {
      * 
      * 
      * @param postId Represents the ID of the post object.
+     * @return Returns true if successfully liked
      */
     @Processor
 	@OAuthProtected
-    public void like(String postId)
+    public Boolean like(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String response = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.valueOf(response);
     }
 
     /**
@@ -2438,10 +2454,11 @@ public class FacebookConnector {
      * @param profile_id the profile where to publish the note
      * @param msg The message
      * @param subject the subject of the note
+     * @return note id
      */
     @Processor
 	@OAuthProtected
-    public void publishNote(String profile_id, String msg,
+    public String publishNote(String profile_id, String msg,
                             String subject)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profile_id);
@@ -2449,8 +2466,14 @@ public class FacebookConnector {
         Form form = new Form();
         form.add("message", msg);
         form.add("subject", subject);
-
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        WebResource.Builder type = resource
+				.type(MediaType.APPLICATION_FORM_URLENCODED);
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE,
+				MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+        
+		return obj.getString("id");
     }
 
     /**
@@ -2461,10 +2484,11 @@ public class FacebookConnector {
      * @param profile_id the profile where to publish the link
      * @param msg The message
      * @param link the link
+     * @return link id
      */
     @Processor
 	@OAuthProtected
-    public void publishLink(String profile_id, String msg, String link)
+    public String publishLink(String profile_id, String msg, String link)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2472,7 +2496,13 @@ public class FacebookConnector {
         form.add("message", msg);
         form.add("link", link);
 
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        WebResource.Builder type = resource
+				.type(MediaType.APPLICATION_FORM_URLENCODED);
+        String json = type.accept(MediaType.APPLICATION_JSON_TYPE,
+				MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
@@ -2481,14 +2511,47 @@ public class FacebookConnector {
      * 
      * 
      * @param profile_id the profile where to publish the event
+     * @param event_name the name of the event
+     * @param start_time the event start time, in ISO-8601 
+     * @param end_time the event end time, in ISO-8601
+     * @param description the event description
+     * @param location the event location
+     * @param location_id Facebook Place ID of the place the Event is taking place 
+     * @param privacy_type string containing 'OPEN' (default), 'SECRET', or 'FRIENDS' 
+     * @return The id of the published event
      */
     @Processor
 	@OAuthProtected
-    public void publishEvent(String profile_id)
+    public String publishEvent(String profile_id, String event_name, String start_time, @Optional String end_time, @Optional String description, @Optional String location,
+    		@Optional String location_id, @Optional String privacy_type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/events").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        
+               
+        resource = resource.queryParam("access_token", accessToken)
+        		.queryParam("name", event_name)
+        		.queryParam("start_time", start_time);
+        
+        if(end_time != null) {
+        	resource = resource.queryParam("end_time", end_time);
+        }
+        if(description != null) {
+        	resource = resource.queryParam("description", description);
+        }
+        if(location != null) {
+        	resource = resource.queryParam("location", location);
+        }
+        if(location_id != null) {
+        	resource = resource.queryParam("location_id", location_id);
+        }
+        if(privacy_type != null) {
+        	resource = resource.queryParam("privacy_type", privacy_type);
+        }
+        
+        String json = resource.post(String.class);
+		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
+		return obj.getString("id");
     }
 
     /**
@@ -2497,14 +2560,17 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId the id of the event to attend
+     * @return Boolean result indicating success or failure of operation
      */
     @Processor
 	@OAuthProtected
-    public void attendEvent(String eventId)
+    public Boolean attendEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/attending").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
@@ -2513,14 +2579,17 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId Represents the id of the event object
+     * @return The result of the API request
      */
     @Processor
 	@OAuthProtected
-    public void tentativeEvent(String eventId)
+    public boolean tentativeEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/maybe").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
@@ -2529,14 +2598,19 @@ public class FacebookConnector {
      * 
      * 
      * @param eventId Represents the id of the event object
+     * @return Boolean result indicating success or failure of operation
      */
     @Processor
 	@OAuthProtected
-    public void declineEvent(String eventId)
+    public Boolean declineEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/declined").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        Form form = new Form();
+        form.add("eventId", eventId);
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+        
+        return Boolean.parseBoolean(res);
     }
 
     /**
@@ -2548,10 +2622,11 @@ public class FacebookConnector {
      * @param profile_id the id of the profile object
      * @param msg The message
      * @param albumName the name of the album
+     * @return The ID of the album that was just created
      */
     @Processor
 	@OAuthProtected
-    public void publishAlbum(String profile_id, String msg, String albumName)
+    public String publishAlbum(String profile_id, String msg, String albumName)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/albums").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2559,7 +2634,12 @@ public class FacebookConnector {
         form.add("message", msg);
         form.add("name", albumName);
 
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(form);
+        String json = resource.type(MediaType.APPLICATION_FORM_URLENCODED).accept(MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_XML_TYPE).post(String.class, form);
+        
+        JsonObject jsonObject = mapper.toJavaObject(json, JsonObject.class);
+        String albumId = (String) jsonObject.get("id");
+        
+        return albumId;
     }
 
     /**
@@ -2570,18 +2650,23 @@ public class FacebookConnector {
      * @param albumId the id of the album object
      * @param caption Caption of the photo
      * @param photo File containing the photo
+     * @return The ID of the photo that was just published
      */
     @Processor
 	@OAuthProtected
-    public void publishPhoto(String albumId, String caption, File photo)
+    public String publishPhoto(String albumId, String caption, File photo)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{albumId}/photos").build(albumId);
         WebResource resource = this.newWebResource(uri, accessToken);
         FormDataMultiPart multiPart = new FormDataMultiPart();
-        multiPart.bodyPart(new BodyPart(photo, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+        multiPart.bodyPart(new FileDataBodyPart("source", photo, MediaType.APPLICATION_OCTET_STREAM_TYPE));
         multiPart.field("message", caption);
-
-        resource.type(MediaType.MULTIPART_FORM_DATA).post(multiPart);
+        
+        String jsonId = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, multiPart);
+        
+        JsonObject obj = mapper.toJavaObject(jsonId, JsonObject.class);
+        String photoId = (String) obj.get("id");
+        return photoId;
     }
 
     /**
@@ -2590,15 +2675,16 @@ public class FacebookConnector {
      * 
      * 
      * @param objectId The ID of the object to be deleted
+     * @return The result of the deletion
      */
     @Processor
 	@OAuthProtected
-    public void deleteObject(String objectId)
+    public Boolean deleteObject(String objectId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{object_id}").build(objectId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
-
+        String result = resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(String.class);
+        return Boolean.valueOf(result);
     }
 
     /**
@@ -2607,14 +2693,16 @@ public class FacebookConnector {
      * 
      * 
      * @param postId The ID of the post to be disliked
+     * @return Returns true if API call was successfull
      */
     @Processor
 	@OAuthProtected
-    public void dislike(String postId)
+    public Boolean dislike(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
-        resource.type(MediaType.APPLICATION_FORM_URLENCODED).post();
+        String response = resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(String.class);
+        return Boolean.valueOf(response);
     }
 
     /**

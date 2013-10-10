@@ -8,10 +8,11 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,39 +20,42 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.User;
+import com.restfb.types.Album;
 
-public class GetUserTestCases extends FacebookTestParent {
-
+public class GetPageAlbumsTestCases extends FacebookTestParent {
+	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
-
-			User loggedInUser = getLoggedUserDetails();
-			testObjects.put("username", loggedInUser.getId());
+			testObjects = (HashMap<String,Object>) context.getBean("getPageAlbumsTestData");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
-
+	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetUser() {
+	public void testGetPageAlbums() {
+    	
+		MessageProcessor flow = lookupFlowConstruct("get-page-albums");
+    	
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User user = (User) response.getMessage().getPayload();
 
-			assertEquals(user.getId(), (String) testObjects.get("username"));
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			List<Album> albums = (List<Album>) response.getMessage().getPayload();
+			
+			assertNotNull(albums);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-
+     
 	}
-
+    
+    
 }

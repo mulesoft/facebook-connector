@@ -1,0 +1,50 @@
+package org.mule.module.facebook.automation.testcases;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.mule.api.MuleEvent;
+import org.mule.api.processor.MessageProcessor;
+import org.mule.module.facebook.types.GetApplicationTaggedResponseType;
+
+import com.restfb.types.Event;
+
+public class GetApplicationTaggedTestCases extends FacebookTestParent {
+
+	@SuppressWarnings("unchecked")
+	@Before
+	public void setUp() {
+		try {
+			testObjects = (Map<String, Object>) context.getBean("getApplicationTaggedTestData");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Category({RegressionTests.class})
+	@Test
+	public void testGetApplicationTagged() {
+		try {
+			MessageProcessor flow = lookupFlowConstruct("get-application-tagged");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			
+			List<GetApplicationTaggedResponseType> result = (List<GetApplicationTaggedResponseType>) response.getMessage().getPayload();
+			
+			assertNotNull(result);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+}

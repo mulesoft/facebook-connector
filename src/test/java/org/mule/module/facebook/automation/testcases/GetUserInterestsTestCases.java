@@ -8,10 +8,11 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,39 +20,43 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.User;
+import com.restfb.types.PageConnection;
 
-public class GetUserTestCases extends FacebookTestParent {
-
+public class GetUserInterestsTestCases extends FacebookTestParent {
+	
+	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
-
-			User loggedInUser = getLoggedUserDetails();
-			testObjects.put("username", loggedInUser.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-    @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetUser() {
-		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User user = (User) response.getMessage().getPayload();
-
-			assertEquals(user.getId(), (String) testObjects.get("username"));
+	    	testObjects = (HashMap<String,Object>) context.getBean("getUserInterestsTestData");
+			
+	    	String profileId = getProfileId();
+	    	testObjects.put("user", profileId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-
 	}
+	
+    @SuppressWarnings("unchecked")
+	@Category({RegressionTests.class})
+	@Test
+	public void testGetUserInterests() {
+    	
+		MessageProcessor flow = lookupFlowConstruct("get-user-interests");
+    	
+		try {
 
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			List<PageConnection> result = (List<PageConnection>) response.getMessage().getPayload();
+			
+			assertNotNull(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+     
+	}
+    
 }

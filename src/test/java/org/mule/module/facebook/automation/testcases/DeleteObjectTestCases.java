@@ -8,7 +8,7 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -19,34 +19,38 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.User;
+import com.restfb.types.Album;
 
-public class GetUserTestCases extends FacebookTestParent {
+public class DeleteObjectTestCases extends FacebookTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
-
-			User loggedInUser = getLoggedUserDetails();
-			testObjects.put("username", loggedInUser.getId());
-		}
-		catch (Exception e) {
+			testObjects = (HashMap<String, Object>) context.getBean("deleteObjectTestData");
+			
+			String profileId = getProfileId();
+			testObjects.put("profileId", profileId);
+			
+			String msg = (String) testObjects.get("msg");
+			
+			String msgId = publishMessage(profileId, msg);
+			testObjects.put("objectId", msgId);
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 
-    @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
+	@Category({ RegressionTests.class })
 	@Test
-	public void testGetUser() {
+	public void testDeleteObject() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user");
+			MessageProcessor flow = lookupFlowConstruct("delete-object");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User user = (User) response.getMessage().getPayload();
-
-			assertEquals(user.getId(), (String) testObjects.get("username"));
+			
+			Boolean result = (Boolean) response.getMessage().getPayload();
+			assertTrue(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

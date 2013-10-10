@@ -13,45 +13,35 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.User;
+import com.restfb.types.Application;
 
-public class GetUserTestCases extends FacebookTestParent {
-
-	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
-
-			User loggedInUser = getLoggedUserDetails();
-			testObjects.put("username", loggedInUser.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
+public class GetApplicationTestCases extends FacebookTestParent {
+	
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testGetUser() {
+	public void testGetApplication() {
+    	
+    	testObjects = (HashMap<String,Object>) context.getBean("getApplicationTestData");
+    	
+		MessageProcessor flow = lookupFlowConstruct("get-application");
+    	
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User user = (User) response.getMessage().getPayload();
+			Application app = (Application) response.getMessage().getPayload();
+			
+			assertEquals(testObjects.get("application"), app.getId());
 
-			assertEquals(user.getId(), (String) testObjects.get("username"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-
+     
 	}
-
+    
 }
