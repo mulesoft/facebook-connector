@@ -64,7 +64,7 @@
 	<!-- get-application-albums -->
 	<util:map id="getApplicationAlbumsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<!-- <entry key="since" value="#{T(java.lang.management.ManagementFactory).getRuntimeMXBean().getStartTime()}" 
 			/> -->
 		<entry key="until" value="now" />
@@ -218,7 +218,7 @@
 	
 	<!-- get-application-statuses -->
 	<util:map id="getApplicationStatusesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -355,7 +355,7 @@
 	<!-- get-application -->
 	<util:map id="getApplicationTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 	</util:map>
 
 	<!-- get-post -->
@@ -968,7 +968,7 @@
 	<!-- get-application-events -->
 	<util:map id="getApplicationEventsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
@@ -978,7 +978,7 @@
 	<!-- get-application-insights -->
 	<util:map id="getApplicationInsightsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
@@ -988,7 +988,7 @@
 	<!-- get-application-links -->
 	<util:map id="getApplicationLinksTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
@@ -998,7 +998,7 @@
 	<!-- get-application-notes -->
 	<util:map id="getApplicationNotesTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
@@ -1008,7 +1008,7 @@
 	<!-- get-application-photos -->
 	<util:map id="getApplicationPhotosTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
@@ -1018,14 +1018,14 @@
 	<!-- get-application-picture -->
 	<util:map id="getApplicationPictureTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="type" value="small" />
 	</util:map>
 	
 	<!-- get-application-tagged -->
 	<util:map id="getApplicationTaggedTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
@@ -1035,7 +1035,7 @@
 	<!-- get-application-videos -->
 	<util:map id="getApplicationVideosTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
@@ -1045,7 +1045,7 @@
 	<!-- get-application-wall -->
 	<util:map id="getApplicationWallTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="application" value="${facebook.appId}" />
+		<entry key="application" value="${facebook.consumerKey}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
