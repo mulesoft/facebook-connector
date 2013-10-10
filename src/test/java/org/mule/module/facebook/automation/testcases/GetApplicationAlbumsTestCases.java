@@ -14,6 +14,7 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
@@ -27,18 +28,14 @@ public class GetApplicationAlbumsTestCases extends FacebookTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetApplicationAlbums() {
-    	
-    	testObjects = (HashMap<String,Object>) context.getBean("getApplicationAlbumsTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-application-albums");
-    	
 		try {
+			testObjects = (HashMap<String,Object>) context.getBean("getApplicationAlbumsTestData");
 
+			MessageProcessor flow = lookupFlowConstruct("get-application-albums");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			List<Album> albums = (List<Album>) response.getMessage().getPayload();
-			
 			assertNotNull(albums);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
