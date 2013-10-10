@@ -41,7 +41,7 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 			String albumName = (String) testObjects.get("albumName");
 			
 			String albumId = publishAlbum(albumName, msg, profileId);
-			testObjects.put("albumId", albumId);
+			testObjects.put("album", albumId);
 			
 			String caption = (String) testObjects.get("caption");
 			String photoFileName = (String) testObjects.get("photoFileName");
@@ -89,7 +89,7 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	public void tearDown() {
 		try {
 			deleteObject((String) testObjects.get("photoId"));
-			deleteObject((String) testObjects.get("albumId"));
+			deleteObject((String) testObjects.get("album"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

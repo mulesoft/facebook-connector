@@ -330,6 +330,10 @@
 		<!-- This file must be present in your classpath This file is loaded as 
 			follows: getClass().getClassLoader().getResource(fileName) -->
 		<entry key="photoFileName" value="image.jpg" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="tomorrow" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
 	</util:map>
 
 	<!-- get-album-comments -->
