@@ -18,17 +18,11 @@ public class GetUserMusicTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserMusicTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserMusicTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -36,12 +30,10 @@ public class GetUserMusicTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserMusic() {
 		try {
-			
 			MessageProcessor flow = lookupFlowConstruct("get-user-music");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<PageConnection> result = (List<PageConnection>) response.getMessage().getPayload();
-			
 			assertNotNull(result);
 		}
 		catch (Exception e) {

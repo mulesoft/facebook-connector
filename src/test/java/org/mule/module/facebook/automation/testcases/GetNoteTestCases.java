@@ -18,22 +18,17 @@ public class GetNoteTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void tearUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getNoteTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("getNoteTestData");
 
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 			
-			String msg = testObjects.get("msg").toString();
-			String subject = testObjects.get("subject").toString();
+		String msg = testObjects.get("msg").toString();
+		String subject = testObjects.get("subject").toString();
 
-			String noteid = publishNote(getProfileId(), msg, subject);
-			testObjects.put("note", noteid);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String noteid = publishNote(getProfileId(), msg, subject);
+		testObjects.put("note", noteid);
 	}
 
 	@Test
@@ -57,13 +52,8 @@ public class GetNoteTestCases extends FacebookTestParent {
 	}
 
 	@After
-	public void tearDown() {
-		try {
-			String noteId = (String) testObjects.get("note");
-			deleteObject(noteId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String noteId = (String) testObjects.get("note");
+		deleteObject(noteId);
 	}
 }

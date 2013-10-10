@@ -24,39 +24,29 @@ import com.restfb.types.Group;
 
 public class GetUserGroupsTestCases extends FacebookTestParent {
 	
-	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserGroupsTestData");
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getUserGroupsTestData");
 			
-	    	String profileId = getProfileId();
-	    	testObjects.put("user", profileId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+    	String profileId = getProfileId();
+    	testObjects.put("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserGroups() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-groups");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user-groups");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			List<Group> result = (List<Group>) response.getMessage().getPayload();
-			
 			assertNotNull(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

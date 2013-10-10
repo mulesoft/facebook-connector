@@ -19,20 +19,14 @@ public class GetUserSearchTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserSearchTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-			
-			String messageId = publishMessage(profileId, (String) testObjects.get("msg"));
-			testObjects.put("objectId", messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserSearchTestData");
+		
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
+		
+		String messageId = publishMessage(profileId, (String) testObjects.get("msg"));
+		testObjects.put("objectId", messageId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -63,12 +57,8 @@ public class GetUserSearchTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			deleteObject((String) testObjects.get("objectId"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String objectId = (String) testObjects.get("objectId");
+		deleteObject((String) testObjects.get("objectId"));
 	}
 }

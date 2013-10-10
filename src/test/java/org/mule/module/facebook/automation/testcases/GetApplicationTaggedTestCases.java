@@ -13,20 +13,11 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.GetApplicationTaggedResponseType;
 
-import com.restfb.types.Event;
-
 public class GetApplicationTaggedTestCases extends FacebookTestParent {
 
-	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getApplicationTaggedTestData");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getApplicationTaggedTestData");
 	}
 	
 	@SuppressWarnings("unchecked")

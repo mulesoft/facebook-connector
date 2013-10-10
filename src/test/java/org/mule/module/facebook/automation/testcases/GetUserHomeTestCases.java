@@ -24,7 +24,6 @@ import com.restfb.types.Post;
 
 public class GetUserHomeTestCases extends FacebookTestParent {
 	
-	
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
@@ -43,21 +42,16 @@ public class GetUserHomeTestCases extends FacebookTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserHome() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-home");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user-home");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Collection<Post> posts = (Collection<Post>) response.getMessage().getPayload();
-			
-			assertTrue(posts instanceof Collection);
 
+			Collection<Post> posts = (Collection<Post>) response.getMessage().getPayload();
+			assertTrue(posts.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

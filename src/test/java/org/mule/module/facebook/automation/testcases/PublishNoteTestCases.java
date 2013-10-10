@@ -19,16 +19,11 @@ public class PublishNoteTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("publishNoteTestData");
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("publishNoteTestData");
+
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 	
 	@Category({RegressionTests.class})
@@ -51,14 +46,8 @@ public class PublishNoteTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String id = (String) testObjects.get("noteId");
-			deleteObject(id);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String id = (String) testObjects.get("noteId");
+		deleteObject(id);
 	}
 }

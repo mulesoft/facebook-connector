@@ -27,35 +27,23 @@ public class GetPageTaggedTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getPageTaggedTestData");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		testObjects = (HashMap<String,Object>) context.getBean("getPageTaggedTestData");
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPageTagged() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-page-tagged");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-page-tagged");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			List<Post> result = (List<Post>) response.getMessage().getPayload();
-			
-			assertNotNull(result);
 
+			List<Post> result = (List<Post>) response.getMessage().getPayload();
+			assertNotNull(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
-    
     
 }

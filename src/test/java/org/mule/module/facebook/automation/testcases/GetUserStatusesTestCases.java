@@ -20,24 +20,18 @@ import com.restfb.types.StatusMessage;
 public class GetUserStatusesTestCases extends FacebookTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserStatusesTestData");
-			
-			String profileId = getProfileId();
-			
-			List<String> messages = (List<String>) testObjects.get("messages");
-			List<String> messageIds = new ArrayList<String>();
-			for (String message : messages) {
-				String messageId = publishMessage(profileId, message);
-				messageIds.add(messageId);
-			}
-			testObjects.put("messageIds", messageIds);
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserStatusesTestData");
+		
+		String profileId = getProfileId();
+		
+		List<String> messages = (List<String>) testObjects.get("messages");
+		List<String> messageIds = new ArrayList<String>();
+		for (String message : messages) {
+			String messageId = publishMessage(profileId, message);
+			messageIds.add(messageId);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		testObjects.put("messageIds", messageIds);
 	}
 	
 	@Category({RegressionTests.class})
@@ -69,16 +63,10 @@ public class GetUserStatusesTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
-			for (String messageId : messageIds) {
-				deleteObject(messageId);
-			}
-		}
-		catch (Exception e) { 
-			e.printStackTrace();
-			fail();
+	public void tearDown() throws Exception {
+		List<String> messageIds = (List<String>) testObjects.get("messageIds");
+		for (String messageId : messageIds) {
+			deleteObject(messageId);
 		}
 	}
 	

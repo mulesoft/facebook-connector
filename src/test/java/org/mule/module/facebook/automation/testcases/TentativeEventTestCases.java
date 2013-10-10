@@ -15,14 +15,8 @@ import org.mule.api.processor.MessageProcessor;
 public class TentativeEventTestCases extends FacebookTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("tentativeEventTestData");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("tentativeEventTestData");
 	}
 	
 	@Category({RegressionTests.class})
@@ -42,15 +36,9 @@ public class TentativeEventTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String eventId = (String) testObjects.get("eventId");
-			declineEvent(eventId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String eventId = (String) testObjects.get("eventId");
+		declineEvent(eventId);
 	}
 	
 }

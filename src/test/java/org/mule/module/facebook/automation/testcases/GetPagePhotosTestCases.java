@@ -26,36 +26,24 @@ public class GetPagePhotosTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getPagePhotosTestData");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getPagePhotosTestData");
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPagePhotos() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-page-photos");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-page-photos");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			List<Photo> result = (List<Photo>) response.getMessage().getPayload();
-			
-			assertNotNull(result);
 
+			List<Photo> result = (List<Photo>) response.getMessage().getPayload();
+			assertNotNull(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
-    
     
 }

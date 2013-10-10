@@ -21,30 +21,24 @@ public class GetPostCommentsTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getPostCommentsTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			
-			String msg = (String) testObjects.get("msg");
-			String messageId = publishMessage(profileId, msg);
-			testObjects.put("messageId", messageId);
-			
-			List<String> comments = (List<String>) testObjects.get("comments");
-			List<String> commentIds = new ArrayList<String>();
-			for (String comment : comments) {
-				String commentId = publishComment(messageId, comment);
-				commentIds.add(commentId);
-			}
-			
-			testObjects.put("commentIds", commentIds);
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getPostCommentsTestData");
+		
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		
+		String msg = (String) testObjects.get("msg");
+		String messageId = publishMessage(profileId, msg);
+		testObjects.put("messageId", messageId);
+		
+		List<String> comments = (List<String>) testObjects.get("comments");
+		List<String> commentIds = new ArrayList<String>();
+		for (String comment : comments) {
+			String commentId = publishComment(messageId, comment);
+			commentIds.add(commentId);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		
+		testObjects.put("commentIds", commentIds);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -73,15 +67,9 @@ public class GetPostCommentsTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(messageId);
 	}
 	
 }

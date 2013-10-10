@@ -21,29 +21,23 @@ public class GetEventWallTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getEventWallTestData");
-			
-			String profileId = getProfileId();
-			
-			String eventName = (String) testObjects.get("eventName");
-			String startTime = (String) testObjects.get("startTime");
-			String eventId = publishEvent(profileId, eventName, startTime);
-			testObjects.put("eventId", eventId);
-			
-			List<String> messages = (List<String>) testObjects.get("messages");
-			List<String> messageIds = new ArrayList<String>();
-			for (String message : messages) {
-				String messageId = publishMessage(eventId, message);
-				messageIds.add(messageId);
-			}
-			testObjects.put("messageIds", messageIds);
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getEventWallTestData");
+		
+		String profileId = getProfileId();
+		
+		String eventName = (String) testObjects.get("eventName");
+		String startTime = (String) testObjects.get("startTime");
+		String eventId = publishEvent(profileId, eventName, startTime);
+		testObjects.put("eventId", eventId);
+		
+		List<String> messages = (List<String>) testObjects.get("messages");
+		List<String> messageIds = new ArrayList<String>();
+		for (String message : messages) {
+			String messageId = publishMessage(eventId, message);
+			messageIds.add(messageId);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		testObjects.put("messageIds", messageIds);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -70,15 +64,9 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String eventId = (String) testObjects.get("eventId");
-			deleteObject(eventId);
-		}
-		catch (Exception e) { 
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception{
+		String eventId = (String) testObjects.get("eventId");
+		deleteObject(eventId);
 	}
 	
 }

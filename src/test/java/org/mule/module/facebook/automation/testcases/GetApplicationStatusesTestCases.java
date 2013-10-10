@@ -19,17 +19,11 @@ public class GetApplicationStatusesTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getApplicationStatusesTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getApplicationStatusesTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -50,12 +44,7 @@ public class GetApplicationStatusesTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+
 	}
 }

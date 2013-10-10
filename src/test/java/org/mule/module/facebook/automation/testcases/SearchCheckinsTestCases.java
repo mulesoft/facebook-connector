@@ -13,24 +13,17 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Post;
-
 public class SearchCheckinsTestCases extends FacebookTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("searchCheckinsTestData");
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("searchCheckinsTestData");
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 			
-			// Check-in at Pizza place
-			String messageId = publishMessage(profileId, "I like pizza", null, null, null, null, null, "132738745815");
-			testObjects.put("messageId", messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		// Check-in at Pizza place
+		String messageId = publishMessage(profileId, "I like pizza", null, null, null, null, null, "132738745815");
+		testObjects.put("messageId", messageId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -50,15 +43,9 @@ public class SearchCheckinsTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(messageId);
 	}
 
 }

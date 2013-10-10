@@ -26,53 +26,37 @@ public class GetPhotoTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getPhotoTestData");
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-			
-			String caption = (String) testObjects.get("caption");
-			File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
-			
-			String photoId = publishPhoto(profileId, caption, photoFile);
-			testObjects.put("photo", photoId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getPhotoTestData");
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
+		
+		String caption = (String) testObjects.get("caption");
+		File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+		
+		String photoId = publishPhoto(profileId, caption, photoFile);
+		testObjects.put("photo", photoId);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPhoto() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-photo");
-    	
 		try {
+			MessageProcessor flow = lookupFlowConstruct("get-photo");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			Photo result = (Photo) response.getMessage().getPayload();
-			
 			assertTrue(result.getId().equals((String) testObjects.get("photo")));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String photoId = (String) testObjects.get("photo");
-			deleteObject(photoId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String photoId = (String) testObjects.get("photo");
+		deleteObject(photoId);
 	}
-    
     
 }

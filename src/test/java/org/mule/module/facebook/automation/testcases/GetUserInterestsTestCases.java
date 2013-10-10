@@ -24,39 +24,29 @@ import com.restfb.types.PageConnection;
 
 public class GetUserInterestsTestCases extends FacebookTestParent {
 	
-	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserInterestsTestData");
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getUserInterestsTestData");
 			
-	    	String profileId = getProfileId();
-	    	testObjects.put("user", profileId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+    	String profileId = getProfileId();
+    	testObjects.put("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserInterests() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-interests");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user-interests");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			List<PageConnection> result = (List<PageConnection>) response.getMessage().getPayload();
-			
 			assertNotNull(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

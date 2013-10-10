@@ -18,22 +18,16 @@ public class GetGroupPictureTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp(){
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getGroupPictureTestData");
-			String query = (String) testObjects.get("q");
-	    	List<Group> groups = searchGroups(query);
-			testObjects.put("group", groups.get(0).getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getGroupPictureTestData");
+		String query = (String) testObjects.get("q");
+    	List<Group> groups = searchGroups(query);
+		testObjects.put("group", groups.get(0).getId());
 	}
 
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetGroupPicture(){
+	public void testGetGroupPicture() {
 		try {
 			MessageProcessor flow = lookupFlowConstruct("get-group-picture");
 			MuleEvent response = flow.process(getTestEvent(testObjects));

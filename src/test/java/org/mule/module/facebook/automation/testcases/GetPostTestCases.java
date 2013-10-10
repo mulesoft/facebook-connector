@@ -18,20 +18,14 @@ public class GetPostTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getPostTestData");
-			
-			String profileId = getProfileId();
-			String msg = (String) testObjects.get("msg");
-			
-			String messageId = publishMessage(profileId, msg);
-			testObjects.put("messageId", messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getPostTestData");
+		
+		String profileId = getProfileId();
+		String msg = (String) testObjects.get("msg");
+		
+		String messageId = publishMessage(profileId, msg);
+		testObjects.put("messageId", messageId);
 	}
 	
 	@Category({RegressionTests.class})
@@ -56,15 +50,9 @@ public class GetPostTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(messageId);
 	}
 	
 }

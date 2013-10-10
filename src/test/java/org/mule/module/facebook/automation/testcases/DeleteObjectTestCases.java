@@ -19,30 +19,23 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
-import com.restfb.types.Album;
-
 public class DeleteObjectTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("deleteObjectTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("deleteObjectTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 			
-			String msg = (String) testObjects.get("msg");
+		String msg = (String) testObjects.get("msg");
 			
-			String msgId = publishMessage(profileId, msg);
-			testObjects.put("objectId", msgId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String msgId = publishMessage(profileId, msg);
+		testObjects.put("objectId", msgId);
 	}
 
-	@Category({ RegressionTests.class })
+	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
 	public void testDeleteObject() {
 		try {

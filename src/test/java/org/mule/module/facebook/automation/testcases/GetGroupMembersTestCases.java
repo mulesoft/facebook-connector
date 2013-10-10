@@ -1,6 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -19,29 +19,23 @@ public class GetGroupMembersTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp(){
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getGroupMembersTestData");
-			String query = (String) testObjects.get("q");
-	    	List<Group> groups = searchGroups(query);
-			testObjects.put("group", groups.get(0).getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getGroupMembersTestData");
+		String query = (String) testObjects.get("q");
+    	List<Group> groups = searchGroups(query);
+		testObjects.put("group", groups.get(0).getId());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
-	public void testGetGroupMembers(){
+	public void testGetGroupMembers() {
 		try {
 			MessageProcessor flow = lookupFlowConstruct("get-group-members");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			List<Member> result = (List<Member>) response.getMessage().getPayload();
 			
-			assertNotNull(result);
+			assertTrue(result.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

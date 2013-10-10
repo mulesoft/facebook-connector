@@ -18,17 +18,11 @@ public class GetUserLikesTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserLikesTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserLikesTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -36,12 +30,10 @@ public class GetUserLikesTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserLikes() {
 		try {
-			
 			MessageProcessor flow = lookupFlowConstruct("get-user-likes");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<PageConnection> likes = (List<PageConnection>) response.getMessage().getPayload();
-			
 			assertNotNull(likes);
 		}
 		catch (Exception e) {

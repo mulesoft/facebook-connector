@@ -18,17 +18,11 @@ public class GetUserMoviesTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserMoviesTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserMoviesTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -36,12 +30,10 @@ public class GetUserMoviesTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserMovies() {
 		try {
-			
 			MessageProcessor flow = lookupFlowConstruct("get-user-movies");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<PageConnection> result = (List<PageConnection>) response.getMessage().getPayload();
-			
 			assertNotNull(result);
 		}
 		catch (Exception e) {

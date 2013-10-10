@@ -24,17 +24,11 @@ import com.restfb.types.User;
 public class GetUserTestCases extends FacebookTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
 
-			User loggedInUser = getLoggedUserDetails();
-			testObjects.put("username", loggedInUser.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		User loggedInUser = getLoggedUserDetails();
+		testObjects.put("username", loggedInUser.getId());
 	}
 
     @SuppressWarnings("unchecked")

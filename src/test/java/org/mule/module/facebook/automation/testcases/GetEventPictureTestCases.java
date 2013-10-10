@@ -24,35 +24,27 @@ public class GetEventPictureTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getEventPictureTestData");
-			
-			String profileId = getProfileId();
-			
-			String eventId = publishEvent(profileId, (String) testObjects.get("eventName"), 
-					(String) testObjects.get("startTime"));
-			
-			testObjects.put("eventId", eventId);
-			testObjects.put("objectId", eventId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getEventPictureTestData");
+		
+		String profileId = getProfileId();
+		String eventName = (String) testObjects.get("eventName");
+		String startTime = (String) testObjects.get("startTime");
+		
+		String eventId = publishEvent(profileId, eventName, startTime);
+		testObjects.put("eventId", eventId);
+		testObjects.put("objectId", eventId);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEventPicture() {
-    	
 		try {
 			MessageProcessor flow = lookupFlowConstruct("get-event-picture");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			byte[] picture = (byte[]) response.getMessage().getPayload();
 			
 			assertTrue(picture.length > 0);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -61,14 +53,9 @@ public class GetEventPictureTestCases extends FacebookTestParent {
 	}
     
     @After
-	public void tearDown() {
-		try {
-			deleteObject((String) testObjects.get("objectId"));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+    	String objectId = (String) testObjects.get("objectId");
+		deleteObject(objectId);
 	}
     
 }

@@ -19,17 +19,11 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getVideoCommentsTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("getVideoCommentsTestData");
 			
-			String commentId = publishComment((String) testObjects.get("postId"), (String) testObjects.get("msg"));
-			testObjects.put("objectId", commentId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-
+		String commentId = publishComment((String) testObjects.get("postId"), (String) testObjects.get("msg"));
+		testObjects.put("objectId", commentId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -48,17 +42,12 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 			e.printStackTrace();
 			fail();
 		}
-
 	}
 	
 	@After
-	public void tearDown(){
-		try {
-			deleteObject(testObjects.get("objectId").toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+	public void tearDown() throws Exception {
+		String objectId = (String) testObjects.get("objectId");
+		deleteObject(objectId);
 	}
 
 }

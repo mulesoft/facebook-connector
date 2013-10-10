@@ -30,30 +30,25 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getAlbumPhotosTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getAlbumPhotosTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 			
-			String msg = (String) testObjects.get("msg");
-			String albumName = (String) testObjects.get("albumName");
+		String msg = (String) testObjects.get("msg");
+		String albumName = (String) testObjects.get("albumName");
 			
-			String albumId = publishAlbum(albumName, msg, profileId);
-			testObjects.put("album", albumId);
+		String albumId = publishAlbum(albumName, msg, profileId);
+		testObjects.put("album", albumId);
 			
-			String caption = (String) testObjects.get("caption");
-			String photoFileName = (String) testObjects.get("photoFileName");
+		String caption = (String) testObjects.get("caption");
+		String photoFileName = (String) testObjects.get("photoFileName");
 			
-			File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
-			String photoId = publishPhoto(albumId, caption, photo);
+		File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
+		String photoId = publishPhoto(albumId, caption, photo);
 			
-			testObjects.put("photoId", photoId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		testObjects.put("photoId", photoId);
 	}
 	
 	
@@ -86,14 +81,8 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	}
     
     @After
-	public void tearDown() {
-		try {
-			deleteObject((String) testObjects.get("photoId"));
-			deleteObject((String) testObjects.get("album"));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		deleteObject((String) testObjects.get("photoId"));
+		deleteObject((String) testObjects.get("album"));
 	}
 }

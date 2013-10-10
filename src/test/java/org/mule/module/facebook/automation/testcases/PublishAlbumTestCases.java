@@ -8,41 +8,42 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import com.restfb.types.Album;
+
 public class PublishAlbumTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("publishAlbumTestData");
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("publishAlbumTestData");
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testPublishAlbum() {
 		try {
-			String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
-			assertTrue(StringUtils.isNotEmpty(albumId));
+			String albumName = (String) testObjects.get("albumName");
+			String msg = (String) testObjects.get("msg");
+			String profileId = (String) testObjects.get("profileId");
 			
+			String albumId = publishAlbum(albumName, msg, profileId);
 			testObjects.put("albumId", albumId);
+			
+			Album retrievedAlbum = getAlbum(albumId);
+			assertEquals(retrievedAlbum.getId(), albumId);
+			assertEquals(retrievedAlbum.getName(), albumName);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -50,17 +51,11 @@ public class PublishAlbumTestCases extends FacebookTestParent {
 	}
 
     @After
-    public void tearDown() {
-    	try {
-    		String albumId = (String) testObjects.get("albumId");
+    public void tearDown() throws Exception {
+    	String albumId = (String) testObjects.get("albumId");
     		
-    		// Deletion of albums cannot be done by the Facebook API.
-//    		deleteObject(albumId);
-    	}
-    	catch (Exception e) {
-    		e.printStackTrace();
-    		fail();
-    	}
+   	// 	Deletion of albums cannot be done by the Facebook API.
+   	//	deleteObject(albumId);
     }
     
 }

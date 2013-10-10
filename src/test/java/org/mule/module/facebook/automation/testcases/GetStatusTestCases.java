@@ -18,22 +18,16 @@ public class GetStatusTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getStatusTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			
-			String msg = (String) testObjects.get("msg");
-			
-			String messageId = publishMessage(profileId, msg);
-			testObjects.put("messageId", messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getStatusTestData");
+		
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		
+		String msg = (String) testObjects.get("msg");
+		
+		String messageId = publishMessage(profileId, msg);
+		testObjects.put("messageId", messageId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -59,15 +53,9 @@ public class GetStatusTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(messageId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(messageId);
 	}
 	
 }

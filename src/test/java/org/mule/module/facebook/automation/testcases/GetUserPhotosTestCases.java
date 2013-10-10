@@ -1,7 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -21,23 +20,17 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserPhotosTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-			
-			String caption = (String) testObjects.get("caption");
-			File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
-			
-			String photoId = publishPhoto(profileId, caption, photoFile);
-			testObjects.put("photoId", photoId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserPhotosTestData");
+		
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
+		
+		String caption = (String) testObjects.get("caption");
+		File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+		
+		String photoId = publishPhoto(profileId, caption, photoFile);
+		testObjects.put("photoId", photoId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -63,15 +56,9 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String photoId = (String) testObjects.get("photoId");
-			deleteObject(photoId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String photoId = (String) testObjects.get("photoId");
+		deleteObject(photoId);
 	}
 	
 }

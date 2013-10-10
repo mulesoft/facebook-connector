@@ -8,13 +8,14 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,27 +27,23 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getUserAlbumsTestData");
-			
-			String profileId = getProfileId();
-			String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), profileId);
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("getUserAlbumsTestData");
+		
+		String profileId = getProfileId();
+		String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), profileId);
 
-			testObjects.put("profileId", profileId);
-			testObjects.put("albumId", albumId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		testObjects.put("profileId", profileId);
+		testObjects.put("albumId", albumId);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Category({ RegressionTests.class })
 	@Test
 	public void testGetUserAlbums() {
 		try {
 			String profileId = (String) testObjects.get("profileId");
-			String albumId = (String) testObjects.get("albumId");
+			final String albumId = (String) testObjects.get("albumId");
 			String since = (String) testObjects.get("since");
 			String until = (String) testObjects.get("until");
 			String limit = (String) testObjects.get("limit");
@@ -54,6 +51,17 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 			
 			Collection<Album> albums = requestUserAlbums(profileId,	since, until, limit, offset);
 			assertTrue(albums.size() > 0);
+
+			Collection<Album> matching = CollectionUtils.select(albums, new Predicate() {
+				
+				@Override
+				public boolean evaluate(Object object) {
+					Album album = (Album) object;
+					return album.getId().equals(albumId);
+				}
+			});
+		
+			assertTrue(matching.size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -61,13 +69,7 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 	}
 
 	@After
-	public void tearDown() {
-		try {
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		
 	}
 }

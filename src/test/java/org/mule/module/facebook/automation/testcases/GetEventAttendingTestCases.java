@@ -26,36 +26,25 @@ public class GetEventAttendingTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getEventAttendingTestData");
-			
-	    	attendEvent((String) testObjects.get("eventId"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getEventAttendingTestData");
+    	attendEvent((String) testObjects.get("eventId"));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEventAttending() {
-		
-		MessageProcessor flow = lookupFlowConstruct("get-event-attending");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-event-attending");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Collection<User> users = (Collection<User>) response.getMessage().getPayload();
-			
-			assertTrue(users.size() > 0);
 
+			Collection<User> users = (Collection<User>) response.getMessage().getPayload();
+			assertTrue(users.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

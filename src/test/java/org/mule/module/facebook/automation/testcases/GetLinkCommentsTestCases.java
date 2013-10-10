@@ -20,32 +20,31 @@ public class GetLinkCommentsTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp(){
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getLinkCommentsTestData");
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("getLinkCommentsTestData");
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 
-			String msg = testObjects.get("msg").toString();
-			// link is a url here
-			String link = testObjects.get("link").toString();
-			
-			String messageId = publishLink(profileId, msg, link);
-			testObjects.put("messageId", messageId);
-			
-			publishComment(messageId, (String) testObjects.get("commentMsg"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String msg = testObjects.get("msg").toString();
+		// link is a url here
+		String link = testObjects.get("link").toString();
+		
+		String messageId = publishLink(profileId, msg, link);
+		testObjects.put("messageId", messageId);
+		
+		String commentId = publishComment(messageId, (String) testObjects.get("commentMsg"));
+		testObjects.put("commentId", commentId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testGetLinkComments(){
+	public void testGetLinkComments() {
 		try {
 			String messageId = (String) testObjects.get("messageId");
+			String commentMsg = (String) testObjects.get("commentMsg");
+			String commentId = (String) testObjects.get("commentId");
+			
 			// link is the graph object id here
 			testObjects.put("link", messageId);
 			
@@ -54,7 +53,9 @@ public class GetLinkCommentsTestCases extends FacebookTestParent {
 			List<Comment> comments = (List<Comment>) response.getMessage().getPayload();
 			
 			assertTrue(comments.size() == 1);
-			assertEquals((String) testObjects.get("commentMsg"), comments.get(0).getMessage());
+			Comment comment = comments.get(0);
+			assertEquals(comment.getMessage(), commentMsg);
+			assertEquals(comment.getId(), commentId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -62,15 +63,10 @@ public class GetLinkCommentsTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String profileId = (String) testObjects.get("profileId");
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(profileId + "_" + messageId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String profileId = (String) testObjects.get("profileId");
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(profileId + "_" + messageId);
 	}
 
 }

@@ -22,39 +22,29 @@ import org.mule.api.processor.MessageProcessor;
 
 public class GetUserInboxTestCases extends FacebookTestParent {
 	
-	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserInboxTestData");
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getUserInboxTestData");
 			
-	    	String profileId = getProfileId();
-	    	testObjects.put("user", profileId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+    	String profileId = getProfileId();
+    	testObjects.put("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserInbox() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-inbox");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user-inbox");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			List<org.mule.module.facebook.types.Thread> result = (List<org.mule.module.facebook.types.Thread>) response.getMessage().getPayload();
-			
+
+			List<Thread> result = (List<Thread>) response.getMessage().getPayload();
 			assertNotNull(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

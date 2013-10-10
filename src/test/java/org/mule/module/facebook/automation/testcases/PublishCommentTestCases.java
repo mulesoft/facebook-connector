@@ -20,19 +20,13 @@ public class PublishCommentTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			//create comment for message
-			testObjects = (HashMap<String, Object>) context.getBean("publishCommentTestData");
+	public void setUp() throws Exception {
+		//create comment for message
+		testObjects = (HashMap<String, Object>) context.getBean("publishCommentTestData");
 			
-			String statusMsg = (String) testObjects.get("msg");
-			String postId = publishMessage(getProfileId(), statusMsg);
-			testObjects.put("postId", postId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-
+		String statusMsg = (String) testObjects.get("msg");
+		String postId = publishMessage(getProfileId(), statusMsg);
+		testObjects.put("postId", postId);
 	}
 
 	@Category({ SmokeTests.class, RegressionTests.class })
@@ -66,13 +60,8 @@ public class PublishCommentTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown(){
-		try {
-			deleteObject(testObjects.get("postId").toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+	public void tearDown() throws Exception {
+		deleteObject(testObjects.get("postId").toString());
 	}
 
 }

@@ -26,34 +26,24 @@ public class GetEventInvitedTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getEventInvitedTestData");
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getEventInvitedTestData");
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEventInvited() {
-		
-		MessageProcessor flow = lookupFlowConstruct("get-event-invited");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-event-invited");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Collection<User> users =  (Collection<User>) response.getMessage().getPayload();
-			
-			assertTrue(users instanceof Collection);
 
+			Collection<User> users =  (Collection<User>) response.getMessage().getPayload();
+			assertTrue(users.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

@@ -18,21 +18,16 @@ public class GetLinkTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp(){
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getLinkTestData");
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("getLinkTestData");
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 
-			String msg = testObjects.get("msg").toString();
-			String link = testObjects.get("link").toString();
-			
-			String messageId = publishLink(profileId, msg, link);
-			testObjects.put("messageId", messageId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String msg = testObjects.get("msg").toString();
+		String link = testObjects.get("link").toString();
+		
+		String messageId = publishLink(profileId, msg, link);
+		testObjects.put("messageId", messageId);
 	}
 
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -53,15 +48,10 @@ public class GetLinkTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String profileId = (String) testObjects.get("profileId");
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(profileId + "_" + messageId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String profileId = (String) testObjects.get("profileId");
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(profileId + "_" + messageId);
 	}
 
 }

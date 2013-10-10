@@ -18,14 +18,8 @@ import com.restfb.types.User;
 public class SearchUsersTestCases extends FacebookTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("searchUsersTestData");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("searchUsersTestData");
 	}
 	
 	@Category({RegressionTests.class})
@@ -45,14 +39,8 @@ public class SearchUsersTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+
 	}
 	
 }

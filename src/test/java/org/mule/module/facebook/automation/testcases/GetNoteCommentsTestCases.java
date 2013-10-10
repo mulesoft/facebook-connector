@@ -21,23 +21,18 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 	// add comment to note
 
 	@Before
-	public void tearUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getNoteCommentsTestData");
-			String msg = testObjects.get("msg").toString();
-			String subject = testObjects.get("subject").toString();
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			
-			String noteid = publishNote(profileId, msg, subject);
-			testObjects.put("note", noteid);
-			
-			String commentId = publishComment(noteid, msg);
-			testObjects.put("commentId", commentId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("getNoteCommentsTestData");
+		String msg = testObjects.get("msg").toString();
+		String subject = testObjects.get("subject").toString();
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		
+		String noteid = publishNote(profileId, msg, subject);
+		testObjects.put("note", noteid);
+		
+		String commentId = publishComment(noteid, msg);
+		testObjects.put("commentId", commentId);
 	}
 
 	@Category({RegressionTests.class})
@@ -69,14 +64,8 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 	
 	//note cannot be deleted with delete object
 	@After
-	public void tearDown(){
-		try {
-			String note = (String) testObjects.get("note");
-			deleteObject(note);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-		
+	public void tearDown() throws Exception {
+		String note = (String) testObjects.get("note");
+		deleteObject(note);
 	}
 }

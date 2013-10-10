@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -19,17 +18,11 @@ public class GetUserTelevisionTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserTelevisionTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserTelevisionTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")

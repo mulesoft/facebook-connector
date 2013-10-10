@@ -27,40 +27,32 @@ public class GetPhotoLikesTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getPhotoLikesTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			
-			String caption = (String) testObjects.get("caption");
-			String photoFileName = (String) testObjects.get("photoFileName");
-			
-			File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
-			String photoId = publishPhoto(profileId, caption, photo);
-			
-			// for "get-photo-likes"
-			testObjects.put("photo", photoId);
-			
-			like(photoId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getPhotoLikesTestData");
+		
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		
+		String caption = (String) testObjects.get("caption");
+		String photoFileName = (String) testObjects.get("photoFileName");
+		
+		File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
+		String photoId = publishPhoto(profileId, caption, photo);
+		
+		// for "get-photo-likes"
+		testObjects.put("photo", photoId);
+		
+		like(photoId);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPhotoLikes() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-photo-likes");
-    	
 		try {
+			MessageProcessor flow = lookupFlowConstruct("get-photo-likes");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			Likes result = (Likes) response.getMessage().getPayload();
-			
 			assertTrue(result.getData().size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,14 +61,9 @@ public class GetPhotoLikesTestCases extends FacebookTestParent {
 	}
 	
     @After
-	public void tearDown() {
-		try {
-			deleteObject((String) testObjects.get("photo"));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+    	String photoId = (String) testObjects.get("photoId");
+    	deleteObject(photoId);
 	}
     
 }

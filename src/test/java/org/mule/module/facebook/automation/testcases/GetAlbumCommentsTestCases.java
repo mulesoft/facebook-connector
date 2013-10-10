@@ -28,25 +28,20 @@ public class GetAlbumCommentsTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getAlbumCommentsTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getAlbumCommentsTestData");
 
-			String albumName = (String) testObjects.get("albumName");
-			String msg = (String) testObjects.get("msg");
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+		String albumName = (String) testObjects.get("albumName");
+		String msg = (String) testObjects.get("msg");
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 			
-			String albumId = publishAlbum(albumName, msg, profileId);
-			testObjects.put("albumId", albumId);
+		String albumId = publishAlbum(albumName, msg, profileId);
+		testObjects.put("albumId", albumId);
 			
-			String commentMsg = (String) testObjects.get("commentMsg");
-			String commentId = publishComment(albumId, commentMsg);
-			testObjects.put("commentId", commentId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String commentMsg = (String) testObjects.get("commentMsg");
+		String commentId = publishComment(albumId, commentMsg);
+		testObjects.put("commentId", commentId);
 	}
 	
     @SuppressWarnings("unchecked")

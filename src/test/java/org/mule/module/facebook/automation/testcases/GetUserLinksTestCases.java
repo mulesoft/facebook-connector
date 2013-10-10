@@ -20,23 +20,17 @@ public class GetUserLinksTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserLinksTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserLinksTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 			
-			String msg = (String) testObjects.get("msg");
-			String link = (String) testObjects.get("link");
+		String msg = (String) testObjects.get("msg");
+		String link = (String) testObjects.get("link");
 			
-			String linkId = publishLink(profileId, msg, link);
-			testObjects.put("linkId", linkId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String linkId = publishLink(profileId, msg, link);
+		testObjects.put("linkId", linkId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -66,16 +60,10 @@ public class GetUserLinksTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String profileId = (String) testObjects.get("profileId");
-			String linkId = (String) testObjects.get("linkId");
-			deleteObject(profileId + "_" + linkId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String profileId = (String) testObjects.get("profileId");
+		String linkId = (String) testObjects.get("linkId");
+		deleteObject(profileId + "_" + linkId);
 	}
 	
 }

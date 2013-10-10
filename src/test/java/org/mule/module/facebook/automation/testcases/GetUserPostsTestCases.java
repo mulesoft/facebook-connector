@@ -1,6 +1,5 @@
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -23,25 +22,19 @@ import com.restfb.types.Post;
 public class GetUserPostsTestCases extends FacebookTestParent {
 	
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserPostsTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			
-			List<String> messages = (List<String>) testObjects.get("messages");
-			List<String> messageIds = new ArrayList<String>();
-			
-			for (String message : messages) {
-				String messageId = publishMessage(profileId, message);
-				messageIds.add(messageId);
-				testObjects.put("messageIds", messageIds);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserPostsTestData");
+		
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		
+		List<String> messages = (List<String>) testObjects.get("messages");
+		List<String> messageIds = new ArrayList<String>();
+		
+		for (String message : messages) {
+			String messageId = publishMessage(profileId, message);
+			messageIds.add(messageId);
+			testObjects.put("messageIds", messageIds);
 		}
 	}
 	
@@ -81,16 +74,10 @@ public class GetUserPostsTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
-			for (String messageId : messageIds) {
-				deleteObject(messageId);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+	public void tearDown() throws Exception {
+		List<String> messageIds = (List<String>) testObjects.get("messageIds");
+		for (String messageId : messageIds) {
+			deleteObject(messageId);
 		}
 	}
 }

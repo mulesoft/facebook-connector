@@ -17,16 +17,11 @@ import com.restfb.types.Link;
 public class PublishLinkTestCases extends FacebookTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("publishLinkTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("publishLinkTestData");
 
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -49,15 +44,9 @@ public class PublishLinkTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String profileId = (String) testObjects.get("profileId");
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(profileId + "_" + messageId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-
+	public void tearDown() throws Exception {
+		String profileId = (String) testObjects.get("profileId");
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(profileId + "_" + messageId);
 	}
 }

@@ -19,25 +19,19 @@ public class GetNoteLikesTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void tearUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("getNoteLikesTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("getNoteLikesTestData");
 
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			
-			String msg = testObjects.get("msg").toString();
-			String subject = testObjects.get("subject").toString();
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		
+		String msg = testObjects.get("msg").toString();
+		String subject = testObjects.get("subject").toString();
 
-			String noteid = publishNote(getProfileId(), msg, subject);
-			testObjects.put("note", noteid);
-			
-			like(noteid);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String noteid = publishNote(getProfileId(), msg, subject);
+		testObjects.put("note", noteid);
+		
+		like(noteid);
 	}
 
 	@Test
@@ -56,13 +50,8 @@ public class GetNoteLikesTestCases extends FacebookTestParent {
 	}
 
 	@After
-	public void tearDown() {
-		try {
-			String noteId = (String) testObjects.get("note");
-			deleteObject(noteId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String noteId = (String) testObjects.get("note");
+		deleteObject(noteId);
 	}
 }

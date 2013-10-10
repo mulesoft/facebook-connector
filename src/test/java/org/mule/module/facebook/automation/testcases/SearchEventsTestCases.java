@@ -18,14 +18,8 @@ import com.restfb.types.Event;
 public class SearchEventsTestCases extends FacebookTestParent {
 	
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("searchEventsTestData");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("searchEventsTestData");
 	}
 	
 	@Category({RegressionTests.class})

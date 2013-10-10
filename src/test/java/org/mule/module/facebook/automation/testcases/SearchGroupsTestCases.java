@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 
@@ -16,17 +17,11 @@ import com.restfb.types.Group;
 public class SearchGroupsTestCases extends FacebookTestParent {
 
 	@Before
-	public void tearUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context
-					.getBean("searchGroupTestData");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("searchGroupTestData");
 	}
 
+	@Category({RegressionTests.class})
 	@Test
 	public void testSearchGroup() {
 		try {
@@ -37,7 +32,6 @@ public class SearchGroupsTestCases extends FacebookTestParent {
 			for (Group group: groups){
 				assertNotNull(group.getId());
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

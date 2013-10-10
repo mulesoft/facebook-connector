@@ -1,7 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -19,17 +18,11 @@ public class GetUserVideosTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserVideosTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserVideosTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -37,12 +30,10 @@ public class GetUserVideosTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserVideos() {
 		try {
-			
 			MessageProcessor flow = lookupFlowConstruct("get-user-videos");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<Video> result = (List<Video>) response.getMessage().getPayload();
-			
 			assertNotNull(result);
 		}
 		catch (Exception e) {

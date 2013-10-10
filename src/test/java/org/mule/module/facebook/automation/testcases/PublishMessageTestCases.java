@@ -16,16 +16,11 @@ public class PublishMessageTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("publishMessageTestData");
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String, Object>) context.getBean("publishMessageTestData");
 
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 
 	@Category({ SmokeTests.class, RegressionTests.class })
@@ -50,14 +45,8 @@ public class PublishMessageTestCases extends FacebookTestParent {
 	}
 
 	@After
-	public void tearDown() {
-		try {
-			String messageId = (String) testObjects.get("messageId");
-			deleteObject(messageId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-
+	public void tearDown() throws Exception {
+		String messageId = (String) testObjects.get("messageId");
+		deleteObject(messageId);
 	}
 }

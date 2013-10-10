@@ -26,34 +26,23 @@ public class GetEventNoReplyTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getEventNoReplyTestData");
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getEventNoReplyTestData");
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEventNoReply() {
-		
-		MessageProcessor flow = lookupFlowConstruct("get-event-no-reply");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-event-no-reply");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Collection<User> users =  (Collection<User>) response.getMessage().getPayload();
-			
-			assertTrue(users instanceof Collection);
 
+			Collection<User> users =  (Collection<User>) response.getMessage().getPayload();
+			assertTrue(users.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
-    
 }

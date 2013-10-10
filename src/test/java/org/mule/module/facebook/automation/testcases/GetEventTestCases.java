@@ -9,7 +9,6 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -25,50 +24,40 @@ public class GetEventTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getEventTestData");
-			
-			String profileId = getProfileId();
-			
-			String eventId = publishEvent(profileId, (String) testObjects.get("eventName"), 
-					(String) testObjects.get("startTime"));
-			
-			testObjects.put("eventId", eventId);
-			testObjects.put("objectId", eventId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getEventTestData");
+		
+		String profileId = getProfileId();
+		String eventName = (String) testObjects.get("eventName");
+		String startTime = (String) testObjects.get("startTime");
+		
+		String eventId = publishEvent(profileId, eventName, startTime);
+		
+		testObjects.put("eventId", eventId);
+		testObjects.put("objectId", eventId);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEvent() {
-    	
 		try {
+			String eventId = (String) testObjects.get("eventId");
+			String eventName = (String) testObjects.get("eventName");
+			
 			Event event = getEvent((String) testObjects.get("eventId"));
 			
-			assertTrue(event instanceof Event);
-			assertEquals((String) testObjects.get("eventName"), event.getName());
-
+			assertEquals(eventId, event.getId());
+			assertEquals(eventName, event.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
     @After
-	public void tearDown() {
-		try {
-			deleteObject((String) testObjects.get("objectId"));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+    	String objectId = (String) testObjects.get("objectId");
+		deleteObject(objectId);
 	}
     
 }

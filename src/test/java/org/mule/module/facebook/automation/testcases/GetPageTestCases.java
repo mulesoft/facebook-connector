@@ -13,6 +13,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
@@ -21,6 +22,11 @@ import org.mule.api.processor.MessageProcessor;
 import com.restfb.types.Page;
 
 public class GetPageTestCases extends FacebookTestParent {
+
+	@Before
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getPageTestData");
+	}
 	
 	// Am using Facebook Developer's page because I couldn't find a way to create a page via message processors.
 	// https://graph.facebook.com/19292868552
@@ -28,18 +34,12 @@ public class GetPageTestCases extends FacebookTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPage() {
-    	
-    	testObjects = (HashMap<String,Object>) context.getBean("getPageTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-page");
-    	
-		try {
-
+    	try {
+    		MessageProcessor flow = lookupFlowConstruct("get-page");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Page page = (Page) response.getMessage().getPayload();
-			
-			assertEquals("Facebook Developers", page.getName());
 
+			Page page = (Page) response.getMessage().getPayload();
+			assertEquals("Facebook Developers", page.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

@@ -28,31 +28,24 @@ public class GetUserEventsTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserEventsTestData");
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getUserEventsTestData");
 			
-	    	String profileId = getProfileId();
-	    	testObjects.put("user", profileId);
+    	String profileId = getProfileId();
+    	testObjects.put("user", profileId);
 	    	
-	    	String eventId = publishEvent(profileId, (String) testObjects.get("eventName"), (String) testObjects.get("startTime"));
-	    	testObjects.put("objectId", eventId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+    	String eventId = publishEvent(profileId, (String) testObjects.get("eventName"), (String) testObjects.get("startTime"));
+    	testObjects.put("objectId", eventId);
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserEvents() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-events");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user-events");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			List<Event> result = (List<Event>) response.getMessage().getPayload();
 			
 			assertTrue(result.size() != 0);
@@ -75,14 +68,8 @@ public class GetUserEventsTestCases extends FacebookTestParent {
 	}
     
     @After
-	public void tearDown() {
-		try {
-			deleteObject((String) testObjects.get("objectId"));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		deleteObject((String) testObjects.get("objectId"));
 	}
     
 }

@@ -28,25 +28,19 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getPhotoCommentsTestData");
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-			
-			String caption = (String) testObjects.get("caption");
-			File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
-			
-			String photoId = publishPhoto(profileId, caption, photoFile);
-			testObjects.put("photo", photoId);
-			
-			String commentId = publishComment((String) testObjects.get("photo"), (String) testObjects.get("msg"));
-			testObjects.put("commentId", commentId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (HashMap<String,Object>) context.getBean("getPhotoCommentsTestData");
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
+		
+		String caption = (String) testObjects.get("caption");
+		File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+		
+		String photoId = publishPhoto(profileId, caption, photoFile);
+		testObjects.put("photo", photoId);
+		
+		String commentId = publishComment((String) testObjects.get("photo"), (String) testObjects.get("msg"));
+		testObjects.put("commentId", commentId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -68,16 +62,11 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
 	}
     
 	@After
-	public void tearDown() {
-		try {
-			deleteObject((String) testObjects.get("commentId"));
-			String photoId = (String) testObjects.get("photo");
-			deleteObject(photoId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String commentId = (String) testObjects.get("commentId");
+		deleteObject(commentId);
+		String photoId = (String) testObjects.get("photo");
+		deleteObject(photoId);
 	}
     
 }

@@ -23,25 +23,19 @@ public class GetUserWallTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserWallTestData");
-			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			
-			List<String> messages = (List<String>) testObjects.get("messages");
-			List<String> messageIds = new ArrayList<String>();
-			
-			for (String message : messages) {
-				String messageId = publishMessage(profileId, message);
-				messageIds.add(messageId);
-				testObjects.put("messageIds", messageIds);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserWallTestData");
+		
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		
+		List<String> messages = (List<String>) testObjects.get("messages");
+		List<String> messageIds = new ArrayList<String>();
+		
+		for (String message : messages) {
+			String messageId = publishMessage(profileId, message);
+			messageIds.add(messageId);
+			testObjects.put("messageIds", messageIds);
 		}
 	}
 	
@@ -79,16 +73,10 @@ public class GetUserWallTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@After
-	public void tearDown() {
-		try {
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
-			for (String messageId : messageIds) {
-				deleteObject(messageId);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+	public void tearDown() throws Exception {
+		List<String> messageIds = (List<String>) testObjects.get("messageIds");
+		for (String messageId : messageIds) {
+			deleteObject(messageId);
 		}
 	}
 }

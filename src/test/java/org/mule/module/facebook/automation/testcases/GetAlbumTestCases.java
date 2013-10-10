@@ -9,7 +9,6 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -26,17 +25,12 @@ public class GetAlbumTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getAlbumTestData");
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-			String id = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
-			testObjects.put("album", id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getAlbumTestData");
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
+		String id = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
+		testObjects.put("album", id);
 	}
 	
 	@Category({RegressionTests.class})

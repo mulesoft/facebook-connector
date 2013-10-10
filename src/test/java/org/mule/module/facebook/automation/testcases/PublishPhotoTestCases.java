@@ -17,17 +17,11 @@ import org.mule.module.facebook.types.Photo;
 public class PublishPhotoTestCases extends FacebookTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("publishPhotoTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("publishPhotoTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -57,15 +51,9 @@ public class PublishPhotoTestCases extends FacebookTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String photoId = (String) testObjects.get("photoId");
-			deleteObject(photoId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String photoId = (String) testObjects.get("photoId");
+		deleteObject(photoId);
 	}
 	
 }

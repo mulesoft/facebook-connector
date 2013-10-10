@@ -23,39 +23,29 @@ import org.mule.module.facebook.types.GetUserAccountResponseType;
 
 public class GetUserAccountsTestCases extends FacebookTestParent {
 	
-	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserAccountsTestData");
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getUserAccountsTestData");
 			
-	    	String profileId = getProfileId();
-	    	testObjects.put("user", profileId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+    	String profileId = getProfileId();
+    	testObjects.put("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserAccounts() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-accounts");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user-accounts");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			List<GetUserAccountResponseType> result = (List<GetUserAccountResponseType>) response.getMessage().getPayload();
-			
 			assertTrue(result.size() == 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

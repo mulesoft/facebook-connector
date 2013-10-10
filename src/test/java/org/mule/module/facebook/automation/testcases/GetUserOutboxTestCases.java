@@ -17,17 +17,11 @@ public class GetUserOutboxTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getUserOutboxTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getUserOutboxTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("user", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("user", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -35,12 +29,10 @@ public class GetUserOutboxTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserOutbox() {
 		try {
-			
 			MessageProcessor flow = lookupFlowConstruct("get-user-outbox");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			List<OutboxThread> result = (List<OutboxThread>) response.getMessage().getPayload();
-			
 			assertNotNull(result);
 		}
 		catch (Exception e) {

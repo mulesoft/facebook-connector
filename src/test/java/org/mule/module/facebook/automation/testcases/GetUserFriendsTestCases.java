@@ -27,36 +27,27 @@ public class GetUserFriendsTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-	    	testObjects = (HashMap<String,Object>) context.getBean("getUserFriendsTestData");
+	public void setUp() throws Exception {
+    	testObjects = (HashMap<String,Object>) context.getBean("getUserFriendsTestData");
 			
-	    	String profileId = getProfileId();
-	    	testObjects.put("user", profileId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+    	String profileId = getProfileId();
+    	testObjects.put("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserFriends() {
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-user-friends");
-    	
 		try {
-
+			MessageProcessor flow = lookupFlowConstruct("get-user-friends");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
+
 			List<NamedFacebookType> result = (List<NamedFacebookType>) response.getMessage().getPayload();
-			
 			assertNotNull(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
     
 }

@@ -17,17 +17,11 @@ public class GetVideoTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getVideoTestData");
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getVideoTestData");
 			
-			String profileId = getProfileId();
-			testObjects.put("profileId", profileId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		String profileId = getProfileId();
+		testObjects.put("profileId", profileId);
 	}
 	
 	@Category({RegressionTests.class})

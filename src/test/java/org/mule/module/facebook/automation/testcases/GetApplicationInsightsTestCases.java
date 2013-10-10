@@ -18,14 +18,8 @@ public class GetApplicationInsightsTestCases extends FacebookTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			testObjects = (Map<String, Object>) context.getBean("getApplicationInsightsTestData");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		testObjects = (Map<String, Object>) context.getBean("getApplicationInsightsTestData");
 	}
 	
 	@SuppressWarnings("unchecked")
