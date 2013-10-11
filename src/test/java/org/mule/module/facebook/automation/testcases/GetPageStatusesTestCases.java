@@ -8,12 +8,14 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -28,6 +30,12 @@ public class GetPageStatusesTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		testObjects = (HashMap<String,Object>) context.getBean("getPageStatusesTestData");
+
+		String page = (String) testObjects.get("page");
+		String msg = (String) testObjects.get("msg");
+		
+		String messageId = publishMessage(page, msg);
+		testObjects.put("messageId", messageId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -35,15 +43,27 @@ public class GetPageStatusesTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageStatuses() {
 		try {
+			String pageId = (String) testObjects.get("page");
+			String messageId = (String) testObjects.get("messageId");
+			
 			MessageProcessor flow = lookupFlowConstruct("get-page-statuses");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
 			List<StatusMessage> result = (List<StatusMessage>) response.getMessage().getPayload();
-			assertNotNull(result);
+			assertTrue(result.size() == 1);
+			
+			StatusMessage message = result.get(0);
+			assertEquals(pageId + "_" + message.getId(), messageId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
+
+    @After
+    public void tearDown() throws Exception {
+    	String messageId = (String) testObjects.get("messageId");
+    	deleteObject(messageId);
+    }
     
 }
