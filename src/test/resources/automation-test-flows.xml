@@ -158,6 +158,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			event_name="#[payload.eventName]" accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="publish-event-on-page">
+		<facebook:publish-event config-ref="Facebook" profile_id="#[payload.profileId]" start_time="#[payload.startTime]" event_name="#[payload.eventName]" accessTokenId="accessTokenIdPage" />
+	</flow>
+
 	<flow name="publish-photo">
 		<facebook:publish-photo config-ref="Facebook"
 			albumId="#[payload.albumId]" caption="#[payload.caption]" photo-ref="#[payload.photoRef]"

@@ -69,6 +69,7 @@ public class FacebookTestParent extends TestParent {
     public void init() throws ObjectStoreException {
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
     	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) context.getBean("connectorOAuthState"));
+    	objectStore.store("accessTokenIdPage", (FacebookConnectorOAuthState) context.getBean("connectorOAuthStatePage"));
     }
 
 	protected Album requestAlbum(String albumId) throws Exception {
@@ -231,6 +232,16 @@ public class FacebookTestParent extends TestParent {
     	testObjects.put("startTime", startTime);
 
     	MessageProcessor flow = lookupFlowConstruct("publish-event");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (String) response.getMessage().getPayload();
+    }
+
+    protected String publishEventPage(String pageId, String eventName, String startTime) throws Exception {
+    	testObjects.put("profileId", pageId);
+    	testObjects.put("eventName", eventName);
+    	testObjects.put("startTime", startTime);
+
+    	MessageProcessor flow = lookupFlowConstruct("publish-event-on-page");
     	MuleEvent response = flow.process(getTestEvent(testObjects));
     	return (String) response.getMessage().getPayload();
     }
