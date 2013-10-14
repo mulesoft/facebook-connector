@@ -840,10 +840,12 @@
 	<util:map id="getPagePhotosTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="since" value="last week" />
-		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
+		<entry key="until" value="next month" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
-		<entry key="page" value="19292868552" />
+		<entry key="page" value="760526370629408" />
+		<entry key="caption" value="Page photo's caption" />
+		<entry key="photoFilePath" value="image.jpg" />
 	</util:map>
 	
 	<!-- get-page-posts -->

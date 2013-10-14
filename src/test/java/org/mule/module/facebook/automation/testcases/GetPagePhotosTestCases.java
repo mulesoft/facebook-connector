@@ -9,6 +9,7 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class GetPagePhotosTestCases extends FacebookTestParent {
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
 			List<Photo> result = (List<Photo>) response.getMessage().getPayload();
-			assertNotNull(result);
+			assertTrue(result.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
