@@ -62,7 +62,7 @@ public class GetPhotoLikesTestCases extends FacebookTestParent {
 	
     @After
 	public void tearDown() throws Exception {
-    	String photoId = (String) testObjects.get("photoId");
+    	String photoId = (String) testObjects.get("photo");
     	deleteObject(photoId);
 	}
     
