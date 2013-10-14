@@ -8,12 +8,13 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -26,8 +27,15 @@ public class GetPageNotesTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		testObjects = (HashMap<String,Object>) context.getBean("getPageNotesTestData");
+		
+		String page = (String) testObjects.get("page");
+		String msg = (String) testObjects.get("msg");
+		String subject = (String) testObjects.get("subject");
+		
+		String noteId = publishNoteOnPage(page, msg, subject);
+		testObjects.put("noteId", noteId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -35,15 +43,26 @@ public class GetPageNotesTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageNotes() {
 		try {
+			String noteId = (String) testObjects.get("noteId");
+			
 			MessageProcessor flow = lookupFlowConstruct("get-page-notes");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
 			List<Note> result = (List<Note>) response.getMessage().getPayload();
-			assertNotNull(result);
+			assertTrue(result.size() == 1);
+			
+			Note note = result.get(0);
+			assertTrue(note.getId().equals(noteId));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
+    
+    @After
+    public void tearDown() throws Exception {
+    	String noteId = (String) testObjects.get("noteId");
+    	deletePageObject(noteId);
+    }
     
 }

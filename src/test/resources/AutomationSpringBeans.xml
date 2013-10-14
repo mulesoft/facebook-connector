@@ -831,7 +831,9 @@
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
-		<entry key="page" value="19292868552" />
+		<entry key="page" value="760526370629408" />
+		<entry key="msg" value="Note's message" />
+		<entry key="subject" value="Note's subject" />
 	</util:map>
 	
 	<!-- get-page-photos -->

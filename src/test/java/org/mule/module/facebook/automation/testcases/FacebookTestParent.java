@@ -217,6 +217,14 @@ public class FacebookTestParent extends TestParent {
     	MuleEvent response = flow.process(getTestEvent(testObjects));
     	return (Boolean) response.getMessage().getPayload();
     }
+    
+    protected Boolean deletePageObject(String objectId) throws Exception {
+    	testObjects.put("objectId", objectId);
+
+    	MessageProcessor flow = lookupFlowConstruct("delete-object-from-page");
+    	MuleEvent response = flow.process(getTestEvent(testObjects));
+    	return (Boolean) response.getMessage().getPayload();
+    }
 
     public Link getLink(String linkId) throws Exception{
     	testObjects.put("link", linkId);
@@ -261,13 +269,23 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
 	}
-
+    
 	protected String publishNote(String profileId, String msg, String subject ) throws Exception{
 		testObjects.put("profileId", profileId);
 		testObjects.put("msg", msg);
 		testObjects.put("subject", subject);
 
 		MessageProcessor flow = lookupFlowConstruct("publish-note");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return response.getMessage().getPayloadAsString();
+	}
+
+	protected String publishNoteOnPage(String pageId, String msg, String subject ) throws Exception{
+		testObjects.put("profileId", pageId);
+		testObjects.put("msg", msg);
+		testObjects.put("subject", subject);
+
+		MessageProcessor flow = lookupFlowConstruct("publish-note-on-page");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return response.getMessage().getPayloadAsString();
 	}

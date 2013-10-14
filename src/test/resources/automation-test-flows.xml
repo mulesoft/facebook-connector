@@ -102,8 +102,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="delete-object">
-		<facebook:delete-object config-ref="Facebook"
-			objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
+		<facebook:delete-object config-ref="Facebook" objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="delete-object-from-page">
+		<facebook:delete-object config-ref="Facebook" objectId="#[payload.objectId]" accessTokenId="accessTokenIdPage" />
 	</flow>
 
 	<flow name="get-status-comments">
@@ -207,9 +210,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="publish-note">
-		<facebook:publish-note profile_id="#[payload.profileId]"
-			msg="#[payload.msg]" config-ref="Facebook" accessTokenId="accessTokenId"
-			subject="#[payload.subject]" />
+		<facebook:publish-note profile_id="#[payload.profileId]" msg="#[payload.msg]" config-ref="Facebook" accessTokenId="accessTokenId" subject="#[payload.subject]" />
+	</flow>
+	
+	<flow name="publish-note-on-page">
+		<facebook:publish-note config-ref="Facebook" profile_id="#[payload.profileId]" msg="#[payload.msg]" subject="#[payload.subject]" accessTokenId="accessTokenIdPage" />
 	</flow>
 
 	<flow name="get-event">
