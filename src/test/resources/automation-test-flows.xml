@@ -35,9 +35,13 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="publish-album">
-		<facebook:publish-album config-ref="Facebook"
-			albumName="#[payload.albumName]" msg="#[payload.msg]" profile_id="#[payload.profileId]"
-			accessTokenId="accessTokenId" />
+		<facebook:publish-album config-ref="Facebook" albumName="#[payload.albumName]" msg="#[payload.msg]" 
+			profile_id="#[payload.profileId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-album-on-page">
+		<facebook:publish-album config-ref="Facebook" albumName="#[payload.albumName]" msg="#[payload.msg]" 
+			profile_id="#[payload.profileId]" accessTokenId="accessTokenIdPage" />
 	</flow>
 
 	<flow name="get-status">
@@ -97,8 +101,8 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="get-page-albums">
-		<facebook:get-page-albums config-ref="Facebook"
-			page="#[payload.page]" accessTokenId="accessTokenId" />
+		<facebook:get-page-albums config-ref="Facebook" since="#[payload.since]" until="#[payload.until]" limit="#[payload.limit]" offset="#[payload.offset]"
+			page="#[payload.page]" accessTokenId="accessTokenIdPage" />
 	</flow>
 
 	<flow name="delete-object">

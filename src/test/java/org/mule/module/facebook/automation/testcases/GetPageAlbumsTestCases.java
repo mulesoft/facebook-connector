@@ -8,9 +8,10 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +29,13 @@ public class GetPageAlbumsTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		testObjects = (HashMap<String,Object>) context.getBean("getPageAlbumsTestData");
+
+		String page = (String) testObjects.get("page");
+		String albumName = (String) testObjects.get("albumName");
+		String msg = (String) testObjects.get("msg");
+		
+		String albumId = publishAlbumOnPage(albumName, msg, page);
+		testObjects.put("albumId", albumId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -35,17 +43,27 @@ public class GetPageAlbumsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageAlbums() {
 		try {
+			String albumId = (String) testObjects.get("albumId");
+			
 			MessageProcessor flow = lookupFlowConstruct("get-page-albums");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
 			List<Album> albums = (List<Album>) response.getMessage().getPayload();
-			assertNotNull(albums);
+			assertTrue(albums.size() > 0);
+			
+			boolean found = false;
+			for (Album album : albums) {
+				if (album.getId().equals(albumId)) {
+					found = true;
+					break;
+				}
+			}
+			
+			assertTrue(found);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-     
 	}
-    
     
 }

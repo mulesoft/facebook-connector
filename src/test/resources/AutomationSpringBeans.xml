@@ -302,6 +302,8 @@
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
+		<entry key="albumName" value="My Page Album" />
+		<entry key="msg" value="Lorem ipsum" />
 	</util:map>
 
 	<!-- delete-object -->

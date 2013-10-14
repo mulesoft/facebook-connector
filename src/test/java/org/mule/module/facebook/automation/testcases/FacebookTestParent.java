@@ -89,6 +89,16 @@ public class FacebookTestParent extends TestParent {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
     }
+    
+    protected String publishAlbumOnPage(String albumName, String msg, String pageId) throws Exception {
+    	testObjects.put("albumName", albumName);
+    	testObjects.put("msg", msg);
+    	testObjects.put("profileId", pageId);
+
+  		MessageProcessor flow = lookupFlowConstruct("publish-album-on-page");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (String) response.getMessage().getPayload();
+    }
 
 	protected String publishMessage(String profileId, String msg) throws Exception {
 		testObjects.put("profileId", profileId);
