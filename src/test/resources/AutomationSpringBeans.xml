@@ -819,7 +819,9 @@
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
-		<entry key="page" value="19292868552" />
+		<entry key="page" value="760526370629408" />
+		<entry key="message" value="This is Google's homepage" />	
+		<entry key="link" value="http://www.google.com" />
 	</util:map>
 	
 	<!-- get-page-notes -->
