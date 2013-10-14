@@ -35,11 +35,13 @@ public class GetPageTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPage() {
     	try {
+    		String pageId = (String) testObjects.get("page");
+    		
     		MessageProcessor flow = lookupFlowConstruct("get-page");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
 			Page page = (Page) response.getMessage().getPayload();
-			assertEquals("Facebook Developers", page.getName());
+			assertEquals(pageId, page.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
