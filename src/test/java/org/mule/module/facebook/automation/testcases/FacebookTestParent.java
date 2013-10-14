@@ -25,9 +25,10 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.construct.Flow;
 import org.mule.module.facebook.oauth.FacebookConnectorOAuthState;
 import org.mule.module.facebook.types.Photo;
-import org.mule.modules.tests.TestParent;
+import org.mule.modules.tests.ConnectorTestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,7 +41,7 @@ import com.restfb.types.Note;
 import com.restfb.types.StatusMessage;
 import com.restfb.types.User;
 
-public class FacebookTestParent extends TestParent {
+public class FacebookTestParent extends ConnectorTestCase {
 
 	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml" };
 	protected static ApplicationContext context;
@@ -49,15 +50,6 @@ public class FacebookTestParent extends TestParent {
 	// Set global timeout of tests to 10minutes
 	@Rule
 	public Timeout globalTimeout = new Timeout(600000);
-
-	@Override
-	protected String getConfigResources() {
-		return "automation-test-flows.xml";
-	}
-
-    protected MessageProcessor lookupMessageProcessor(String name) {
-        return (MessageProcessor) muleContext.getRegistry().lookupFlowConstruct(name);
-    }
 
     @BeforeClass
     public static void beforeClass() {
@@ -105,7 +97,6 @@ public class FacebookTestParent extends TestParent {
 		testObjects.put("msg", msg);
 
 		MessageProcessor flow = lookupFlowConstruct("publish-message");
-
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (String) response.getMessage().getPayload();
 	}

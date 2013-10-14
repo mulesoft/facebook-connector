@@ -16,6 +16,7 @@
 		<mule.modules.utils.version>1.0</mule.modules.utils.version>
 		<restfb.version>1.6.9</restfb.version>
 		<devkit.studio.package.skip>false</devkit.studio.package.skip>
+		<connector.test.version>2.0.4-SNAPSHOT</connector.test.version>
 	</properties>
 
     <groupId>org.mule.modules</groupId>
@@ -66,7 +67,7 @@
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-connector-test</artifactId>
-			<version>3.5.0-SNAPSHOT</version>
+			<version>${connector.test.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
