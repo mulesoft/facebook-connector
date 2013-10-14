@@ -34,11 +34,17 @@
 	<!-- get-user-home -->
 	<util:map id="getUserHomeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
-		<entry key="until" value="now" />
+		<entry key="until" value="tomorrow" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
+		<entry key="messages">
+			<list value-type="java.lang.String">
+				<value>First post to user's home</value>
+				<value>Second post to user's home</value>
+				<value>Third post to user's home</value>
+			</list>
+		</entry>
 	</util:map>
 
 	<!-- get-album -->
