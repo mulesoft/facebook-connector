@@ -18,7 +18,7 @@ public class SearchCheckinsTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("searchCheckinsTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("searchCheckinsTestData");
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);
 			

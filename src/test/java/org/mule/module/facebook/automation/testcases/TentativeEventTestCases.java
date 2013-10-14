@@ -17,7 +17,7 @@ public class TentativeEventTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("tentativeEventTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("tentativeEventTestData");
 	}
 	
 	@Category({RegressionTests.class})

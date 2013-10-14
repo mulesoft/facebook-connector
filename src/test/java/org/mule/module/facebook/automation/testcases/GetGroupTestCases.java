@@ -20,7 +20,7 @@ public class GetGroupTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) context.getBean("getGroupTestData");
+    	testObjects = (HashMap<String,Object>) getBeanFromContext("getGroupTestData");
 		String query = (String) testObjects.get("q");
     	List<Group> groups = searchGroups(query);
     	//get first group in the list this will be used to compare with

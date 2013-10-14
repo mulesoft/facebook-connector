@@ -20,7 +20,7 @@ public class SearchPagesTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("searchPagesTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("searchPagesTestData");
 	}
 	
 	@SuppressWarnings("unchecked")

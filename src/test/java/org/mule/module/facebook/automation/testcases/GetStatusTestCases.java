@@ -20,7 +20,7 @@ public class GetStatusTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getStatusTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getStatusTestData");
 		
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

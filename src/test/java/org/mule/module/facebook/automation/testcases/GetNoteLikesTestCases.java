@@ -21,7 +21,7 @@ public class GetNoteLikesTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("getNoteLikesTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("getNoteLikesTestData");
 
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

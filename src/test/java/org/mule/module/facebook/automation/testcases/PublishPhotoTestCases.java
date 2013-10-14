@@ -19,7 +19,7 @@ public class PublishPhotoTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("publishPhotoTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("publishPhotoTestData");
 			
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

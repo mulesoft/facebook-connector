@@ -19,7 +19,7 @@ public class PublishLinkTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("publishLinkTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("publishLinkTestData");
 
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

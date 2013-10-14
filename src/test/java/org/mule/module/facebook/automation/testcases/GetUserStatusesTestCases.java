@@ -22,7 +22,7 @@ public class GetUserStatusesTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getUserStatusesTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getUserStatusesTestData");
 		
 		String profileId = getProfileId();
 		

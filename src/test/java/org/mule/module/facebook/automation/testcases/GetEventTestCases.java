@@ -26,7 +26,7 @@ public class GetEventTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) context.getBean("getEventTestData");
+    	testObjects = (HashMap<String,Object>) getBeanFromContext("getEventTestData");
 		
 		String profileId = getProfileId();
 		String eventName = (String) testObjects.get("eventName");

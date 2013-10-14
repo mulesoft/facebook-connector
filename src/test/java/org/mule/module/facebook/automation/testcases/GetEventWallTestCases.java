@@ -23,7 +23,7 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getEventWallTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getEventWallTestData");
 		
 		String profileId = getProfileId();
 		

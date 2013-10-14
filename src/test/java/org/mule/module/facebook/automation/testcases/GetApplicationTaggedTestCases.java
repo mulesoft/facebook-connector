@@ -18,7 +18,7 @@ public class GetApplicationTaggedTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getApplicationTaggedTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getApplicationTaggedTestData");
 	}
 	
 	@SuppressWarnings("unchecked")

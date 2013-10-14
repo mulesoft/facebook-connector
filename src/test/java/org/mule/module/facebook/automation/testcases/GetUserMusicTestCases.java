@@ -20,7 +20,7 @@ public class GetUserMusicTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getUserMusicTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getUserMusicTestData");
 			
 		String profileId = getProfileId();
 		testObjects.put("user", profileId);

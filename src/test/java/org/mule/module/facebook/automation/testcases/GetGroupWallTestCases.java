@@ -21,7 +21,7 @@ public class GetGroupWallTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) context.getBean("getGroupWallTestData");
+    	testObjects = (HashMap<String,Object>) getBeanFromContext("getGroupWallTestData");
 		String query = (String) testObjects.get("q");
     	List<Group> groups = searchGroups(query);
 		testObjects.put("group", groups.get(0).getId());

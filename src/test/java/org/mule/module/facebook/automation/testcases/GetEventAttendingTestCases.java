@@ -28,7 +28,7 @@ public class GetEventAttendingTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) context.getBean("getEventAttendingTestData");
+    	testObjects = (HashMap<String,Object>) getBeanFromContext("getEventAttendingTestData");
     	attendEvent((String) testObjects.get("eventId"));
 	}
 	

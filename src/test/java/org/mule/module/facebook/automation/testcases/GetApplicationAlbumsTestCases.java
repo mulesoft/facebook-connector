@@ -29,7 +29,7 @@ public class GetApplicationAlbumsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetApplicationAlbums() {
 		try {
-			testObjects = (HashMap<String,Object>) context.getBean("getApplicationAlbumsTestData");
+			testObjects = (HashMap<String,Object>) getBeanFromContext("getApplicationAlbumsTestData");
 
 			MessageProcessor flow = lookupFlowConstruct("get-application-albums");
 			MuleEvent response = flow.process(getTestEvent(testObjects));

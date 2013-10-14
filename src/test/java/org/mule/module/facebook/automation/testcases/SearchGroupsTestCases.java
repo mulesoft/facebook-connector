@@ -19,7 +19,7 @@ public class SearchGroupsTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("searchGroupTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("searchGroupTestData");
 	}
 
 	@Category({RegressionTests.class})

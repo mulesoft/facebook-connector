@@ -28,7 +28,7 @@ public class GetPageTaggedTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
-		testObjects = (HashMap<String,Object>) context.getBean("getPageTaggedTestData");
+		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageTaggedTestData");
 	}
 	
     @SuppressWarnings("unchecked")

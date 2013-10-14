@@ -27,7 +27,7 @@ public class GetAlbumTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) context.getBean("getAlbumTestData");
+    	testObjects = (HashMap<String,Object>) getBeanFromContext("getAlbumTestData");
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);
 		String id = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));

@@ -24,7 +24,7 @@ public class GetUserPostsTestCases extends FacebookTestParent {
 	
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getUserPostsTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getUserPostsTestData");
 		
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

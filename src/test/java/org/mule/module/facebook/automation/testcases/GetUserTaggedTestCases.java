@@ -21,7 +21,7 @@ public class GetUserTaggedTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getUserTaggedTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getUserTaggedTestData");
 		
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

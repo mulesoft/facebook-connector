@@ -20,7 +20,7 @@ public class GetLinkTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("getLinkTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("getLinkTestData");
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);
 

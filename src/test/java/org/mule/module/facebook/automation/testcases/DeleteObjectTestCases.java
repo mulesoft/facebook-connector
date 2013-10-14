@@ -25,7 +25,7 @@ public class DeleteObjectTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("deleteObjectTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("deleteObjectTestData");
 			
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

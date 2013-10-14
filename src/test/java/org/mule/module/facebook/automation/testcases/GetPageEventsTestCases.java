@@ -29,7 +29,7 @@ public class GetPageEventsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) context.getBean("getPageEventsTestData");
+		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageEventsTestData");
 		
 		String pageId = (String) testObjects.get("page");
 		String eventName = (String) testObjects.get("eventName");

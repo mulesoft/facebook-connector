@@ -28,7 +28,7 @@ public class GetApplicationTestCases extends FacebookTestParent {
 	@Test
 	public void testGetApplication() {
     	
-    	testObjects = (HashMap<String,Object>) context.getBean("getApplicationTestData");
+    	testObjects = (HashMap<String,Object>) getBeanFromContext("getApplicationTestData");
     	
 		MessageProcessor flow = lookupFlowConstruct("get-application");
     	

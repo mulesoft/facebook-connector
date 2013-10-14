@@ -43,25 +43,18 @@ import com.restfb.types.User;
 
 public class FacebookTestParent extends ConnectorTestCase {
 
-	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml" };
-	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
 
 	// Set global timeout of tests to 10minutes
 	@Rule
 	public Timeout globalTimeout = new Timeout(600000);
 
-    @BeforeClass
-    public static void beforeClass() {
-    	context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILES);
-    }
-
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
     public void init() throws ObjectStoreException {
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-    	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) context.getBean("connectorOAuthState"));
-    	objectStore.store("accessTokenIdPage", (FacebookConnectorOAuthState) context.getBean("connectorOAuthStatePage"));
+    	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthState"));
+    	objectStore.store("accessTokenIdPage", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStatePage"));
     }
 
 	protected Album requestAlbum(String albumId) throws Exception {

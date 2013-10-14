@@ -17,7 +17,7 @@ public class LikeTestCases extends FacebookTestParent {
 	
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("likeTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("likeTestData");
 		
 		String profileId = getProfileId();
 		testObjects.put("profileId", profileId);

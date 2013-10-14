@@ -20,7 +20,7 @@ public class GetApplicationWallTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getApplicationWallTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getApplicationWallTestData");
 	}
 	
 	@SuppressWarnings("unchecked")

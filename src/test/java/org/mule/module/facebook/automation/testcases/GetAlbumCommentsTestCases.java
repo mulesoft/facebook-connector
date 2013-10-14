@@ -30,7 +30,7 @@ public class GetAlbumCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) context.getBean("getAlbumCommentsTestData");
+		testObjects = (HashMap<String,Object>) getBeanFromContext("getAlbumCommentsTestData");
 
 		String albumName = (String) testObjects.get("albumName");
 		String msg = (String) testObjects.get("msg");

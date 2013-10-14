@@ -31,7 +31,7 @@ public class DownloadImageTestCases extends FacebookTestParent {
 	
 	@Before
 	public void setUp() throws Exception  {
-		testObjects = (HashMap<String,Object>) context.getBean("downloadImageTestData");
+		testObjects = (HashMap<String,Object>) getBeanFromContext("downloadImageTestData");
 
 		String profileId = getProfileId();
 			

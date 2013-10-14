@@ -21,7 +21,7 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("getVideoCommentsTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("getVideoCommentsTestData");
 			
 		String commentId = publishComment((String) testObjects.get("postId"), (String) testObjects.get("msg"));
 		testObjects.put("objectId", commentId);

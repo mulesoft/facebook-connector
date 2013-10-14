@@ -23,7 +23,7 @@ public class PublishCommentTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		//create comment for message
-		testObjects = (HashMap<String, Object>) context.getBean("publishCommentTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("publishCommentTestData");
 			
 		String statusMsg = (String) testObjects.get("msg");
 		String postId = publishMessage(getProfileId(), statusMsg);

@@ -17,7 +17,7 @@ public class GetUserPictureTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("getUserPictureTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("getUserPictureTestData");
 			
 		String profileId = getProfileId();
 		testObjects.put("user", profileId);

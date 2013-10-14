@@ -20,7 +20,7 @@ public class GetGroupPictureTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) context.getBean("getGroupPictureTestData");
+    	testObjects = (HashMap<String,Object>) getBeanFromContext("getGroupPictureTestData");
 		String query = (String) testObjects.get("q");
     	List<Group> groups = searchGroups(query);
 		testObjects.put("group", groups.get(0).getId());

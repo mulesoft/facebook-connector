@@ -30,7 +30,7 @@ public class GetPageWallTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) context.getBean("getPageWallTestData");
+		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageWallTestData");
 		
 		String page = (String) testObjects.get("page");
 		List<String> messages = (List<String>) testObjects.get("messages");

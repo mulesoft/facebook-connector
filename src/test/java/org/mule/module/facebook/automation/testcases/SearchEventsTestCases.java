@@ -20,7 +20,7 @@ public class SearchEventsTestCases extends FacebookTestParent {
 	
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) context.getBean("searchEventsTestData");
+		testObjects = (Map<String, Object>) getBeanFromContext("searchEventsTestData");
 	}
 	
 	@Category({RegressionTests.class})

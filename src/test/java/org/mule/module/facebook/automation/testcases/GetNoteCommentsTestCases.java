@@ -23,7 +23,7 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) context.getBean("getNoteCommentsTestData");
+		testObjects = (HashMap<String, Object>) getBeanFromContext("getNoteCommentsTestData");
 		String msg = testObjects.get("msg").toString();
 		String subject = testObjects.get("subject").toString();
 		String profileId = getProfileId();

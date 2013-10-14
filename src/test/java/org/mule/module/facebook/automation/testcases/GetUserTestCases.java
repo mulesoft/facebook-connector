@@ -26,7 +26,7 @@ public class GetUserTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) context.getBean("getUserTestData");
+		testObjects = (HashMap<String,Object>) getBeanFromContext("getUserTestData");
 
 		User loggedInUser = getLoggedUserDetails();
 		testObjects.put("username", loggedInUser.getId());
