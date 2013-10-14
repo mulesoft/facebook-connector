@@ -28,8 +28,6 @@ public class GetPageTestCases extends FacebookTestParent {
 		testObjects = (HashMap<String,Object>) context.getBean("getPageTestData");
 	}
 	
-	// Am using Facebook Developer's page because I couldn't find a way to create a page via message processors.
-	// https://graph.facebook.com/19292868552
     @SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
