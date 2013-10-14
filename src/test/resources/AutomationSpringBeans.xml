@@ -854,6 +854,13 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 		<entry key="page" value="${facebook.page}" />
+		<entry key="messages">
+			<list value-type="java.lang.String">
+				<value>Test Message One</value>
+				<value>Test Message Two</value>
+				<value>Test Message Three</value>
+			</list>
+		</entry>
 	</util:map>
 	
 	<!-- get-page-statuses -->

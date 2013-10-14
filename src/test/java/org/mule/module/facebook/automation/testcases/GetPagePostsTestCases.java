@@ -8,12 +8,14 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -28,6 +30,17 @@ public class GetPagePostsTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		testObjects = (HashMap<String,Object>) context.getBean("getPagePostsTestData");
+		
+		String page = (String) testObjects.get("page");
+		List<String> messages = (List<String>) testObjects.get("messages");
+		List<String> messageIds = new ArrayList<String>();
+		
+		for (String msg : messages) {
+			String messageId = publishMessage(page, msg);
+			messageIds.add(messageId);
+		}
+		
+		testObjects.put("messageIds", messageIds);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -35,15 +48,36 @@ public class GetPagePostsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPagePosts() {
 		try {
+			List<String> messageIds = (List<String>) testObjects.get("messageIds");
+			
 			MessageProcessor flow = lookupFlowConstruct("get-page-posts");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
 			List<Post> result = (List<Post>) response.getMessage().getPayload();
-			assertNotNull(result);
+			assertTrue(result.size() >= messageIds.size());
+
+			for (String messageId : messageIds) {
+				boolean found = false;
+				for (Post post : result) {
+					if (post.getId().equals(messageId)) {
+						found = true;
+						break;
+					}
+				}
+				assertTrue(found);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
+    
+    @After
+    public void tearDown() throws Exception {
+    	List<String> messageIds = (List<String>) testObjects.get("messageIds");
+    	for (String messageId : messageIds) {
+			deleteObject(messageId);
+		}
+    }
     
 }
