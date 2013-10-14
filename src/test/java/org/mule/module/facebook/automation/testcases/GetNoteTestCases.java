@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Note;
 
@@ -46,8 +47,7 @@ public class GetNoteTestCases extends FacebookTestParent {
 			assertTrue(note.getMessage().contains(msg));
 			assertEquals(note.getSubject(), subject);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

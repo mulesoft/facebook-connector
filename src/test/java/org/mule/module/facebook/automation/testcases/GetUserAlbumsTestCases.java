@@ -20,6 +20,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Album;
 
@@ -63,8 +64,7 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 		
 			assertTrue(matching.size() == 1);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

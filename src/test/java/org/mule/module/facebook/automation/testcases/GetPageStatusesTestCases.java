@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.StatusMessage;
 
@@ -55,8 +56,7 @@ public class GetPageStatusesTestCases extends FacebookTestParent {
 			StatusMessage message = result.get(0);
 			assertEquals(pageId + "_" + message.getId(), messageId);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.User;
 
@@ -42,8 +43,7 @@ public class GetUserTestCases extends FacebookTestParent {
 
 			assertEquals(user.getId(), (String) testObjects.get("username"));
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 
 	}

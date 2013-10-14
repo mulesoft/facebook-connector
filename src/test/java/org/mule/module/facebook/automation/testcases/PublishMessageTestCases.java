@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.StatusMessage;
 
@@ -39,8 +40,7 @@ public class PublishMessageTestCases extends FacebookTestParent {
 			assertEquals(msg, status.getMessage());
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

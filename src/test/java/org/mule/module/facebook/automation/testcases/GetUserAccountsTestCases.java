@@ -20,6 +20,7 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.GetUserAccountResponseType;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetUserAccountsTestCases extends FacebookTestParent {
 	
@@ -43,8 +44,7 @@ public class GetUserAccountsTestCases extends FacebookTestParent {
 			List<GetUserAccountResponseType> result = (List<GetUserAccountResponseType>) response.getMessage().getPayload();
 			assertTrue(result.size() == 0);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
     

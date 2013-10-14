@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Group;
 
@@ -40,8 +41,7 @@ public class GetGroupTestCases extends FacebookTestParent {
 			assertEquals(groupGotBySearch.getId(), group.getId());
 			assertEquals(groupGotBySearch.getName(), group.getName());
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

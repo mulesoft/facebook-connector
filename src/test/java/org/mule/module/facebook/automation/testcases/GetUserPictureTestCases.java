@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetUserPictureTestCases extends FacebookTestParent {
 
@@ -33,8 +34,7 @@ public class GetUserPictureTestCases extends FacebookTestParent {
 			assertTrue(result.length != 0);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	

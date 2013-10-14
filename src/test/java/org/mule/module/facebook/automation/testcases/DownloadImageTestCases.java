@@ -25,6 +25,7 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.Photo;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class DownloadImageTestCases extends FacebookTestParent {
 	
@@ -61,8 +62,7 @@ public class DownloadImageTestCases extends FacebookTestParent {
 			assertTrue(image.getHeight() == photo.getHeight());
 			assertTrue(image.getWidth() == photo.getWidth());
     	} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
     

@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Group;
 
@@ -44,8 +45,7 @@ public class GetUserGroupsTestCases extends FacebookTestParent {
 			List<Group> result = (List<Group>) response.getMessage().getPayload();
 			assertNotNull(result);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
     

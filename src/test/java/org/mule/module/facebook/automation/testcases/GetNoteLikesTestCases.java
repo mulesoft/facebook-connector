@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.NamedFacebookType;
 import com.restfb.types.Post.Likes;
@@ -44,8 +45,7 @@ public class GetNoteLikesTestCases extends FacebookTestParent {
 			List<NamedFacebookType> data = likes.getData();
 			assertTrue(data.size() == 1);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

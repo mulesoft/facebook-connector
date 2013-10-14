@@ -17,6 +17,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Event;
 
@@ -49,8 +50,7 @@ public class GetEventTestCases extends FacebookTestParent {
 			assertEquals(eventId, event.getId());
 			assertEquals(eventName, event.getName());
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
     

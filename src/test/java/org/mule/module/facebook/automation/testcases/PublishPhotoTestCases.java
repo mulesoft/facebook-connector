@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.module.facebook.types.Photo;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class PublishPhotoTestCases extends FacebookTestParent {
 
@@ -45,8 +46,7 @@ public class PublishPhotoTestCases extends FacebookTestParent {
 			assertEquals(photo.getId(), photoId);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	

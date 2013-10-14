@@ -16,6 +16,7 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class DeclineEventTestCases extends FacebookTestParent {
 	
@@ -34,8 +35,7 @@ public class DeclineEventTestCases extends FacebookTestParent {
 			
 			assertTrue(result);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
      
 	}

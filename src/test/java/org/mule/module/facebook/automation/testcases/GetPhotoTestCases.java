@@ -21,6 +21,7 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.Photo;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetPhotoTestCases extends FacebookTestParent {
 	
@@ -48,8 +49,7 @@ public class GetPhotoTestCases extends FacebookTestParent {
 			Photo result = (Photo) response.getMessage().getPayload();
 			assertTrue(result.getId().equals((String) testObjects.get("photo")));
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	

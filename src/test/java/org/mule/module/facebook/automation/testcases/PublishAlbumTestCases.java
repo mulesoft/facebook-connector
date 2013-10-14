@@ -17,6 +17,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Album;
 
@@ -45,8 +46,7 @@ public class PublishAlbumTestCases extends FacebookTestParent {
 			assertEquals(retrievedAlbum.getId(), albumId);
 			assertEquals(retrievedAlbum.getName(), albumName);
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

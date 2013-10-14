@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class PublishEventTestCases extends FacebookTestParent {
 
@@ -36,8 +37,7 @@ public class PublishEventTestCases extends FacebookTestParent {
 			assertTrue(StringUtils.isNotEmpty(eventId));
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	

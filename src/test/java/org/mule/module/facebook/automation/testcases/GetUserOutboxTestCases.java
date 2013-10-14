@@ -12,6 +12,7 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.OutboxThread;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetUserOutboxTestCases extends FacebookTestParent {
 
@@ -36,8 +37,7 @@ public class GetUserOutboxTestCases extends FacebookTestParent {
 			assertNotNull(result);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
