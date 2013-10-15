@@ -5,14 +5,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Link;
@@ -22,16 +19,16 @@ public class GetUserLinksTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getUserLinksTestData");
+		initializeTestRunMessage("getUserLinksTestData");
 			
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 			
-		String msg = (String) testObjects.get("msg");
-		String link = (String) testObjects.get("link");
+		String msg = (String) getTestRunMessageValue("msg");
+		String link = (String) getTestRunMessageValue("link");
 			
 		String linkId = publishLink(profileId, msg, link);
-		testObjects.put("linkId", linkId);
+		upsertOnTestRunMessage("linkId", linkId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -39,15 +36,12 @@ public class GetUserLinksTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserLinks() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
-			testObjects.put("user", profileId);
+			String profileId = (String) getTestRunMessageValue("profileId");
+			upsertOnTestRunMessage("user", profileId);
 			
-			String linkId = (String) testObjects.get("linkId");
+			String linkId = (String) getTestRunMessageValue("linkId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-user-links");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			List<Link> links = (List<Link>) response.getMessage().getPayload();
+			List<Link> links = runFlowAndGetPayload("get-user-links");
 			// We only insert 1 link
 			assertTrue(links.size() == 1);
 			
@@ -61,8 +55,8 @@ public class GetUserLinksTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String profileId = (String) testObjects.get("profileId");
-		String linkId = (String) testObjects.get("linkId");
+		String profileId = (String) getTestRunMessageValue("profileId");
+		String linkId = (String) getTestRunMessageValue("linkId");
 		deleteObject(profileId + "_" + linkId);
 	}
 	

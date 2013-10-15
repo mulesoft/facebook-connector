@@ -14,7 +14,6 @@ import static org.junit.Assert.fail;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
@@ -22,8 +21,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.Photo;
 import org.mule.modules.tests.ConnectorTestUtils;
 
@@ -31,15 +28,15 @@ public class DownloadImageTestCases extends FacebookTestParent {
 	
 	@Before
 	public void setUp() throws Exception  {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("downloadImageTestData");
+		initializeTestRunMessage("downloadImageTestData");
 
 		String profileId = getProfileId();
 			
-		String caption = (String) testObjects.get("caption");
-		File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+		String caption = (String) getTestRunMessageValue("caption");
+		File photoFile = new File(getClass().getClassLoader().getResource((String) getTestRunMessageValue("photoFilePath")).toURI());
 
 		String photoId = publishPhoto(profileId, caption, photoFile);
-		testObjects.put("photoId", photoId);
+		upsertOnTestRunMessage("photoId", photoId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -47,15 +44,12 @@ public class DownloadImageTestCases extends FacebookTestParent {
 	@Test
 	public void testDownloadImage() {
     	try {
-    		String photoId = (String) testObjects.get("photoId");
+    		String photoId = (String) getTestRunMessageValue("photoId");
     		Photo photo = getPhoto(photoId, "0");
     		
-    		testObjects.put("imageUri", photo.getPicture());
-    		MessageProcessor flow = lookupFlowConstruct("download-image");
-    	
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			byte[] result = (byte[]) response.getMessage().getPayload();
+    		upsertOnTestRunMessage("imageUri", photo.getPicture());
+    		
+    		byte[] result = runFlowAndGetPayload("download-image");
 			assertTrue(result.length > 0);
 			
 			BufferedImage image = ImageIO.read(new ByteArrayInputStream(result));
@@ -68,7 +62,7 @@ public class DownloadImageTestCases extends FacebookTestParent {
     
     @After
     public void tearDown() throws Exception {
-   		String photoId = (String) testObjects.get("photoId");
+   		String photoId = (String) getTestRunMessageValue("photoId");
    		deleteObject(photoId);
     }
     

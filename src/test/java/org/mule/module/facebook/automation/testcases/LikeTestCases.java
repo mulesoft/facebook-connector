@@ -3,41 +3,34 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Map;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 public class LikeTestCases extends FacebookTestParent {
 	
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("likeTestData");
+		initializeTestRunMessage("likeTestData");
 		
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 		
-		String msg = (String) testObjects.get("msg");
+		String msg = (String) getTestRunMessageValue("msg");
 		String messageId = publishMessage(profileId, msg);
-		testObjects.put("messageId", messageId);
+		upsertOnTestRunMessage("messageId", messageId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testLike() {
 		try {
-			String messageId = (String) testObjects.get("messageId");
-			testObjects.put("postId", messageId);
+			String messageId = (String) getTestRunMessageValue("messageId");
+			upsertOnTestRunMessage("postId", messageId);
 			
-			MessageProcessor flow = lookupFlowConstruct("like");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-						
-			Boolean result = (Boolean) response.getMessage().getPayload();
+			Boolean result = runFlowAndGetPayload("like");
 			assertTrue(result);
 		}
 		catch (Exception e) {
@@ -47,7 +40,7 @@ public class LikeTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String messageId = (String) testObjects.get("messageId");
+		String messageId = (String) getTestRunMessageValue("messageId");
 		deleteObject(messageId);
 	}
 

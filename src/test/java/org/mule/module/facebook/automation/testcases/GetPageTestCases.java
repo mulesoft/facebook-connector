@@ -11,13 +11,9 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Page;
@@ -26,7 +22,7 @@ public class GetPageTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageTestData");
+		initializeTestRunMessage("getPageTestData");
 	}
 	
     @SuppressWarnings("unchecked")
@@ -34,12 +30,9 @@ public class GetPageTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPage() {
     	try {
-    		String pageId = (String) testObjects.get("page");
+    		String pageId = (String) getTestRunMessageValue("page");
     		
-    		MessageProcessor flow = lookupFlowConstruct("get-page");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			Page page = (Page) response.getMessage().getPayload();
+    		Page page = runFlowAndGetPayload("get-page");
 			assertEquals(pageId, page.getId());
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

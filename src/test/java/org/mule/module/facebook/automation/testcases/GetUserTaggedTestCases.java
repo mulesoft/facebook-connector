@@ -4,14 +4,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Post;
@@ -21,14 +18,14 @@ public class GetUserTaggedTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getUserTaggedTestData");
+		initializeTestRunMessage("getUserTaggedTestData");
 		
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 
-		String msg = (String) testObjects.get("msg");
+		String msg = (String) getTestRunMessageValue("msg");
 		String messageId = publishMessage(profileId, msg);
-		testObjects.put("messageId", messageId);
+		upsertOnTestRunMessage("messageId", messageId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -36,12 +33,9 @@ public class GetUserTaggedTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserTagged() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
+			String profileId = (String) getTestRunMessageValue("profileId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-user-tagged");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Post> posts = (List<Post>) response.getMessage().getPayload();
+			List<Post> posts = runFlowAndGetPayload("get-user-tagged");
 			
 			boolean found = false;
 			for (Post post : posts) {
@@ -59,7 +53,7 @@ public class GetUserTaggedTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String messageId = (String) testObjects.get("messageId");
+		String messageId = (String) getTestRunMessageValue("messageId");
 		deleteObject(messageId);
 	}
 }

@@ -13,15 +13,12 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Post;
@@ -31,12 +28,12 @@ public class GetUserHomeTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserHomeTestData");
+    	initializeTestRunMessage("getUserHomeTestData");
 		
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
     	
-    	List<String> messages = (List<String>) testObjects.get("messages");
+    	List<String> messages = (List<String>) getTestRunMessageValue("messages");
     	List<String> messageIds = new ArrayList<String>();
     	
     	for (String message : messages) {
@@ -44,7 +41,7 @@ public class GetUserHomeTestCases extends FacebookTestParent {
 			messageIds.add(messageId);
 		}
     	
-    	testObjects.put("messageIds", messageIds);
+    	upsertOnTestRunMessage("messageIds", messageIds);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -52,12 +49,9 @@ public class GetUserHomeTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserHome() {
 		try {
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
+			List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-user-home");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			Collection<Post> posts = (Collection<Post>) response.getMessage().getPayload();
+			Collection<Post> posts = runFlowAndGetPayload("get-user-home");
 			assertTrue(posts.size() >= messageIds.size());
 			
 			for (String messageId : messageIds) {
@@ -77,7 +71,7 @@ public class GetUserHomeTestCases extends FacebookTestParent {
     
     @After
     public void tearDown() throws Exception {
-    	List<String> messageIds = (List<String>) testObjects.get("messageIds");
+    	List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
     	for (String messageId : messageIds) {
 			deleteObject(messageId);
 		}

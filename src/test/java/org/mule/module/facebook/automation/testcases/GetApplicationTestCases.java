@@ -11,37 +11,31 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Application;
 
 public class GetApplicationTestCases extends FacebookTestParent {
+
+	@Before
+	public void setUp() throws Exception {
+		initializeTestRunMessage("getApplicationTestData");
+	}
 	
-    @SuppressWarnings("unchecked")
-	@Category({SmokeTests.class, RegressionTests.class})
+	@SuppressWarnings("unchecked")
+	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
 	public void testGetApplication() {
-    	
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getApplicationTestData");
-    	
-		MessageProcessor flow = lookupFlowConstruct("get-application");
-    	
 		try {
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Application app = (Application) response.getMessage().getPayload();
-			
-			assertEquals(testObjects.get("application"), app.getId());
-
+			Application app = runFlowAndGetPayload("get-application");
+			assertEquals(getTestRunMessageValue("application"), app.getId());
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
-     
+
 	}
-    
+
 }

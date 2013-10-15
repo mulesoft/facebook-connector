@@ -11,13 +11,9 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.User;
@@ -26,10 +22,10 @@ public class GetUserTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getUserTestData");
+		initializeTestRunMessage("getUserTestData");
 
 		User loggedInUser = getLoggedUserDetails();
-		testObjects.put("username", loggedInUser.getId());
+		upsertOnTestRunMessage("username", loggedInUser.getId());
 	}
 
     @SuppressWarnings("unchecked")
@@ -37,11 +33,8 @@ public class GetUserTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUser() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User user = (User) response.getMessage().getPayload();
-
-			assertEquals(user.getId(), (String) testObjects.get("username"));
+			User user = runFlowAndGetPayload("get-user");
+			assertEquals(user.getId(), (String) getTestRunMessageValue("username"));
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}

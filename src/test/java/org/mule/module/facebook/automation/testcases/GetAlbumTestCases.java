@@ -11,13 +11,9 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Album;
@@ -27,23 +23,21 @@ public class GetAlbumTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getAlbumTestData");
+    	initializeTestRunMessage("getAlbumTestData");
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
-		String id = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), (String) testObjects.get("profileId"));
-		testObjects.put("album", id);
+		upsertOnTestRunMessage("profileId", profileId);
+		String id = publishAlbum((String) getTestRunMessageValue("albumName"), (String) getTestRunMessageValue("msg"), (String) getTestRunMessageValue("profileId"));
+		upsertOnTestRunMessage("album", id);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetAlbum() {
 		try {
-			String id = (String) testObjects.get("album");
-			String albumName = (String) testObjects.get("albumName");
+			String id = (String) getTestRunMessageValue("album");
+			String albumName = (String) getTestRunMessageValue("albumName");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-album");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Album album = (Album) response.getMessage().getPayload();
+			Album album = runFlowAndGetPayload("get-album");
 
 			assertEquals(album.getId(), id);
 			assertEquals(album.getName(), albumName);

@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Checkin;
@@ -28,7 +25,7 @@ public class GetPageCheckinsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageCheckinsTestData");
+		initializeTestRunMessage("getPageCheckinsTestData");
 	}
 	
     @SuppressWarnings("unchecked")
@@ -36,10 +33,7 @@ public class GetPageCheckinsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageCheckins() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-page-checkins");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Checkin> result = (List<Checkin>) response.getMessage().getPayload();
+			List<Checkin> result = runFlowAndGetPayload("get-page-checkins");
 			assertNotNull(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

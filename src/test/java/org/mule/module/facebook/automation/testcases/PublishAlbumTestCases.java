@@ -11,8 +11,6 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,21 +24,21 @@ public class PublishAlbumTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("publishAlbumTestData");
+		initializeTestRunMessage("publishAlbumTestData");
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testPublishAlbum() {
 		try {
-			String albumName = (String) testObjects.get("albumName");
-			String msg = (String) testObjects.get("msg");
-			String profileId = (String) testObjects.get("profileId");
+			String albumName = (String) getTestRunMessageValue("albumName");
+			String msg = (String) getTestRunMessageValue("msg");
+			String profileId = (String) getTestRunMessageValue("profileId");
 			
 			String albumId = publishAlbum(albumName, msg, profileId);
-			testObjects.put("albumId", albumId);
+			upsertOnTestRunMessage("albumId", albumId);
 			
 			Album retrievedAlbum = getAlbum(albumId);
 			assertEquals(retrievedAlbum.getId(), albumId);
@@ -52,7 +50,7 @@ public class PublishAlbumTestCases extends FacebookTestParent {
 
     @After
     public void tearDown() throws Exception {
-    	String albumId = (String) testObjects.get("albumId");
+    	String albumId = (String) getTestRunMessageValue("albumId");
     		
    	// 	Deletion of albums cannot be done by the Facebook API.
    	//	deleteObject(albumId);

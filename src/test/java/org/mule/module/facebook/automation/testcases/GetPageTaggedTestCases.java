@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Post;
@@ -28,7 +25,7 @@ public class GetPageTaggedTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageTaggedTestData");
+		initializeTestRunMessage("getPageTaggedTestData");
 	}
 	
     @SuppressWarnings("unchecked")
@@ -36,10 +33,7 @@ public class GetPageTaggedTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageTagged() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-page-tagged");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Post> result = (List<Post>) response.getMessage().getPayload();
+			List<Post> result = runFlowAndGetPayload("get-page-tagged");
 			assertNotNull(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

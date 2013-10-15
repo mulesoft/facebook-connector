@@ -12,14 +12,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.util.HashMap;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.Photo;
 import org.mule.modules.tests.ConnectorTestUtils;
 
@@ -28,26 +25,23 @@ public class GetPhotoTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPhotoTestData");
+		initializeTestRunMessage("getPhotoTestData");
 		String profileId = getProfileId();
-		testObjects.put("user", profileId);
+		upsertOnTestRunMessage("user", profileId);
 		
-		String caption = (String) testObjects.get("caption");
-		File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+		String caption = (String) getTestRunMessageValue("caption");
+		File photoFile = new File(getClass().getClassLoader().getResource((String) getTestRunMessageValue("photoFilePath")).toURI());
 		
 		String photoId = publishPhoto(profileId, caption, photoFile);
-		testObjects.put("photo", photoId);
+		upsertOnTestRunMessage("photo", photoId);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetPhoto() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-photo");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			Photo result = (Photo) response.getMessage().getPayload();
-			assertTrue(result.getId().equals((String) testObjects.get("photo")));
+			Photo result = runFlowAndGetPayload("get-photo");
+			assertTrue(result.getId().equals((String) getTestRunMessageValue("photo")));
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
@@ -55,7 +49,7 @@ public class GetPhotoTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String photoId = (String) testObjects.get("photo");
+		String photoId = (String) getTestRunMessageValue("photo");
 		deleteObject(photoId);
 	}
     

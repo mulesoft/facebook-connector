@@ -11,13 +11,9 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 public class DeleteObjectTestCases extends FacebookTestParent {
@@ -25,25 +21,22 @@ public class DeleteObjectTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) getBeanFromContext("deleteObjectTestData");
+		initializeTestRunMessage("deleteObjectTestData");
 			
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 			
-		String msg = (String) testObjects.get("msg");
+		String msg = (String) getTestRunMessageValue("msg");
 			
 		String msgId = publishMessage(profileId, msg);
-		testObjects.put("objectId", msgId);
+		upsertOnTestRunMessage("objectId", msgId);
 	}
 
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
 	public void testDeleteObject() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("delete-object");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Boolean result = (Boolean) response.getMessage().getPayload();
+			Boolean result = runFlowAndGetPayload("delete-object");
 			assertTrue(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

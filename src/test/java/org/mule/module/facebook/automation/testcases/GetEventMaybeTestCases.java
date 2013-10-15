@@ -12,13 +12,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.User;
@@ -28,7 +25,7 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getEventMaybeTestData");
+    	initializeTestRunMessage("getEventMaybeTestData");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -36,10 +33,7 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 	@Test
 	public void testGetEventMaybe() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-event-maybe");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			Collection<User> users =  (Collection<User>) response.getMessage().getPayload();
+			Collection<User> users = runFlowAndGetPayload("get-event-maybe");
 			assertTrue(users.size() > 0);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

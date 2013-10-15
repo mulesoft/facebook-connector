@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetUserInboxTestCases extends FacebookTestParent {
@@ -26,10 +23,10 @@ public class GetUserInboxTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserInboxTestData");
+    	initializeTestRunMessage("getUserInboxTestData");
 			
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -37,10 +34,7 @@ public class GetUserInboxTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserInbox() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-inbox");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Thread> result = (List<Thread>) response.getMessage().getPayload();
+			List<org.mule.module.facebook.types.Thread> result = runFlowAndGetPayload("get-user-inbox");
 			assertNotNull(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

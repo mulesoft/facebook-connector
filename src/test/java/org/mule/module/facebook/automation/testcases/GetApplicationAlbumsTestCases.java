@@ -11,13 +11,10 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Album;
@@ -29,12 +26,9 @@ public class GetApplicationAlbumsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetApplicationAlbums() {
 		try {
-			testObjects = (HashMap<String,Object>) getBeanFromContext("getApplicationAlbumsTestData");
+			initializeTestRunMessage("getApplicationAlbumsTestData");
 
-			MessageProcessor flow = lookupFlowConstruct("get-application-albums");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Album> albums = (List<Album>) response.getMessage().getPayload();
+			List<Album> albums = runFlowAndGetPayload("get-application-albums");
 			assertNotNull(albums);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

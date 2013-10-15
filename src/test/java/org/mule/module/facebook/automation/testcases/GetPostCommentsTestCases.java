@@ -6,14 +6,11 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Comment;
@@ -23,23 +20,23 @@ public class GetPostCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getPostCommentsTestData");
+		initializeTestRunMessage("getPostCommentsTestData");
 		
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 		
-		String msg = (String) testObjects.get("msg");
+		String msg = (String) getTestRunMessageValue("msg");
 		String messageId = publishMessage(profileId, msg);
-		testObjects.put("messageId", messageId);
+		upsertOnTestRunMessage("messageId", messageId);
 		
-		List<String> comments = (List<String>) testObjects.get("comments");
+		List<String> comments = (List<String>) getTestRunMessageValue("comments");
 		List<String> commentIds = new ArrayList<String>();
 		for (String comment : comments) {
 			String commentId = publishComment(messageId, comment);
 			commentIds.add(commentId);
 		}
 		
-		testObjects.put("commentIds", commentIds);
+		upsertOnTestRunMessage("commentIds", commentIds);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -47,14 +44,11 @@ public class GetPostCommentsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPostComments() {
 		try {
-			String messageId = (String) testObjects.get("messageId");
-			testObjects.put("post", messageId);
-			List<String> commentIds = (List<String>) testObjects.get("commentIds");
+			String messageId = (String) getTestRunMessageValue("messageId");
+			upsertOnTestRunMessage("post", messageId);
+			List<String> commentIds = (List<String>) getTestRunMessageValue("commentIds");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-post-comments");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			List<Comment> postComments = (List<Comment>) response.getMessage().getPayload();
+			List<Comment> postComments = runFlowAndGetPayload("get-post-comments");
 
 			assertEquals(postComments.size(), commentIds.size());
 			for (Comment comment : postComments) {
@@ -68,7 +62,7 @@ public class GetPostCommentsTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String messageId = (String) testObjects.get("messageId");
+		String messageId = (String) getTestRunMessageValue("messageId");
 		deleteObject(messageId);
 	}
 	

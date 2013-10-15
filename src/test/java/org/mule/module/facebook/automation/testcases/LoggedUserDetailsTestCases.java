@@ -5,8 +5,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.User;
@@ -17,10 +15,7 @@ public class LoggedUserDetailsTestCases extends FacebookTestParent {
 	@Test
 	public void testLoggedUserDetails() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("logged-user-details");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			User loggedIn = (User) response.getMessage().getPayload();
-
+			User loggedIn = runFlowAndGetPayload("logged-user-details");
 			assertNotNull(loggedIn);
 		}
 		catch (Exception e) {

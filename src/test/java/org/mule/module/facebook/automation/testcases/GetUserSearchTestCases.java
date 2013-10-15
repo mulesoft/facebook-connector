@@ -4,14 +4,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Post;
@@ -21,13 +18,13 @@ public class GetUserSearchTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getUserSearchTestData");
+		initializeTestRunMessage("getUserSearchTestData");
 		
 		String profileId = getProfileId();
-		testObjects.put("user", profileId);
+		upsertOnTestRunMessage("user", profileId);
 		
-		String messageId = publishMessage(profileId, (String) testObjects.get("msg"));
-		testObjects.put("objectId", messageId);
+		String messageId = publishMessage(profileId, (String) getTestRunMessageValue("msg"));
+		upsertOnTestRunMessage("objectId", messageId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -35,12 +32,9 @@ public class GetUserSearchTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserSearch() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-search");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			List<Post> result = runFlowAndGetPayload("get-user-search");
 			
-			List<Post> result = (List<Post>) response.getMessage().getPayload();
-			
-			String messageId = (String) testObjects.get("objectId");
+			String messageId = (String) getTestRunMessageValue("objectId");
 			boolean found = false;
 			for(Post post : result) {
 				if(messageId.equals(post.getId())) {
@@ -58,7 +52,7 @@ public class GetUserSearchTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String objectId = (String) testObjects.get("objectId");
-		deleteObject((String) testObjects.get("objectId"));
+		String objectId = (String) getTestRunMessageValue("objectId");
+		deleteObject(objectId);
 	}
 }

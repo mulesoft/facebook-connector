@@ -3,8 +3,6 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,21 +16,21 @@ public class PublishMessageTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) getBeanFromContext("publishMessageTestData");
+		initializeTestRunMessage("publishMessageTestData");
 
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 	}
 
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
 	public void testPublishMessage() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
-			String msg = (String) testObjects.get("msg");
+			String profileId = (String) getTestRunMessageValue("profileId");
+			String msg = (String) getTestRunMessageValue("msg");
 
 			String messageId = publishMessage(profileId, msg);
-			testObjects.put("messageId", messageId);
+			upsertOnTestRunMessage("messageId", messageId);
 			
 			StatusMessage status = getStatus(messageId);
 
@@ -46,7 +44,7 @@ public class PublishMessageTestCases extends FacebookTestParent {
 
 	@After
 	public void tearDown() throws Exception {
-		String messageId = (String) testObjects.get("messageId");
+		String messageId = (String) getTestRunMessageValue("messageId");
 		deleteObject(messageId);
 	}
 }

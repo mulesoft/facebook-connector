@@ -11,8 +11,6 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,26 +24,26 @@ public class GetEventTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getEventTestData");
+    	initializeTestRunMessage("getEventTestData");
 		
 		String profileId = getProfileId();
-		String eventName = (String) testObjects.get("eventName");
-		String startTime = (String) testObjects.get("startTime");
+		String eventName = (String) getTestRunMessageValue("eventName");
+		String startTime = (String) getTestRunMessageValue("startTime");
 		
 		String eventId = publishEvent(profileId, eventName, startTime);
 		
-		testObjects.put("eventId", eventId);
-		testObjects.put("objectId", eventId);
+		upsertOnTestRunMessage("eventId", eventId);
+		upsertOnTestRunMessage("objectId", eventId);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEvent() {
 		try {
-			String eventId = (String) testObjects.get("eventId");
-			String eventName = (String) testObjects.get("eventName");
+			String eventId = (String) getTestRunMessageValue("eventId");
+			String eventName = (String) getTestRunMessageValue("eventName");
 			
-			Event event = getEvent((String) testObjects.get("eventId"));
+			Event event = getEvent((String) getTestRunMessageValue("eventId"));
 			
 			assertEquals(eventId, event.getId());
 			assertEquals(eventName, event.getName());
@@ -56,7 +54,7 @@ public class GetEventTestCases extends FacebookTestParent {
     
     @After
 	public void tearDown() throws Exception {
-    	String objectId = (String) testObjects.get("objectId");
+    	String objectId = (String) getTestRunMessageValue("objectId");
 		deleteObject(objectId);
 	}
     

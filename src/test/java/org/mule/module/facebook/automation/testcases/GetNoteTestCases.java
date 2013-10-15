@@ -4,13 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Note;
@@ -20,28 +16,26 @@ public class GetNoteTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) getBeanFromContext("getNoteTestData");
+		initializeTestRunMessage("getNoteTestData");
 
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 			
-		String msg = testObjects.get("msg").toString();
-		String subject = testObjects.get("subject").toString();
+		String msg = getTestRunMessageValue("msg").toString();
+		String subject = getTestRunMessageValue("subject").toString();
 
 		String noteid = publishNote(getProfileId(), msg, subject);
-		testObjects.put("note", noteid);
+		upsertOnTestRunMessage("note", noteid);
 	}
 
 	@Test
 	public void testGetNote() {
 		try {
-			String noteId = (String) testObjects.get("note");
-			String msg = (String) testObjects.get("msg");
-			String subject = (String) testObjects.get("subject");
+			String noteId = (String) getTestRunMessageValue("note");
+			String msg = (String) getTestRunMessageValue("msg");
+			String subject = (String) getTestRunMessageValue("subject");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-note");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Note note = (Note) response.getMessage().getPayload();
+			Note note = runFlowAndGetPayload("get-note");
 			
 			assertEquals(noteId, note.getId());
 			assertTrue(note.getMessage().contains(msg));
@@ -53,7 +47,7 @@ public class GetNoteTestCases extends FacebookTestParent {
 
 	@After
 	public void tearDown() throws Exception {
-		String noteId = (String) testObjects.get("note");
+		String noteId = (String) getTestRunMessageValue("note");
 		deleteObject(noteId);
 	}
 }

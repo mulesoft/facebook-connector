@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.module.facebook.types.GetUserAccountResponseType;
 import org.mule.modules.tests.ConnectorTestUtils;
 
@@ -27,10 +24,10 @@ public class GetUserAccountsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserAccountsTestData");
+    	initializeTestRunMessage("getUserAccountsTestData");
 			
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -38,10 +35,7 @@ public class GetUserAccountsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserAccounts() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-accounts");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<GetUserAccountResponseType> result = (List<GetUserAccountResponseType>) response.getMessage().getPayload();
+			List<GetUserAccountResponseType> result = runFlowAndGetPayload("get-user-accounts");
 			assertTrue(result.size() == 0);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

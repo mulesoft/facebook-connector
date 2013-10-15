@@ -11,8 +11,6 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -23,14 +21,14 @@ public class AttendEventTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("attendEventTestData");
+		initializeTestRunMessage("attendEventTestData");
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testAttendEvent() {
 		try {
-			Boolean result = attendEvent((String) testObjects.get("eventId"));
+			Boolean result = attendEvent((String) getTestRunMessageValue("eventId"));
 			
 			assertTrue(result);
 		} catch (Exception e) {

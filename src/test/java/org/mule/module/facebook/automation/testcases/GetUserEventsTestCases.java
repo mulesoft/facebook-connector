@@ -11,15 +11,12 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Event;
@@ -30,13 +27,13 @@ public class GetUserEventsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserEventsTestData");
+    	initializeTestRunMessage("getUserEventsTestData");
 			
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
 	    	
-    	String eventId = publishEvent(profileId, (String) testObjects.get("eventName"), (String) testObjects.get("startTime"));
-    	testObjects.put("objectId", eventId);
+    	String eventId = publishEvent(profileId, (String) getTestRunMessageValue("eventName"), (String) getTestRunMessageValue("startTime"));
+    	upsertOnTestRunMessage("objectId", eventId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -44,14 +41,11 @@ public class GetUserEventsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserEvents() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-events");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			List<Event> result = runFlowAndGetPayload("get-user-events");
 
-			List<Event> result = (List<Event>) response.getMessage().getPayload();
-			
 			assertTrue(result.size() != 0);
 			
-			String eventId = (String) testObjects.get("objectId");
+			String eventId = (String) getTestRunMessageValue("objectId");
 			boolean containsPublishedEvent = false;
 			for(Event event : result) {
 				if(eventId.equals(event.getId())) {
@@ -69,7 +63,7 @@ public class GetUserEventsTestCases extends FacebookTestParent {
     
     @After
 	public void tearDown() throws Exception {
-		deleteObject((String) testObjects.get("objectId"));
+		deleteObject((String) getTestRunMessageValue("objectId"));
 	}
     
 }

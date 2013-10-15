@@ -13,7 +13,6 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
@@ -21,8 +20,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Photo;
@@ -32,24 +29,24 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getAlbumPhotosTestData");
+		initializeTestRunMessage("getAlbumPhotosTestData");
 			
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 			
-		String msg = (String) testObjects.get("msg");
-		String albumName = (String) testObjects.get("albumName");
+		String msg = (String) getTestRunMessageValue("msg");
+		String albumName = (String) getTestRunMessageValue("albumName");
 			
 		String albumId = publishAlbum(albumName, msg, profileId);
-		testObjects.put("album", albumId);
+		upsertOnTestRunMessage("album", albumId);
 			
-		String caption = (String) testObjects.get("caption");
-		String photoFileName = (String) testObjects.get("photoFileName");
+		String caption = (String) getTestRunMessageValue("caption");
+		String photoFileName = (String) getTestRunMessageValue("photoFileName");
 			
 		File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
 		String photoId = publishPhoto(albumId, caption, photo);
 			
-		testObjects.put("photoId", photoId);
+		upsertOnTestRunMessage("photoId", photoId);
 	}
 	
 	
@@ -58,11 +55,9 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
 	@Test
 	public void testGetAlbumPhotos() {
 		try {
-			final String photoId = (String) testObjects.get("photoId");
+			final String photoId = (String) getTestRunMessageValue("photoId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-album-photos");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Collection<Photo> photos = (Collection<Photo>) response.getMessage().getPayload();
+			Collection<Photo> photos = runFlowAndGetPayload("get-album-photos");
 
 			Collection<Photo> matchingPhotos = CollectionUtils.select(photos, new Predicate() {
 				
@@ -82,7 +77,7 @@ public class GetAlbumPhotosTestCases extends FacebookTestParent {
     
     @After
 	public void tearDown() throws Exception {
-		deleteObject((String) testObjects.get("photoId"));
-		deleteObject((String) testObjects.get("album"));
+		deleteObject((String) getTestRunMessageValue("photoId"));
+//		deleteObject((String) getTestRunMessageValue("album"));
 	}
 }

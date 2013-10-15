@@ -12,7 +12,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
@@ -29,13 +28,13 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) getBeanFromContext("getUserAlbumsTestData");
+		initializeTestRunMessage("getUserAlbumsTestData");
 		
 		String profileId = getProfileId();
-		String albumId = publishAlbum((String) testObjects.get("albumName"), (String) testObjects.get("msg"), profileId);
+		String albumId = publishAlbum((String) getTestRunMessageValue("albumName"), (String) getTestRunMessageValue("msg"), profileId);
 
-		testObjects.put("profileId", profileId);
-		testObjects.put("albumId", albumId);
+		upsertOnTestRunMessage("profileId", profileId);
+		upsertOnTestRunMessage("albumId", albumId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -43,12 +42,12 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserAlbums() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
-			final String albumId = (String) testObjects.get("albumId");
-			String since = (String) testObjects.get("since");
-			String until = (String) testObjects.get("until");
-			String limit = (String) testObjects.get("limit");
-			String offset = (String) testObjects.get("offset");
+			String profileId = (String) getTestRunMessageValue("profileId");
+			final String albumId = (String) getTestRunMessageValue("albumId");
+			String since = (String) getTestRunMessageValue("since");
+			String until = (String) getTestRunMessageValue("until");
+			String limit = (String) getTestRunMessageValue("limit");
+			String offset = (String) getTestRunMessageValue("offset");
 			
 			Collection<Album> albums = requestUserAlbums(profileId,	since, until, limit, offset);
 			assertTrue(albums.size() > 0);

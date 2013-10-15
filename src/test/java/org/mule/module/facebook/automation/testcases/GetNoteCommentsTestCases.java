@@ -4,15 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Comment;
@@ -23,29 +20,27 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) getBeanFromContext("getNoteCommentsTestData");
-		String msg = testObjects.get("msg").toString();
-		String subject = testObjects.get("subject").toString();
+		initializeTestRunMessage("getNoteCommentsTestData");
+		String msg = getTestRunMessageValue("msg").toString();
+		String subject = getTestRunMessageValue("subject").toString();
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 		
 		String noteid = publishNote(profileId, msg, subject);
-		testObjects.put("note", noteid);
+		upsertOnTestRunMessage("note", noteid);
 		
 		String commentId = publishComment(noteid, msg);
-		testObjects.put("commentId", commentId);
+		upsertOnTestRunMessage("commentId", commentId);
 	}
 
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetNoteComments() {
 		try {
-			String commentId = testObjects.get("commentId").toString();
-			String msg = testObjects.get("msg").toString();
+			String commentId = getTestRunMessageValue("commentId").toString();
+			String msg = getTestRunMessageValue("msg").toString();
 
-			MessageProcessor flow = lookupFlowConstruct("get-note-comments");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			List<Comment> comments = (List<Comment>) response.getMessage().getPayload();
+			List<Comment> comments = runFlowAndGetPayload("get-note-comments");
 
 			Boolean found = false;
 
@@ -65,7 +60,7 @@ public class GetNoteCommentsTestCases extends FacebookTestParent {
 	//note cannot be deleted with delete object
 	@After
 	public void tearDown() throws Exception {
-		String note = (String) testObjects.get("note");
+		String note = (String) getTestRunMessageValue("note");
 		deleteObject(note);
 	}
 }

@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Group;
@@ -28,10 +25,10 @@ public class GetUserGroupsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserGroupsTestData");
+    	initializeTestRunMessage("getUserGroupsTestData");
 			
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -39,10 +36,7 @@ public class GetUserGroupsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserGroups() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-groups");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Group> result = (List<Group>) response.getMessage().getPayload();
+			List<Group> result = runFlowAndGetPayload("get-user-groups");
 			assertNotNull(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

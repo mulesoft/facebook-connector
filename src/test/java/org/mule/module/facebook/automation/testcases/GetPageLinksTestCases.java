@@ -11,15 +11,12 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Link;
@@ -29,14 +26,14 @@ public class GetPageLinksTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageLinksTestData");
+		initializeTestRunMessage("getPageLinksTestData");
 		
-		String page = (String) testObjects.get("page");
-		String message = (String) testObjects.get("message");
-		String link = (String) testObjects.get("link");
+		String page = (String) getTestRunMessageValue("page");
+		String message = (String) getTestRunMessageValue("message");
+		String link = (String) getTestRunMessageValue("link");
 		
 		String linkId = publishLink(page, message, link);
-		testObjects.put("linkId", linkId);
+		upsertOnTestRunMessage("linkId", linkId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -44,12 +41,9 @@ public class GetPageLinksTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageLinks() {
 		try {
-			String linkId = (String) testObjects.get("linkId");
+			String linkId = (String) getTestRunMessageValue("linkId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-page-links");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Link> links = (List<Link>) response.getMessage().getPayload();
+			List<Link> links = runFlowAndGetPayload("get-page-links");
 			assertTrue(links.size() == 1);
 			
 			Link link = links.get(0);
@@ -61,8 +55,8 @@ public class GetPageLinksTestCases extends FacebookTestParent {
     
     @After
     public void tearDown() throws Exception {
-    	String pageId = (String) testObjects.get("page");
-    	String linkId = (String) testObjects.get("linkId");
+    	String pageId = (String) getTestRunMessageValue("page");
+    	String linkId = (String) getTestRunMessageValue("linkId");
     	deleteObject(pageId + "_" + linkId);
     }
     

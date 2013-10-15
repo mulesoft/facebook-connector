@@ -14,23 +14,16 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
-import org.mule.api.MuleEvent;
 import org.mule.api.config.MuleProperties;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
-import org.mule.construct.Flow;
 import org.mule.module.facebook.oauth.FacebookConnectorOAuthState;
 import org.mule.module.facebook.types.Photo;
 import org.mule.modules.tests.ConnectorTestCase;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.restfb.types.Album;
 import com.restfb.types.Comment;
@@ -42,8 +35,6 @@ import com.restfb.types.StatusMessage;
 import com.restfb.types.User;
 
 public class FacebookTestParent extends ConnectorTestCase {
-
-	protected Map<String, Object> testObjects;
 
 	// Set global timeout of tests to 10minutes
 	@Rule
@@ -58,75 +49,59 @@ public class FacebookTestParent extends ConnectorTestCase {
     }
 
 	protected Album requestAlbum(String albumId) throws Exception {
-		testObjects.put("album", albumId);
+		upsertOnTestRunMessage("album", albumId);
 
-		MessageProcessor flow = lookupFlowConstruct("get-album");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (Album) response.getMessage().getPayload();
+		return runFlowAndGetPayload("get-album");
     }
 
     protected String publishAlbum(String albumName, String msg, String profileId) throws Exception {
-    	testObjects.put("albumName", albumName);
-    	testObjects.put("msg", msg);
-    	testObjects.put("profileId", profileId);
+    	upsertOnTestRunMessage("albumName", albumName);
+    	upsertOnTestRunMessage("msg", msg);
+    	upsertOnTestRunMessage("profileId", profileId);
 
-  		MessageProcessor flow = lookupFlowConstruct("publish-album");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (String) response.getMessage().getPayload();
+    	return runFlowAndGetPayload("publish-album");
     }
     
     protected String publishAlbumOnPage(String albumName, String msg, String pageId) throws Exception {
-    	testObjects.put("albumName", albumName);
-    	testObjects.put("msg", msg);
-    	testObjects.put("profileId", pageId);
-
-  		MessageProcessor flow = lookupFlowConstruct("publish-album-on-page");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (String) response.getMessage().getPayload();
+    	upsertOnTestRunMessage("albumName", albumName);
+    	upsertOnTestRunMessage("msg", msg);
+    	upsertOnTestRunMessage("profileId", pageId);
+    	
+    	return runFlowAndGetPayload("publish-album-on-page");
     }
 
 	protected String publishMessage(String profileId, String msg) throws Exception {
-		testObjects.put("profileId", profileId);
-		testObjects.put("msg", msg);
+		upsertOnTestRunMessage("profileId", profileId);
+		upsertOnTestRunMessage("msg", msg);
 
-		MessageProcessor flow = lookupFlowConstruct("publish-message");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (String) response.getMessage().getPayload();
+		return runFlowAndGetPayload("publish-message");
 	}
 
 	@SuppressWarnings("unchecked")
 	protected Collection<Album> requestUserAlbums(String user, String since, String until, String limit, String offset) throws Exception {
-		testObjects.put("user", user);
-		testObjects.put("since", since);
-		testObjects.put("until", until);
-		testObjects.put("limit", limit);
-		testObjects.put("offset", offset);
+		upsertOnTestRunMessage("user", user);
+		upsertOnTestRunMessage("since", since);
+		upsertOnTestRunMessage("until", until);
+		upsertOnTestRunMessage("limit", limit);
+		upsertOnTestRunMessage("offset", offset);
 
-		MessageProcessor flow = lookupFlowConstruct("get-user-albums");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (Collection<Album>) response.getMessage().getPayload();
+		return runFlowAndGetPayload("get-user-albums");
     }
 
 	protected StatusMessage getStatus(String statusId) throws Exception {
-		testObjects.put("status", statusId);
-
-		MessageProcessor flow = lookupFlowConstruct("get-status");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (StatusMessage) response.getMessage().getPayload();
+		upsertOnTestRunMessage("status", statusId);
+		
+		return runFlowAndGetPayload("get-status");
 	}
 
 	protected Album getAlbum(String albumId) throws Exception {
-		testObjects.put("album", albumId);
+		upsertOnTestRunMessage("album", albumId);
 
-		MessageProcessor flow = lookupFlowConstruct("get-album");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (Album) response.getMessage().getPayload();
+		return runFlowAndGetPayload("get-album");
 	}
 
     protected User getLoggedUserDetails() throws Exception {
-    	MessageProcessor flow = lookupFlowConstruct("logged-user-details");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (User) response.getMessage().getPayload();
+		return runFlowAndGetPayload("logged-user-details");
     }
 
     protected String getProfileId() throws Exception {
@@ -134,57 +109,44 @@ public class FacebookTestParent extends ConnectorTestCase {
     }
 
     protected Photo getPhoto(String photoId, String metadata) throws Exception {
-    	testObjects.put("photo", photoId);
-    	testObjects.put("metadata", metadata);
+    	upsertOnTestRunMessage("photo", photoId);
+    	upsertOnTestRunMessage("metadata", metadata);
 
-    	MessageProcessor flow = lookupFlowConstruct("get-photo");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (Photo) response.getMessage().getPayload();
+		return runFlowAndGetPayload("get-photo");
     }
 
     protected String publishComment(String postId, String msg) throws Exception {
-    	testObjects.put("postId", postId);
-    	testObjects.put("msg", msg);
+    	upsertOnTestRunMessage("postId", postId);
+    	upsertOnTestRunMessage("msg", msg);
 
-    	MessageProcessor flow = lookupFlowConstruct("publish-comment");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (String) response.getMessage().getPayload();
+    	return runFlowAndGetPayload("publish-comment");
     }
 
     protected String publishLink(String profileId, String msg, String link) throws Exception {
-    	testObjects.put("profileId", profileId);
-    	testObjects.put("msg", msg);
-    	testObjects.put("link", link);
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("msg", msg);
+    	upsertOnTestRunMessage("link", link);
 
-    	MessageProcessor flow = lookupFlowConstruct("publish-link");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (String) response.getMessage().getPayload();
+		return runFlowAndGetPayload("publish-link");
     }
 
     protected String publishPhoto(String albumId, String caption, File photo) throws Exception {
-    	testObjects.put("albumId", albumId);
-    	testObjects.put("caption", caption);
-    	testObjects.put("photoRef", photo);
+    	upsertOnTestRunMessage("albumId", albumId);
+    	upsertOnTestRunMessage("caption", caption);
+    	upsertOnTestRunMessage("photoRef", photo);
 
-    	MessageProcessor flow = lookupFlowConstruct("publish-photo");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (String) response.getMessage().getPayload();
+		return runFlowAndGetPayload("publish-photo");
     }
 
     public boolean like(String postId) throws Exception {
-    	testObjects.put("postId", postId);
-
-    	MessageProcessor flow = lookupFlowConstruct("like");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (Boolean) response.getMessage().getPayload();
+    	upsertOnTestRunMessage("postId", postId);
+		return runFlowAndGetPayload("like");
     }
 
     public boolean dislike(String postId) throws Exception {
-    	testObjects.put("postId", postId);
-
-    	MessageProcessor flow = lookupFlowConstruct("dislike");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (Boolean) response.getMessage().getPayload();
+    	upsertOnTestRunMessage("postId", postId);
+    	
+		return runFlowAndGetPayload("dislike");
     }
 
     public List<Comment> getStatusComments(String statusId) throws Exception {
@@ -193,137 +155,108 @@ public class FacebookTestParent extends ConnectorTestCase {
 
     @SuppressWarnings("unchecked")
 	public List<Comment> getStatusComments(String statusId, String until, String since, String limit, String offset) throws Exception {
-    	testObjects.put("status", statusId);
-    	testObjects.put("until", until);
-    	testObjects.put("since", since);
-    	testObjects.put("limit", limit);
-    	testObjects.put("offset", offset);
+    	upsertOnTestRunMessage("status", statusId);
+    	upsertOnTestRunMessage("until", until);
+    	upsertOnTestRunMessage("since", since);
+    	upsertOnTestRunMessage("limit", limit);
+    	upsertOnTestRunMessage("offset", offset);
 
-    	MessageProcessor flow = lookupFlowConstruct("get-status-comments");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (List<Comment>) response.getMessage().getPayload();
+		return runFlowAndGetPayload("get-status-comments");
     }
 
     protected Boolean deleteObject(String objectId) throws Exception {
-    	testObjects.put("objectId", objectId);
-
-    	MessageProcessor flow = lookupFlowConstruct("delete-object");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (Boolean) response.getMessage().getPayload();
+    	upsertOnTestRunMessage("objectId", objectId);
+    	
+		return runFlowAndGetPayload("delete-object");
     }
     
     protected Boolean deletePageObject(String objectId) throws Exception {
-    	testObjects.put("objectId", objectId);
+    	upsertOnTestRunMessage("objectId", objectId);
 
-    	MessageProcessor flow = lookupFlowConstruct("delete-object-from-page");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (Boolean) response.getMessage().getPayload();
+    	return runFlowAndGetPayload("delete-object-from-page");
     }
 
     public Link getLink(String linkId) throws Exception{
-    	testObjects.put("link", linkId);
-    	MessageProcessor flow = lookupFlowConstruct("get-link");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	Link myLink = (Link) response.getMessage().getPayload();
-    	return myLink;
+    	upsertOnTestRunMessage("link", linkId);
+
+    	return runFlowAndGetPayload("get-link");
 	}
 
     protected String publishEvent(String profileId, String eventName, String startTime) throws Exception {
-    	testObjects.put("profileId", profileId);
-    	testObjects.put("eventName", eventName);
-    	testObjects.put("startTime", startTime);
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("eventName", eventName);
+    	upsertOnTestRunMessage("startTime", startTime);
 
-    	MessageProcessor flow = lookupFlowConstruct("publish-event");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (String) response.getMessage().getPayload();
+		return runFlowAndGetPayload("publish-event");
     }
 
     protected String publishEventPage(String pageId, String eventName, String startTime) throws Exception {
-    	testObjects.put("profileId", pageId);
-    	testObjects.put("eventName", eventName);
-    	testObjects.put("startTime", startTime);
-
-    	MessageProcessor flow = lookupFlowConstruct("publish-event-on-page");
-    	MuleEvent response = flow.process(getTestEvent(testObjects));
-    	return (String) response.getMessage().getPayload();
+    	upsertOnTestRunMessage("profileId", pageId);
+    	upsertOnTestRunMessage("eventName", eventName);
+    	upsertOnTestRunMessage("startTime", startTime);
+    	
+		return runFlowAndGetPayload("publish-event-on-page");
     }
 
     protected String publishMessage(String profileId, String msg, String link, String linkName, String description, String picture, String caption, String place) throws Exception {
-    	testObjects.put("profileId", profileId);
-    	testObjects.put("msg", msg);
-    	testObjects.put("link", link);
-    	testObjects.put("linkName", linkName);
-    	testObjects.put("description", description);
-    	testObjects.put("picture", picture);
-    	testObjects.put("caption", caption);
-    	testObjects.put("place", place);
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("msg", msg);
+    	upsertOnTestRunMessage("link", link);
+    	upsertOnTestRunMessage("linkName", linkName);
+    	upsertOnTestRunMessage("description", description);
+    	upsertOnTestRunMessage("picture", picture);
+    	upsertOnTestRunMessage("caption", caption);
+    	upsertOnTestRunMessage("place", place);
 
-		MessageProcessor flow = lookupFlowConstruct("publish-message-all-attributes");
-
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (String) response.getMessage().getPayload();
+		return runFlowAndGetPayload("publish-message-all-attributes");
 	}
     
 	protected String publishNote(String profileId, String msg, String subject ) throws Exception{
-		testObjects.put("profileId", profileId);
-		testObjects.put("msg", msg);
-		testObjects.put("subject", subject);
+		upsertOnTestRunMessage("profileId", profileId);
+		upsertOnTestRunMessage("msg", msg);
+		upsertOnTestRunMessage("subject", subject);
 
-		MessageProcessor flow = lookupFlowConstruct("publish-note");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return response.getMessage().getPayloadAsString();
+		return runFlowAndGetPayload("publish-note");
 	}
 
 	protected String publishNoteOnPage(String pageId, String msg, String subject ) throws Exception{
-		testObjects.put("profileId", pageId);
-		testObjects.put("msg", msg);
-		testObjects.put("subject", subject);
+		upsertOnTestRunMessage("profileId", pageId);
+		upsertOnTestRunMessage("msg", msg);
+		upsertOnTestRunMessage("subject", subject);
 
-		MessageProcessor flow = lookupFlowConstruct("publish-note-on-page");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return response.getMessage().getPayloadAsString();
+		return runFlowAndGetPayload("publish-note-on-page");
 	}
 
 	protected Note getNote(String note) throws Exception {
-		testObjects.put("note", note);
+		upsertOnTestRunMessage("note", note);
 
-		MessageProcessor flow = lookupFlowConstruct("get-note");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (Note) response.getMessage().getPayload();
+		return runFlowAndGetPayload("get-note");
 	}
 
 	protected Boolean attendEvent(String eventId) throws Exception {
-		testObjects.put("eventId", eventId);
+		upsertOnTestRunMessage("eventId", eventId);
 
-		MessageProcessor flow = lookupFlowConstruct("attend-event");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (Boolean) response.getMessage().getPayload();
+		return runFlowAndGetPayload("attend-event");
 	}
 
 	protected Boolean declineEvent(String eventId) throws Exception {
-		testObjects.put("eventId", eventId);
+		upsertOnTestRunMessage("eventId", eventId);
 
-		MessageProcessor flow = lookupFlowConstruct("decline-event");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (Boolean) response.getMessage().getPayload();
+		return runFlowAndGetPayload("decline-event");
 	}
 
 	protected Event getEvent(String eventId) throws Exception {
-		testObjects.put("eventId", eventId);
+		upsertOnTestRunMessage("eventId", eventId);
 
-		MessageProcessor flow = lookupFlowConstruct("get-event");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (Event) response.getMessage().getPayload();
+		return runFlowAndGetPayload("get-event");
 	}
 
 
 	@SuppressWarnings("unchecked")
 	protected List<Group> searchGroups(String query) throws Exception {
-		testObjects.put("q", query);
+		upsertOnTestRunMessage("q", query);
 
-		MessageProcessor flow = lookupFlowConstruct("search-groups");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
-		return (List<Group>) response.getMessage().getPayload();
+		return runFlowAndGetPayload("search-groups");
 
 	}
 

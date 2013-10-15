@@ -12,15 +12,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Comment;
@@ -30,18 +27,18 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPhotoCommentsTestData");
+		initializeTestRunMessage("getPhotoCommentsTestData");
 		String profileId = getProfileId();
-		testObjects.put("user", profileId);
+		upsertOnTestRunMessage("user", profileId);
 		
-		String caption = (String) testObjects.get("caption");
-		File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+		String caption = (String) getTestRunMessageValue("caption");
+		File photoFile = new File(getClass().getClassLoader().getResource((String) getTestRunMessageValue("photoFilePath")).toURI());
 		
 		String photoId = publishPhoto(profileId, caption, photoFile);
-		testObjects.put("photo", photoId);
+		upsertOnTestRunMessage("photo", photoId);
 		
-		String commentId = publishComment((String) testObjects.get("photo"), (String) testObjects.get("msg"));
-		testObjects.put("commentId", commentId);
+		String commentId = publishComment((String) getTestRunMessageValue("photo"), (String) getTestRunMessageValue("msg"));
+		upsertOnTestRunMessage("commentId", commentId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -49,13 +46,11 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPhotoComments() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-photo-comments");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			List<Comment> result = (List<Comment>) response.getMessage().getPayload();
+			List<Comment> result = runFlowAndGetPayload("get-photo-comments");
 			
 			assertTrue(result.size() == 1);
 			Comment comment = result.get(0);
-			assertTrue(comment.getId().equals((String) testObjects.get("commentId")));
+			assertTrue(comment.getId().equals((String) getTestRunMessageValue("commentId")));
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
@@ -63,9 +58,9 @@ public class GetPhotoCommentsTestCases extends FacebookTestParent {
     
 	@After
 	public void tearDown() throws Exception {
-		String commentId = (String) testObjects.get("commentId");
+		String commentId = (String) getTestRunMessageValue("commentId");
 		deleteObject(commentId);
-		String photoId = (String) testObjects.get("photo");
+		String photoId = (String) getTestRunMessageValue("photo");
 		deleteObject(photoId);
 	}
     

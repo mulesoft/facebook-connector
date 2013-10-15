@@ -4,15 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Comment;
@@ -23,24 +20,21 @@ public class PublishCommentTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		//create comment for message
-		testObjects = (HashMap<String, Object>) getBeanFromContext("publishCommentTestData");
+		initializeTestRunMessage("publishCommentTestData");
 			
-		String statusMsg = (String) testObjects.get("msg");
+		String statusMsg = (String) getTestRunMessageValue("msg");
 		String postId = publishMessage(getProfileId(), statusMsg);
-		testObjects.put("postId", postId);
+		upsertOnTestRunMessage("postId", postId);
 	}
 
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
 	public void testPublishComment() {
 		try {
-			String postId = (String) testObjects.get("postId");
-			String msg = (String) testObjects.get("msg");
+			String postId = (String) getTestRunMessageValue("postId");
+			String msg = (String) getTestRunMessageValue("msg");
 			
-			MessageProcessor flow = lookupFlowConstruct("publish-comment");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			String commentId = (String) response.getMessage().getPayload();
+			String commentId = runFlowAndGetPayload("publish-comment");
 
 			List<Comment> comments = getStatusComments(postId);
 			boolean commentFound = false;
@@ -61,7 +55,7 @@ public class PublishCommentTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		deleteObject(testObjects.get("postId").toString());
+		deleteObject(getTestRunMessageValue("postId").toString());
 	}
 
 }

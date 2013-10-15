@@ -12,15 +12,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Comment;
@@ -30,19 +27,19 @@ public class GetAlbumCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getAlbumCommentsTestData");
+		initializeTestRunMessage("getAlbumCommentsTestData");
 
-		String albumName = (String) testObjects.get("albumName");
-		String msg = (String) testObjects.get("msg");
+		String albumName = (String) getTestRunMessageValue("albumName");
+		String msg = (String) getTestRunMessageValue("msg");
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 			
 		String albumId = publishAlbum(albumName, msg, profileId);
-		testObjects.put("albumId", albumId);
+		upsertOnTestRunMessage("albumId", albumId);
 			
-		String commentMsg = (String) testObjects.get("commentMsg");
+		String commentMsg = (String) getTestRunMessageValue("commentMsg");
 		String commentId = publishComment(albumId, commentMsg);
-		testObjects.put("commentId", commentId);
+		upsertOnTestRunMessage("commentId", commentId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -50,14 +47,11 @@ public class GetAlbumCommentsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetAlbumComments() {
 		try {
-			String albumId = (String) testObjects.get("albumId");
-			testObjects.put("album", albumId);
-			final String commentId = (String) testObjects.get("commentId");
+			String albumId = (String) getTestRunMessageValue("albumId");
+			upsertOnTestRunMessage("album", albumId);
+			final String commentId = (String) getTestRunMessageValue("commentId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-album-comments");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			Collection<Comment> comments = (Collection<Comment>) response.getMessage().getPayload();
+			Collection<Comment> comments = runFlowAndGetPayload("get-album-comments");
 			
 			Collection<Comment> matching = CollectionUtils.select(comments, new Predicate() {
 				

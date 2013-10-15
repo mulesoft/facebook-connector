@@ -3,14 +3,10 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Map;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.StatusMessage;
@@ -20,30 +16,27 @@ public class GetStatusTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getStatusTestData");
+		initializeTestRunMessage("getStatusTestData");
 		
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 		
-		String msg = (String) testObjects.get("msg");
+		String msg = (String) getTestRunMessageValue("msg");
 		
 		String messageId = publishMessage(profileId, msg);
-		testObjects.put("messageId", messageId);
+		upsertOnTestRunMessage("messageId", messageId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetStatus() {
 		try {
-			String msg = (String) testObjects.get("msg");
-			String messageId = (String) testObjects.get("messageId");
-			testObjects.put("status", messageId);
+			String msg = (String) getTestRunMessageValue("msg");
+			String messageId = (String) getTestRunMessageValue("messageId");
+			upsertOnTestRunMessage("status", messageId);
 			
-			MessageProcessor flow = lookupFlowConstruct("get-status");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			StatusMessage status = (StatusMessage) response.getMessage().getPayload();
-			
+			StatusMessage status = runFlowAndGetPayload("get-status");
+
 			assertTrue(status.getId().equals(messageId));
 			assertTrue(status.getMessage().equals(msg));
 		}
@@ -54,7 +47,7 @@ public class GetStatusTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String messageId = (String) testObjects.get("messageId");
+		String messageId = (String) getTestRunMessageValue("messageId");
 		deleteObject(messageId);
 	}
 	

@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Checkin;
@@ -29,10 +26,10 @@ public class GetUserCheckinsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserCheckinsTestData");
+    	initializeTestRunMessage("getUserCheckinsTestData");
 			
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -40,10 +37,7 @@ public class GetUserCheckinsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserCheckins() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-checkins");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Checkin> result = (List<Checkin>) response.getMessage().getPayload();
+			List<Checkin> result = runFlowAndGetPayload("get-user-checkins");
 			assertTrue(result.size() == 0);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

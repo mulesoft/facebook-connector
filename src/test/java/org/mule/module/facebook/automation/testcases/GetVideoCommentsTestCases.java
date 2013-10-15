@@ -3,15 +3,12 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Comment;
@@ -21,10 +18,10 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) getBeanFromContext("getVideoCommentsTestData");
+		initializeTestRunMessage("getVideoCommentsTestData");
 			
-		String commentId = publishComment((String) testObjects.get("postId"), (String) testObjects.get("msg"));
-		testObjects.put("objectId", commentId);
+		String commentId = publishComment((String) getTestRunMessageValue("postId"), (String) getTestRunMessageValue("msg"));
+		upsertOnTestRunMessage("objectId", commentId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,13 +29,10 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetVideoComments() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-video-comments");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Comment> result = (List<Comment>) response.getMessage().getPayload();
+			List<Comment> result = runFlowAndGetPayload("get-video-comments");
 
 			Comment comment = result.get(0);
-			assertEquals((String) testObjects.get("msg"), comment.getMessage());
+			assertEquals((String) getTestRunMessageValue("msg"), comment.getMessage());
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
@@ -46,7 +40,7 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String objectId = (String) testObjects.get("objectId");
+		String objectId = (String) getTestRunMessageValue("objectId");
 		deleteObject(objectId);
 	}
 

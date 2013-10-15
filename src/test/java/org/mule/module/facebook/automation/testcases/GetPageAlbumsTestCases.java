@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Album;
@@ -28,14 +25,14 @@ public class GetPageAlbumsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageAlbumsTestData");
+		initializeTestRunMessage("getPageAlbumsTestData");
 
-		String page = (String) testObjects.get("page");
-		String albumName = (String) testObjects.get("albumName");
-		String msg = (String) testObjects.get("msg");
+		String page = (String) getTestRunMessageValue("page");
+		String albumName = (String) getTestRunMessageValue("albumName");
+		String msg = (String) getTestRunMessageValue("msg");
 		
 		String albumId = publishAlbumOnPage(albumName, msg, page);
-		testObjects.put("albumId", albumId);
+		upsertOnTestRunMessage("albumId", albumId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -43,12 +40,9 @@ public class GetPageAlbumsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageAlbums() {
 		try {
-			String albumId = (String) testObjects.get("albumId");
+			String albumId = (String) getTestRunMessageValue("albumId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-page-albums");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Album> albums = (List<Album>) response.getMessage().getPayload();
+			List<Album> albums = runFlowAndGetPayload("get-page-albums");
 			assertTrue(albums.size() > 0);
 			
 			boolean found = false;

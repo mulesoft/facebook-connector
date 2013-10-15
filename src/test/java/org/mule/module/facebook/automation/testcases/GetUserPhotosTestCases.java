@@ -5,14 +5,11 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Photo;
@@ -22,16 +19,16 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getUserPhotosTestData");
+		initializeTestRunMessage("getUserPhotosTestData");
 		
 		String profileId = getProfileId();
-		testObjects.put("user", profileId);
+		upsertOnTestRunMessage("user", profileId);
 		
-		String caption = (String) testObjects.get("caption");
-		File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+		String caption = (String) getTestRunMessageValue("caption");
+		File photoFile = new File(getClass().getClassLoader().getResource((String) getTestRunMessageValue("photoFilePath")).toURI());
 		
 		String photoId = publishPhoto(profileId, caption, photoFile);
-		testObjects.put("photoId", photoId);
+		upsertOnTestRunMessage("photoId", photoId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -39,12 +36,9 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserPhotos() {
 		try {
-			String photoId = (String) testObjects.get("photoId");
+			String photoId = (String) getTestRunMessageValue("photoId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-user-photos");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			List<Photo> result = (List<Photo>) response.getMessage().getPayload();
+			List<Photo> result = runFlowAndGetPayload("get-user-photos");
 			assertEquals(result.size(), 1);
 			
 			Photo photo = result.get(0);
@@ -57,7 +51,7 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String photoId = (String) testObjects.get("photoId");
+		String photoId = (String) getTestRunMessageValue("photoId");
 		deleteObject(photoId);
 	}
 	

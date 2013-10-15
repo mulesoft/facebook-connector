@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
@@ -19,28 +18,28 @@ public class PublishPhotoTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("publishPhotoTestData");
+		initializeTestRunMessage("publishPhotoTestData");
 			
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testPublishPhoto() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
-			String caption = (String) testObjects.get("caption");
-			File photoFile = new File(getClass().getClassLoader().getResource((String) testObjects.get("photoFilePath")).toURI());
+			String profileId = (String) getTestRunMessageValue("profileId");
+			String caption = (String) getTestRunMessageValue("caption");
+			File photoFile = new File(getClass().getClassLoader().getResource((String) getTestRunMessageValue("photoFilePath")).toURI());
 
 			assertTrue(photoFile.getAbsolutePath() + " does not exist.", photoFile.exists());
 			
 			String photoId = publishPhoto(profileId, caption, photoFile);
 			assertTrue(StringUtils.isNotEmpty(photoId));			
 
-			testObjects.put("photoId", photoId);
+			upsertOnTestRunMessage("photoId", photoId);
 			
-			String metadata = (String) testObjects.get("metadata");
+			String metadata = (String) getTestRunMessageValue("metadata");
 			
 			Photo photo = getPhoto(photoId, metadata);
 			assertEquals(photo.getId(), photoId);
@@ -52,7 +51,7 @@ public class PublishPhotoTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String photoId = (String) testObjects.get("photoId");
+		String photoId = (String) getTestRunMessageValue("photoId");
 		deleteObject(photoId);
 	}
 	

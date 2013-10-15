@@ -11,14 +11,10 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetEventPictureTestCases extends FacebookTestParent {
@@ -26,35 +22,31 @@ public class GetEventPictureTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getEventPictureTestData");
+    	initializeTestRunMessage("getEventPictureTestData");
 		
 		String profileId = getProfileId();
-		String eventName = (String) testObjects.get("eventName");
-		String startTime = (String) testObjects.get("startTime");
+		String eventName = (String) getTestRunMessageValue("eventName");
+		String startTime = (String) getTestRunMessageValue("startTime");
 		
 		String eventId = publishEvent(profileId, eventName, startTime);
-		testObjects.put("eventId", eventId);
-		testObjects.put("objectId", eventId);
+		upsertOnTestRunMessage("eventId", eventId);
+		upsertOnTestRunMessage("objectId", eventId);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetEventPicture() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-event-picture");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			byte[] picture = (byte[]) response.getMessage().getPayload();
-			
+			byte[] picture = runFlowAndGetPayload("get-event-picture");
 			assertTrue(picture.length > 0);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
-     
 	}
     
     @After
 	public void tearDown() throws Exception {
-    	String objectId = (String) testObjects.get("objectId");
+    	String objectId = (String) getTestRunMessageValue("objectId");
 		deleteObject(objectId);
 	}
     

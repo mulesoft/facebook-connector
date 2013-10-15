@@ -11,15 +11,12 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Note;
@@ -29,14 +26,14 @@ public class GetPageNotesTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageNotesTestData");
+		initializeTestRunMessage("getPageNotesTestData");
 		
-		String page = (String) testObjects.get("page");
-		String msg = (String) testObjects.get("msg");
-		String subject = (String) testObjects.get("subject");
+		String page = (String) getTestRunMessageValue("page");
+		String msg = (String) getTestRunMessageValue("msg");
+		String subject = (String) getTestRunMessageValue("subject");
 		
 		String noteId = publishNoteOnPage(page, msg, subject);
-		testObjects.put("noteId", noteId);
+		upsertOnTestRunMessage("noteId", noteId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -44,12 +41,9 @@ public class GetPageNotesTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageNotes() {
 		try {
-			String noteId = (String) testObjects.get("noteId");
+			String noteId = (String) getTestRunMessageValue("noteId");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-page-notes");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Note> result = (List<Note>) response.getMessage().getPayload();
+			List<Note> result = runFlowAndGetPayload("get-page-notes");
 			assertTrue(result.size() == 1);
 			
 			Note note = result.get(0);
@@ -61,7 +55,7 @@ public class GetPageNotesTestCases extends FacebookTestParent {
     
     @After
     public void tearDown() throws Exception {
-    	String noteId = (String) testObjects.get("noteId");
+    	String noteId = (String) getTestRunMessageValue("noteId");
     	deletePageObject(noteId);
     }
     

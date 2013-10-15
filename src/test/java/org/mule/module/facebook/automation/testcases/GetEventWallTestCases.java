@@ -6,14 +6,11 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Post;
@@ -23,22 +20,22 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getEventWallTestData");
+		initializeTestRunMessage("getEventWallTestData");
 		
 		String profileId = getProfileId();
 		
-		String eventName = (String) testObjects.get("eventName");
-		String startTime = (String) testObjects.get("startTime");
+		String eventName = (String) getTestRunMessageValue("eventName");
+		String startTime = (String) getTestRunMessageValue("startTime");
 		String eventId = publishEvent(profileId, eventName, startTime);
-		testObjects.put("eventId", eventId);
+		upsertOnTestRunMessage("eventId", eventId);
 		
-		List<String> messages = (List<String>) testObjects.get("messages");
+		List<String> messages = (List<String>) getTestRunMessageValue("messages");
 		List<String> messageIds = new ArrayList<String>();
 		for (String message : messages) {
 			String messageId = publishMessage(eventId, message);
 			messageIds.add(messageId);
 		}
-		testObjects.put("messageIds", messageIds);
+		upsertOnTestRunMessage("messageIds", messageIds);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -46,13 +43,9 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	@Test
 	public void testGetEventWall() {
 		try {
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
+			List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-event-wall");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			List<Post> wall = (List<Post>) response.getMessage().getPayload();
-			
+			List<Post> wall = runFlowAndGetPayload("get-event-wall");
 			assertEquals(wall.size(), messageIds.size());
 			for (Post post : wall) {
 				assertTrue(messageIds.contains(post.getId()));
@@ -65,7 +58,7 @@ public class GetEventWallTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception{
-		String eventId = (String) testObjects.get("eventId");
+		String eventId = (String) getTestRunMessageValue("eventId");
 		deleteObject(eventId);
 	}
 	

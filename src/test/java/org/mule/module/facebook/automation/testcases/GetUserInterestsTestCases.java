@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.PageConnection;
@@ -28,10 +25,10 @@ public class GetUserInterestsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserInterestsTestData");
+    	initializeTestRunMessage("getUserInterestsTestData");
 			
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -39,10 +36,7 @@ public class GetUserInterestsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserInterests() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-interests");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<PageConnection> result = (List<PageConnection>) response.getMessage().getPayload();
+			List<PageConnection> result = runFlowAndGetPayload("get-user-interests");
 			assertNotNull(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

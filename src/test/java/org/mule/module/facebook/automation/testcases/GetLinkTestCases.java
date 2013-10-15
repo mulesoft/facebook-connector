@@ -3,14 +3,10 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Link;
@@ -20,27 +16,25 @@ public class GetLinkTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String, Object>) getBeanFromContext("getLinkTestData");
+		initializeTestRunMessage("getLinkTestData");
 		String profileId = getProfileId();
-		testObjects.put("profileId", profileId);
+		upsertOnTestRunMessage("profileId", profileId);
 
-		String msg = testObjects.get("msg").toString();
-		String link = testObjects.get("link").toString();
+		String msg = getTestRunMessageValue("msg").toString();
+		String link = getTestRunMessageValue("link").toString();
 		
 		String messageId = publishLink(profileId, msg, link);
-		testObjects.put("messageId", messageId);
+		upsertOnTestRunMessage("messageId", messageId);
 	}
 
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetLink(){
 		try {
-			String link = (String) testObjects.get("link");
+			String link = (String) getTestRunMessageValue("link");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-link");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			Link result = (Link) response.getMessage().getPayload();
-    
+			Link result = runFlowAndGetPayload("get-link");
+
 			assertEquals(link, result.getId());
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
@@ -49,8 +43,8 @@ public class GetLinkTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		String profileId = (String) testObjects.get("profileId");
-		String messageId = (String) testObjects.get("messageId");
+		String profileId = (String) getTestRunMessageValue("profileId");
+		String messageId = (String) getTestRunMessageValue("messageId");
 		deleteObject(profileId + "_" + messageId);
 	}
 

@@ -12,15 +12,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Post;
@@ -30,10 +27,10 @@ public class GetPagePostsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPagePostsTestData");
+		initializeTestRunMessage("getPagePostsTestData");
 		
-		String page = (String) testObjects.get("page");
-		List<String> messages = (List<String>) testObjects.get("messages");
+		String page = (String) getTestRunMessageValue("page");
+		List<String> messages = (List<String>) getTestRunMessageValue("messages");
 		List<String> messageIds = new ArrayList<String>();
 		
 		for (String msg : messages) {
@@ -41,7 +38,7 @@ public class GetPagePostsTestCases extends FacebookTestParent {
 			messageIds.add(messageId);
 		}
 		
-		testObjects.put("messageIds", messageIds);
+		upsertOnTestRunMessage("messageIds", messageIds);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -49,12 +46,9 @@ public class GetPagePostsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPagePosts() {
 		try {
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
+			List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-page-posts");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Post> result = (List<Post>) response.getMessage().getPayload();
+			List<Post> result = runFlowAndGetPayload("get-page-posts");
 			assertTrue(result.size() >= messageIds.size());
 
 			for (String messageId : messageIds) {
@@ -74,7 +68,7 @@ public class GetPagePostsTestCases extends FacebookTestParent {
     
     @After
     public void tearDown() throws Exception {
-    	List<String> messageIds = (List<String>) testObjects.get("messageIds");
+    	List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
     	for (String messageId : messageIds) {
 			deleteObject(messageId);
 		}

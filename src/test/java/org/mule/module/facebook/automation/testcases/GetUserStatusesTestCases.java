@@ -6,14 +6,11 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.StatusMessage;
@@ -22,32 +19,29 @@ public class GetUserStatusesTestCases extends FacebookTestParent {
 
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (Map<String, Object>) getBeanFromContext("getUserStatusesTestData");
+		initializeTestRunMessage("getUserStatusesTestData");
 		
 		String profileId = getProfileId();
 		
-		List<String> messages = (List<String>) testObjects.get("messages");
+		List<String> messages = (List<String>) getTestRunMessageValue("messages");
 		List<String> messageIds = new ArrayList<String>();
 		for (String message : messages) {
 			String messageId = publishMessage(profileId, message);
 			messageIds.add(messageId);
 		}
-		testObjects.put("messageIds", messageIds);
+		upsertOnTestRunMessage("messageIds", messageIds);
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserStatuses() {
 		try {
-			String profileId = (String) testObjects.get("profileId");
-			testObjects.put("user", profileId);
+			String profileId = (String) getTestRunMessageValue("profileId");
+			upsertOnTestRunMessage("user", profileId);
 			
-			List<String> messageIds = (List<String>) testObjects.get("messageIds");
+			List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
 			
-			MessageProcessor flow = lookupFlowConstruct("get-user-statuses");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			List<StatusMessage> statuses = (List<StatusMessage>) response.getMessage().getPayload();
+			List<StatusMessage> statuses = runFlowAndGetPayload("get-user-statuses");
 			
 			assertEquals(statuses.size(), messageIds.size());
 			for (StatusMessage status : statuses) {
@@ -64,7 +58,7 @@ public class GetUserStatusesTestCases extends FacebookTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		List<String> messageIds = (List<String>) testObjects.get("messageIds");
+		List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
 		for (String messageId : messageIds) {
 			deleteObject(messageId);
 		}

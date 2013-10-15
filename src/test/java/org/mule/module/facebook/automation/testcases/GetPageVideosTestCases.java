@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Video;
@@ -28,7 +25,7 @@ public class GetPageVideosTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		testObjects = (HashMap<String,Object>) getBeanFromContext("getPageVideosTestData");
+		initializeTestRunMessage("getPageVideosTestData");
 	}
 	
     @SuppressWarnings("unchecked")
@@ -36,10 +33,7 @@ public class GetPageVideosTestCases extends FacebookTestParent {
 	@Test
 	public void testGetPageVideos() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-page-videos");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<Video> result = (List<Video>) response.getMessage().getPayload();
+			List<Video> result = runFlowAndGetPayload("get-page-videos");
 			assertNotNull(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

@@ -11,14 +11,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.NamedFacebookType;
@@ -29,10 +26,10 @@ public class GetUserFriendsTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-    	testObjects = (HashMap<String,Object>) getBeanFromContext("getUserFriendsTestData");
+    	initializeTestRunMessage("getUserFriendsTestData");
 			
     	String profileId = getProfileId();
-    	testObjects.put("user", profileId);
+    	upsertOnTestRunMessage("user", profileId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -40,10 +37,7 @@ public class GetUserFriendsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserFriends() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-user-friends");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-
-			List<NamedFacebookType> result = (List<NamedFacebookType>) response.getMessage().getPayload();
+			List<NamedFacebookType> result = runFlowAndGetPayload("get-user-friends");
 			assertNotNull(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
