@@ -9,12 +9,18 @@
 package org.mule.module.facebook.automation.testcases;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Properties;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
@@ -40,14 +46,19 @@ public class FacebookTestParent extends ConnectorTestCase {
 	@Rule
 	public Timeout globalTimeout = new Timeout(600000);
 
+	private Properties properties = new Properties();
+	
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
-    public void init() throws ObjectStoreException {
+    public void init() throws ObjectStoreException, IOException {
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
     	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthState"));
     	objectStore.store("accessTokenIdPage", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStatePage"));
+    	
+		InputStream props = getClass().getClassLoader().getResourceAsStream("init-state.properties");
+		properties.load(props);
     }
-
+	
 	protected Album requestAlbum(String albumId) throws Exception {
 		upsertOnTestRunMessage("album", albumId);
 
@@ -279,4 +290,39 @@ public class FacebookTestParent extends ConnectorTestCase {
 		calendar.add(Calendar.DAY_OF_YEAR, -1);
 		return format.format(calendar.getTime());
 	}
+	
+	protected List<String> getExpectedMusic() throws IOException {
+		String musicLikes = properties.getProperty("facebook.init.music");
+		return Arrays.asList(musicLikes.split(","));
+	}
+	
+	protected List<String> getExpectedTelevision() throws IOException {
+		String televisionLikes = properties.getProperty("facebook.init.television");
+		return Arrays.asList(televisionLikes.split(","));
+	}
+	
+	protected List<String> getExpectedBooks() throws IOException {
+		String bookLikes = properties.getProperty("facebook.init.books");
+		return Arrays.asList(bookLikes.split(","));
+	}
+	
+	protected List<String> getExpectedMovies() throws IOException {
+		String movieLikes = properties.getProperty("facebook.init.movies");
+		return Arrays.asList(movieLikes.split(","));
+	}
+	
+	protected List<String> getExpectedLikes() throws IOException {
+		List<String> music = getExpectedMovies();
+		List<String> television = getExpectedTelevision();
+		List<String> books = getExpectedBooks();
+		List<String> movies = getExpectedMovies();
+
+		List<String> finalList = new ArrayList<String>();
+		finalList.addAll(music);
+		finalList.addAll(television);
+		finalList.addAll(books);
+		finalList.addAll(movies);
+		return finalList;
+	}
+	
 }
