@@ -35,7 +35,7 @@ public class GetUserMoviesTestCases extends FacebookTestParent {
 		try {
 			List<String> expectedIds = getTestRunMessageValue("expected");
 
-			assertTrue("Please make sure that you have liked a music page on your Facebook account before running this test.", !expectedIds.isEmpty());
+			assertTrue("Please make sure that you have liked a movie page on your Facebook account before running this test.", !expectedIds.isEmpty());
 			
 			List<PageConnection> result = runFlowAndGetPayload("get-user-movies");
 			for (PageConnection pageConnection : result) {
