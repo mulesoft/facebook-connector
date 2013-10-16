@@ -8,6 +8,7 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -30,6 +31,9 @@ public class GetUserBooksTestCases extends FacebookTestParent {
 			
     	String profileId = getProfileId();
     	upsertOnTestRunMessage("user", profileId);
+    	
+		List<String> expectedIds = getExpectedBooks();
+		upsertOnTestRunMessage("expected", expectedIds);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -37,8 +41,16 @@ public class GetUserBooksTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserBooks() {
 		try {
+			List<String> expectedIds = getTestRunMessageValue("expected");
+
+			assertTrue("Please make sure that you have liked a book page on your Facebook account before running this test.", !expectedIds.isEmpty());
+
 			List<PageConnection> result = runFlowAndGetPayload("get-user-books");
-			assertTrue(result.size() == 0);
+			for (PageConnection pageConnection : result) {
+				assertTrue(expectedIds.contains(pageConnection.getId()));
+			}
+			
+			assertEquals(expectedIds.size(), result.size());
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}

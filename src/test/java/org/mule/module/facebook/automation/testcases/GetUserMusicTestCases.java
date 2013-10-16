@@ -1,5 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -40,6 +41,8 @@ public class GetUserMusicTestCases extends FacebookTestParent {
 			for (PageConnection pageConnection : result) {
 				assertTrue(expectedIds.contains(pageConnection.getId()));
 			}
+
+			assertEquals(expectedIds.size(), result.size());
 		}
 		catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));

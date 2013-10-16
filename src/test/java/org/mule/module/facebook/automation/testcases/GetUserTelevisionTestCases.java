@@ -1,5 +1,6 @@
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -42,6 +43,8 @@ public class GetUserTelevisionTestCases extends FacebookTestParent {
 			for (PageConnection pageConnection : pageConnections) {
 				assertTrue(expectedIds.contains(pageConnection.getId()));
 			}
+			
+			assertEquals(expectedIds.size(), pageConnections.size());
 		}
 		catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
