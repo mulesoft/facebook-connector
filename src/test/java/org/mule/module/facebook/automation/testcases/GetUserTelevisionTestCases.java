@@ -21,6 +21,9 @@ public class GetUserTelevisionTestCases extends FacebookTestParent {
 			
 		String profileId = getProfileId();
 		upsertOnTestRunMessage("profileId", profileId);
+		
+		List<String> expectedIds = getExpectedTelevision();
+		upsertOnTestRunMessage("expectedIds", expectedIds);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -29,11 +32,16 @@ public class GetUserTelevisionTestCases extends FacebookTestParent {
 	public void testGetUserTelevision() {
 		try {
 			String profileId = (String) getTestRunMessageValue("profileId");
+			List<String> expectedIds = getTestRunMessageValue("expectedIds");
+
+			assertTrue("Please make sure that you have liked a TV page on your Facebook account before running this test.", !expectedIds.isEmpty());
 			
 			upsertOnTestRunMessage("user", profileId);
 			
 			List<PageConnection> pageConnections = runFlowAndGetPayload("get-user-television");
-			assertTrue(pageConnections.isEmpty());
+			for (PageConnection pageConnection : pageConnections) {
+				assertTrue(expectedIds.contains(pageConnection.getId()));
+			}
 		}
 		catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
