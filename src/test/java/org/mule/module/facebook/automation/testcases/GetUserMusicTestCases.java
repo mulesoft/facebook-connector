@@ -1,6 +1,7 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public class GetUserMusicTestCases extends FacebookTestParent {
 			
 		String profileId = getProfileId();
 		upsertOnTestRunMessage("user", profileId);
+		
+		List<String> expectedIds = getExpectedMusic();
+		upsertOnTestRunMessage("expected", expectedIds);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -28,8 +32,14 @@ public class GetUserMusicTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserMusic() {
 		try {
+			List<String> expectedIds = getTestRunMessageValue("expected");
+
+			assertTrue("Please make sure that you have liked a music page on your Facebook account before running this test.", !expectedIds.isEmpty());
+			
 			List<PageConnection> result = runFlowAndGetPayload("get-user-music");
-			assertNotNull(result);
+			for (PageConnection pageConnection : result) {
+				assertTrue(expectedIds.contains(pageConnection.getId()));
+			}
 		}
 		catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
