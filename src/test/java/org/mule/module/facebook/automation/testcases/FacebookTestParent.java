@@ -312,7 +312,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 	}
 	
 	protected List<String> getExpectedLikes() throws IOException {
-		List<String> music = getExpectedMovies();
+		List<String> music = getExpectedMusic();
 		List<String> television = getExpectedTelevision();
 		List<String> books = getExpectedBooks();
 		List<String> movies = getExpectedMovies();
