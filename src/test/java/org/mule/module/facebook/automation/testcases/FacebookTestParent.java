@@ -261,6 +261,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 
 		return runFlowAndGetPayload("get-event");
 	}
+	
+	protected Boolean tentativeEvent(String eventId) throws Exception {
+		upsertOnTestRunMessage("eventId", eventId);
+		
+		return runFlowAndGetPayload("tentative-event");
+	}
 
 
 	@SuppressWarnings("unchecked")

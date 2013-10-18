@@ -499,7 +499,8 @@
 		<entry key="eventId" value="331218348435" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
-		<entry key="limit" value="100" />
+		<!-- effectively no limit -->
+		<entry key="limit" value="100000" />
 		<entry key="offset" value="0" />
 	</util:map>
 	

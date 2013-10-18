@@ -13,6 +13,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Collection;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -26,6 +27,12 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getEventMaybeTestData");
+    	
+    	String profileId = getProfileId();
+    	upsertOnTestRunMessage("profileId", profileId);
+    	
+    	String eventId = getTestRunMessageValue("eventId");
+    	tentativeEvent(eventId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -33,12 +40,28 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 	@Test
 	public void testGetEventMaybe() {
 		try {
+			String profileId = getTestRunMessageValue("profileId");
+			
 			Collection<User> users = runFlowAndGetPayload("get-event-maybe");
 			assertTrue(users.size() > 0);
+			
+			boolean found = false;
+			for (User user : users) {
+				if (user.getId().equals(profileId)) {
+					found = true;
+					break;
+				}
+			}
+			assertTrue(found);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
-     
 	}
     
+	@After
+	public void tearDown() throws Exception {
+		String eventId = getTestRunMessageValue("eventId");
+		declineEvent(eventId);
+	}
+	
 }
