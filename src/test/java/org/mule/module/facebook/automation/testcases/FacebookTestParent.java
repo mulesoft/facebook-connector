@@ -291,26 +291,65 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return format.format(calendar.getTime());
 	}
 	
+	/*
+	 * Gets the expected IDs of Music pages which the test account has liked
+	 * An an example, the Metallica and Deep Purple page IDs are 10212595263, 192121640808384 respectively
+	 * So, inside the properties file, you would need to have the following configuration:
+	 * 
+	 * facebook.init.music=10212595263,192121640808384
+	 * 
+	 * This method would then return the following list: ["10212595263", "192121640808384"]
+	 */
 	protected List<String> getExpectedMusic() throws IOException {
 		String musicLikes = properties.getProperty("facebook.init.music");
-		return Arrays.asList(musicLikes.split(","));
+		return toList(musicLikes.split(","));
 	}
 	
+	/*
+	 * Gets the expected IDs of television show pages which the test account has liked
+	 * As an example, the Seinfeld and Top Gear UK page IDs are 9023924452, 133612723434302 respectively
+	 * So, inside the properties file, you would need to have the following configuration:
+	 * 
+	 * facebook.init.television=9023924452,133612723434302
+	 * 
+	 * This method would then return the following list: ["9023924452","133612723434302"]
+	 */
 	protected List<String> getExpectedTelevision() throws IOException {
 		String televisionLikes = properties.getProperty("facebook.init.television");
-		return Arrays.asList(televisionLikes.split(","));
+		return toList(televisionLikes.split(","));
 	}
 	
+	/*
+	 * Gets the expected IDs of book pages which the test account has liked
+	 * As an example, the Harry Potter and A Game of Thrones - A Song of Ice and Fire page IDs are 107641979264998, 402991343106786 respectively
+	 * So, inside the properties file, you need to have the following configuration:
+	 * 
+	 * facebook.init.books=107641979264998,402991343106786 
+	 * 
+	 * This method would then return the following list: ["107641979264998","402991343106786"]
+	 */
 	protected List<String> getExpectedBooks() throws IOException {
 		String bookLikes = properties.getProperty("facebook.init.books");
-		return Arrays.asList(bookLikes.split(","));
+		return toList(bookLikes.split(","));
 	}
-	
+
+	/*
+	 * Gets the expected IDs of book pages which the test account has liked
+	 * As an example, the Harry Potter and A Game of Thrones - A Song of Ice and Fire page IDs are 107641979264998, 402991343106786 respectively
+	 * So, inside the properties file, you need to have the following configuration:
+	 * 
+	 * facebook.init.books=107641979264998,402991343106786 
+	 * 
+	 * This method would then return the following list: ["107641979264998","402991343106786"]
+	 */
 	protected List<String> getExpectedMovies() throws IOException {
 		String movieLikes = properties.getProperty("facebook.init.movies");
-		return Arrays.asList(movieLikes.split(","));
+		return toList(movieLikes.split(","));
 	}
 	
+	/*
+	 * This method collates the result of every one of the above four methods and returns them as a single list
+	 */
 	protected List<String> getExpectedLikes() throws IOException {
 		List<String> music = getExpectedMusic();
 		List<String> television = getExpectedTelevision();
@@ -325,4 +364,16 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return finalList;
 	}
 	
+	/*
+	 * Returns back a list of strings from the input array.
+	 * The different between this method and Arrays.asList() is that elements are trimmed before
+	 * they are placed in the list.
+	 */
+	private static List<String> toList(String[] array) {
+		List<String> list = new ArrayList<String>();
+		for (String element : array) {
+			list.add(element.trim());
+		}
+		return list;
+	}
 }
