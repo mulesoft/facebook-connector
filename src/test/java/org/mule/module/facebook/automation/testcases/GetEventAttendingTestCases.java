@@ -13,6 +13,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Collection;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -26,7 +27,11 @@ public class GetEventAttendingTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getEventAttendingTestData");
-    	attendEvent((String) getTestRunMessageValue("eventId"));
+		String eventId = getTestRunMessageValue("eventId");
+    	attendEvent(eventId);
+    	
+    	String profileId = getProfileId();
+    	upsertOnTestRunMessage("profileId", profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -34,11 +39,31 @@ public class GetEventAttendingTestCases extends FacebookTestParent {
 	@Test
 	public void testGetEventAttending() {
 		try {
+			String profileId = getTestRunMessageValue("profileId");
+			
+			// Get list of users attending the event
 			Collection<User> users = runFlowAndGetPayload("get-event-attending");
+			// There should be at least one (us)
 			assertTrue(users.size() > 0);
+			
+			// Loop through each user until we find ourselves
+			boolean found = false;
+			for (User user : users) {
+				if (user.getId().equals(profileId)) {
+					found = true;
+					break;
+				}
+			}
+			assertTrue(found);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		String eventId = getTestRunMessageValue("eventId");
+		declineEvent(eventId);
 	}
     
 }
