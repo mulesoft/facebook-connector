@@ -50,8 +50,6 @@
 	<!-- get-album -->
 	<util:map id="getAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="profileId" value="getDynamically" />
-		<entry key="album" value="getDynamically" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
 	</util:map>
@@ -67,7 +65,6 @@
 	<!-- publish-album -->
 	<util:map id="publishAlbumTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="profileId" value="getDynamically" />
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
 	</util:map>
@@ -220,7 +217,6 @@
 	
 	<!-- get-user-likes -->
 	<util:map id="getUserLikesTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="yesterday" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -310,7 +306,6 @@
 	<util:map id="deleteObjectTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<!-- for publish-message -->
-		<entry key="profileId" value="getDynamically" />
 		<entry key="msg" value="msgForTest" />
 	</util:map>
 
@@ -362,7 +357,6 @@
 	<!-- publish-comment -->
 	<util:map id="publishCommentTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="postId" value="getDynamically" />
 		<entry key="msg" value="Hello from comment 123" />
 		<entry key="statusmsg" value="Hello From status 123" />
 	</util:map>
@@ -389,8 +383,6 @@
 	<!-- get-event -->
 	<util:map id="getEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="getDynamically" />
-		<entry key="profileId" value="getDynamically" />
 		<entry key="eventName" value="testEventName" />
 		<entry key="startTime" value="2013-10-04" />
 	</util:map>	
@@ -438,7 +430,6 @@
 	<!-- publish-event -->
 	<util:map id="publishEventTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="profileId" value="getDynamically" />
 		<entry key="eventName" value="testEventName" />
 		<entry key="startTime" value="2013-10-04" />
 	</util:map>
@@ -453,7 +444,6 @@
 	<!-- get-user-notes -->
 	<util:map id="getUserNotesTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="profileId" value="getDynamically" />
 		<entry key="until" value="now" />
 		<entry key="msg" value="This is a test note" />
 		<entry key="subject" value="This is a test subject for a test note" />
@@ -466,8 +456,6 @@
 		<entry key="until" value="now" />
 		<entry key="msg" value="This is a test note for note test" />
 		<entry key="subject" value="This is a test subject for a test note for note test" />
-		<entry key="noteid" value="getDynamically" />
-		<entry key="profileId" value="getDynamically" />
 	</util:map>
 	
 		<!-- get-note-comments -->
@@ -549,7 +537,6 @@
 	<!-- get-event-picture -->
 	<util:map id="getEventPictureTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="eventId" value="getDynamically" />
 		<entry key="eventName" value="testEventName" />
 		<entry key="startTime" value="2013-10-04" />
 		<entry key="type" value="small" />
@@ -581,7 +568,7 @@
 	<!-- get-user-accounts -->
 	<util:map id="getUserAccountsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
+		<entry key="adminPageId" value="${facebook.page}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -591,7 +578,6 @@
 	<!-- get-user-activities -->
 	<util:map id="getUserActivitiesTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -601,7 +587,6 @@
 	<!-- get-user-books -->
 	<util:map id="getUserBooksTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -611,7 +596,6 @@
 	<!-- get-user-checkins -->
 	<util:map id="getUserCheckinsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -621,7 +605,6 @@
 	<!-- get-user-events -->
 	<util:map id="getUserEventsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -633,7 +616,6 @@
 	<!-- get-user-friends -->
 	<util:map id="getUserFriendsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -643,7 +625,6 @@
 	<!-- get-user-groups -->
 	<util:map id="getUserGroupsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -653,7 +634,6 @@
 	<!-- get-user-inbox -->
 	<util:map id="getUserInboxTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -663,7 +643,6 @@
 	<!-- get-user-interests -->
 	<util:map id="getUserInterestsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -673,7 +652,6 @@
 	<!-- get-user-movies -->
 	<util:map id="getUserMoviesTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -683,7 +661,6 @@
 	<!-- get-user-music -->
 	<util:map id="getUserMusicTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -693,7 +670,6 @@
 	<!-- get-user-outbox -->
 	<util:map id="getUserOutboxTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -703,7 +679,6 @@
 	<!-- get-user-photos -->
 	<util:map id="getUserPhotosTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="tomorrow" />
 		<entry key="limit" value="100" />
@@ -719,7 +694,6 @@
 	<!-- get-user-picture -->
 	<util:map id="getUserPictureTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="type" value="small" />
 	</util:map>
 	
@@ -730,7 +704,6 @@
 		<entry key="offset" value="0" />
 		<entry key="since" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).yesterday()}" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
-		<entry key="user" value="getDynamically" />
 		<entry key="metadata" value="0" />
 <!-- 	Empty in order to get everything - after manually testing, it seems q doesn't work properly -->
 		<entry key="q" value="" />
@@ -740,7 +713,6 @@
 	<!-- get-user-videos -->
 	<util:map id="getUserVideosTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="user" value="getDynamically" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<entry key="limit" value="100" />
@@ -974,14 +946,12 @@
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
-		<entry key="group" value="getDynamically" />
 		<entry key="q" value="facebook" />
 	</util:map>
 	
 	<!-- get-group-picture -->
 	<util:map id="getGroupPictureTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="group" value="getDynamically" />
 		<entry key="type" value="small" />
 		<entry key="q" value="facebook" />
 		<entry key="since" value="last week" />
@@ -992,7 +962,6 @@
 	<!-- get-group-wall -->
 	<util:map id="getGroupWallTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="group" value="getDynamically" />
 		<entry key="type" value="small" />
 		<entry key="q" value="facebook" />
 		<entry key="until" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
