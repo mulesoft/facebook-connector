@@ -71,7 +71,6 @@ public class GetEventAttendingTestCases extends FacebookTestParent {
 	@After
 	public void tearDown() throws Exception {
 		String eventId = getTestRunMessageValue("eventId");
-		declineEvent(eventId);
 		deleteObjectAux(eventId);
 	}
     
