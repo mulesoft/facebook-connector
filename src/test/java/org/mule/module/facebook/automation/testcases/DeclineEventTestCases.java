@@ -11,6 +11,7 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -22,20 +23,33 @@ public class DeclineEventTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		initializeTestRunMessage("declineEventTestData");
+
+		String auxProfileId = getProfileIdAux();
+		String eventName = getTestRunMessageValue("eventName");
+		String startTime = getTestRunMessageValue("startTime");
+		
+		String eventId = publishEventAux(auxProfileId, eventName, startTime);
+		upsertOnTestRunMessage("eventId", eventId);
+		
+		attendEvent(eventId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testDeclineEvent() {
-		
 		try {
-			Boolean result = declineEvent((String) getTestRunMessageValue("eventId"));
-			
+			String eventId = getTestRunMessageValue("eventId");
+			Boolean result = declineEvent(eventId);
 			assertTrue(result);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
-     
 	}
-    
+
+	@After
+	public void tearDown() throws Exception {
+		String eventId = getTestRunMessageValue("eventId");
+		deleteObjectAux(eventId);
+	}
+	
 }

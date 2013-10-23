@@ -19,6 +19,29 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			path="${facebook.path}" />
 	</facebook:config-with-oauth>
 
+	<facebook:config-with-oauth name="auxFacebook" consumerKey="${facebook.aux.consumerKey}" consumerSecret="${facebook.aux.consumerSecret}"
+		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event">
+		<facebook:oauth-callback-config domain="${facebook.aux.domain}" localPort="${facebook.aux.localPort}" 
+			path="${facebook.aux.path}" remotePort="${facebook.aux.remotePort}" />	
+	</facebook:config-with-oauth>
+
+	<!-- ### Auxiliary Facebook flows -->
+	
+	<flow name="logged-user-details-aux">
+		<facebook:logged-user-details accessTokenId="accessTokenIdAux" config-ref="auxFacebook" />
+	</flow>
+	
+	<flow name="publish-event-aux">
+		<facebook:publish-event accessTokenId="accessTokenIdAux" config-ref="auxFacebook" event_name="#[payload.eventName]" 
+			profile_id="#[payload.profileId]" start_time="#[payload.startTime]" />
+	</flow>
+
+	<flow name="delete-object-aux">
+		<facebook:delete-object accessTokenId="accessTokenIdAux" objectId="#[payload.objectId]" config-ref="auxFacebook" />
+	</flow>
+
+	<!-- ### Facebook ### -->
+
 	<flow name="get-user" doc:name="get-user">
 		<facebook:get-user config-ref="Facebook" user="#[payload.username]"
 			accessTokenId="accessTokenId" doc:name="Facebook" />

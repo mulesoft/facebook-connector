@@ -54,6 +54,7 @@ public class FacebookTestParent extends ConnectorTestCase {
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
     	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthState"));
     	objectStore.store("accessTokenIdPage", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStatePage"));
+    	objectStore.store("accessTokenIdAux", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStateAux"));
     	
 		InputStream props = getClass().getClassLoader().getResourceAsStream("init-state.properties");
 		properties.load(props);
@@ -381,5 +382,33 @@ public class FacebookTestParent extends ConnectorTestCase {
 			list.add(element.trim());
 		}
 		return list;
+	}
+	
+	/*
+	 * ========================================================================
+	 * 				A U X I L I A R Y   M E T H O D S    B E L O W
+	 * ========================================================================
+	 */
+	
+	protected User getLoggedUserDetailsAux() throws Exception {
+		return runFlowAndGetPayload("logged-user-details-aux");
+	}
+	
+	protected String getProfileIdAux() throws Exception {
+		return getLoggedUserDetailsAux().getId();
+	}
+	
+	protected Boolean deleteObjectAux(String objectId) throws Exception {
+		upsertOnTestRunMessage("objectId", objectId);
+		
+		return runFlowAndGetPayload("delete-object-aux");
+	}
+	
+	protected String publishEventAux(String profileId, String eventName, String startTime) throws Exception {
+		upsertOnTestRunMessage("profileId", profileId);
+		upsertOnTestRunMessage("eventName", eventName);
+		upsertOnTestRunMessage("startTime", startTime);
+		
+		return runFlowAndGetPayload("publish-event-aux");
 	}
 }
