@@ -628,7 +628,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public List<Event> getEventDeclined(String eventId,
+    public List<User> getEventDeclined(String eventId,
                                    @Optional @Default("last week") String since,
                                    @Optional @Default("yesterday") String until,
                                    @Optional @Default("100") String limit,
@@ -641,7 +641,7 @@ public class FacebookConnector {
 						            .queryParam("until", until)
 						            .queryParam("limit", limit)
 						            .queryParam("offset", offset)
-						            .get(String.class), Event.class);
+						            .get(String.class), User.class);
     }
 
     /**
