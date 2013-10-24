@@ -38,7 +38,8 @@ public class GetEventDeclinedTestCases extends FacebookTestParent {
     	
     	String eventId = publishEventAux(auxProfileId, eventName, startTime);
     	declineEvent(eventId);
-
+    	
+    	upsertOnTestRunMessage("eventId", eventId);
     	upsertOnTestRunMessage("profileId", profileId);
     	upsertOnTestRunMessage("auxProfileId", auxProfileId);
 	}
