@@ -84,7 +84,6 @@
 
 		<entry key="albumName" value="albumForTest" />
 		<entry key="msg" value="msgForTest" />
-		<entry key="profileId" value="100006563414301" />
 	</util:map>
 
 	<!-- get-status -->
@@ -504,8 +503,7 @@
 		<entry key="startTime" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
-		<!-- effectively no limit -->
-		<entry key="limit" value="100000" />
+		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
 	
