@@ -8,11 +8,13 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Collection;
+import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -26,7 +28,19 @@ public class GetEventDeclinedTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getEventDeclinedTestData");
-    	declineEvent((String) getTestRunMessageValue("eventId"));
+    	
+    	String profileId = getProfileId();
+    	
+    	String auxProfileId = getProfileIdAux();
+    	
+    	String eventName = getTestRunMessageValue("eventName");
+    	String startTime = getTestRunMessageValue("startTime");
+    	
+    	String eventId = publishEventAux(auxProfileId, eventName, startTime);
+    	declineEvent(eventId);
+
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -34,11 +48,22 @@ public class GetEventDeclinedTestCases extends FacebookTestParent {
 	@Test
 	public void testGetEventDeclined() {
 		try {
-			Collection<User> users = runFlowAndGetPayload("get-event-declined");
-			assertTrue(users.size() > 0);
+			String profileId = getTestRunMessageValue("profileId");
+			
+			List<User> users = runFlowAndGetPayload("get-event-declined");
+			assertTrue(users.size() == 1);
+			
+			User user = users.get(0);
+			assertEquals(user.getId(), profileId);
+			
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
-    
+
+	@After
+	public void tearDown() throws Exception {
+		String eventId = getTestRunMessageValue("eventId");
+		deleteObjectAux(eventId);
+	}
 }

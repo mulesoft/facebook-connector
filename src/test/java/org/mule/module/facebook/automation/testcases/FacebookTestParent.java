@@ -150,12 +150,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return runFlowAndGetPayload("publish-photo");
     }
 
-    public boolean like(String postId) throws Exception {
+    public Boolean like(String postId) throws Exception {
     	upsertOnTestRunMessage("postId", postId);
 		return runFlowAndGetPayload("like");
     }
 
-    public boolean dislike(String postId) throws Exception {
+    public Boolean dislike(String postId) throws Exception {
     	upsertOnTestRunMessage("postId", postId);
     	
 		return runFlowAndGetPayload("dislike");
