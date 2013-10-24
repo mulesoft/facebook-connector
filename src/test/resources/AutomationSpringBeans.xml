@@ -500,8 +500,8 @@
 	<!-- get-event-maybe -->
 	<util:map id="getEventMaybeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-<!-- 		The Facebook Developer Garage Austin Event -->
-		<entry key="eventId" value="331218348435" />
+		<entry key="eventName" value="My Maybe Event" />
+		<entry key="startTime" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
 		<entry key="since" value="last week" />
 		<entry key="until" value="now" />
 		<!-- effectively no limit -->

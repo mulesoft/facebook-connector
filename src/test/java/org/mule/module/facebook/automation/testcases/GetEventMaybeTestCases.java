@@ -8,10 +8,11 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,12 +28,20 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getEventMaybeTestData");
-    	
+
     	String profileId = getProfileId();
-    	upsertOnTestRunMessage("profileId", profileId);
     	
-    	String eventId = getTestRunMessageValue("eventId");
-    	tentativeEvent(eventId);
+    	String auxProfileId = getProfileIdAux();
+    	
+    	String eventName = getTestRunMessageValue("eventName");
+    	String startTime = getTestRunMessageValue("startTime");
+    	
+    	String eventId = publishEventAux(auxProfileId, eventName, startTime);
+		tentativeEvent(eventId);
+
+		upsertOnTestRunMessage("eventId", eventId);
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -42,17 +51,11 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 		try {
 			String profileId = getTestRunMessageValue("profileId");
 			
-			Collection<User> users = runFlowAndGetPayload("get-event-maybe");
-			assertTrue(users.size() > 0);
-			
-			boolean found = false;
-			for (User user : users) {
-				if (user.getId().equals(profileId)) {
-					found = true;
-					break;
-				}
-			}
-			assertTrue(found);
+			List<User> users = runFlowAndGetPayload("get-event-maybe");
+			assertTrue(users.size() == 1);
+
+			User user = users.get(0);
+			assertEquals(user.getId(), profileId);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
@@ -61,7 +64,7 @@ public class GetEventMaybeTestCases extends FacebookTestParent {
 	@After
 	public void tearDown() throws Exception {
 		String eventId = getTestRunMessageValue("eventId");
-		declineEvent(eventId);
+		deleteObjectAux(eventId);
 	}
 	
 }
