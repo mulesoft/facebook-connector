@@ -8,7 +8,9 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -20,8 +22,10 @@ import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.NamedFacebookType;
 
+/*
+ * Account and Auxiliary Account MUST BE FRIENDS
+ */
 public class GetUserFriendsTestCases extends FacebookTestParent {
-	
 	
 	@SuppressWarnings("unchecked")
 	@Before
@@ -30,6 +34,9 @@ public class GetUserFriendsTestCases extends FacebookTestParent {
 			
     	String profileId = getProfileId();
     	upsertOnTestRunMessage("user", profileId);
+    	
+    	String auxProfileId = getProfileIdAux();
+    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -37,8 +44,13 @@ public class GetUserFriendsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserFriends() {
 		try {
+			String auxProfileId = getTestRunMessageValue("auxProfileId");
+			
 			List<NamedFacebookType> result = runFlowAndGetPayload("get-user-friends");
-			assertNotNull(result);
+			assertTrue(result.size() == 1);
+			
+			NamedFacebookType friend = result.get(0);
+			assertEquals(friend.getId(), auxProfileId);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
