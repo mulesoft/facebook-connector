@@ -151,6 +151,18 @@
 		<entry key="metadata" value="0" />
 	</util:map>
 	
+	<!-- get-event-photos -->
+	<util:map id="getEventPhotosTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventName" value="My Photos Event" />
+		<entry key="startTime" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
+		<entry key="caption" value="Photo Caption" />
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="photoFilePath" value="image.jpg" />
+	</util:map>
+	
 	<!-- search-events -->
 	<util:map id="searchEventsTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<!-- query facebook events -->

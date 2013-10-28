@@ -191,6 +191,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			profile_id="#[payload.profileId]" start_time="#[payload.startTime]"
 			event_name="#[payload.eventName]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-event-photos">
+		<facebook:get-event-photos config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
 
 	<flow name="publish-event-on-page">
 		<facebook:publish-event config-ref="Facebook" profile_id="#[payload.profileId]" start_time="#[payload.startTime]" event_name="#[payload.eventName]" accessTokenId="accessTokenIdPage" />
