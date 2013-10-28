@@ -674,6 +674,22 @@ public class FacebookConnector {
         }
         return baos.toByteArray();
     }
+    
+    /**
+     * Retrieves a list of photos from the event's wall
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getEventPhotos}
+     * 
+     * @param eventId The ID of the event
+     * @return A list of photos from the event's wall
+     */
+    @Processor
+    @OAuthProtected
+    public List<Photo> getEventPhotos(String eventId)
+    {
+    	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/photos").build(eventId);
+    	WebResource resource = this.newWebResource(uri, accessToken);
+    	return mapper.toJavaList(resource.get(String.class), Photo.class);
+    }
 
     /**
      * A Facebook group
