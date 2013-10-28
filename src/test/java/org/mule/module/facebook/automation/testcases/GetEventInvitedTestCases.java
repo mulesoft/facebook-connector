@@ -32,7 +32,10 @@ public class GetEventInvitedTestCases extends FacebookTestParent {
     	String profileId = getProfileId();
     	String auxProfileId = getProfileIdAux();
     	
-    	String eventId = publishEvent(profileId, "My Event", tomorrow());
+    	String eventName = getTestRunMessageValue("eventName");
+    	String startTime = getTestRunMessageValue("startTime");
+    	
+    	String eventId = publishEvent(profileId, eventName, startTime);
     	
     	upsertOnTestRunMessage("eventId", eventId);
     	upsertOnTestRunMessage("profileId", profileId);
