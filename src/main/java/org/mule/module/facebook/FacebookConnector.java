@@ -2612,6 +2612,26 @@ public class FacebookConnector {
         
         return Boolean.parseBoolean(res);
     }
+    
+    /**
+     * Invites a user to a given event.
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:inviteUser}
+     * 
+     * @param eventId The ID of the event.
+     * @param userId The ID of the user to invite.
+     * @return Boolean result indicating success or failure of operation
+     */
+    public Boolean inviteUser(String eventId, String userId)
+    {
+    	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/invited/{userId}").build(eventId, userId);
+        WebResource resource = this.newWebResource(uri, accessToken);
+        Form form = new Form();
+        form.add("eventId", eventId);
+        form.add("userId", userId);
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+        
+        return Boolean.parseBoolean(res);
+    }
 
     /**
      * Create an album. 
