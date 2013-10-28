@@ -269,6 +269,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return runFlowAndGetPayload("tentative-event");
 	}
 
+	public Boolean inviteUser(String eventId, String userId) throws Exception {
+		upsertOnTestRunMessage("eventId", eventId);
+		upsertOnTestRunMessage("userId", userId);
+		
+		return runFlowAndGetPayload("invite-user");
+	}
 
 	@SuppressWarnings("unchecked")
 	protected List<Group> searchGroups(String query) throws Exception {

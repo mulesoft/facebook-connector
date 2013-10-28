@@ -8,11 +8,13 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Collection;
+import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -26,6 +28,17 @@ public class GetEventInvitedTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getEventInvitedTestData");
+    	
+    	String profileId = getProfileId();
+    	String auxProfileId = getProfileIdAux();
+    	
+    	String eventId = publishEvent(profileId, "My Event", tomorrow());
+    	
+    	upsertOnTestRunMessage("eventId", eventId);
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
+    	
+    	inviteUser(eventId, auxProfileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -33,11 +46,32 @@ public class GetEventInvitedTestCases extends FacebookTestParent {
 	@Test
 	public void testGetEventInvited() {
 		try {
-			Collection<User> users =  runFlowAndGetPayload("get-event-invited");
-			assertTrue(users.size() > 0);
+			String profileId = getTestRunMessageValue("profileId");
+			String auxProfileId = getTestRunMessageValue("auxProfileId");
+			
+			List<User> users =  runFlowAndGetPayload("get-event-invited");
+			
+			// There should be two users invited, the one we invited in the setUp method
+			// and the one who created the event.
+			assertTrue(users.size() == 2);
+			
+			User first = users.get(0);
+			User second = users.get(1);
+
+			// Assert that the two invited users do not share the same ID,
+			// and that their IDs correspond to the profile IDs retrieved in the setUp method
+			assertTrue(first.getId().equals(auxProfileId) || first.getId().equals(profileId));
+			assertTrue(second.getId().equals(auxProfileId) || second.getId().equals(profileId));
+			assertFalse(second.getId().equals(first.getId()));
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
-    
+
+	@After
+	public void tearDown() throws Exception {
+		String eventId = getTestRunMessageValue("eventId");
+		deleteObject(eventId);
+	}
+	
 }
