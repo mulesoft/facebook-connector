@@ -284,6 +284,20 @@ public class FacebookTestParent extends ConnectorTestCase {
 		
 		return runFlowAndGetPayload("invite-user");
 	}
+	
+	public Boolean tagPhoto(String photoId, String to) throws Exception {
+		return tagPhoto(photoId, to, null, null, null);
+	}
+	
+	public Boolean tagPhoto(String photoId, String to, String tagText, Integer x, Integer y) throws Exception {
+		upsertOnTestRunMessage("photoId", photoId);
+		upsertOnTestRunMessage("to", to);
+		upsertOnTestRunMessage("tagText", tagText);
+		upsertOnTestRunMessage("x", x);
+		upsertOnTestRunMessage("y", y);
+		
+		return runFlowAndGetPayload("tag-photo");
+	}
 
 	@SuppressWarnings("unchecked")
 	protected List<Group> searchGroups(String query) throws Exception {

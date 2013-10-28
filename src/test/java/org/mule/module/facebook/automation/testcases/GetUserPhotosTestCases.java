@@ -29,6 +29,8 @@ public class GetUserPhotosTestCases extends FacebookTestParent {
 		
 		String photoId = publishPhoto(profileId, caption, photoFile);
 		upsertOnTestRunMessage("photoId", photoId);
+		
+		tagPhoto(photoId, profileId);
 	}
 	
 	@SuppressWarnings("unchecked")
