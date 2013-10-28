@@ -2636,6 +2636,28 @@ public class FacebookConnector {
     }
 
     /**
+     * Uninvites a user from an event.
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:uninviteUser}
+     * 
+     * @param eventId The ID of the event.
+     * @param userId The ID of the user to uninvite
+     * @return Boolean result indicating success or failure of operation
+     */
+    @Processor
+    @OAuthProtected
+    public Boolean uninviteUser(String eventId, String userId)
+    {
+    	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/invited/{userId}").build(eventId, userId);
+        WebResource resource = this.newWebResource(uri, accessToken);
+        Form form = new Form();
+        form.add("eventId", eventId);
+        form.add("userId", userId);
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(String.class, form);
+        
+        return Boolean.parseBoolean(res);
+    }
+    
+    /**
      * Create an album. 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample
      * facebook:publishAlbum}

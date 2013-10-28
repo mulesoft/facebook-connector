@@ -437,6 +437,10 @@
 <facebook:invite-user eventId="#[map-payload:eventId]" userId="#[map-payload:userId]" />
 <!-- END_INCLUDE(facebook:inviteUser) -->
 
+<!-- BEGIN_INCLUDE(facebook:uninviteUser) -->
+<facebook:uninvite-user eventId="#[map-payload:eventId]" userId="#[map-payload:userId]" />
+<!-- END_INCLUDE(facebook:uninviteUser) -->
+
 <!-- BEGIN_INCLUDE(facebook:publishAlbum) -->
 <facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" albumName=""/>
 <!-- END_INCLUDE(facebook:publishAlbum) -->
