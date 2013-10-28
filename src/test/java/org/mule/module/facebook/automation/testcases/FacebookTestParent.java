@@ -150,6 +150,15 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return runFlowAndGetPayload("publish-photo");
     }
 
+    protected String publishVideo(String id, String title, String description, File video) throws Exception {
+    	upsertOnTestRunMessage("id", id);
+    	upsertOnTestRunMessage("title", title);
+    	upsertOnTestRunMessage("description", description);
+    	upsertOnTestRunMessage("videoRef", video);
+    	
+		return runFlowAndGetPayload("publish-video");
+    }
+    
     public Boolean like(String postId) throws Exception {
     	upsertOnTestRunMessage("postId", postId);
 		return runFlowAndGetPayload("like");

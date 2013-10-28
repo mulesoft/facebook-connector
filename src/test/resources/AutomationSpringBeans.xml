@@ -151,6 +151,17 @@
 		<entry key="metadata" value="0" />
 	</util:map>
 	
+	<!-- publish-video -->
+	<util:map id="publishVideoTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="title" value="My Video" />
+		<entry key="description" value="This video is only used for testing purposes" />
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="videoFilePath" value="vinevideo.mp4" />
+	</util:map>
+	
 	<!-- get-event-photos -->
 	<util:map id="getEventPhotosTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="eventName" value="My Photos Event" />
