@@ -207,6 +207,11 @@
 <!-- END_INCLUDE(facebook:getPhoto) -->
 
 
+<!-- BEGIN_INCLUDE(facebook:tagPhoto) -->
+<facebook:tag-photo photoId="#[map-payload:photoId]" to="#[map-payload:userId]" />
+<!-- END_INCLUDE(facebook:tagPhoto) -->
+
+
 <!-- BEGIN_INCLUDE(facebook:getPhotoComments) -->
 <facebook:get-photo-comments photo="#[map-payload:photo]"/>
 <!-- END_INCLUDE(facebook:getPhotoComments) -->

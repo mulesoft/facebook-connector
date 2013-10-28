@@ -1332,7 +1332,36 @@ public class FacebookConnector {
         WebResource resource = this.newWebResource(uri, accessToken);
         return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), org.mule.module.facebook.types.Photo.class);
     }
+    
+    /**
+     * Tag a photo. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:tagPhoto}
+     * 
+     * @param photoId The ID of the photo where the tag should be placed
+     * @param to The userId of the user to tag. One of 'to' or 'tagText' must be set.
+     * @param tagText A text string to tag. One of 'to' or 'tagText' must be set.
+     * @param x The X coordinate of the tag, as a percentage offset from the left edge of the picture
+     * @param y The Y coordinate of the tag, as a percentage offset from the top edge of the picture
+     * @return A boolean indicating the success or failure of the request
+     */
+    @Processor
+	@OAuthProtected
+    public boolean tagPhoto(String photoId, @Optional String to, @Optional String tagText, @Optional String x, @Optional String y) 
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photoId}/tags").build(photoId);
+        WebResource resource = this.newWebResource(uri, accessToken);
+        
+        Form form = new Form();
+        if (to != null) { form.add("to", to); }
+        if (tagText != null) { form.add("tag_text", tagText); }
+        if (x != null) { form.add("x", x); }
+        if (y != null) { form.add("y", y); }
 
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
+    	return Boolean.parseBoolean(res);
+    }
+    
+    
     /**
      * All of the comments on this photo 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoComments}
