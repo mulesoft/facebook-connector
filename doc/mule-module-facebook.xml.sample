@@ -434,7 +434,7 @@
 <!-- END_INCLUDE(facebook:declineEvent) -->
 
 <!-- BEGIN_INCLUDE(facebook:inviteUser) -->
-<facebook:invite-users eventId="#[map-payload:eventId]" user-id="#[map-payload:userId]" />
+<facebook:invite-user eventId="#[map-payload:eventId]" userId="#[map-payload:userId]" />
 <!-- END_INCLUDE(facebook:inviteUser) -->
 
 <!-- BEGIN_INCLUDE(facebook:publishAlbum) -->

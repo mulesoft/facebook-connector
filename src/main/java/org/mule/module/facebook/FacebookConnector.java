@@ -2621,6 +2621,8 @@ public class FacebookConnector {
      * @param userId The ID of the user to invite.
      * @return Boolean result indicating success or failure of operation
      */
+    @Processor
+	@OAuthProtected
     public Boolean inviteUser(String eventId, String userId)
     {
     	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/invited/{userId}").build(eventId, userId);
