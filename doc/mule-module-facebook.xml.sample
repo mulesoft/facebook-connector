@@ -460,6 +460,11 @@
 <!-- END_INCLUDE(facebook:publishPhoto) -->
 
 
+<!-- BEGIN_INCLUDE(facebook:publishVideo) -->
+<facebook:publish-video id="#[map-payload:id]" video-ref="#[map-payload:video]" title="#[map-payload:title]" description="#[map-payload:description]" />
+<!-- END_INCLUDE(facebook:publishVideo) -->
+
+
 <!-- BEGIN_INCLUDE(facebook:deleteObject) -->
 <facebook:delete-object objectId="#[map-payload:objectId]"/>
 <!-- END_INCLUDE(facebook:deleteObject) -->

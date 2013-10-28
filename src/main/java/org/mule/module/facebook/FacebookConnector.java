@@ -2728,6 +2728,38 @@ public class FacebookConnector {
         String photoId = (String) obj.get("id");
         return photoId;
     }
+    
+    /**
+     * Upload a video. 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:publishVideo}
+     * 
+     * 
+     * @param id The id of the object that this video is being uploaded to (can be user ID, album ID, page ID, etc)
+     * @param title Title of the video
+     * @param description Description of the video
+     * @param video File containing the video
+     * @return The ID of the video that was just published
+     */
+    @Processor
+    @OAuthProtected
+    public String publishVideo(String id,
+    							@Optional String title,
+    							@Optional String description,
+    							File video)
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{id}/videos").build(id);
+        WebResource resource = this.newWebResource(uri, accessToken);
+        FormDataMultiPart multiPart = new FormDataMultiPart();
+        multiPart.bodyPart(new FileDataBodyPart("source", video, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+        if (title != null) { multiPart.field("title", title); }
+        if (description != null) { multiPart.field("description", description); }
+            
+        String jsonId = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, multiPart);
+            
+        JsonObject obj = mapper.toJavaObject(jsonId, JsonObject.class);
+        String videoId = (String) obj.get("id");
+        return videoId;
+    }
 
     /**
      * Delete an object in the graph. 
