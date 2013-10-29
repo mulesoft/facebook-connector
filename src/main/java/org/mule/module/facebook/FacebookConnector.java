@@ -56,6 +56,7 @@ import com.restfb.types.Note;
 import com.restfb.types.Page;
 import com.restfb.types.PageConnection;
 import com.restfb.types.Photo;
+import com.restfb.types.Photo.Tag;
 import com.restfb.types.Post;
 import com.restfb.types.Post.Likes;
 import com.restfb.types.StatusMessage;
@@ -1406,6 +1407,20 @@ public class FacebookConnector {
     	return Boolean.parseBoolean(res);
     }
     
+    /**
+     * Retrieves the list of tags of a photo
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPhotoTags}
+     * 
+     * @param photoId The ID of the photo from which tags will be retrieved
+     * @return Returns a list of tags found on a photo.
+     */
+    @Processor
+    @OAuthProtected
+    public List<Tag> getPhotoTags(String photoId) {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photoId}/tags").build(photoId);
+        WebResource resource = this.newWebResource(uri, accessToken);
+        return mapper.toJavaList(resource.get(String.class), Tag.class);
+    }
     
     /**
      * All of the comments on this photo 
