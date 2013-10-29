@@ -26,9 +26,12 @@ public class GetPhotoTagsTestCases extends FacebookTestParent {
 		upsertOnTestRunMessage("profileId", profileId);
 		upsertOnTestRunMessage("auxProfileId", auxProfileId);
 		
-		File photo = new File(getClass().getClassLoader().getResource("image.jpg").toURI());
+		String photoFilePath = getTestRunMessageValue("photoFilePath");
+		String caption = getTestRunMessageValue("caption");
 		
-		String photoId = publishPhoto(profileId, "My Photo", photo);
+		File photo = new File(getClass().getClassLoader().getResource(photoFilePath).toURI());
+		
+		String photoId = publishPhoto(profileId, caption, photo);
 		upsertOnTestRunMessage("photoId", photoId);
 		
 		tagPhoto(photoId, auxProfileId);
