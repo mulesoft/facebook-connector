@@ -142,6 +142,16 @@
 <!-- END_INCLUDE(facebook:getPagePicture) -->
 
 
+<!-- BEGIN_INCLUDE(facebook:setPagePictureFromLink) -->
+<facebook:set-page-picture-from-link page="#[map-payload:page]" imageUrl="#[map-payload:imageUrl]" />
+<!-- END_INCLUDE(facebook:setPagePictureFromLink) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:setPagePictureFromSource) -->
+<facebook:set-page-picture-from-source page="#[map-payload:page]" source-ref="#[map-payload:imageFile]" />
+<!-- END_INCLUDE(facebook:setPagePictureFromSource) -->
+
+
 <!-- BEGIN_INCLUDE(facebook:getPageTagged) -->
 <facebook:get-page-tagged page="#[map-payload:page]"/>
 <!-- END_INCLUDE(facebook:getPageTagged) -->

@@ -991,7 +991,52 @@ public class FacebookConnector {
         WebResource resource = this.newWebResource(uri, accessToken);
         return bufferedImageToByteArray( resource.queryParam("type", type).get(BufferedImage.class));
     }
-
+    
+    /**
+     * Sets the page picture to the image linked by the URL.
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:setPagePictureFromLink}
+     * 
+     * @param page The ID of the page which will have its picture set
+     * @param imageUrl The web link of the image (e.g. Facebook's logo image URL).
+     * @return A boolean result indicating the success or failure of the request
+     */
+    @Processor
+    @OAuthProtected
+    public boolean setPagePictureFromLink(String page, String imageUrl) 
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
+    	WebResource resource = this.newWebResource(uri, accessToken);
+    	Form form = new Form();
+	    form.add("picture", imageUrl);
+	    String res = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, form);
+	    	
+    	return Boolean.parseBoolean(res);
+    }
+    
+    /**
+     * Sets the page picture to the image file provided to this message processor 
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:setPagePictureFromSource}
+     * 
+     * @param page The ID of the page which will have its picture set
+     * @param source File containing the photo
+     * @return A boolean result indicating the success or failure of the request
+     */
+    @Processor
+    @OAuthProtected
+    public boolean setPagePictureFromSource(String page, File source) 
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
+        WebResource resource = this.newWebResource(uri, accessToken);
+        
+        FormDataMultiPart multiPart = new FormDataMultiPart();
+        multiPart.bodyPart(new FileDataBodyPart("source", source, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+        
+        String res = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, multiPart);
+    	
+    	return Boolean.parseBoolean(res);
+    }
+    
+    
     /**
      * The photos, videos, and posts in which this page has been tagged 
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getPageTagged}
