@@ -13,14 +13,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
@@ -37,6 +35,7 @@ import com.restfb.types.Event;
 import com.restfb.types.Group;
 import com.restfb.types.Link;
 import com.restfb.types.Note;
+import com.restfb.types.Photo.Tag;
 import com.restfb.types.StatusMessage;
 import com.restfb.types.User;
 
@@ -320,6 +319,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return runFlowAndGetPayload("set-page-picture-from-source");
 	}
 
+	public List<Tag> getPhotoTags(String photoId) throws Exception {
+		upsertOnTestRunMessage("photoId", photoId);
+		
+		return runFlowAndGetPayload("get-photo-tags");
+	}
+	
 	@SuppressWarnings("unchecked")
 	protected List<Group> searchGroups(String query) throws Exception {
 		upsertOnTestRunMessage("q", query);

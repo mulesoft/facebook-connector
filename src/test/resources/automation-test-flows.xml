@@ -127,6 +127,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="get-photo-tags">
+		<facebook:get-photo-tags config-ref="Facebook" photoId="#[payload.photoId]" accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="invite-user">
 		<facebook:invite-user config-ref="Facebook" eventId="#[payload.eventId]" userId="#[payload.userId]"	 accessTokenId="accessTokenId" />
 	</flow>
