@@ -14,6 +14,19 @@ public class TentativeEventTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		initializeTestRunMessage("tentativeEventTestData");
+
+		String profileId = getProfileId();
+    	String auxProfileId = getProfileIdAux();
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
+    	
+    	String eventName = getTestRunMessageValue("eventName");
+    	String startTime = getTestRunMessageValue("startTime");
+
+    	String eventId = publishEventAux(auxProfileId, eventName, startTime);
+    	upsertOnTestRunMessage("eventId", eventId);
+    	
+    	inviteUserAux(eventId, profileId);
 	}
 	
 	@Category({RegressionTests.class})
@@ -31,7 +44,7 @@ public class TentativeEventTestCases extends FacebookTestParent {
 	@After
 	public void tearDown() throws Exception {
 		String eventId = (String) getTestRunMessageValue("eventId");
-		declineEvent(eventId);
+		deleteObjectAux(eventId);
 	}
 	
 }

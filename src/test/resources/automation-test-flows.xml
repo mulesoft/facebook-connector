@@ -40,6 +40,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:delete-object accessTokenId="accessTokenIdAux" objectId="#[payload.objectId]" config-ref="auxFacebook" />
 	</flow>
 
+	<flow name="invite-user-aux">
+		<facebook:invite-user config-ref="auxFacebook" eventId="#[payload.eventId]" userId="#[payload.userId]" accessTokenId="accessTokenIdAux" />
+	</flow>
+
 	<!-- ### Facebook ### -->
 
 	<flow name="get-user" doc:name="get-user">

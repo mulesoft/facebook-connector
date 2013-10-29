@@ -284,6 +284,13 @@ public class FacebookTestParent extends ConnectorTestCase {
 		
 		return runFlowAndGetPayload("invite-user");
 	}
+
+	public Boolean inviteUserAux(String eventId, String userId) throws Exception {
+		upsertOnTestRunMessage("eventId", eventId);
+		upsertOnTestRunMessage("userId", userId);
+		
+		return runFlowAndGetPayload("invite-user-aux");
+	}
 	
 	public Boolean tagPhoto(String photoId, String to) throws Exception {
 		return tagPhoto(photoId, to, null, null, null);
