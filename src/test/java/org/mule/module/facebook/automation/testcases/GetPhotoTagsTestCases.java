@@ -39,7 +39,7 @@ public class GetPhotoTagsTestCases extends FacebookTestParent {
 		tagPhoto(photoId, auxProfileId);
 	}
 	
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetPhotoTags() {
 		try {
