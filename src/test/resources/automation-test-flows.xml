@@ -531,6 +531,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-page-picture config-ref="Facebook" page="#[payload.page]" type="#[payload.type]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="set-page-picture-from-link">
+		<facebook:set-page-picture-from-link config-ref="Facebook" page="#[payload.page]" imageUrl="#[payload.imageUrl]" accessTokenId="accessTokenIdPage" />
+	</flow>
+	
+	<flow name="set-page-picture-from-source">
+		<facebook:set-page-picture-from-source config-ref="Facebook" page="#[payload.page]" source-ref="#[payload.sourceRef]" accessTokenId="accessTokenIdPage" />
+	</flow>
+	
 	<flow name="get-photo">
 		<facebook:get-photo config-ref="Facebook" metadata="#[payload.metadata]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
 	</flow>

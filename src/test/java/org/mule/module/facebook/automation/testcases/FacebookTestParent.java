@@ -298,6 +298,20 @@ public class FacebookTestParent extends ConnectorTestCase {
 		
 		return runFlowAndGetPayload("tag-photo");
 	}
+	
+	public Boolean setPagePicture(String pageId, String imageUrl) throws Exception {
+		upsertOnTestRunMessage("page", pageId);
+		upsertOnTestRunMessage("imageUrl", imageUrl);
+		
+		return runFlowAndGetPayload("set-page-picture-from-link");
+	}
+	
+	public Boolean setPagePicture(String pageId, File imageFile) throws Exception {
+		upsertOnTestRunMessage("page", pageId);
+		upsertOnTestRunMessage("sourceRef", imageFile);
+		
+		return runFlowAndGetPayload("set-page-picture-from-source");
+	}
 
 	@SuppressWarnings("unchecked")
 	protected List<Group> searchGroups(String query) throws Exception {
