@@ -325,6 +325,23 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return runFlowAndGetPayload("get-photo-tags");
 	}
 	
+	public Boolean uninviteUser(String eventId, String userId) throws Exception {
+		upsertOnTestRunMessage("eventId", eventId);
+		upsertOnTestRunMessage("userId", userId);
+		
+		return runFlowAndGetPayload("uninvite-user");
+	}
+	
+	public List<User> getEventInvited(String eventId, String until, String since, String limit, String offset) throws Exception {
+		upsertOnTestRunMessage("eventId", eventId);
+    	upsertOnTestRunMessage("until", until);
+    	upsertOnTestRunMessage("since", since);
+    	upsertOnTestRunMessage("limit", limit);
+    	upsertOnTestRunMessage("offset", offset);
+		
+		return runFlowAndGetPayload("get-event-invited");
+	}
+	
 	@SuppressWarnings("unchecked")
 	protected List<Group> searchGroups(String query) throws Exception {
 		upsertOnTestRunMessage("q", query);

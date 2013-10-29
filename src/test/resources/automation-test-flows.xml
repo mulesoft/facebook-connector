@@ -359,6 +359,10 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
 	</flow>
 	
+	<flow name="uninvite-user">
+		<facebook:uninvite-user config-ref="Facebook" eventId="#[payload.eventId]" userId="#[payload.userId]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="search-groups">
 		<facebook:search-groups q="#[payload.q]" accessTokenId="accessTokenId" config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" />
