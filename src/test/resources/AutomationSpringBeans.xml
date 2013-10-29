@@ -540,6 +540,17 @@
 		<entry key="offset" value="0" />
 	</util:map>
 	
+	<!-- invite-user -->
+	<util:map id="inviteUserTestData" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="eventName" value="My Invited Event" />
+		<entry key="startTime" value="#{T(org.mule.module.facebook.automation.testcases.FacebookTestParent).tomorrow()}" />
+		<entry key="since" value="last week" />
+		<entry key="until" value="tomorrow" />
+		<entry key="limit" value="100" />
+		<entry key="offset" value="0" />
+	</util:map>
+	
 	<!-- get-event-maybe -->
 	<util:map id="getEventMaybeTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
