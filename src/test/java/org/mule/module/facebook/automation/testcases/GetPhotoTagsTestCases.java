@@ -20,6 +20,8 @@ public class GetPhotoTagsTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		
+		initializeTestRunMessage("getPhotoTagsTestData");
+		
 		String profileId = getProfileId();
 		String auxProfileId = getProfileIdAux();
 
