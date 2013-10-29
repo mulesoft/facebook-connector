@@ -8,11 +8,13 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Collection;
+import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -26,6 +28,20 @@ public class GetEventNoReplyTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getEventNoReplyTestData");
+    	
+    	String profileId = getProfileId();
+    	String auxProfileId = getProfileIdAux();
+
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
+    	
+    	String eventName = getTestRunMessageValue("eventName");
+    	String startTime = getTestRunMessageValue("startTime");
+
+    	String eventId = publishEvent(profileId, eventName , startTime);
+    	upsertOnTestRunMessage("eventId", eventId);
+    	
+    	inviteUser(eventId, auxProfileId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -33,10 +49,21 @@ public class GetEventNoReplyTestCases extends FacebookTestParent {
 	@Test
 	public void testGetEventNoReply() {
 		try {
-			Collection<User> users = runFlowAndGetPayload("get-event-no-reply");
-			assertTrue(users.size() > 0);
+			String auxProfileId = getTestRunMessageValue("auxProfileId");
+			
+			List<User> users = runFlowAndGetPayload("get-event-no-reply");
+			assertTrue(users.size() == 1);
+			
+			User user = users.get(0);
+			assertEquals(user.getId(), auxProfileId);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		String eventId = getTestRunMessageValue("eventId");
+		deleteObject(eventId);
 	}
 }
