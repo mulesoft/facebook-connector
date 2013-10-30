@@ -8,7 +8,9 @@
 
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -29,6 +31,9 @@ public class GetUserGroupsTestCases extends FacebookTestParent {
 			
     	String profileId = getProfileId();
     	upsertOnTestRunMessage("user", profileId);
+    	
+    	String groupId = getExpectedGroupId();
+    	upsertOnTestRunMessage("groupId", groupId);
 	}
 	
     @SuppressWarnings("unchecked")
@@ -36,8 +41,19 @@ public class GetUserGroupsTestCases extends FacebookTestParent {
 	@Test
 	public void testGetUserGroups() {
 		try {
+			String groupId = getTestRunMessageValue("groupId");
+						
 			List<Group> result = runFlowAndGetPayload("get-user-groups");
-			assertNotNull(result);
+			assertFalse(result.isEmpty());
+			
+			boolean found = false;
+			for (Group group : result) {
+				if (group.getId().equals(groupId)) {
+					found = true;
+					break;
+				}
+			}
+			assertTrue(found);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
