@@ -184,6 +184,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return runFlowAndGetPayload("get-status-comments");
     }
 
+    protected Group getGroup(String groupId) throws Exception {
+    	upsertOnTestRunMessage("group", groupId);
+    	
+    	return runFlowAndGetPayload("get-group");
+    }
+    
     protected Boolean deleteObject(String objectId) throws Exception {
     	upsertOnTestRunMessage("objectId", objectId);
     	

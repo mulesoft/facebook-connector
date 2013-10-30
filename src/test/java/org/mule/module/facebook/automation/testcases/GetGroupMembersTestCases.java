@@ -19,10 +19,15 @@ public class GetGroupMembersTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getGroupMembersTestData");
+
+    	String expectedGroupId = getExpectedGroupId();
+    	upsertOnTestRunMessage("group", expectedGroupId);
+
+    	String profileId = getProfileId();
+    	String auxProfileId = getProfileIdAux();
     	
-		String query = (String) getTestRunMessageValue("q");
-    	List<Group> groups = searchGroups(query);
-		upsertOnTestRunMessage("group", groups.get(0).getId());
+    	upsertOnTestRunMessage("profileId", profileId);
+    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -30,8 +35,32 @@ public class GetGroupMembersTestCases extends FacebookTestParent {
 	@Test
 	public void testGetGroupMembers() {
 		try {
+			String profileId = getTestRunMessageValue("profileId");
+			String auxProfileId = getTestRunMessageValue("auxProfileId");
+			
 			List<Member> result = runFlowAndGetPayload("get-group-members");
-			assertTrue(result.size() > 0);
+			// Group should contain at least test account and auxiliary test account 
+			assertTrue(result.size() > 1);
+			
+			// Search for the main test account
+			boolean found = false;			
+			for (Member member : result) {
+				if (member.getId().equals(profileId)) {
+					found = true;
+					break;
+				}
+			}
+			assertTrue(found);
+			
+			// Search for the auxiliary test account
+			found = false;
+			for (Member member : result) {
+				if (member.getId().equals(auxProfileId)) {
+					found = true;
+					break;
+				}
+			}
+			assertTrue(found);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
