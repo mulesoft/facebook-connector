@@ -3,7 +3,11 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +23,8 @@ public class GetGroupPictureTestCases extends FacebookTestParent {
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getGroupPictureTestData");
     	
-		String query = (String) getTestRunMessageValue("q");
-    	List<Group> groups = searchGroups(query);
-		upsertOnTestRunMessage("group", groups.get(0).getId());
+    	String groupId = getExpectedGroupId();
+		upsertOnTestRunMessage("group", groupId);
 	}
 
 	@Category({RegressionTests.class})
