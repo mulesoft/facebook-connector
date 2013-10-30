@@ -36,7 +36,7 @@ public class GetPhotoTestCases extends FacebookTestParent {
 		upsertOnTestRunMessage("photo", photoId);
 	}
 	
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetPhoto() {
 		try {

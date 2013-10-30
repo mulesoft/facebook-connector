@@ -25,7 +25,7 @@ public class GetVideoCommentsTestCases extends FacebookTestParent {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Category({ SmokeTests.class, RegressionTests.class })
+	@Category({ RegressionTests.class })
 	@Test
 	public void testGetVideoComments() {
 		try {

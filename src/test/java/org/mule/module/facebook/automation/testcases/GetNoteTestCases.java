@@ -29,7 +29,7 @@ public class GetNoteTestCases extends FacebookTestParent {
 		upsertOnTestRunMessage("note", noteid);
 	}
 
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetNote() {
 		try {

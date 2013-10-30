@@ -30,7 +30,7 @@ public class GetAlbumTestCases extends FacebookTestParent {
 		upsertOnTestRunMessage("album", id);
 	}
 	
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetAlbum() {
 		try {

@@ -45,7 +45,7 @@ public class GetEventInvitedTestCases extends FacebookTestParent {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetEventInvited() {
 		try {

@@ -22,7 +22,7 @@ public class PublishLinkTestCases extends FacebookTestParent {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Category({ RegressionTests.class })
+	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
 	public void testPublishLink() {
 		try {

@@ -23,7 +23,7 @@ public class PublishNoteTestCases extends FacebookTestParent {
 		upsertOnTestRunMessage("profileId", profileId);
 	}
 	
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testPublishNote() {
 		try {

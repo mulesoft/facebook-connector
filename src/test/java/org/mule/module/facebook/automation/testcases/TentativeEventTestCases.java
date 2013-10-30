@@ -29,7 +29,7 @@ public class TentativeEventTestCases extends FacebookTestParent {
     	inviteUserAux(eventId, profileId);
 	}
 	
-	@Category({RegressionTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testTentativeEvent() {
 		try {
