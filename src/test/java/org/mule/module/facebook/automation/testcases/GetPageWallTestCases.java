@@ -60,7 +60,8 @@ public class GetPageWallTestCases extends FacebookTestParent {
 					}
 				}
 				assertTrue(found);
-			}		} catch (Exception e) {
+			}		
+		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
