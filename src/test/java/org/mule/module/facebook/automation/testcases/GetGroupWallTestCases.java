@@ -1,16 +1,18 @@
 package org.mule.module.facebook.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Group;
 import com.restfb.types.Post;
 
 public class GetGroupWallTestCases extends FacebookTestParent {
@@ -19,9 +21,18 @@ public class GetGroupWallTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getGroupWallTestData");
-		String query = (String) getTestRunMessageValue("q");
-    	List<Group> groups = searchGroups(query);
-		upsertOnTestRunMessage("group", groups.get(0).getId());
+    	
+    	String groupId = getExpectedGroupId();
+    	upsertOnTestRunMessage("group", groupId);
+    	
+    	List<String> messages = getTestRunMessageValue("messages");
+    	List<String> messageIds = new ArrayList<String>();
+    	
+    	for (String msg : messages) {
+    		String messageId = publishMessage(groupId, msg);
+    		messageIds.add(messageId);
+    		upsertOnTestRunMessage("messageIds", messageIds);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -29,12 +40,25 @@ public class GetGroupWallTestCases extends FacebookTestParent {
 	@Test
 	public void testGetGroupWall(){
 		try {
+			List<String> messageIds = getTestRunMessageValue("messageIds");
 			List<Post> result = runFlowAndGetPayload("get-group-wall");
-			assertTrue(result.size() > 0);
+			assertEquals(messageIds.size(), result.size());
+			
+			for (Post post : result) {
+				assertTrue(messageIds.contains(post.getId()));
+			}
+			
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 
+	@After
+	public void tearDown() throws Exception {
+		List<String> messageIds = getTestRunMessageValue("messageIds");
+		for (String messageId : messageIds) {
+			deleteObject(messageId);
+		}
+	}
 
 }
