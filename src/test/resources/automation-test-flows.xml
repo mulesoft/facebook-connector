@@ -229,7 +229,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="publish-message">
-		<facebook:publish-message profile_id="#[payload.profileId]"
+		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"
 			msg="#[payload.msg]" accessTokenId="accessTokenId" />
 	</flow>
 
