@@ -49,7 +49,7 @@ public class GetUserAlbumsTestCases extends FacebookTestParent {
 			String limit = (String) getTestRunMessageValue("limit");
 			String offset = (String) getTestRunMessageValue("offset");
 			
-			Collection<Album> albums = requestUserAlbums(profileId,	since, until, limit, offset);
+			Collection<Album> albums = getUserAlbums(profileId,	since, until, limit, offset);
 			assertTrue(albums.size() > 0);
 
 			Collection<Album> matching = CollectionUtils.select(albums, new Predicate() {

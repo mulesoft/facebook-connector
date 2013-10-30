@@ -89,7 +89,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Collection<Album> requestUserAlbums(String user, String since, String until, String limit, String offset) throws Exception {
+	protected Collection<Album> getUserAlbums(String user, String since, String until, String limit, String offset) throws Exception {
 		upsertOnTestRunMessage("user", user);
 		upsertOnTestRunMessage("since", since);
 		upsertOnTestRunMessage("until", until);
