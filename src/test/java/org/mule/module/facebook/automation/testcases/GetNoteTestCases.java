@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.restfb.types.Note;
@@ -28,6 +29,7 @@ public class GetNoteTestCases extends FacebookTestParent {
 		upsertOnTestRunMessage("note", noteid);
 	}
 
+	@Category({RegressionTests.class})
 	@Test
 	public void testGetNote() {
 		try {
