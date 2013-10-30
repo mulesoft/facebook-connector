@@ -443,6 +443,11 @@ public class FacebookTestParent extends ConnectorTestCase {
 		return finalList;
 	}
 	
+	protected String getExpectedGroupId() {
+		String expectedGroupId = properties.getProperty("facebook.init.groupId");
+		return expectedGroupId;
+	}
+	
 	/*
 	 * Returns back a list of strings from the input array.
 	 * The different between this method and Arrays.asList() is that elements are trimmed before

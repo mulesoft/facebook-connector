@@ -18,23 +18,18 @@ public class GetGroupTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
     	initializeTestRunMessage("getGroupTestData");
-		String query = (String) getTestRunMessageValue("q");
-    	List<Group> groups = searchGroups(query);
-    	//get first group in the list this will be used to compare with
-    	upsertOnTestRunMessage("groupGotBySearch",groups.get(0));
+    	
+    	String expectedGroupId = getExpectedGroupId();
+    	upsertOnTestRunMessage("group", expectedGroupId);
 	}
 
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetGroup(){
 		try {
-			Group groupGotBySearch = (Group) getTestRunMessageValue("groupGotBySearch");
-			upsertOnTestRunMessage("group", groupGotBySearch.getId());
-			
+			String groupId = getTestRunMessageValue("group");
 			Group group = runFlowAndGetPayload("get-group");
-
-			assertEquals(groupGotBySearch.getId(), group.getId());
-			assertEquals(groupGotBySearch.getName(), group.getName());
+			assertEquals(group.getId(), groupId);
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
