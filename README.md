@@ -69,15 +69,19 @@ init-state.properties
 ---------------------
 
 * facebook.init.books
+
   This property should have a comma-separated list of facebook IDs of pages related to books that the main test account has liked.
 
 * facebook.init.television
+  
   This property should have a comma-separated list of facebook IDs of televeision pages that the main test account has liked.
 
 * facebook.init.movies
+  
   A comma separated list of pages related to movies that the test account has liked.
 
 * facebook.init.music 
+  
   A comma separated list of pages related to music that the test account has liked.
   
 
@@ -85,9 +89,11 @@ automation-credentials.properties
 ---------------------------------
 
 * consumerKey property
+  
   appId in Facebook application admin page.
 
 * consumerSecret property
+  
   appSecret in Facebook application admin page.
 
 * localPort for main test account and auxiliary test account have to be different.
@@ -95,9 +101,11 @@ automation-credentials.properties
 * remotePort for main test account and auxiliary test account have to be different.
 
 * accessToken property
+  
   The access token needed to perform API requests to Facebook. Access tokens are invalidated when user logs out. Easiest way of getting two access tokens is to use two different browsers.
 
 * facebook.accessToken.page property
+  
   The main test account should be an admin of a page. You can get this page access token by sending an API request to https://graph.facebook.com/me/accounts. Example response:
 
 	{
@@ -132,14 +140,17 @@ Test helper methods overview
 ----------------------------
 
 * getExpectedBooks(), getExpectedMusic(), getExpectedTelevision(), getExpectedMovies()
+  
   These methods parse init-state.properties and retrieve the comma-separated list of IDs (facebook.init.books, facebook.init.music, etc), separate the IDs and return a list. As an example: 
 
 	facebook.init.music=77696833002,14644790067 returns back [77696833002, 14644790067]
 
 * getExpectedLikes()
+  
   This method combines the result of the above four helper methods in a single list.
 
 * getExpectedGroupId()
+  
   This method returns back the value of the facebook.init.groupId property found in init-state.properties.
 
 
