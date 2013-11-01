@@ -949,6 +949,13 @@
 		<entry key="page" value="${facebook.page}" />
 	</util:map>
 	
+	<!-- set-page-picture-from-link -->
+	<util:map id="setPagePictureFromLinkTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<!-- image link from Mulesoft's main website -->
+		<entry key="imageUrl" value="http://www.mulesoft.org/sites/all/themes/mulesoft_community/images/open-source-integration-platform.png" />
+		<entry key="page" value="${facebook.page}" />
+	</util:map>
+	
 	<!-- get-photo -->
 	<util:map id="getPhotoTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
