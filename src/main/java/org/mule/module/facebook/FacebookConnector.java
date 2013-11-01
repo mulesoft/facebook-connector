@@ -693,6 +693,22 @@ public class FacebookConnector {
     }
 
     /**
+     * Retrieves a list of videos from the event's wall
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getEventVideos}
+     * 
+     * @param eventId The ID of the event
+     * @return A list of videos from the event's wall
+     */
+    @Processor
+    @OAuthProtected
+    public List<Video> getEventVideos(String eventId)
+    {
+    	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/videos").build(eventId);
+    	WebResource resource = this.newWebResource(uri, accessToken);
+    	return mapper.toJavaList(resource.get(String.class), Video.class);
+    }
+    
+    /**
      * A Facebook group
      * <p/>
      * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:getGroup}

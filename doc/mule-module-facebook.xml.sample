@@ -474,6 +474,11 @@
 <!-- END_INCLUDE(facebook:getEventPhotos) -->
 
 
+<!-- BEGIN_INCLUDE(facebook:getEventVideos) -->
+<facebook:get-event-videos eventId="#[map-payload:eventId]" />
+<!-- END_INCLUDE(facebook:getEventVideos) -->
+
+
 <!-- BEGIN_INCLUDE(facebook:publishPhoto) -->
 <facebook:publish-photo albumId="#[map-payload:albumId" caption="#[map-payload:caption]"
                                 photo-ref="#[map-payload:photo]"/>
