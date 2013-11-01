@@ -956,6 +956,16 @@
 		<entry key="page" value="${facebook.page}" />
 	</util:map>
 	
+	<!-- set-page-picture-from-source -->
+	<util:map id="setPagePictureFromSourceTestData" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<!-- 
+			This file must be present in your classpath 
+			This file is loaded as follows: getClass().getClassLoader().getResource(fileName) 
+			-->
+		<entry key="photoFilePath" value="image2.jpg" />
+		<entry key="page" value="${facebook.page}" />
+	</util:map>
+	
 	<!-- get-photo -->
 	<util:map id="getPhotoTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
