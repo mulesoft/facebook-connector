@@ -107,7 +107,7 @@ automation-credentials.properties
 * facebook.accessToken.page property
   
   The main test account should be an admin of a page. You can get this page access token by sending an API request to https://graph.facebook.com/me/accounts. Example response:
-
+```
 	{
 	  "data": [
 	    {
@@ -135,7 +135,7 @@ automation-credentials.properties
 	    "next": "https://graph.facebook.com/100006728886621/accounts?limit=5000&offset=5000&__after_id=760526370629408"
 	  }
 	}
-
+```
 Test helper methods overview
 ----------------------------
 
