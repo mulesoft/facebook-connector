@@ -1,17 +1,625 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:context="http://www.springframework.org/schema/context" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+<mule xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/2.0/mule-facebook.xsd">
-    
-    <context:property-placeholder location="automation-credentials.properties" />
-    
-    <facebook:config-with-oauth name="Facebook" appId="${facebook.appId}" appSecret="${facebook.appSecret}" doc:name="Facebook">
-        <facebook:oauth-callback-config domain="${facebook.domain}" localPort="${facebook.localPort}" remotePort="${facebook.remotePort}" path="${facebook.path}"/>
-    </facebook:config-with-oauth>
-    
-    <flow name="get-user" doc:name="get-user">
-        <facebook:get-user config-ref="Facebook" user="#[payload.username]" accessTokenId="accessTokenId" doc:name="Facebook" />
-    </flow>
-    
+http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd">
+
+	<context:property-placeholder location="automation-credentials.properties" />
+
+	<facebook:config-with-oauth name="Facebook"
+		consumerKey="${facebook.consumerKey}" consumerSecret="${facebook.consumerSecret}"
+		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event">
+		<facebook:oauth-callback-config domain="${facebook.domain}"
+			localPort="${facebook.localPort}" remotePort="${facebook.remotePort}"
+			path="${facebook.path}" />
+	</facebook:config-with-oauth>
+
+	<facebook:config-with-oauth name="auxFacebook" consumerKey="${facebook.aux.consumerKey}" consumerSecret="${facebook.aux.consumerSecret}"
+		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event">
+		<facebook:oauth-callback-config domain="${facebook.aux.domain}" localPort="${facebook.aux.localPort}" 
+			path="${facebook.aux.path}" remotePort="${facebook.aux.remotePort}" />	
+	</facebook:config-with-oauth>
+
+	<!-- ### Auxiliary Facebook flows -->
+	
+	<flow name="logged-user-details-aux">
+		<facebook:logged-user-details accessTokenId="accessTokenIdAux" config-ref="auxFacebook" />
+	</flow>
+	
+	<flow name="publish-event-aux">
+		<facebook:publish-event accessTokenId="accessTokenIdAux" config-ref="auxFacebook" event_name="#[payload.eventName]" 
+			profile_id="#[payload.profileId]" start_time="#[payload.startTime]" />
+	</flow>
+
+	<flow name="delete-object-aux">
+		<facebook:delete-object accessTokenId="accessTokenIdAux" objectId="#[payload.objectId]" config-ref="auxFacebook" />
+	</flow>
+
+	<flow name="invite-user-aux">
+		<facebook:invite-user config-ref="auxFacebook" eventId="#[payload.eventId]" userId="#[payload.userId]" accessTokenId="accessTokenIdAux" />
+	</flow>
+
+	<!-- ### Facebook ### -->
+
+	<flow name="get-user" doc:name="get-user">
+		<facebook:get-user config-ref="Facebook" user="#[payload.username]"
+			accessTokenId="accessTokenId" doc:name="Facebook" />
+	</flow>
+
+	<flow name="get-user-home" doc:name="get-user-home">
+		<facebook:get-user-home config-ref="Facebook" user="#[payload.user]" limit="#[payload.limit]" offset="#[payload.offset]" 
+			since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-album">
+		<facebook:get-album config-ref="Facebook" album="#[payload.album]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-album">
+		<facebook:publish-album config-ref="Facebook" albumName="#[payload.albumName]" msg="#[payload.msg]" 
+			profile_id="#[payload.profileId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-album-on-page">
+		<facebook:publish-album config-ref="Facebook" albumName="#[payload.albumName]" msg="#[payload.msg]" 
+			profile_id="#[payload.profileId]" accessTokenId="accessTokenIdPage" />
+	</flow>
+
+	<flow name="get-status">
+		<facebook:get-status config-ref="Facebook"
+			status="#[payload.status]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-post">
+		<facebook:get-post config-ref="Facebook" post="#[payload.post]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-application-albums">
+		<facebook:get-application-albums
+			config-ref="Facebook" application="#[payload.application]"
+			accessTokenId="accessTokenId" until="#[payload.until]" />
+	</flow>
+
+	<flow name="get-page">
+		<facebook:get-page config-ref="Facebook" page="#[payload.page]"
+			accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-updates">
+		<facebook:get-user-updates config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-statuses">
+		<facebook:get-application-statuses config-ref="Facebook" application="#[payload.application]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-statuses">
+		<facebook:get-user-statuses config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-links">
+		<facebook:get-user-links config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-likes">
+		<facebook:get-user-likes config-ref="Facebook" user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="like">
+		<facebook:like config-ref="Facebook" postId="#[payload.postId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="dislike">
+		<facebook:dislike config-ref="Facebook" postId="#[payload.postId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-photo-tags">
+		<facebook:get-photo-tags config-ref="Facebook" photoId="#[payload.photoId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="invite-user">
+		<facebook:invite-user config-ref="Facebook" eventId="#[payload.eventId]" userId="#[payload.userId]"	 accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="tag-photo">
+		<facebook:tag-photo config-ref="Facebook" photoId="#[payload.photoId]" to="#[payload.to]" tagText="#[payload.tagText]" 
+			x="#[payload.x]" y="#[payload.y]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-page-albums">
+		<facebook:get-page-albums config-ref="Facebook" since="#[payload.since]" until="#[payload.until]" limit="#[payload.limit]" offset="#[payload.offset]"
+			page="#[payload.page]" accessTokenId="accessTokenIdPage" />
+	</flow>
+
+	<flow name="delete-object">
+		<facebook:delete-object config-ref="Facebook" objectId="#[payload.objectId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="delete-object-from-page">
+		<facebook:delete-object config-ref="Facebook" objectId="#[payload.objectId]" accessTokenId="accessTokenIdPage" />
+	</flow>
+
+	<flow name="get-status-comments">
+		<facebook:get-status-comments config-ref="Facebook"
+			status="#[payload.status]" until="#[payload.until]" since="#[payload.since]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-television">
+		<facebook:get-user-television config-ref="Facebook"
+			user="#[payload.user]" until="#[payload.until]" since="#[payload.since]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-posts">
+		<facebook:get-user-posts config-ref="Facebook"
+			user="#[payload.user]" until="#[payload.until]" since="#[payload.since]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-wall">
+		<facebook:get-user-wall config-ref="Facebook"
+			user="#[payload.user]" until="#[payload.until]" since="#[payload.since]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-event-wall">
+		<facebook:get-event-wall config-ref="Facebook" eventId="#[payload.eventId]" limit="#[payload.limit]" 
+			offset="#[payload.offset]" until="#[payload.until]" since="#[payload.since]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-post-comments">
+		<facebook:get-post-comments config-ref="Facebook"
+			post="#[payload.post]" until="#[payload.until]" since="#[payload.since]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-albums">
+		<facebook:get-user-albums config-ref="Facebook"
+			user="#[payload.user]" since="#[payload.since]" until="#[payload.until]"
+			limit="#[payload.limit]" offset="#[payload.offset]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-tagged">
+		<facebook:get-user-tagged config-ref="Facebook" user="#[payload.user]" offset="#[payload.offset]"
+			since="#[payload.since]" until="#[payload.until]" limit="#[payload.limit]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-event">
+		<facebook:publish-event config-ref="Facebook"
+			profile_id="#[payload.profileId]" start_time="#[payload.startTime]"
+			event_name="#[payload.eventName]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-event-photos">
+		<facebook:get-event-photos config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="publish-video">
+		<facebook:publish-video config-ref="Facebook" id="#[payload.id]" title="#[payload.title]" description="#[payload.description]" video-ref="#[payload.videoRef]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-event-on-page">
+		<facebook:publish-event config-ref="Facebook" profile_id="#[payload.profileId]" start_time="#[payload.startTime]" event_name="#[payload.eventName]" accessTokenId="accessTokenIdPage" />
+	</flow>
+
+	<flow name="publish-photo">
+		<facebook:publish-photo config-ref="Facebook"
+			albumId="#[payload.albumId]" caption="#[payload.caption]" photo-ref="#[payload.photoRef]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="logged-user-details">
+		<facebook:logged-user-details config-ref="Facebook"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-message">
+		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"
+			msg="#[payload.msg]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="download-image">
+		<facebook:download-image accessTokenId="accessTokenId"
+			config-ref="Facebook" imageUri="#[payload.imageUri]" />
+	</flow>
+
+	<flow name="publish-comment">
+		<facebook:publish-comment accessTokenId="accessTokenId"
+			config-ref="Facebook" postId="#[payload.postId]" msg="#[payload.msg]" />
+	</flow>
+
+	<flow name="get-album-photos">
+		<facebook:get-album-photos accessTokenId="accessTokenId"
+			config-ref="Facebook" album="#[payload.album]" limit="#[payload.limit]"
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" />
+	</flow>
+
+	<flow name="get-album-comments">
+		<facebook:get-album-comments
+			accessTokenId="accessTokenId" config-ref="Facebook" album="#[payload.album]"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]"
+			until="#[payload.until]" />
+	</flow>
+
+	<flow name="get-application">
+		<facebook:get-application accessTokenId="accessTokenId"
+			config-ref="Facebook" application="#[payload.application]" />
+	</flow>
+
+	<flow name="publish-note">
+		<facebook:publish-note profile_id="#[payload.profileId]" msg="#[payload.msg]" config-ref="Facebook" accessTokenId="accessTokenId" subject="#[payload.subject]" />
+	</flow>
+	
+	<flow name="publish-note-on-page">
+		<facebook:publish-note config-ref="Facebook" profile_id="#[payload.profileId]" msg="#[payload.msg]" subject="#[payload.subject]" accessTokenId="accessTokenIdPage" />
+	</flow>
+
+	<flow name="get-event">
+		<facebook:get-event config-ref="Facebook"
+			accessTokenId="accessTokenId" eventId="#[payload.eventId]" />
+	</flow>
+
+	<flow name="search-checkins">
+	     <facebook:search-checkins config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
+	     	since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="search-events">
+		<facebook:search-events config-ref="Facebook" q="#[payload.q]" limit="#[payload.limit]" offset="#[payload.offset]" 
+			since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="publish-link">
+		<facebook:publish-link config-ref="Facebook" profile_id="#[payload.profileId]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />	
+	</flow>
+
+	<flow name="get-link">
+		<facebook:get-link config-ref="Facebook" link="#[payload.link]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-event-attending">
+		<facebook:get-event-attending
+			accessTokenId="accessTokenId" config-ref="Facebook" eventId="#[payload.eventId]"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]"
+			until="#[payload.until]" />
+	</flow>
+
+	<flow name="attend-event">
+    	<facebook:attend-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="publish-message-all-attributes">
+		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]" 
+			linkName="#[payload.linkName]" picture="#[payload.picture]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
+	</flow>
+	
+	<flow name="search-users">
+		<facebook:search-users config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" 
+			until="#[payload.until]" q="#[payload.q]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="decline-event">
+		<facebook:decline-event config-ref="Facebook"
+			eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="tentative-event">
+		<facebook:tentative-event config-ref="Facebook" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-notes">
+		<facebook:get-user-notes config-ref="Facebook"
+			user="#[payload.profileId]" until="now" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-event-declined">
+		<facebook:get-event-declined
+			accessTokenId="accessTokenId" config-ref="Facebook" eventId="#[payload.eventId]"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]"
+			until="#[payload.until]" />
+	</flow>
+
+	<flow name="get-note">
+		<facebook:get-note note="#[payload.note]"
+			config-ref="Facebook" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-note-comments">
+		<facebook:get-note-comments note="#[payload.note]" until="#[payload.until]" since="#[payload.since]" limit="#[payload.limit]" offset="#[payload.offset]" 
+			config-ref="Facebook" accessTokenId="accessTokenId" />
+	</flow>	
+	
+	<flow name="get-event-invited">
+		<facebook:get-event-invited config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>	
+	
+	<flow name="get-event-maybe">
+		<facebook:get-event-maybe config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>
+	
+	<flow name="get-event-no-reply">
+		<facebook:get-event-no-reply config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" accessTokenId="accessTokenId" until="#[payload.until]" eventId="#[payload.eventId]" />
+	</flow>
+	
+	<flow name="uninvite-user">
+		<facebook:uninvite-user config-ref="Facebook" eventId="#[payload.eventId]" userId="#[payload.userId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="search-groups">
+		<facebook:search-groups q="#[payload.q]" accessTokenId="accessTokenId" config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" />
+	</flow>
+	
+	<flow name="get-group">
+		<facebook:get-group group="#[payload.group]" accessTokenId="accessTokenId" config-ref="Facebook"/>
+	</flow>
+
+	<flow name="get-event-picture">
+		<facebook:get-event-picture config-ref="Facebook" eventId="#[payload.eventId]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-link-comments">
+		<facebook:get-link-comments config-ref="Facebook" limit="#[payload.limit]" link="#[payload.link]" 
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-note-likes">
+		<facebook:get-note-likes config-ref="Facebook" limit="#[payload.limit]" 
+			offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" note="#[payload.note]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-accounts">
+		<facebook:get-user-accounts config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-activities">
+		<facebook:get-user-activities config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-books">
+		<facebook:get-user-books config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-checkins">
+		<facebook:get-user-checkins config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-events">
+		<facebook:get-user-events config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-friends">
+		<facebook:get-user-friends config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-groups">
+		<facebook:get-user-groups config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-inbox">
+		<facebook:get-user-inbox config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-interests">
+		<facebook:get-user-interests config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-movies">
+		<facebook:get-user-movies config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-music">
+		<facebook:get-user-music config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-outbox">
+		<facebook:get-user-outbox config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-photos">
+		<facebook:get-user-photos config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-picture">
+		<facebook:get-user-picture config-ref="Facebook" user="#[payload.user]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-user-search">
+		<facebook:get-user-search config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
+			since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" metadata="#[payload.metadata]" q="#[payload.q]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-user-videos">
+		<facebook:get-user-videos config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="search-posts">
+		<facebook:search-posts config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
+			since="#[payload.since]" until="#[payload.until]" q="#[payload.q]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-video">
+		<facebook:get-video config-ref="Facebook" metadata="#[payload.metadata]" video="#[payload.video]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="search-pages">
+		<facebook:search-pages config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" q="#[payload.q]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-video-comments">
+		<facebook:get-video-comments config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" video="#[payload.video]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-checkins">
+		<facebook:get-page-checkins config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-events">
+		<facebook:get-page-events config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-groups">
+		<facebook:get-page-groups config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-links">
+		<facebook:get-page-links config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-notes">
+		<facebook:get-page-notes config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-photos">
+		<facebook:get-page-photos config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-posts">
+		<facebook:get-page-posts config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-statuses">
+		<facebook:get-page-statuses config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-page-tagged">
+		<facebook:get-page-tagged config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-videos">
+		<facebook:get-page-videos config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-wall">
+		<facebook:get-page-wall config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" page="#[payload.page]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-page-picture">
+		<facebook:get-page-picture config-ref="Facebook" page="#[payload.page]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="set-page-picture-from-link">
+		<facebook:set-page-picture-from-link config-ref="Facebook" page="#[payload.page]" imageUrl="#[payload.imageUrl]" accessTokenId="accessTokenIdPage" />
+	</flow>
+	
+	<flow name="set-page-picture-from-source">
+		<facebook:set-page-picture-from-source config-ref="Facebook" page="#[payload.page]" source-ref="#[payload.sourceRef]" accessTokenId="accessTokenIdPage" />
+	</flow>
+	
+	<flow name="get-photo">
+		<facebook:get-photo config-ref="Facebook" metadata="#[payload.metadata]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-photo-comments">
+		<facebook:get-photo-comments config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-photo-likes">
+		<facebook:get-photo-likes config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" photo="#[payload.photo]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-group-members">
+		<facebook:get-group-members config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" group="#[payload.group]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-group-picture">
+		<facebook:get-group-picture config-ref="Facebook" group="#[payload.group]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-group-wall">
+		<facebook:get-group-wall config-ref="Facebook"
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" group="#[payload.group]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-events">
+		<facebook:get-application-events config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-insights">
+		<facebook:get-application-insights config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-links">
+		<facebook:get-application-links config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-notes">
+		<facebook:get-application-notes config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-photos">
+		<facebook:get-application-photos config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-picture">
+		<facebook:get-application-picture config-ref="Facebook" application="#[payload.application]" type="#[payload.type]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-tagged">
+		<facebook:get-application-tagged config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-videos">
+		<facebook:get-application-videos config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-application-wall">
+		<facebook:get-application-wall config-ref="Facebook" application="#[payload.application]" 
+			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>

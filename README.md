@@ -60,17 +60,98 @@ Here is detailed list of all the configuration attributes:
 |oauth-restore-access-token|A chain of message processors processed synchronously that can be used to restore OAuth state. They will be executed whenever access to a protected resource is requested and the connector is not authorized yet|yes|
 
 
+Automation Tests
+================
 
+In order to run the test you should have at least two test accounts - a main test account and an auxiliary test account. The two test accounts should be friends, and should be together in a group.
 
+init-state.properties
+---------------------
 
+* facebook.init.books
 
+  This property should have a comma-separated list of facebook IDs of pages related to books that the main test account has liked.
 
+* facebook.init.television
+  
+  This property should have a comma-separated list of facebook IDs of televeision pages that the main test account has liked.
 
+* facebook.init.movies
+  
+  A comma separated list of pages related to movies that the test account has liked.
 
+* facebook.init.music 
+  
+  A comma separated list of pages related to music that the test account has liked.
+  
 
+automation-credentials.properties
+---------------------------------
 
+* consumerKey property
+  
+  appId in Facebook application admin page.
 
+* consumerSecret property
+  
+  appSecret in Facebook application admin page.
 
+* localPort for main test account and auxiliary test account have to be different.
+
+* remotePort for main test account and auxiliary test account have to be different.
+
+* accessToken property
+  
+  The access token needed to perform API requests to Facebook. Access tokens are invalidated when user logs out. Easiest way of getting two access tokens is to use two different browsers.
+
+* facebook.accessToken.page property
+  
+  The main test account should be an admin of a page. You can get this page access token by sending an API request to https://graph.facebook.com/me/accounts. Example response:
+```
+	{
+	  "data": [
+	    {
+	      "category": "Airport",
+	      "category_list": [
+		{
+		  "id": "128966563840349",
+		  "name": "Airport"
+		}
+	      ],
+	      "name": "Mule Test Community",
+	      "access_token": "CAAImeh5LIRsBAFBBgTr8ZARhTMvMNvcI4opHxCzojGhpGZBVGK7raY92olI7gU9AbAGVYWUPa4Hb2jGH8xtMK6322iRh6x3jTKhahTyq3AIB88jkIM5c09XyZCTAalzcHvfkp95SsLxsTrGZBnFLkPZBhzjJJFwNmDJebaZBgkfZA8bfnfodrZBe2zUNpHuf5YsZD",
+	      "perms": [
+		"ADMINISTER",
+		"EDIT_PROFILE",
+		"CREATE_CONTENT",
+		"MODERATE_CONTENT",
+		"CREATE_ADS",
+		"BASIC_ADMIN"
+	      ],
+	      "id": "760526370629409"
+	    }
+	  ],
+	  "paging": {
+	    "next": "https://graph.facebook.com/100006728886621/accounts?limit=5000&offset=5000&__after_id=760526370629408"
+	  }
+	}
+```
+Test helper methods overview
+----------------------------
+
+* getExpectedBooks(), getExpectedMusic(), getExpectedTelevision(), getExpectedMovies()
+  
+  These methods parse init-state.properties and retrieve the comma-separated list of IDs (facebook.init.books, facebook.init.music, etc), separate the IDs and return a list. As an example: 
+
+	facebook.init.music=77696833002,14644790067 returns back [77696833002, 14644790067]
+
+* getExpectedLikes()
+  
+  This method combines the result of the above four helper methods in a single list.
+
+* getExpectedGroupId()
+  
+  This method returns back the value of the facebook.init.groupId property found in init-state.properties.
 
 
 
