@@ -33,7 +33,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	
 	<flow name="publish-event-aux">
 		<facebook:publish-event accessTokenId="accessTokenIdAux" config-ref="auxFacebook" event_name="#[payload.eventName]" 
-			profile_id="#[payload.profileId]" start_time="#[payload.startTime]" />
+			profile_id="#[payload.profileId]" start_time="121226230" />
 	</flow>
 
 	<flow name="delete-object-aux">
@@ -229,6 +229,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="publish-message">
+        <logger level="DEBUG" doc:name="Logger" message="#[payload]"/>
 		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"
 			msg="#[payload.msg]" accessTokenId="accessTokenId" />
 	</flow>

@@ -23,6 +23,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.config.MuleProperties;
+import org.mule.api.store.ObjectAlreadyExistsException;
+import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.module.facebook.oauth.FacebookConnectorOAuthState;
@@ -50,8 +52,17 @@ public class FacebookTestParent extends ConnectorTestCase {
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
     public void init() throws ObjectStoreException, IOException {
+
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-    	objectStore.store("accessTokenId", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthState"));
+    	if(objectStore.contains("accessTokenId"))
+    			objectStore.remove("accessTokenId");
+    	if(objectStore.contains("accessTokenIdPage"))
+			objectStore.remove("accessTokenIdPage");
+    	if(objectStore.contains("accessTokenIdAux"))
+			objectStore.remove("accessTokenIdAux");
+    	
+    	FacebookConnectorOAuthState f = (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthState");
+    	objectStore.store("accessTokenId", f);
     	objectStore.store("accessTokenIdPage", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStatePage"));
     	objectStore.store("accessTokenIdAux", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStateAux"));
     	

@@ -42,6 +42,7 @@ import org.mule.modules.utils.MuleSoftException;
 
 import com.restfb.DefaultJsonMapper;
 import com.restfb.JsonMapper;
+import com.restfb.json.JsonArray;
 import com.restfb.json.JsonObject;
 import com.restfb.types.Album;
 import com.restfb.types.Application;
@@ -2670,9 +2671,11 @@ public class FacebookConnector {
         	resource = resource.queryParam("privacy_type", privacy_type);
         }
         
-        String json = resource.post(String.class);
+        String json = resource.get(String.class);
 		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
-		return obj.getString("id");
+		JsonArray data = obj.getJsonArray("data");
+		
+		return ((data.length() > 0) ? data.getJsonObject(0).getString("id") : null);
     }
 
     /**
@@ -2689,7 +2692,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/attending").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class);
         
         return Boolean.parseBoolean(res);
     }
@@ -2708,7 +2711,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/maybe").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class);
         
         return Boolean.parseBoolean(res);
     }

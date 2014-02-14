@@ -117,7 +117,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <facebook:like postId="#[map-payload:postId]"/>
         <facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" albumName=""/>
         <facebook:publish-comment postId="#[map-payload:postId]" msg="#[map-payload:msg]"/>
-        <facebook:publish-event profile_id="#[map-payload:profileId]"/>
+        <facebook:publish-event profile_id="#[map-payload:profileId]" event_name="testname" start_time="1000"/>
         <facebook:publish-link profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"
                                link="#[map-payload:link]"/>
         <facebook:publish-message profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"/>

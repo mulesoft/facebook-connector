@@ -22,23 +22,28 @@ public class AttendEventTestCases extends FacebookTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
+
 		initializeTestRunMessage("attendEventTestData");
 
 		String auxProfileId = getProfileIdAux();
 		String eventName = getTestRunMessageValue("eventName");
 		String startTime = getTestRunMessageValue("startTime");
-
 		String eventId = publishEventAux(auxProfileId, eventName, startTime);
+
 		upsertOnTestRunMessage("eventId", eventId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testAttendEvent() {
+		System.out.println("CALLED");
 		try {
+			System.out.println(" * * * * *  CUSTOM LOG :: eventID: " + (String) getTestRunMessageValue("eventId"));
 			Boolean result = attendEvent((String) getTestRunMessageValue("eventId"));
 			assertTrue(result);
 		} catch (Exception e) {
+			System.out.println("*** ERROR :: " + e.getMessage());
+			e.printStackTrace();
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
