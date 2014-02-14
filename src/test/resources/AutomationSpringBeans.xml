@@ -11,7 +11,7 @@
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>automation-credentials.properties</value>
+			<value>${FACEBOOK_CREDENTIALS}</value>
 		</property>
 	</bean>
 

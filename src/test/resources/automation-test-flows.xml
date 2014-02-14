@@ -9,7 +9,7 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd">
 
-	<context:property-placeholder location="automation-credentials.properties" />
+	<context:property-placeholder location="${FACEBOOK_CREDENTIALS}" />
 
 	<facebook:config-with-oauth name="Facebook"
 		consumerKey="${facebook.consumerKey}" consumerSecret="${facebook.consumerSecret}"
