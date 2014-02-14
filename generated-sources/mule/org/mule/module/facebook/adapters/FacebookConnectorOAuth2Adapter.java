@@ -24,7 +24,7 @@ import org.mule.security.oauth.OnNoTokenPolicy;
  * A {@code FacebookConnectorOAuth2Adapter} is a wrapper around {@link FacebookConnector } that adds OAuth capabilites to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T12:05:56-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T03:46:38-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class FacebookConnectorOAuth2Adapter
     extends FacebookConnectorProcessAdapter
     implements OAuth2Adapter, OAuth2Connector

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * A <code>FacebookConnectorLifecycleAdapter</code> is a wrapper around {@link FacebookConnector } that adds lifecycle methods to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T12:05:56-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T03:46:38-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class FacebookConnectorLifecycleAdapter
     extends FacebookConnectorMetadataAdapater
     implements Disposable, Initialisable, Startable, Stoppable

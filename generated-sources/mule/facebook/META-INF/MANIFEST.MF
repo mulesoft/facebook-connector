@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Facebook
 Bundle-SymbolicName: org.mule.tooling.ui.contribution.facebook.3.5.0;singleton:=true
-Bundle-Version: 2.3.2.201402141205
+Bundle-Version: 2.3.2.201402141546
 Bundle-Activator: org.mule.tooling.ui.contribution.FacebookActivator
 Bundle-Vendor: MuleSoft, inc.
 Require-Bundle: org.eclipse.ui,
