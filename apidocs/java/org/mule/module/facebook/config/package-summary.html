@@ -1,0 +1,978 @@
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <meta name="description" content="Documentation for Mule Facebook Connector." />
+
+<link rel="shortcut icon" type="image/x-icon" href="../../../../../../favicon.ico" />
+<title>
+
+  org.mule.module.facebook.config
+
+
+| Mule Facebook Connector
+
+</title>
+<link href="../../../../../../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../../assets/mule-developer-prettify.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../../assets/customizations.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+<script src="../../../../../../assets/search_autocomplete.js" type="text/javascript"></script>
+<script src="../../../../../../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../../../../../../assets/jquery-toc.js" type="text/javascript"></script>
+<script src="../../../../../../assets/mule-developer-docs.js" type="text/javascript"></script>
+<script src="../../../../../../assets/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+  setToRoot("../../../../../../", "../../../../../../assets/");
+</script>
+<script src="../../../../../../assets/mule-developer-reference.js" type="text/javascript"></script>
+<script src="../../../../../../assets/navtree_data.js" type="text/javascript"></script>
+<script src="../../../../../../assets/customizations.js" type="text/javascript"></script>
+<noscript>
+  <style type="text/css">
+    html,body{overflow:auto;}
+    #body-content{position:relative; top:0;}
+    #doc-content{overflow:visible;border-left:3px solid #666;}
+    #side-nav{padding:0;}
+    #side-nav .toggle-list ul {display:block;}
+    #resize-packages-nav{border-bottom:3px solid #666;}
+  </style>
+</noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "Mule Facebook Connector";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+</head>
+
+<body class="">
+
+<div id="header">
+    <div id="headerLeft">
+    
+      <span id="masthead-title">Mule Facebook Connector</span>
+    
+    <ul id="header-tabs" class="java">
+    
+    	<li id="guide"><a href="../../../../../../guide/install.html">
+	    	<span class="en">Install Guide</span>
+    	</a></li>
+    
+    	<li id="java"><a href="../../../../../../java/packages.html">
+	    	<span class="en">Java API Reference</span>
+    	</a></li>
+    
+    	<li id="mule"><a href="../../../../../../mule/modules.html">
+	    	<span class="en">Mule API Reference</span>
+    	</a></li>
+    
+    </ul>
+    </div>
+    <div id="headerRight">
+      <a href="http://www.mulesoft.com" tabindex="-1">
+      <img src="../../../../../../assets//images/mulesoft-logo-final.gif" alt="MuleSoft" border="0" id="mulesoftlogo"></a><br/>
+      
+  <div id="search" >
+      <div id="searchForm">
+          <form accept-charset="utf-8" class="gsc-search-box" 
+                onsubmit="return submit_search()">
+            <table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody>
+                <tr>
+                  <td class="gsc-input">
+                    <input id="search_autocomplete" class="gsc-input" type="text" size="33" autocomplete="off"
+                      title="search developer docs" name="q"
+                      value="search developer docs"
+                      onFocus="search_focus_changed(this, true)"
+                      onBlur="search_focus_changed(this, false)"
+                      onkeydown="return search_changed(event, true, '../../../../../../')"
+                      onkeyup="return search_changed(event, false, '../../../../../../')" />
+                  <div id="search_filtered_div" class="no-display">
+                      <table id="search_filtered" cellspacing=0>
+                      </table>
+                  </div>
+                  </td>
+                  <td class="gsc-search-button">
+                    <input type="submit" value="Search" title="search" id="search-button" class="gsc-search-button" />
+                  </td>
+                  <td class="gsc-clear-button">
+                    <div title="clear results" class="gsc-clear-button">&nbsp;</div>
+                  </td>
+                </tr></tbody>
+              </table>
+          </form>
+      </div><!-- searchForm -->
+  </div><!-- search -->
+      
+    </div>
+</div><!-- header -->
+
+
+  <div class="g-section g-tpl-240" id="body-content">
+    <div class="g-unit g-first side-nav-resizable" id="side-nav">
+      <div id="swapper">
+        <div id="nav-panels">
+          <div id="resize-packages-nav">
+            <div id="packages-nav">
+              <div id="index-links">
+                <a href="../../../../../../java/packages.html"  >Package Index</a> |
+                <a href="../../../../../../java/classes.html" >Class Index</a>
+              </div>
+              <ul>
+                
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/package-summary.html">org.mule.module.facebook</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/adapter/package-summary.html">org.mule.module.facebook.adapter</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/adapters/package-summary.html">org.mule.module.facebook.adapters</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/agents/package-summary.html">org.mule.module.facebook.agents</a></li>
+    <li class="selected api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/config/package-summary.html">org.mule.module.facebook.config</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/connection/package-summary.html">org.mule.module.facebook.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/devkit/package-summary.html">org.mule.module.facebook.devkit</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/oauth/package-summary.html">org.mule.module.facebook.oauth</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/processors/package-summary.html">org.mule.module.facebook.processors</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/types/package-summary.html">org.mule.module.facebook.types</a></li>
+              </ul><br/>
+            </div> <!-- end packages -->
+          </div> <!-- end resize-packages -->
+          <div id="classes-nav">
+            <ul>
+              
+              
+    <li><h2>Classes</h2>
+      <ul>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/AttendEventDefinitionParser.html">AttendEventDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/AuthorizeDefinitionParser.html">AuthorizeDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DeclineEventDefinitionParser.html">DeclineEventDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DeleteObjectDefinitionParser.html">DeleteObjectDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DislikeDefinitionParser.html">DislikeDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/DownloadImageDefinitionParser.html">DownloadImageDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/FacebookConnectorConfigDefinitionParser.html">FacebookConnectorConfigDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/FacebookNamespaceHandler.html">FacebookNamespaceHandler</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetAlbumCommentsDefinitionParser.html">GetAlbumCommentsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetAlbumDefinitionParser.html">GetAlbumDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetAlbumPhotosDefinitionParser.html">GetAlbumPhotosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationAlbumsDefinitionParser.html">GetApplicationAlbumsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationDefinitionParser.html">GetApplicationDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationEventsDefinitionParser.html">GetApplicationEventsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationInsightsDefinitionParser.html">GetApplicationInsightsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationLinksDefinitionParser.html">GetApplicationLinksDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationNotesDefinitionParser.html">GetApplicationNotesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationPhotosDefinitionParser.html">GetApplicationPhotosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationPictureDefinitionParser.html">GetApplicationPictureDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationStatusesDefinitionParser.html">GetApplicationStatusesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationTaggedDefinitionParser.html">GetApplicationTaggedDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationVideosDefinitionParser.html">GetApplicationVideosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationWallDefinitionParser.html">GetApplicationWallDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetCheckinDefinitionParser.html">GetCheckinDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventAttendingDefinitionParser.html">GetEventAttendingDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventDeclinedDefinitionParser.html">GetEventDeclinedDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventDefinitionParser.html">GetEventDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventInvitedDefinitionParser.html">GetEventInvitedDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventMaybeDefinitionParser.html">GetEventMaybeDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventNoReplyDefinitionParser.html">GetEventNoReplyDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventPhotosDefinitionParser.html">GetEventPhotosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventPictureDefinitionParser.html">GetEventPictureDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventVideosDefinitionParser.html">GetEventVideosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventWallDefinitionParser.html">GetEventWallDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupDefinitionParser.html">GetGroupDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupMembersDefinitionParser.html">GetGroupMembersDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupPictureDefinitionParser.html">GetGroupPictureDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupWallDefinitionParser.html">GetGroupWallDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetLinkCommentsDefinitionParser.html">GetLinkCommentsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetLinkDefinitionParser.html">GetLinkDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetNoteCommentsDefinitionParser.html">GetNoteCommentsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetNoteDefinitionParser.html">GetNoteDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetNoteLikesDefinitionParser.html">GetNoteLikesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageAlbumsDefinitionParser.html">GetPageAlbumsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageCheckinsDefinitionParser.html">GetPageCheckinsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageDefinitionParser.html">GetPageDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageEventsDefinitionParser.html">GetPageEventsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageGroupsDefinitionParser.html">GetPageGroupsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageLinksDefinitionParser.html">GetPageLinksDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageNotesDefinitionParser.html">GetPageNotesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPagePhotosDefinitionParser.html">GetPagePhotosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPagePictureDefinitionParser.html">GetPagePictureDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPagePostsDefinitionParser.html">GetPagePostsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageStatusesDefinitionParser.html">GetPageStatusesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageTaggedDefinitionParser.html">GetPageTaggedDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageVideosDefinitionParser.html">GetPageVideosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageWallDefinitionParser.html">GetPageWallDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoCommentsDefinitionParser.html">GetPhotoCommentsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoDefinitionParser.html">GetPhotoDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoLikesDefinitionParser.html">GetPhotoLikesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoTagsDefinitionParser.html">GetPhotoTagsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPostCommentsDefinitionParser.html">GetPostCommentsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetPostDefinitionParser.html">GetPostDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetStatusCommentsDefinitionParser.html">GetStatusCommentsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetStatusDefinitionParser.html">GetStatusDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserAccountsDefinitionParser.html">GetUserAccountsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserActivitiesDefinitionParser.html">GetUserActivitiesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserAlbumsDefinitionParser.html">GetUserAlbumsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserBooksDefinitionParser.html">GetUserBooksDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserCheckinsDefinitionParser.html">GetUserCheckinsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserDefinitionParser.html">GetUserDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserEventsDefinitionParser.html">GetUserEventsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserFriendsDefinitionParser.html">GetUserFriendsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserGroupsDefinitionParser.html">GetUserGroupsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserHomeDefinitionParser.html">GetUserHomeDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserInboxDefinitionParser.html">GetUserInboxDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserInterestsDefinitionParser.html">GetUserInterestsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserLikesDefinitionParser.html">GetUserLikesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserLinksDefinitionParser.html">GetUserLinksDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserMoviesDefinitionParser.html">GetUserMoviesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserMusicDefinitionParser.html">GetUserMusicDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserNotesDefinitionParser.html">GetUserNotesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserOutboxDefinitionParser.html">GetUserOutboxDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserPhotosDefinitionParser.html">GetUserPhotosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserPictureDefinitionParser.html">GetUserPictureDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserPostsDefinitionParser.html">GetUserPostsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserSearchDefinitionParser.html">GetUserSearchDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserStatusesDefinitionParser.html">GetUserStatusesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserTaggedDefinitionParser.html">GetUserTaggedDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserTelevisionDefinitionParser.html">GetUserTelevisionDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserUpdatesDefinitionParser.html">GetUserUpdatesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserVideosDefinitionParser.html">GetUserVideosDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserWallDefinitionParser.html">GetUserWallDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetVideoCommentsDefinitionParser.html">GetVideoCommentsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/GetVideoDefinitionParser.html">GetVideoDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/InviteUserDefinitionParser.html">InviteUserDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/LikeDefinitionParser.html">LikeDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/LoggedUserDetailsDefinitionParser.html">LoggedUserDetailsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishAlbumDefinitionParser.html">PublishAlbumDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishCommentDefinitionParser.html">PublishCommentDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishEventDefinitionParser.html">PublishEventDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishLinkDefinitionParser.html">PublishLinkDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishMessageDefinitionParser.html">PublishMessageDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishNoteDefinitionParser.html">PublishNoteDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishPhotoDefinitionParser.html">PublishPhotoDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/PublishVideoDefinitionParser.html">PublishVideoDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/RestoreAccessTokenCallbackFactoryBean.html">RestoreAccessTokenCallbackFactoryBean</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SaveAccessTokenCallbackFactoryBean.html">SaveAccessTokenCallbackFactoryBean</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SearchCheckinsDefinitionParser.html">SearchCheckinsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SearchEventsDefinitionParser.html">SearchEventsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SearchGroupsDefinitionParser.html">SearchGroupsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SearchPagesDefinitionParser.html">SearchPagesDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SearchPostsDefinitionParser.html">SearchPostsDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SearchUsersDefinitionParser.html">SearchUsersDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SetPagePictureFromLinkDefinitionParser.html">SetPagePictureFromLinkDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/SetPagePictureFromSourceDefinitionParser.html">SetPagePictureFromSourceDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/TagPhotoDefinitionParser.html">TagPhotoDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/TentativeEventDefinitionParser.html">TentativeEventDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/UnauthorizeDefinitionParser.html">UnauthorizeDefinitionParser</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/config/UninviteUserDefinitionParser.html">UninviteUserDefinitionParser</a></li>
+      </ul>
+    </li>
+              
+              
+              
+              
+            </ul><br/>
+          </div><!-- end classes -->
+        </div><!-- end nav-panels -->
+        <div id="nav-tree" style="display:none">
+          <div id="index-links">
+            <a href="../../../../../../packages.html"  >Package Index</a> | 
+            <a href="../../../../../../classes.html" >Class Index</a>
+          </div>
+        </div><!-- end nav-tree -->
+      </div><!-- end swapper -->
+    </div> <!-- end side-nav -->
+    <script>
+      if (!isMobile) {
+        $("<a href='#' id='nav-swap' onclick='swapNav();return false;' style='font-size:10px;line-height:9px;margin-left:1em;text-decoration:none;'><span id='tree-link'>Use Tree Navigation</span><span id='panel-link' style='display:none'>Use Panel Navigation</span></a>").appendTo("#side-nav");
+        chooseDefaultNav();
+        if ($("#nav-tree").is(':visible')) {
+          init_default_navtree("../../../../../../");
+        } else {
+          addLoadEvent(function() {
+            scrollIntoView("packages-nav");
+            scrollIntoView("classes-nav");
+          });
+        }
+        $("#swapper").css({borderBottom:"2px solid #aaa"});
+      } else {
+        swapNav(); // tree view should be used on mobile
+      }
+    </script>
+
+
+
+<div class="g-unit" id="doc-content">
+
+<div id="api-info-block">
+<div class="api-level">
+  
+
+
+  
+  
+
+</div>
+</div>
+
+<div id="jd-header">
+  package
+  <h1>org.mule.module.facebook.config</h1>
+</div><!-- end header -->
+
+<div id="naMessage"></div>
+
+<div id="jd-content" class="api apilevel-">
+
+
+
+
+
+
+  
+
+
+  
+    <h2>Classes</h2>
+    <div class="jd-sumtable">
+    
+  <table class="jd-sumtable-expando">
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/AttendEventDefinitionParser.html">AttendEventDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/AuthorizeDefinitionParser.html">AuthorizeDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/DeclineEventDefinitionParser.html">DeclineEventDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/DeleteObjectDefinitionParser.html">DeleteObjectDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/DislikeDefinitionParser.html">DislikeDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/DownloadImageDefinitionParser.html">DownloadImageDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/FacebookConnectorConfigDefinitionParser.html">FacebookConnectorConfigDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/FacebookNamespaceHandler.html">FacebookNamespaceHandler</a></td>
+              <td class="jd-descrcol" width="100%">Registers bean definitions parsers for handling elements in <code>http://www.mulesoft.org/schema/mule/facebook</code>.&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetAlbumCommentsDefinitionParser.html">GetAlbumCommentsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetAlbumDefinitionParser.html">GetAlbumDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetAlbumPhotosDefinitionParser.html">GetAlbumPhotosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationAlbumsDefinitionParser.html">GetApplicationAlbumsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationDefinitionParser.html">GetApplicationDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationEventsDefinitionParser.html">GetApplicationEventsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationInsightsDefinitionParser.html">GetApplicationInsightsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationLinksDefinitionParser.html">GetApplicationLinksDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationNotesDefinitionParser.html">GetApplicationNotesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationPhotosDefinitionParser.html">GetApplicationPhotosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationPictureDefinitionParser.html">GetApplicationPictureDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationStatusesDefinitionParser.html">GetApplicationStatusesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationTaggedDefinitionParser.html">GetApplicationTaggedDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationVideosDefinitionParser.html">GetApplicationVideosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetApplicationWallDefinitionParser.html">GetApplicationWallDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetCheckinDefinitionParser.html">GetCheckinDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventAttendingDefinitionParser.html">GetEventAttendingDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventDeclinedDefinitionParser.html">GetEventDeclinedDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventDefinitionParser.html">GetEventDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventInvitedDefinitionParser.html">GetEventInvitedDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventMaybeDefinitionParser.html">GetEventMaybeDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventNoReplyDefinitionParser.html">GetEventNoReplyDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventPhotosDefinitionParser.html">GetEventPhotosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventPictureDefinitionParser.html">GetEventPictureDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventVideosDefinitionParser.html">GetEventVideosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetEventWallDefinitionParser.html">GetEventWallDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupDefinitionParser.html">GetGroupDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupMembersDefinitionParser.html">GetGroupMembersDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupPictureDefinitionParser.html">GetGroupPictureDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetGroupWallDefinitionParser.html">GetGroupWallDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetLinkCommentsDefinitionParser.html">GetLinkCommentsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetLinkDefinitionParser.html">GetLinkDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetNoteCommentsDefinitionParser.html">GetNoteCommentsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetNoteDefinitionParser.html">GetNoteDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetNoteLikesDefinitionParser.html">GetNoteLikesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageAlbumsDefinitionParser.html">GetPageAlbumsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageCheckinsDefinitionParser.html">GetPageCheckinsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageDefinitionParser.html">GetPageDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageEventsDefinitionParser.html">GetPageEventsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageGroupsDefinitionParser.html">GetPageGroupsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageLinksDefinitionParser.html">GetPageLinksDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageNotesDefinitionParser.html">GetPageNotesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPagePhotosDefinitionParser.html">GetPagePhotosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPagePictureDefinitionParser.html">GetPagePictureDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPagePostsDefinitionParser.html">GetPagePostsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageStatusesDefinitionParser.html">GetPageStatusesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageTaggedDefinitionParser.html">GetPageTaggedDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageVideosDefinitionParser.html">GetPageVideosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPageWallDefinitionParser.html">GetPageWallDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoCommentsDefinitionParser.html">GetPhotoCommentsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoDefinitionParser.html">GetPhotoDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoLikesDefinitionParser.html">GetPhotoLikesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPhotoTagsDefinitionParser.html">GetPhotoTagsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPostCommentsDefinitionParser.html">GetPostCommentsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetPostDefinitionParser.html">GetPostDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetStatusCommentsDefinitionParser.html">GetStatusCommentsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetStatusDefinitionParser.html">GetStatusDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserAccountsDefinitionParser.html">GetUserAccountsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserActivitiesDefinitionParser.html">GetUserActivitiesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserAlbumsDefinitionParser.html">GetUserAlbumsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserBooksDefinitionParser.html">GetUserBooksDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserCheckinsDefinitionParser.html">GetUserCheckinsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserDefinitionParser.html">GetUserDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserEventsDefinitionParser.html">GetUserEventsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserFriendsDefinitionParser.html">GetUserFriendsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserGroupsDefinitionParser.html">GetUserGroupsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserHomeDefinitionParser.html">GetUserHomeDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserInboxDefinitionParser.html">GetUserInboxDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserInterestsDefinitionParser.html">GetUserInterestsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserLikesDefinitionParser.html">GetUserLikesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserLinksDefinitionParser.html">GetUserLinksDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserMoviesDefinitionParser.html">GetUserMoviesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserMusicDefinitionParser.html">GetUserMusicDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserNotesDefinitionParser.html">GetUserNotesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserOutboxDefinitionParser.html">GetUserOutboxDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserPhotosDefinitionParser.html">GetUserPhotosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserPictureDefinitionParser.html">GetUserPictureDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserPostsDefinitionParser.html">GetUserPostsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserSearchDefinitionParser.html">GetUserSearchDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserStatusesDefinitionParser.html">GetUserStatusesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserTaggedDefinitionParser.html">GetUserTaggedDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserTelevisionDefinitionParser.html">GetUserTelevisionDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserUpdatesDefinitionParser.html">GetUserUpdatesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserVideosDefinitionParser.html">GetUserVideosDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetUserWallDefinitionParser.html">GetUserWallDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetVideoCommentsDefinitionParser.html">GetVideoCommentsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/GetVideoDefinitionParser.html">GetVideoDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/InviteUserDefinitionParser.html">InviteUserDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/LikeDefinitionParser.html">LikeDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/LoggedUserDetailsDefinitionParser.html">LoggedUserDetailsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishAlbumDefinitionParser.html">PublishAlbumDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishCommentDefinitionParser.html">PublishCommentDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishEventDefinitionParser.html">PublishEventDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishLinkDefinitionParser.html">PublishLinkDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishMessageDefinitionParser.html">PublishMessageDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishNoteDefinitionParser.html">PublishNoteDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishPhotoDefinitionParser.html">PublishPhotoDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/PublishVideoDefinitionParser.html">PublishVideoDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/RestoreAccessTokenCallbackFactoryBean.html">RestoreAccessTokenCallbackFactoryBean</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SaveAccessTokenCallbackFactoryBean.html">SaveAccessTokenCallbackFactoryBean</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SearchCheckinsDefinitionParser.html">SearchCheckinsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SearchEventsDefinitionParser.html">SearchEventsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SearchGroupsDefinitionParser.html">SearchGroupsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SearchPagesDefinitionParser.html">SearchPagesDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SearchPostsDefinitionParser.html">SearchPostsDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SearchUsersDefinitionParser.html">SearchUsersDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SetPagePictureFromLinkDefinitionParser.html">SetPagePictureFromLinkDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/SetPagePictureFromSourceDefinitionParser.html">SetPagePictureFromSourceDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/TagPhotoDefinitionParser.html">TagPhotoDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/TentativeEventDefinitionParser.html">TentativeEventDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/UnauthorizeDefinitionParser.html">UnauthorizeDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/config/UninviteUserDefinitionParser.html">UninviteUserDefinitionParser</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+  </table>
+    </div>
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+<div id="footer">
+Generated by <a href="http://www.mulesoft.com/devkit">Mule DevKit</a>. Document generation technology based on <a href="http://code.google.com/p/doclava/">Google's Doclava</a>.
+</div> <!-- end footer -->
+
+</div><!-- end jd-content -->
+</div><!-- doc-content -->
+
+</div> <!-- end body-content --> 
+
+<script type="text/javascript">
+init(); /* initialize mule-developer-docs.js */
+</script>
+
+</body>
+</html>
