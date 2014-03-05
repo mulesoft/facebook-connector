@@ -36,13 +36,12 @@ public class AttendEventTestCases extends FacebookTestParent {
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testAttendEvent() {
-		System.out.println("CALLED");
+
 		try {
-			System.out.println(" * * * * *  CUSTOM LOG :: eventID: " + (String) getTestRunMessageValue("eventId"));
 			Boolean result = attendEvent((String) getTestRunMessageValue("eventId"));
 			assertTrue(result);
 		} catch (Exception e) {
-			System.out.println("*** ERROR :: " + e.getMessage());
+
 			e.printStackTrace();
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
