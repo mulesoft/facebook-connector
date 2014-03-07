@@ -4,7 +4,7 @@
     <docletArtifact>
       <groupId>org.mule.tools.devkit</groupId>
       <artifactId>mule-devkit-doclet</artifactId>
-      <version>3.5.0-SNAPSHOT</version>
+      <version>3.5.0-M4</version>
     </docletArtifact>
   </docletArtifacts>
   <tagletArtifacts>

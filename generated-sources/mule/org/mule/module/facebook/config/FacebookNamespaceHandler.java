@@ -13,7 +13,7 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
  * Registers bean definitions parsers for handling elements in <code>http://www.mulesoft.org/schema/mule/facebook</code>.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-03-05T01:25:22-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-M4", date = "2014-03-07T02:39:52-06:00", comments = "Build M4.1875.17b58a3")
 public class FacebookNamespaceHandler
     extends NamespaceHandlerSupport
 {
