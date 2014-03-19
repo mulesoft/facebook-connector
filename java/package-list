@@ -5,7 +5,6 @@ org.mule.module.facebook.agents
 org.mule.module.facebook.basic
 org.mule.module.facebook.callback
 org.mule.module.facebook.config
-org.mule.module.facebook.config.spring
 org.mule.module.facebook.connection
 org.mule.module.facebook.devkit
 org.mule.module.facebook.oauth
