@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" prefix="facebook" url="http://www.mulesoft.org/schema/mule/facebook">
-  <global-cloud-connector metaData="static" connectivityTesting="disabled" extends="http://www.mulesoft.org/schema/mule/facebook/abstractFacebookConnectorGeneric" abstract="true" image="" localId="parentConfig" icon="" description="" caption="Facebook" versions="[3.5.0,8.0.0]"></global-cloud-connector>
+  <global-cloud-connector extends="http://www.mulesoft.org/schema/mule/facebook/abstractFacebookConnectorGeneric" abstract="true" image="" localId="parentConfig" icon="" description="" caption="Facebook" versions="[3.5.0,8.0.0]"></global-cloud-connector>
   <global-cloud-connector metaData="static" connectivityTesting="disabled" extends="http://www.mulesoft.org/schema/mule/facebook/parentConfig" abstract="false" image="icons/large/facebook-connector-48x32.png" localId="config-with-oauth" icon="icons/small/facebook-connector-24x16.png" description="Global Facebook configuration information." caption="Facebook" versions="[3.5.0,8.0.0]">
     <attribute-category description="Facebook configuration properties." caption="General">
-      <group caption="Generic" id="facebookGenericProperties">
+      <group caption="Basic Settings" id="facebookGenericProperties">
         <name required="true" description="Give a name to this configuration so it can be later referenced by config-ref." caption="Name" name="name"></name>
       </group>
       <group caption="General" id="general">
@@ -28,14 +28,14 @@
   </global-cloud-connector>
   <cloud-connector abstract="true" image="icons/large/facebook-connector-48x32.png" localId="abstractFacebookConnectorGeneric" icon="icons/small/facebook-connector-24x16.png" description="Interact with Facebook." caption="Abstractfacebookconnectorgeneric">
     <attribute-category description="General." caption="General">
-      <group caption="Generic" id="abstractFacebookConnectorGeneric">
-        <globalRef requiredType="http://www.mulesoft.org/schema/mule/facebook/config-with-oauth" required="true" description="Specify which configuration to use for this invocation." caption="Config Reference" name="config-ref"></globalRef>
+      <group caption="Basic Settings" id="abstractFacebookConnectorGeneric">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/facebook/config-with-oauth" required="true" description="Specify which configuration to use for this invocation." caption="Connector Configuration" name="config-ref"></globalRef>
       </group>
     </attribute-category>
   </cloud-connector>
   <cloud-connector extends="http://www.mulesoft.org/schema/mule/facebook/abstractFacebookConnectorGeneric" image="icons/large/facebook-connector-48x32.png" localId="facebook-connector" icon="icons/small/facebook-connector-24x16.png" description="Facebook is a social networking service and website launched in February 2004." caption="Facebook" aliasId="org.mule.tooling.ui.modules.core.pattern.facebook" versions="[3.5.0,8.0.0]">
     <attribute-category description="General." caption="General">
-      <group caption="Generic" id="facebookConnectorGeneric">
+      <group caption="Basic Settings" id="facebookConnectorGeneric">
         <modeSwitch alwaysCombo="true" description="Operation." caption="Operation" name="Facebook operations to execute">
           <mode modeLabel="Authorize" modeId="http://www.mulesoft.org/schema/mule/facebook/authorize"></mode>
           <mode modeLabel="Unauthorize" modeId="http://www.mulesoft.org/schema/mule/facebook/unauthorize"></mode>
