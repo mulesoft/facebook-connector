@@ -10,7 +10,7 @@ import org.mule.module.facebook.FacebookConnector;
  * A <code>FacebookConnectorMetadataAdapater</code> is a wrapper around {@link FacebookConnector } that adds support for querying metadata about the extension.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-15T03:23:29-05:00", comments = "Build master.1915.dd1962d")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-16T10:42:49-05:00", comments = "Build master.1915.dd1962d")
 public class FacebookConnectorMetadataAdapater
     extends FacebookConnectorCapabilitiesAdapter
     implements MetadataAware
