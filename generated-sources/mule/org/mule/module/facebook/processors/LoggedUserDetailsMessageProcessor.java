@@ -34,7 +34,7 @@ import org.mule.security.oauth.callback.ProcessCallback;
  * LoggedUserDetailsMessageProcessor invokes the {@link org.mule.module.facebook.FacebookConnector#loggedUserDetails()} method in {@link FacebookConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-16T10:42:49-05:00", comments = "Build master.1915.dd1962d")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-24T12:40:55-05:00", comments = "Build master.1920.518defc")
 public class LoggedUserDetailsMessageProcessor
     extends AbstractConnectedProcessor
     implements MessageProcessor, OperationMetaDataEnabled

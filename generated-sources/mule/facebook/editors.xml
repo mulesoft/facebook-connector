@@ -163,8 +163,8 @@
         <string javaType="java.lang.String" required="true" description="The id of the event to attend." caption="Event Id" name="eventId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -175,10 +175,6 @@
         <string required="false" description="Any value that you wish to be sent with the callback." caption="State" name="state"></string>
         <string required="false" description="The URL defined by the Service Provider to obtain an access token." caption="Access Token Url" name="accessTokenUrl"></string>
         <string required="false" description="The URL defined by the Service Provider where the resource owner will be redirected to grant authorization to the connector." caption="Authorization Url" name="authorizationUrl"></string>
-      </group>
-    </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -189,8 +185,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the id of the event object." caption="Event Id" name="eventId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -201,8 +197,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the object to be deleted." caption="Object Id" name="objectId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -213,8 +209,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the post to be disliked." caption="Post Id" name="postId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -225,8 +221,8 @@
         <string javaType="java.lang.String" required="true" description="The uri of an image resource." caption="Image Uri" name="imageUri"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -238,8 +234,8 @@
         <string defaultValue="0" javaType="java.lang.String" required="false" description="The Graph API supports introspection of objects, which enables you to see all of the connections an object has without knowing its type ahead of time." caption="Metadata" name="metadata"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -254,8 +250,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -270,8 +266,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -282,8 +278,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the application object." caption="Application" name="application"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -298,8 +294,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -314,8 +310,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -330,8 +326,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -346,8 +342,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -362,8 +358,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -378,8 +374,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by shorttime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -391,8 +387,8 @@
         <string defaultValue="small" javaType="java.lang.String" required="false" description="One of square (50x50), small (50 pixels wide, variable height), and large (about 200 pixels wide, variable height)." caption="Type" name="type"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -407,8 +403,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -423,8 +419,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -439,8 +435,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -455,8 +451,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -468,8 +464,8 @@
         <string defaultValue="0" javaType="java.lang.String" required="false" description="The Graph API supports introspection of objects, which enables you to see all of the connections an object has without knowing its type ahead of time." caption="Metadata" name="metadata"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -481,8 +477,8 @@
         <string defaultValue="0" javaType="java.lang.String" required="false" description="The Graph API supports introspection of objects, which enables you to see all of the connections an object has without knowing its type ahead of time." caption="Metadata" name="metadata"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -497,8 +493,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -513,8 +509,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -529,8 +525,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -545,8 +541,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -561,8 +557,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -573,8 +569,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the event." caption="Event Id" name="eventId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -586,8 +582,8 @@
         <string defaultValue="small" javaType="java.lang.String" required="false" description="One of square (50x50), small (50 pixels wide, variable height), and large (about 200 pixels wide, variable height)." caption="Type" name="type"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -598,8 +594,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the event." caption="Event Id" name="eventId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -614,8 +610,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -627,8 +623,8 @@
         <string defaultValue="0" javaType="java.lang.String" required="false" description="The Graph API supports introspection of objects, which enables you to see all of the connections an object has without knowing its type ahead of time." caption="Metadata" name="metadata"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -643,8 +639,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -656,8 +652,8 @@
         <string defaultValue="small" javaType="java.lang.String" required="false" description="One of square (50x50), small (50 pixels wide, variable height), and large (about 200 pixels wide, variable height)." caption="Type" name="type"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -672,8 +668,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -685,8 +681,8 @@
         <string defaultValue="0" javaType="java.lang.String" required="false" description="The Graph API supports introspection of objects, which enables you to see all of the connections an object has without knowing its type ahead of time." caption="Metadata" name="metadata"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -701,8 +697,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -714,8 +710,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the note object." caption="Note" name="note"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -730,8 +726,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -746,8 +742,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -759,8 +755,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the page object." caption="Page" name="page"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -775,8 +771,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -791,8 +787,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -807,8 +803,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -823,8 +819,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -839,8 +835,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -855,8 +851,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -871,8 +867,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -884,8 +880,8 @@
         <string defaultValue="small" javaType="java.lang.String" required="false" description="One of square (50x50), small (50 pixels wide, variable height), and large (about 200 pixels wide, variable height)." caption="Type" name="type"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -900,8 +896,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -916,8 +912,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -932,8 +928,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -948,8 +944,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -964,8 +960,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -977,8 +973,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the photo object." caption="Photo" name="photo"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -993,8 +989,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1009,8 +1005,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1021,8 +1017,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the photo from which tags will be retrieved." caption="Photo Id" name="photoId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1034,8 +1030,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the post object." caption="Post" name="post"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1050,8 +1046,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1063,8 +1059,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the status object." caption="Status" name="status"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1079,8 +1075,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1092,8 +1088,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1108,8 +1104,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1124,8 +1120,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1140,8 +1136,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1156,8 +1152,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1172,8 +1168,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1188,8 +1184,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1204,8 +1200,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1220,8 +1216,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1236,8 +1232,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1252,8 +1248,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1268,8 +1264,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1284,8 +1280,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1300,8 +1296,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1316,8 +1312,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1332,8 +1328,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1348,8 +1344,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1364,8 +1360,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1380,8 +1376,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1393,8 +1389,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1409,8 +1405,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1427,8 +1423,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1443,8 +1439,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1459,8 +1455,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1475,8 +1471,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1491,8 +1487,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1507,8 +1503,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1523,8 +1519,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the user object." caption="User" name="user"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1536,8 +1532,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the video object." caption="Video" name="video"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1552,8 +1548,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the video object." caption="Video" name="video"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1565,8 +1561,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the user to invite." caption="User Id" name="userId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1577,16 +1573,16 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the post object." caption="Post Id" name="postId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
   </cloud-connector>
   <cloud-connector returnType="com.restfb.types.User" metaData="static" extends="http://www.mulesoft.org/schema/mule/facebook/abstractFacebookConnectorGeneric" abstract="true" image="icons/large/facebook-connector-48x32.png" localId="logged-user-details" icon="icons/small/facebook-connector-24x16.png" caption="Logged User Details">
     <attribute-category description="General." caption="General"></attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1599,8 +1595,8 @@
         <string javaType="java.lang.String" required="true" description="The id of the profile object." caption="Profile_id" name="profile_id"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1612,8 +1608,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the ID of the post object." caption="Post Id" name="postId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1631,8 +1627,8 @@
         <string javaType="java.lang.String" required="true" description="The event start time, in ISO-8601." caption="Start_time" name="start_time"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1645,8 +1641,8 @@
         <string javaType="java.lang.String" required="true" description="The profile where to publish the link." caption="Profile_id" name="profile_id"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1664,8 +1660,8 @@
         <string javaType="java.lang.String" required="true" description="The profile where to publish the message." caption="Profile_id" name="profile_id"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1678,8 +1674,8 @@
         <string javaType="java.lang.String" required="true" description="The subject of the note." caption="Subject" name="subject"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1692,8 +1688,8 @@
         <string javaType="java.io.File" required="true" description="File containing the photo." caption="Photo Reference" name="photo-ref"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1707,8 +1703,8 @@
         <string javaType="java.io.File" required="true" description="File containing the video." caption="Video Reference" name="video-ref"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1722,8 +1718,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1738,8 +1734,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1754,8 +1750,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1770,8 +1766,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1786,8 +1782,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1802,8 +1798,8 @@
         <string defaultValue="yesterday" javaType="java.lang.String" required="false" description="A unix timestamp or any date accepted by strtotime." caption="Until" name="until"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1815,8 +1811,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the page which will have its picture set." caption="Page" name="page"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1828,8 +1824,8 @@
         <string javaType="java.io.File" required="true" description="File containing the photo." caption="Source Reference" name="source-ref"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1844,8 +1840,8 @@
         <string javaType="java.lang.String" required="false" description="The Y coordinate of the tag, as a percentage offset from the top edge of the picture." caption="Y" name="y"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1856,8 +1852,8 @@
         <string javaType="java.lang.String" required="true" description="Represents the id of the event object." caption="Event Id" name="eventId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>
@@ -1876,8 +1872,8 @@
         <string javaType="java.lang.String" required="true" description="The ID of the user to uninvite." caption="User Id" name="userId"></string>
       </group>
     </attribute-category>
-    <attribute-category description="Connection" caption="Connection">
-      <group caption="Connection" id="connection">
+    <attribute-category description="Advanced" caption="Advanced">
+      <group caption="Advanced" id="advanced">
         <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
       </group>
     </attribute-category>

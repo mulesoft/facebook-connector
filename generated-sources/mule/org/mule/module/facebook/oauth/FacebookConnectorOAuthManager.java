@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * A {@code FacebookConnectorOAuthManager} is a wrapper around {@link FacebookConnector } that adds access token management capabilities to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-16T10:42:49-05:00", comments = "Build master.1915.dd1962d")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-24T12:40:55-05:00", comments = "Build master.1920.518defc")
 public class FacebookConnectorOAuthManager
     extends BaseOAuth2Manager<OAuth2Adapter>
 {
@@ -31,7 +31,7 @@ public class FacebookConnectorOAuthManager
     private final static String MODULE_NAME = "Facebook";
     private final static String MODULE_VERSION = "2.3.2-SNAPSHOT";
     private final static String DEVKIT_VERSION = "3.5.0-SNAPSHOT";
-    private final static String DEVKIT_BUILD = "master.1915.dd1962d";
+    private final static String DEVKIT_BUILD = "master.1920.518defc";
 
     @Override
     protected Logger getLogger() {

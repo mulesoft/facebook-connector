@@ -10,22 +10,8 @@ import javax.annotation.Generated;
  * @param <C> Actual connector object that represents a connection
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-16T10:42:49-05:00", comments = "Build master.1915.dd1962d")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-24T12:40:55-05:00", comments = "Build master.1920.518defc")
 public interface ConnectionManager<K, C extends Connection >{
-
-     /**
-     * Set the connection pooling profile
-     *
-     * @param value PoolingProfile representing the pooling parameters
-     */
-    void setConnectionPoolingProfile(org.mule.config.PoolingProfile value);
-
-    /**
-     * Retrieve the connection pooling profile
-     *
-     * @return PoolingProfile representing the pooling parameters
-     */
-    org.mule.config.PoolingProfile getConnectionPoolingProfile();
 
     /**
      * Borrow a connection from the pool
