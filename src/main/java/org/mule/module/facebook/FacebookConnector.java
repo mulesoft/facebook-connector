@@ -2670,12 +2670,10 @@ public class FacebookConnector {
         if(privacy_type != null) {
         	resource = resource.queryParam("privacy_type", privacy_type);
         }
-        
-        String json = resource.get(String.class);
-		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
-		JsonArray data = obj.getJsonArray("data");
-		
-		return ((data.length() > 0) ? data.getJsonObject(0).getString("id") : null);
+
+        String json = resource.post(String.class);
+        JsonObject response = mapper.toJavaObject(json, JsonObject.class);
+        return response.getString("id");
     }
 
     /**
