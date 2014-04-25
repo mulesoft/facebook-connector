@@ -48,7 +48,13 @@ public class FacebookTestParent extends ConnectorTestCase {
 	public Timeout globalTimeout = new Timeout(600000);
 
 	private Properties properties = new Properties();
-	
+
+    @Override
+    protected <T> T runFlowAndGetPayload(String flowName) throws Exception {
+        Thread.sleep(2000);
+        return super.runFlowAndGetPayload(flowName);
+    }
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
     public void init() throws ObjectStoreException, IOException {
