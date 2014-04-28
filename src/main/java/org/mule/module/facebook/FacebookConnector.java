@@ -577,10 +577,11 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/invited").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        return mapper.toJavaList(resource.queryParam("since", since)
-            .queryParam("until", until)
-            .queryParam("limit", limit)
-            .queryParam("offset", offset)
+        if (since != null) resource = resource.queryParam("since", since);
+        if (until != null) resource = resource.queryParam("until", until);
+        if (limit != null) resource = resource.queryParam("limit", limit);
+        if (offset != null) resource = resource.queryParam("offset", offset);
+        return mapper.toJavaList(resource
             .get(String.class), User.class);
     }
 
