@@ -25,12 +25,16 @@ import com.restfb.types.StatusMessage;
 
 public class GetUserStatusesTestCases extends FacebookTestParent {
 
+	private List<StatusMessage> originalStatuses;
+
 	@Before
 	public void setUp() throws Exception {
 		initializeTestRunMessage("getUserStatusesTestData");
 		
 		String profileId = getProfileId();
-		
+		upsertOnTestRunMessage("user", profileId);
+		originalStatuses = runFlowAndGetPayload("get-user-statuses");
+
 		List<String> messages = (List<String>) getTestRunMessageValue("messages");
 		List<String> messageIds = new ArrayList<String>();
 		for (String message : messages) {
@@ -46,17 +50,19 @@ public class GetUserStatusesTestCases extends FacebookTestParent {
 		try {
 			String profileId = (String) getTestRunMessageValue("profileId");
 			upsertOnTestRunMessage("user", profileId);
-			
-			List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
-			
-			List<StatusMessage> statuses = runFlowAndGetPayload("get-user-statuses");
-			
-			assertEquals(statuses.size(), messageIds.size());
-			for (StatusMessage status : statuses) {
-				// MessageId is of the form {userId}_{messageId}
-				// StatusId is of the form {messageId}
-				// So we assert by concatenating profileId (our userId) with statusId
-				assertTrue(messageIds.contains(profileId + "_" + status.getId()));
+
+			List<String> postedStatuses = (List<String>) getTestRunMessageValue("messageIds");
+
+			List<StatusMessage> newStatuses = runFlowAndGetPayload("get-user-statuses");
+
+			assertEquals(originalStatuses.size() + postedStatuses.size(), newStatuses.size());
+			for (StatusMessage status : originalStatuses) {
+				if (postedStatuses.contains(status.getId())) {
+					// MessageId is of the form {userId}_{messageId}
+					// StatusId is of the form {messageId}
+					// So we assert by concatenating profileId (our userId) with statusId
+					assertTrue(postedStatuses.contains(profileId + "_" + status.getId()));
+                }
 			}
 		}
 		catch (Exception e) {
