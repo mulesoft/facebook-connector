@@ -24,16 +24,16 @@ import org.mule.security.oauth.OnNoTokenPolicy;
  * A {@code FacebookConnectorOAuth2Adapter} is a wrapper around {@link FacebookConnector } that adds OAuth capabilites to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-24T12:40:55-05:00", comments = "Build master.1920.518defc")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-28T02:56:18-05:00", comments = "Build master.1926.b0106b2")
 public class FacebookConnectorOAuth2Adapter
     extends FacebookConnectorProcessAdapter
     implements OAuth2Adapter, OAuth2Connector
 {
 
     private OAuth2Manager<OAuth2Adapter> oauthManager;
-    private final static Pattern ACCESS_CODE_PATTERN = Pattern.compile("access_token=([^&]+?)&");
+    private final static Pattern ACCESS_CODE_PATTERN = Pattern.compile("access_token=([^&]+?)(&|$)");
     private final static Pattern REFRESH_TOKEN_PATTERN = Pattern.compile("\"refresh_token\":\"([^&]+?)\"");
-    private final static Pattern EXPIRATION_TIME_PATTERN = Pattern.compile("expires=([^&]+?)$");
+    private final static Pattern EXPIRATION_TIME_PATTERN = Pattern.compile("expires=([^&]+?)(&|$)");
     private String name;
     private OnNoTokenPolicy onNoTokenPolicy;
     private String oauthVerifier;

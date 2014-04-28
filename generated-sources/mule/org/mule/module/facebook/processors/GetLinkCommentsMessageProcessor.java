@@ -35,7 +35,7 @@ import org.mule.security.oauth.callback.ProcessCallback;
  * GetLinkCommentsMessageProcessor invokes the {@link org.mule.module.facebook.FacebookConnector#getLinkComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)} method in {@link FacebookConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-24T12:40:55-05:00", comments = "Build master.1920.518defc")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-04-28T02:56:18-05:00", comments = "Build master.1926.b0106b2")
 public class GetLinkCommentsMessageProcessor
     extends AbstractConnectedProcessor
     implements MessageProcessor, OperationMetaDataEnabled
