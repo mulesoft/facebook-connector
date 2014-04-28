@@ -9,6 +9,7 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
@@ -39,7 +40,7 @@ public class SearchCheckinsTestCases extends FacebookTestParent {
 		try {
 			Collection<String> searchResponse = runFlowAndGetPayload("search-checkins");
 
-			assertEquals(searchResponse.isEmpty(), false);
+			assertFalse(searchResponse.isEmpty());
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
