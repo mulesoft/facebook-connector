@@ -2709,8 +2709,8 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/maybe").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class);
-        
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+
         return Boolean.parseBoolean(res);
     }
 
