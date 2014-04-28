@@ -18,7 +18,7 @@ import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
 public class AttendEventTestCases extends FacebookTestParent {
-	
+
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
@@ -32,11 +32,10 @@ public class AttendEventTestCases extends FacebookTestParent {
 
 		upsertOnTestRunMessage("eventId", eventId);
 	}
-	
+
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testAttendEvent() {
-		
 		try {
 			Boolean result = attendEvent((String) getTestRunMessageValue("eventId"));
 			assertTrue(result);
@@ -46,11 +45,11 @@ public class AttendEventTestCases extends FacebookTestParent {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 		String eventId = getTestRunMessageValue("eventId");
 		deleteObjectAux(eventId);
 	}
-	
+
 }
