@@ -429,8 +429,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 	 * This method would then return the following list: ["107641979264998","402991343106786"]
 	 */
 	protected List<String> getExpectedBooks() throws IOException {
-		String bookLikes = properties.getProperty("facebook.init.books");
-		return toList(bookLikes.split(","));
+		return parsePropertyList("facebook.init.books");
 	}
 
 	/*
