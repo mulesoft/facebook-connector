@@ -231,7 +231,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="publish-message">
         <logger level="DEBUG" doc:name="Logger" message="#[payload]"/>
 		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"
-			msg="#[payload.msg]" accessTokenId="accessTokenId" />
+			msg="#[payload.msg]" accessTokenId="accessTokenId" tags="#[payload.tags]"/>
 	</flow>
 
 	<flow name="download-image">

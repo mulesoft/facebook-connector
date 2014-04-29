@@ -2492,6 +2492,8 @@ public class FacebookConnector {
      * @param description A description of the link (appears beneath the link
      *            caption)
      * @param place The page ID of the place that this message is associated with
+     * @param tags A list of user IDs of people tagged in this post. You cannot specify
+     *             this field without also specifying a place.
      * @return The id of the published object
      */
     @Processor
@@ -2504,7 +2506,8 @@ public class FacebookConnector {
                                  @Optional String caption,
                                  @Optional String linkName,
                                  @Optional String description,
-                                 @Optional String place)
+                                 @Optional String place,
+                                 @Optional List<String> tags)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/feed").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2518,6 +2521,10 @@ public class FacebookConnector {
         if (linkName != null) form.add("name", linkName);
         if (description != null) form.add("description", description);
         if (place != null) form.add("place", place);
+        if (tags != null) {
+            String csvTagsList = StringUtils.join(tags, ",");
+            form.add("tags", csvTagsList);
+        }
 
         String json = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
 		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);

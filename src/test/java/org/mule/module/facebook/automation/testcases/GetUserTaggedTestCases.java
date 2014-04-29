@@ -11,6 +11,7 @@ package org.mule.module.facebook.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -34,6 +35,9 @@ public class GetUserTaggedTestCases extends FacebookTestParent {
 		String msg = (String) getTestRunMessageValue("msg");
 		String messageId = publishMessage(profileId, msg);
 		upsertOnTestRunMessage("messageId", messageId);
+        List<String> tagList = new ArrayList<String>();
+        tagList.add(getProfileIdAux());
+        upsertOnTestRunMessage("tags", tagList);
 	}
 	
 	@SuppressWarnings("unchecked")
