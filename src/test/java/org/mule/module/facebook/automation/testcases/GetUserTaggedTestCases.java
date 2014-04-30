@@ -28,27 +28,27 @@ public class GetUserTaggedTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		initializeTestRunMessage("getUserTaggedTestData");
-		
+
 		String profileId = getProfileId();
 		upsertOnTestRunMessage("profileId", profileId);
-
 		String msg = (String) getTestRunMessageValue("msg");
-		String messageId = publishMessage(profileId, msg);
-		upsertOnTestRunMessage("messageId", messageId);
         List<String> tagList = new ArrayList<String>();
         tagList.add(getProfileIdAux());
         upsertOnTestRunMessage("tags", tagList);
+        String messageId = publishMessage(profileId, msg, null, null, null, null, null, "132738745815");
+        upsertOnTestRunMessage("messageId", messageId);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testGetUserTagged() {
 		try {
 			String profileId = (String) getTestRunMessageValue("profileId");
-			
+            upsertOnTestRunMessage("user", getProfileIdAux());
+
 			List<Post> posts = runFlowAndGetPayload("get-user-tagged");
-			
+
 			boolean found = false;
 			for (Post post : posts) {
 				if (post.getFrom().getId().equals(profileId)) {
@@ -62,7 +62,7 @@ public class GetUserTaggedTestCases extends FacebookTestParent {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 		String messageId = (String) getTestRunMessageValue("messageId");
