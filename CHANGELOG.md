@@ -1,3 +1,12 @@
+2.3
+===
+- Fixed the following operations:
+  - Publish an event
+  - Attend an event
+  - Decline an event invitation
+- Fixed video uploads being corrupted
+- Added support for tagging users in posts
+
 2.0
 ===
 - Migration to devkit 3.3.1
