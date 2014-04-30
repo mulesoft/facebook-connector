@@ -36,6 +36,7 @@ public class GetPagePostsTestCases extends FacebookTestParent {
 		for (String msg : messages) {
 			String messageId = publishMessage(page, msg);
 			messageIds.add(messageId);
+			Thread.sleep(2000);
 		}
 		
 		upsertOnTestRunMessage("messageIds", messageIds);

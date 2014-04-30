@@ -32,6 +32,7 @@ public class GetUserSearchTestCases extends FacebookTestParent {
 		upsertOnTestRunMessage("user", profileId);
 		
 		String messageId = publishMessage(profileId, (String) getTestRunMessageValue("msg"));
+		Thread.sleep(2000);
 		upsertOnTestRunMessage("objectId", messageId);
 	}
 	

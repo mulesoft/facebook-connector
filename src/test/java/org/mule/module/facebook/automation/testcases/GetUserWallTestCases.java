@@ -42,6 +42,7 @@ public class GetUserWallTestCases extends FacebookTestParent {
 			String messageId = publishMessage(profileId, message);
 			messageIds.add(messageId);
 			upsertOnTestRunMessage("messageIds", messageIds);
+			Thread.sleep(2000);
 		}
 	}
 	
