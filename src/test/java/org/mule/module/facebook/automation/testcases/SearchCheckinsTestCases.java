@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
@@ -35,6 +36,7 @@ public class SearchCheckinsTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
+	@Ignore("Facebook API bug. See https://developers.facebook.com/bugs/536595293095881")
 	@Test
 	public void testSearchCheckins() {
 		try {
