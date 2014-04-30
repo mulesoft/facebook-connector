@@ -51,7 +51,6 @@ public class FacebookTestParent extends ConnectorTestCase {
 
     @Override
     protected <T> T runFlowAndGetPayload(String flowName) throws Exception {
-        Thread.sleep(2000);
         return super.runFlowAndGetPayload(flowName);
     }
 
