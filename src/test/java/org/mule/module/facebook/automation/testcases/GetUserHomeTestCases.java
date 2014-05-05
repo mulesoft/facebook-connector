@@ -39,6 +39,7 @@ public class GetUserHomeTestCases extends FacebookTestParent {
     	for (String message : messages) {
 			String messageId = publishMessage(profileId, message);
 			messageIds.add(messageId);
+			Thread.sleep(2000);
 		}
     	
     	upsertOnTestRunMessage("messageIds", messageIds);

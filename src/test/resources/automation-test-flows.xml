@@ -32,8 +32,8 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 	
 	<flow name="publish-event-aux">
-		<facebook:publish-event accessTokenId="accessTokenIdAux" config-ref="auxFacebook" event_name="#[payload.eventName]" 
-			profile_id="#[payload.profileId]" start_time="121226230" />
+		<facebook:publish-event accessTokenId="accessTokenIdAux" config-ref="auxFacebook" event_name="#[payload.eventName]"
+			profile_id="#[payload.profileId]" start_time="#[payload.startTime]" />
 	</flow>
 
 	<flow name="delete-object-aux">
@@ -231,7 +231,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	<flow name="publish-message">
         <logger level="DEBUG" doc:name="Logger" message="#[payload]"/>
 		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"
-			msg="#[payload.msg]" accessTokenId="accessTokenId" />
+			msg="#[payload.msg]" accessTokenId="accessTokenId"/>
 	</flow>
 
 	<flow name="download-image">
@@ -305,10 +305,12 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 	
 	<flow name="publish-message-all-attributes">
-		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]" 
-			linkName="#[payload.linkName]" picture="#[payload.picture]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" />
-	</flow>
-	
+		<facebook:publish-message config-ref="Facebook" profile_id="#[payload.profileId]"  caption="#[payload.caption]" description="#[payload.description]"
+			linkName="#[payload.linkName]" picture="#[payload.picture]" msg="#[payload.msg]" accessTokenId="accessTokenId" link="#[payload.link]" place="#[payload.place]">
+        <facebook:tags ref="#[payload.tags]"/>
+        </facebook:publish-message>
+    </flow>
+
 	<flow name="search-users">
 		<facebook:search-users config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" 
 			until="#[payload.until]" q="#[payload.q]" accessTokenId="accessTokenId" />

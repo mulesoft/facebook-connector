@@ -33,8 +33,6 @@ public class TentativeEventTestCases extends FacebookTestParent {
 
     	String eventId = publishEventAux(auxProfileId, eventName, startTime);
     	upsertOnTestRunMessage("eventId", eventId);
-    	
-    	inviteUserAux(eventId, profileId);
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})

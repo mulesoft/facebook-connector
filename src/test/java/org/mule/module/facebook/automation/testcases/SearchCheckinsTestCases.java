@@ -9,12 +9,14 @@
 package org.mule.module.facebook.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.Collection;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
@@ -34,12 +36,13 @@ public class SearchCheckinsTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
+	@Ignore("Facebook API bug. See https://developers.facebook.com/bugs/536595293095881")
 	@Test
 	public void testSearchCheckins() {
 		try {
 			Collection<String> searchResponse = runFlowAndGetPayload("search-checkins");
 
-			assertEquals(searchResponse.isEmpty(), false);
+			assertFalse(searchResponse.isEmpty());
 		} catch (Exception e) {
 			fail(ConnectorTestUtils.getStackTrace(e));
 		}

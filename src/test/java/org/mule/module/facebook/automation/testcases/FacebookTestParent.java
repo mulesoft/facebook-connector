@@ -48,7 +48,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 	public Timeout globalTimeout = new Timeout(600000);
 
 	private Properties properties = new Properties();
-	
+
+    @Override
+    protected <T> T runFlowAndGetPayload(String flowName) throws Exception {
+        return super.runFlowAndGetPayload(flowName);
+    }
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
     public void init() throws ObjectStoreException, IOException {
@@ -397,8 +402,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 	 * This method would then return the following list: ["10212595263", "192121640808384"]
 	 */
 	protected List<String> getExpectedMusic() throws IOException {
-		String musicLikes = properties.getProperty("facebook.init.music");
-		return toList(musicLikes.split(","));
+		return parsePropertyList("facebook.init.music");
 	}
 	
 	/*
@@ -411,8 +415,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 	 * This method would then return the following list: ["9023924452","133612723434302"]
 	 */
 	protected List<String> getExpectedTelevision() throws IOException {
-		String televisionLikes = properties.getProperty("facebook.init.television");
-		return toList(televisionLikes.split(","));
+		return parsePropertyList("facebook.init.television");
 	}
 	
 	/*
@@ -425,8 +428,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 	 * This method would then return the following list: ["107641979264998","402991343106786"]
 	 */
 	protected List<String> getExpectedBooks() throws IOException {
-		String bookLikes = properties.getProperty("facebook.init.books");
-		return toList(bookLikes.split(","));
+		return parsePropertyList("facebook.init.books");
 	}
 
 	/*
@@ -439,8 +441,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 	 * This method would then return the following list: ["107641979264998","402991343106786"]
 	 */
 	protected List<String> getExpectedMovies() throws IOException {
-		String movieLikes = properties.getProperty("facebook.init.movies");
-		return toList(movieLikes.split(","));
+		return parsePropertyList("facebook.init.movies");
 	}
 	
 	/*
@@ -505,4 +506,15 @@ public class FacebookTestParent extends ConnectorTestCase {
 		
 		return runFlowAndGetPayload("publish-event-aux");
 	}
+
+    protected List<String> parsePropertyList(String propertyKey) {
+        String propertyValue = properties.getProperty(propertyKey);
+        List<String> result;
+        if (propertyValue.isEmpty()) { // split() on an empty list returns a list of size 1
+            result = new ArrayList<String>();
+        } else {
+            result = toList(propertyValue.split(","));
+        }
+        return result;
+    }
 }

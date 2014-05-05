@@ -577,10 +577,11 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/invited").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        return mapper.toJavaList(resource.queryParam("since", since)
-            .queryParam("until", until)
-            .queryParam("limit", limit)
-            .queryParam("offset", offset)
+        if (since != null) resource = resource.queryParam("since", since);
+        if (until != null) resource = resource.queryParam("until", until);
+        if (limit != null) resource = resource.queryParam("limit", limit);
+        if (offset != null) resource = resource.queryParam("offset", offset);
+        return mapper.toJavaList(resource
             .get(String.class), User.class);
     }
 
@@ -2491,6 +2492,8 @@ public class FacebookConnector {
      * @param description A description of the link (appears beneath the link
      *            caption)
      * @param place The page ID of the place that this message is associated with
+     * @param tags A list of user IDs of people tagged in this post. You cannot specify
+     *             this field without also specifying a place.
      * @return The id of the published object
      */
     @Processor
@@ -2503,7 +2506,8 @@ public class FacebookConnector {
                                  @Optional String caption,
                                  @Optional String linkName,
                                  @Optional String description,
-                                 @Optional String place)
+                                 @Optional String place,
+                                 @Optional List<String> tags)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/feed").build(profile_id);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2517,6 +2521,10 @@ public class FacebookConnector {
         if (linkName != null) form.add("name", linkName);
         if (description != null) form.add("description", description);
         if (place != null) form.add("place", place);
+        if (tags != null) {
+            String csvTagsList = StringUtils.join(tags, ",");
+            form.add("tags", csvTagsList);
+        }
 
         String json = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
 		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
@@ -2670,12 +2678,10 @@ public class FacebookConnector {
         if(privacy_type != null) {
         	resource = resource.queryParam("privacy_type", privacy_type);
         }
-        
-        String json = resource.get(String.class);
-		JsonObject obj = mapper.toJavaObject(json, JsonObject.class);
-		JsonArray data = obj.getJsonArray("data");
-		
-		return ((data.length() > 0) ? data.getJsonObject(0).getString("id") : null);
+
+        String json = resource.post(String.class);
+        JsonObject response = mapper.toJavaObject(json, JsonObject.class);
+        return response.getString("id");
     }
 
     /**
@@ -2692,8 +2698,8 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/attending").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class);
-        
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+
         return Boolean.parseBoolean(res);
     }
 
@@ -2711,8 +2717,8 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/maybe").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
-        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class);
-        
+        String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+
         return Boolean.parseBoolean(res);
     }
 
