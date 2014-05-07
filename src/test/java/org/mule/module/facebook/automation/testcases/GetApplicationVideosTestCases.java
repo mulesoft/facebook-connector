@@ -14,7 +14,6 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
@@ -31,7 +30,6 @@ public class GetApplicationVideosTestCases extends FacebookTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
-	@Ignore("Facebook API bug. See https://developers.facebook.com/bugs/1595003230723916/")
 	@Test
 	public void testGetApplicationVideos() {
 		try {
