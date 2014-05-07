@@ -15,6 +15,7 @@ import java.io.File;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
@@ -31,6 +32,7 @@ public class PublishVideoTestCases extends FacebookTestParent {
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
+	@Ignore("Facebook API bug. See https://developers.facebook.com/bugs/1595003230723916/")
 	@Test
 	public void testPublishVideo() {
 		try {
