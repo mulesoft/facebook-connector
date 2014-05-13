@@ -66,49 +66,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -199,7 +156,7 @@
       <a href="http://www.mulesoft.com" tabindex="-1">
       <img src="../../../../../../assets//images/mulesoft-logo-final.gif" alt="MuleSoft" border="0" id="mulesoftlogo"></a><br/>
       
-  <div id="searchContainer" >
+  <div id="search" >
       <div id="searchForm">
           <form accept-charset="utf-8" class="gsc-search-box" 
                 onsubmit="return submit_search()">
@@ -255,6 +212,10 @@
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/agents/package-summary.html">org.mule.module.facebook.agents</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/basic/package-summary.html">org.mule.module.facebook.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/callback/package-summary.html">org.mule.module.facebook.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/config/package-summary.html">org.mule.module.facebook.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/connection/package-summary.html">org.mule.module.facebook.connection</a></li>
@@ -262,6 +223,8 @@
   <a href="../../../../../../java/org/mule/module/facebook/devkit/package-summary.html">org.mule.module.facebook.devkit</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/oauth/package-summary.html">org.mule.module.facebook.oauth</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/module/facebook/process/package-summary.html">org.mule.module.facebook.process</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../java/org/mule/module/facebook/processors/package-summary.html">org.mule.module.facebook.processors</a></li>
     <li class="api apilevel-">
@@ -272,16 +235,13 @@
           <div id="classes-nav">
             <ul>
               
-    <li><h2>Interfaces</h2>
-      <ul>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/ConnectivityProcessor.html">ConnectivityProcessor</a></li>
-      </ul>
-    </li>
               
     <li><h2>Classes</h2>
       <ul>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractConnectedProcessor.html">AbstractConnectedProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractPagedConnectedProcessor.html">AbstractPagedConnectedProcessor</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractExpressionEvaluator.html">AbstractExpressionEvaluator</a></li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractListeningMessageProcessor.html">AbstractListeningMessageProcessor</a>&lt;O&gt;</li>
+        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractMessageProcessor.html">AbstractMessageProcessor</a>&lt;O&gt;</li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/AttendEventMessageProcessor.html">AttendEventMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/AuthorizeMessageProcessor.html">AuthorizeMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/DeclineEventMessageProcessor.html">DeclineEventMessageProcessor</a></li>
@@ -310,9 +270,7 @@
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventMaybeMessageProcessor.html">GetEventMaybeMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventMessageProcessor.html">GetEventMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventNoReplyMessageProcessor.html">GetEventNoReplyMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventPhotosMessageProcessor.html">GetEventPhotosMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventPictureMessageProcessor.html">GetEventPictureMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventVideosMessageProcessor.html">GetEventVideosMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventWallMessageProcessor.html">GetEventWallMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetGroupMembersMessageProcessor.html">GetGroupMembersMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetGroupMessageProcessor.html">GetGroupMessageProcessor</a></li>
@@ -340,7 +298,6 @@
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPhotoCommentsMessageProcessor.html">GetPhotoCommentsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPhotoLikesMessageProcessor.html">GetPhotoLikesMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPhotoMessageProcessor.html">GetPhotoMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPhotoTagsMessageProcessor.html">GetPhotoTagsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPostCommentsMessageProcessor.html">GetPostCommentsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPostMessageProcessor.html">GetPostMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetStatusCommentsMessageProcessor.html">GetStatusCommentsMessageProcessor</a></li>
@@ -375,7 +332,6 @@
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserWallMessageProcessor.html">GetUserWallMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetVideoCommentsMessageProcessor.html">GetVideoCommentsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/GetVideoMessageProcessor.html">GetVideoMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/InviteUserMessageProcessor.html">InviteUserMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/LikeMessageProcessor.html">LikeMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/LoggedUserDetailsMessageProcessor.html">LoggedUserDetailsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishAlbumMessageProcessor.html">PublishAlbumMessageProcessor</a></li>
@@ -385,19 +341,14 @@
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishMessageMessageProcessor.html">PublishMessageMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishNoteMessageProcessor.html">PublishNoteMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishPhotoMessageProcessor.html">PublishPhotoMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishVideoMessageProcessor.html">PublishVideoMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchCheckinsMessageProcessor.html">SearchCheckinsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchEventsMessageProcessor.html">SearchEventsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchGroupsMessageProcessor.html">SearchGroupsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchPagesMessageProcessor.html">SearchPagesMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchPostsMessageProcessor.html">SearchPostsMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchUsersMessageProcessor.html">SearchUsersMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SetPagePictureFromLinkMessageProcessor.html">SetPagePictureFromLinkMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/SetPagePictureFromSourceMessageProcessor.html">SetPagePictureFromSourceMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/TagPhotoMessageProcessor.html">TagPhotoMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/TentativeEventMessageProcessor.html">TentativeEventMessageProcessor</a></li>
         <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/UnauthorizeMessageProcessor.html">UnauthorizeMessageProcessor</a></li>
-        <li class="api apilevel-"><a href="../../../../../../java/org/mule/module/facebook/processors/UninviteUserMessageProcessor.html">UninviteUserMessageProcessor</a></li>
       </ul>
     </li>
               
@@ -463,19 +414,6 @@
 
 
   
-    <h2>Interfaces</h2>
-    <div class="jd-sumtable">
-    
-  <table class="jd-sumtable-expando">
-        <tr class="alt-color api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/ConnectivityProcessor.html">ConnectivityProcessor</a></td>
-              <td class="jd-descrcol" width="100%">Interface used to unify all message processors (those which use (or not) pagination) from the ManagedConnectionProcessInterceptor
- 
-&nbsp;</td>
-          </tr>
-  </table>
-    </div>
-  
 
 
   
@@ -488,7 +426,15 @@
               <td class="jd-descrcol" width="100%">&nbsp;</td>
           </tr>
         <tr class=" api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractPagedConnectedProcessor.html">AbstractPagedConnectedProcessor</a></td>
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractExpressionEvaluator.html">AbstractExpressionEvaluator</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractListeningMessageProcessor.html">AbstractListeningMessageProcessor</a>&lt;O&gt;</td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/AbstractMessageProcessor.html">AbstractMessageProcessor</a>&lt;O&gt;</td>
               <td class="jd-descrcol" width="100%">&nbsp;</td>
           </tr>
         <tr class="alt-color api apilevel-" >
@@ -604,16 +550,8 @@
               <td class="jd-descrcol" width="100%">GetEventNoReplyMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getEventNoReply(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventNoReply(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class="alt-color api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventPhotosMessageProcessor.html">GetEventPhotosMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">GetEventPhotosMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getEventPhotos(java.lang.String)">getEventPhotos(java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventPictureMessageProcessor.html">GetEventPictureMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetEventPictureMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getEventPicture(java.lang.String, java.lang.String)">getEventPicture(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class="alt-color api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventVideosMessageProcessor.html">GetEventVideosMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">GetEventVideosMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getEventVideos(java.lang.String)">getEventVideos(java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetEventWallMessageProcessor.html">GetEventWallMessageProcessor</a></td>
@@ -724,148 +662,140 @@
               <td class="jd-descrcol" width="100%">GetPhotoMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getPhoto(java.lang.String, java.lang.String)">getPhoto(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class="alt-color api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPhotoTagsMessageProcessor.html">GetPhotoTagsMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">GetPhotoTagsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getPhotoTags(java.lang.String)">getPhotoTags(java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPostCommentsMessageProcessor.html">GetPostCommentsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetPostCommentsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getPostComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetPostMessageProcessor.html">GetPostMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetPostMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getPost(java.lang.String, java.lang.String)">getPost(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetStatusCommentsMessageProcessor.html">GetStatusCommentsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetStatusCommentsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getStatusComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getStatusComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetStatusMessageProcessor.html">GetStatusMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetStatusMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getStatus(java.lang.String, java.lang.String)">getStatus(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserAccountsMessageProcessor.html">GetUserAccountsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserAccountsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserAccounts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAccounts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserActivitiesMessageProcessor.html">GetUserActivitiesMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserActivitiesMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserActivities(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserActivities(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserAlbumsMessageProcessor.html">GetUserAlbumsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserAlbumsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserAlbums(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserBooksMessageProcessor.html">GetUserBooksMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserBooksMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserBooks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserBooks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserCheckinsMessageProcessor.html">GetUserCheckinsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserCheckinsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserCheckins(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserCheckins(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserEventsMessageProcessor.html">GetUserEventsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserEventsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserFriendsMessageProcessor.html">GetUserFriendsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserFriendsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserFriends(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserFriends(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserGroupsMessageProcessor.html">GetUserGroupsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserGroupsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserGroups(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserGroups(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserHomeMessageProcessor.html">GetUserHomeMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserHomeMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserHome(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserHome(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserInboxMessageProcessor.html">GetUserInboxMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserInboxMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserInbox(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserInbox(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserInterestsMessageProcessor.html">GetUserInterestsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserInterestsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserInterests(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserInterests(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserLikesMessageProcessor.html">GetUserLikesMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserLikesMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserLikes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserLinksMessageProcessor.html">GetUserLinksMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserLinksMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserLinks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserMessageProcessor.html">GetUserMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUser(java.lang.String, java.lang.String)">getUser(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserMoviesMessageProcessor.html">GetUserMoviesMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserMoviesMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserMovies(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserMovies(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserMusicMessageProcessor.html">GetUserMusicMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserMusicMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserMusic(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserMusic(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserNotesMessageProcessor.html">GetUserNotesMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserNotesMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserNotes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserNotes(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserOutboxMessageProcessor.html">GetUserOutboxMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserOutboxMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserOutbox(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserOutbox(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserPhotosMessageProcessor.html">GetUserPhotosMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserPhotosMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPhotos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserPictureMessageProcessor.html">GetUserPictureMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserPictureMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserPicture(java.lang.String, java.lang.String)">getUserPicture(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserPostsMessageProcessor.html">GetUserPostsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserPostsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserSearchMessageProcessor.html">GetUserSearchMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserSearchMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserSearch(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserSearch(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserStatusesMessageProcessor.html">GetUserStatusesMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserStatusesMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserStatuses(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserStatuses(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserTaggedMessageProcessor.html">GetUserTaggedMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserTaggedMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserTagged(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserTagged(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserTelevisionMessageProcessor.html">GetUserTelevisionMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserTelevisionMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserTelevision(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserTelevision(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserUpdatesMessageProcessor.html">GetUserUpdatesMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserUpdatesMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserUpdates(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserUpdates(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserVideosMessageProcessor.html">GetUserVideosMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserVideosMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserVideos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserVideos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetUserWallMessageProcessor.html">GetUserWallMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetUserWallMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getUserWall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getUserWall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetVideoCommentsMessageProcessor.html">GetVideoCommentsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetVideoCommentsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getVideoComments(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/GetVideoMessageProcessor.html">GetVideoMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">GetVideoMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#getVideo(java.lang.String, java.lang.String)">getVideo(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class=" api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/InviteUserMessageProcessor.html">InviteUserMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">InviteUserMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#inviteUser(java.lang.String, java.lang.String)">inviteUser(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/LikeMessageProcessor.html">LikeMessageProcessor</a></td>
@@ -885,7 +815,7 @@
           </tr>
         <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishEventMessageProcessor.html">PublishEventMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">PublishEventMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#publishEvent(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishEvent(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
+              <td class="jd-descrcol" width="100%">PublishEventMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#publishEvent(java.lang.String)">publishEvent(java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishLinkMessageProcessor.html">PublishLinkMessageProcessor</a></td>
@@ -893,7 +823,7 @@
           </tr>
         <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishMessageMessageProcessor.html">PublishMessageMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">PublishMessageMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.lang.String>)">publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
+              <td class="jd-descrcol" width="100%">PublishMessageMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishNoteMessageProcessor.html">PublishNoteMessageProcessor</a></td>
@@ -904,44 +834,28 @@
               <td class="jd-descrcol" width="100%">PublishPhotoMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#publishPhoto(java.lang.String, java.lang.String, java.io.File)">publishPhoto(java.lang.String, java.lang.String, java.io.File)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class=" api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/PublishVideoMessageProcessor.html">PublishVideoMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">PublishVideoMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#publishVideo(java.lang.String, java.lang.String, java.lang.String, java.io.File)">publishVideo(java.lang.String, java.lang.String, java.lang.String, java.io.File)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchCheckinsMessageProcessor.html">SearchCheckinsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">SearchCheckinsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#searchCheckins(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchCheckins(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchEventsMessageProcessor.html">SearchEventsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">SearchEventsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#searchEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchEvents(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchGroupsMessageProcessor.html">SearchGroupsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">SearchGroupsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#searchGroups(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchGroups(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchPagesMessageProcessor.html">SearchPagesMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">SearchPagesMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPages(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchPostsMessageProcessor.html">SearchPostsMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">SearchPostsMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchPosts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SearchUsersMessageProcessor.html">SearchUsersMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">SearchUsersMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#searchUsers(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">searchUsers(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class="alt-color api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SetPagePictureFromLinkMessageProcessor.html">SetPagePictureFromLinkMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">SetPagePictureFromLinkMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#setPagePictureFromLink(java.lang.String, java.lang.String)">setPagePictureFromLink(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class=" api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/SetPagePictureFromSourceMessageProcessor.html">SetPagePictureFromSourceMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">SetPagePictureFromSourceMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#setPagePictureFromSource(java.lang.String, java.io.File)">setPagePictureFromSource(java.lang.String, java.io.File)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
-          </tr>
-        <tr class="alt-color api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/TagPhotoMessageProcessor.html">TagPhotoMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">TagPhotoMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#tagPhoto(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">tagPhoto(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
         <tr class=" api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/TentativeEventMessageProcessor.html">TentativeEventMessageProcessor</a></td>
@@ -950,10 +864,6 @@
         <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/UnauthorizeMessageProcessor.html">UnauthorizeMessageProcessor</a></td>
               <td class="jd-descrcol" width="100%">&nbsp;</td>
-          </tr>
-        <tr class=" api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../java/org/mule/module/facebook/processors/UninviteUserMessageProcessor.html">UninviteUserMessageProcessor</a></td>
-              <td class="jd-descrcol" width="100%">UninviteUserMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html#uninviteUser(java.lang.String, java.lang.String)">uninviteUser(java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../java/org/mule/module/facebook/FacebookConnector.html">FacebookConnector</a></code>.&nbsp;</td>
           </tr>
   </table>
     </div>

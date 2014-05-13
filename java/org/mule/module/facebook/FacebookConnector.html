@@ -65,49 +65,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -198,7 +155,7 @@
       <a href="http://www.mulesoft.com" tabindex="-1">
       <img src="../../../../../assets//images/mulesoft-logo-final.gif" alt="MuleSoft" border="0" id="mulesoftlogo"></a><br/>
       
-  <div id="searchContainer" >
+  <div id="search" >
       <div id="searchForm">
           <form accept-charset="utf-8" class="gsc-search-box" 
                 onsubmit="return submit_search()">
@@ -254,6 +211,10 @@
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/module/facebook/agents/package-summary.html">org.mule.module.facebook.agents</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/module/facebook/basic/package-summary.html">org.mule.module.facebook.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/module/facebook/callback/package-summary.html">org.mule.module.facebook.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../java/org/mule/module/facebook/config/package-summary.html">org.mule.module.facebook.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/module/facebook/connection/package-summary.html">org.mule.module.facebook.connection</a></li>
@@ -261,6 +222,8 @@
   <a href="../../../../../java/org/mule/module/facebook/devkit/package-summary.html">org.mule.module.facebook.devkit</a></li>
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/module/facebook/oauth/package-summary.html">org.mule.module.facebook.oauth</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/module/facebook/process/package-summary.html">org.mule.module.facebook.process</a></li>
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/module/facebook/processors/package-summary.html">org.mule.module.facebook.processors</a></li>
     <li class="api apilevel-">
@@ -593,9 +556,9 @@ Summary:
           private
           
           
-          Client</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#client">client</a></td>
-          <td class="jd-descrcol" width="100%">Jersey client
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#appId">appId</a></td>
+          <td class="jd-descrcol" width="100%">The application identifier as registered with Facebook
 </td>
       </tr>
       
@@ -606,8 +569,8 @@ Summary:
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#consumerKey">consumerKey</a></td>
-          <td class="jd-descrcol" width="100%">The application identifier as registered with Facebook
+          <td class="jd-linkcol"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#appSecret">appSecret</a></td>
+          <td class="jd-descrcol" width="100%">The application secret
 </td>
       </tr>
       
@@ -617,9 +580,9 @@ Summary:
           private
           
           
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#consumerSecret">consumerSecret</a></td>
-          <td class="jd-descrcol" width="100%">The application secret
+          Client</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#client">client</a></td>
+          <td class="jd-descrcol" width="100%">Jersey client
 </td>
       </tr>
       
@@ -723,7 +686,7 @@ Summary:
             
             
             
-            Boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#attendEvent(java.lang.String)">attendEvent</a></span>(String eventId)</nobr>
@@ -741,7 +704,7 @@ Summary:
             
             
             
-            Boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#declineEvent(java.lang.String)">declineEvent</a></span>(String eventId)</nobr>
@@ -759,7 +722,7 @@ Summary:
             
             
             
-            Boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#deleteObject(java.lang.String)">deleteObject</a></span>(String objectId)</nobr>
@@ -777,7 +740,7 @@ Summary:
             
             
             
-            Boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#dislike(java.lang.String)">dislike</a></span>(String postId)</nobr>
@@ -879,6 +842,38 @@ Summary:
  <p/>
  </div>
   
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAppId()">getAppId</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getAppSecret()">getAppSecret</a></span>()</nobr>
+        
   </td></tr>
 
 
@@ -1146,38 +1141,6 @@ Summary:
             
             
             
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getConsumerKey()">getConsumerKey</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getConsumerSecret()">getConsumerSecret</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             Event</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1217,7 +1180,7 @@ Summary:
             
             
             
-            List&lt;User&gt;</nobr>
+            List&lt;Event&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getEventDeclined(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEventDeclined</a></span>(String eventId, String since, String until, String limit, String offset)</nobr>
@@ -1299,25 +1262,6 @@ Summary:
             
             
             
-            List&lt;Photo&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getEventPhotos(java.lang.String)">getEventPhotos</a></span>(String eventId)</nobr>
-        
-        <div class="jd-descrdiv">Retrieves a list of photos from the event's wall
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1325,25 +1269,6 @@ Summary:
         
         <div class="jd-descrdiv">The event's profile picture
  <p/>
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;Video&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getEventVideos(java.lang.String)">getEventVideos</a></span>(String eventId)</nobr>
-        
-        <div class="jd-descrdiv">Retrieves a list of videos from the event's wall
  </div>
   
   </td></tr>
@@ -1875,25 +1800,6 @@ Summary:
             
             
             
-            List&lt;Photo.Tag&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#getPhotoTags(java.lang.String)">getPhotoTags</a></span>(String photoId)</nobr>
-        
-        <div class="jd-descrdiv">Retrieves the list of tags of a photo
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             Post</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1906,7 +1812,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1925,7 +1831,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1941,7 +1847,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1960,7 +1866,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1979,7 +1885,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1997,7 +1903,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2016,7 +1922,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2035,7 +1941,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2053,7 +1959,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2072,7 +1978,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2091,7 +1997,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2109,7 +2015,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2128,7 +2034,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2146,7 +2052,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2164,7 +2070,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2180,7 +2086,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2198,7 +2104,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2217,7 +2123,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2235,7 +2141,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2253,7 +2159,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2272,7 +2178,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2291,7 +2197,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2309,7 +2215,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2327,7 +2233,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2345,7 +2251,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2364,7 +2270,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2382,7 +2288,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2401,7 +2307,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2419,7 +2325,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2437,7 +2343,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2456,7 +2362,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2474,7 +2380,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2492,7 +2398,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2510,7 +2416,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2529,7 +2435,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2548,24 +2454,6 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#inviteUser(java.lang.String, java.lang.String)">inviteUser</a></span>(String eventId, String userId)</nobr>
-        
-        <div class="jd-descrdiv">Invites a user to a given event.</div>
-  
-  </td></tr>
-
-
-	 
     <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
@@ -2573,7 +2461,7 @@ Summary:
             
             
             
-            Boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#like(java.lang.String)">like</a></span>(String postId)</nobr>
@@ -2609,7 +2497,7 @@ Summary:
             
             
             
-            String</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishAlbum(java.lang.String, java.lang.String, java.lang.String)">publishAlbum</a></span>(String profile_id, String msg, String albumName)</nobr>
@@ -2646,10 +2534,10 @@ Summary:
             
             
             
-            String</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishEvent(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishEvent</a></span>(String profile_id, String event_name, String start_time, String end_time, String description, String location, String location_id, String privacy_type)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishEvent(java.lang.String)">publishEvent</a></span>(String profile_id)</nobr>
         
         <div class="jd-descrdiv">Post an event in the given profile.</div>
   
@@ -2664,7 +2552,7 @@ Summary:
             
             
             
-            String</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishLink(java.lang.String, java.lang.String, java.lang.String)">publishLink</a></span>(String profile_id, String msg, String link)</nobr>
@@ -2685,7 +2573,7 @@ Summary:
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.lang.String>)">publishMessage</a></span>(String profile_id, String msg, String picture, String link, String caption, String linkName, String description, String place, List&lt;String&gt; tags)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">publishMessage</a></span>(String profile_id, String msg, String picture, String link, String caption, String linkName, String description)</nobr>
         
         <div class="jd-descrdiv">Write to the given profile's feed/wall.</div>
   
@@ -2700,7 +2588,7 @@ Summary:
             
             
             
-            String</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishNote(java.lang.String, java.lang.String, java.lang.String)">publishNote</a></span>(String profile_id, String msg, String subject)</nobr>
@@ -2718,7 +2606,7 @@ Summary:
             
             
             
-            String</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishPhoto(java.lang.String, java.lang.String, java.io.File)">publishPhoto</a></span>(String albumId, String caption, File photo)</nobr>
@@ -2730,24 +2618,6 @@ Summary:
 
 	 
     <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#publishVideo(java.lang.String, java.lang.String, java.lang.String, java.io.File)">publishVideo</a></span>(String id, String title, String description, File video)</nobr>
-        
-        <div class="jd-descrdiv">Upload a video.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2767,7 +2637,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2787,7 +2657,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2807,7 +2677,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2827,7 +2697,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2847,7 +2717,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2867,7 +2737,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2883,7 +2753,39 @@ Summary:
 
 
 	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#setAppId(java.lang.String)">setAppId</a></span>(String appId)</nobr>
+        
+  </td></tr>
+
+
+	 
     <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#setAppSecret(java.lang.String)">setAppSecret</a></span>(String appSecret)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2899,76 +2801,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#setConsumerKey(java.lang.String)">setConsumerKey</a></span>(String consumerKey)</nobr>
-        
-  </td></tr>
-
-
-	 
     <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#setConsumerSecret(java.lang.String)">setConsumerSecret</a></span>(String consumerSecret)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#setPagePictureFromLink(java.lang.String, java.lang.String)">setPagePictureFromLink</a></span>(String page, String imageUrl)</nobr>
-        
-        <div class="jd-descrdiv">Sets the page picture to the image linked by the URL.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#setPagePictureFromSource(java.lang.String, java.io.File)">setPagePictureFromSource</a></span>(String page, File source)</nobr>
-        
-        <div class="jd-descrdiv">Sets the page picture to the image file provided to this message processor 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2984,24 +2817,6 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#tagPhoto(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">tagPhoto</a></span>(String photoId, String to, String tagText, String x, String y)</nobr>
-        
-        <div class="jd-descrdiv">Tag a photo.</div>
-  
-  </td></tr>
-
-
-	 
     <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
@@ -3009,30 +2824,12 @@ Summary:
             
             
             
-            boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#tentativeEvent(java.lang.String)">tentativeEvent</a></span>(String eventId)</nobr>
         
         <div class="jd-descrdiv">Maybe attend the given event.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/facebook/FacebookConnector.html#uninviteUser(java.lang.String, java.lang.String)">uninviteUser</a></span>(String eventId, String userId)</nobr>
-        
-        <div class="jd-descrdiv">Uninvites a user from an event.</div>
   
   </td></tr>
 
@@ -3375,6 +3172,68 @@ From class
 
 
 
+<A NAME="appId"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        appId
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>The application identifier as registered with Facebook
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="appSecret"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        appSecret
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>The application secret
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="client"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -3398,68 +3257,6 @@ From class
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Jersey client
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="consumerKey"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        consumerKey
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>The application identifier as registered with Facebook
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="consumerSecret"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        consumerSecret
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>The application secret
 </p></div>
 
     
@@ -3655,7 +3452,7 @@ From class
          
          
          
-        Boolean
+        void
       </span>
       <span class="sympad">attendEvent</span>
       <span class="normal">(String eventId)</span>
@@ -3677,14 +3474,10 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>eventId</td>
-          <td>The id of the event to attend</td>
+          <td>The id of the event to attend
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Boolean result indicating success or failure of operation
-</li></ul>
   </div>
 
     </div>
@@ -3701,7 +3494,7 @@ From class
          
          
          
-        Boolean
+        void
       </span>
       <span class="sympad">declineEvent</span>
       <span class="normal">(String eventId)</span>
@@ -3723,14 +3516,10 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>eventId</td>
-          <td>Represents the id of the event object</td>
+          <td>Represents the id of the event object
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Boolean result indicating success or failure of operation
-</li></ul>
   </div>
 
     </div>
@@ -3747,7 +3536,7 @@ From class
          
          
          
-        Boolean
+        void
       </span>
       <span class="sympad">deleteObject</span>
       <span class="normal">(String objectId)</span>
@@ -3769,14 +3558,10 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>objectId</td>
-          <td>The ID of the object to be deleted</td>
+          <td>The ID of the object to be deleted
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The result of the deletion
-</li></ul>
   </div>
 
     </div>
@@ -3793,7 +3578,7 @@ From class
          
          
          
-        Boolean
+        void
       </span>
       <span class="sympad">dislike</span>
       <span class="normal">(String postId)</span>
@@ -3815,14 +3600,10 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>postId</td>
-          <td>The ID of the post to be disliked</td>
+          <td>The ID of the post to be disliked
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Returns true if API call was successfull
-</li></ul>
   </div>
 
     </div>
@@ -4083,6 +3864,68 @@ From class
       <ul class="nolist"><li>response from Facebook
 </li></ul>
   </div>
+
+    </div>
+</div>
+
+
+<A NAME="getAppId()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getAppId</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getAppSecret()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getAppSecret</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>
@@ -4890,68 +4733,6 @@ From class
 </div>
 
 
-<A NAME="getConsumerKey()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getConsumerKey</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getConsumerSecret()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getConsumerSecret</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
 <A NAME="getEvent(java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -5079,7 +4860,7 @@ From class
          
          
          
-        List&lt;User&gt;
+        List&lt;Event&gt;
       </span>
       <span class="sympad">getEventDeclined</span>
       <span class="normal">(String eventId, String since, String until, String limit, String offset)</span>
@@ -5323,52 +5104,6 @@ From class
 </div>
 
 
-<A NAME="getEventPhotos(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        List&lt;Photo&gt;
-      </span>
-      <span class="sympad">getEventPhotos</span>
-      <span class="normal">(String eventId)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves a list of photos from the event's wall
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>eventId</td>
-          <td>The ID of the event</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>A list of photos from the event's wall
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
 <A NAME="getEventPicture(java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -5414,52 +5149,6 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>The image as a Byte array
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getEventVideos(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        List&lt;Video&gt;
-      </span>
-      <span class="sympad">getEventVideos</span>
-      <span class="normal">(String eventId)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves a list of videos from the event's wall
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>eventId</td>
-          <td>The ID of the event</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>A list of videos from the event's wall
 </li></ul>
   </div>
 
@@ -7067,52 +6756,6 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>The likes from the given photo
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getPhotoTags(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        List&lt;Photo.Tag&gt;
-      </span>
-      <span class="sympad">getPhotoTags</span>
-      <span class="normal">(String photoId)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves the list of tags of a photo
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>photoId</td>
-          <td>The ID of the photo from which tags will be retrieved</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Returns a list of tags found on a photo.
 </li></ul>
   </div>
 
@@ -9258,56 +8901,6 @@ From class
 </div>
 
 
-<A NAME="inviteUser(java.lang.String, java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Boolean
-      </span>
-      <span class="sympad">inviteUser</span>
-      <span class="normal">(String eventId, String userId)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Invites a user to a given event.
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>eventId</td>
-          <td>The ID of the event.</td>
-        </tr>
-        <tr>
-          <th>userId</td>
-          <td>The ID of the user to invite.</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Boolean result indicating success or failure of operation
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
 <A NAME="like(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -9318,7 +8911,7 @@ From class
          
          
          
-        Boolean
+        void
       </span>
       <span class="sympad">like</span>
       <span class="normal">(String postId)</span>
@@ -9340,14 +8933,10 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>postId</td>
-          <td>Represents the ID of the post object.</td>
+          <td>Represents the ID of the post object.
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Returns true if successfully liked
-</li></ul>
   </div>
 
     </div>
@@ -9402,7 +8991,7 @@ From class
          
          
          
-        String
+        void
       </span>
       <span class="sympad">publishAlbum</span>
       <span class="normal">(String profile_id, String msg, String albumName)</span>
@@ -9432,14 +9021,10 @@ From class
         </tr>
         <tr>
           <th>albumName</td>
-          <td>The name of the album</td>
+          <td>The name of the album
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The ID of the album that was just created
-</li></ul>
   </div>
 
     </div>
@@ -9496,7 +9081,7 @@ From class
 </div>
 
 
-<A NAME="publishEvent(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
+<A NAME="publishEvent(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -9506,10 +9091,10 @@ From class
          
          
          
-        String
+        void
       </span>
       <span class="sympad">publishEvent</span>
-      <span class="normal">(String profile_id, String event_name, String start_time, String end_time, String description, String location, String location_id, String privacy_type)</span>
+      <span class="normal">(String profile_id)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -9528,42 +9113,10 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>profile_id</td>
-          <td>The profile where to publish the event</td>
-        </tr>
-        <tr>
-          <th>event_name</td>
-          <td>The name of the event</td>
-        </tr>
-        <tr>
-          <th>start_time</td>
-          <td>The event start time, in ISO-8601 </td>
-        </tr>
-        <tr>
-          <th>end_time</td>
-          <td>The event end time, in ISO-8601</td>
-        </tr>
-        <tr>
-          <th>description</td>
-          <td>The event description</td>
-        </tr>
-        <tr>
-          <th>location</td>
-          <td>The event location</td>
-        </tr>
-        <tr>
-          <th>location_id</td>
-          <td>Facebook Place ID of the place the Event is taking place </td>
-        </tr>
-        <tr>
-          <th>privacy_type</td>
-          <td>String containing 'OPEN' (default), 'SECRET', or 'FRIENDS' </td>
+          <td>The profile where to publish the event
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The id of the published event
-</li></ul>
   </div>
 
     </div>
@@ -9580,7 +9133,7 @@ From class
          
          
          
-        String
+        void
       </span>
       <span class="sympad">publishLink</span>
       <span class="normal">(String profile_id, String msg, String link)</span>
@@ -9610,21 +9163,17 @@ From class
         </tr>
         <tr>
           <th>link</td>
-          <td>The link</td>
+          <td>The link
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>link id
-</li></ul>
   </div>
 
     </div>
 </div>
 
 
-<A NAME="publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.lang.String>)"></A>
+<A NAME="publishMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -9637,7 +9186,7 @@ From class
         String
       </span>
       <span class="sympad">publishMessage</span>
-      <span class="normal">(String profile_id, String msg, String picture, String link, String caption, String linkName, String description, String place, List&lt;String&gt; tags)</span>
+      <span class="normal">(String profile_id, String msg, String picture, String link, String caption, String linkName, String description)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -9683,15 +9232,6 @@ From class
           <td>A description of the link (appears beneath the link
             caption)</td>
         </tr>
-        <tr>
-          <th>place</td>
-          <td>The page ID of the place that this message is associated with</td>
-        </tr>
-        <tr>
-          <th>tags</td>
-          <td>A list of user IDs of people tagged in this post. You cannot specify
-             this field without also specifying a place.</td>
-        </tr>
       </table>
   </div>
   <div class="jd-tagdata">
@@ -9714,7 +9254,7 @@ From class
          
          
          
-        String
+        void
       </span>
       <span class="sympad">publishNote</span>
       <span class="normal">(String profile_id, String msg, String subject)</span>
@@ -9744,14 +9284,10 @@ From class
         </tr>
         <tr>
           <th>subject</td>
-          <td>The subject of the note</td>
+          <td>The subject of the note
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>note id
-</li></ul>
   </div>
 
     </div>
@@ -9768,7 +9304,7 @@ From class
          
          
          
-        String
+        void
       </span>
       <span class="sympad">publishPhoto</span>
       <span class="normal">(String albumId, String caption, File photo)</span>
@@ -9798,72 +9334,10 @@ From class
         </tr>
         <tr>
           <th>photo</td>
-          <td>File containing the photo</td>
+          <td>File containing the photo
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The ID of the photo that was just published
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="publishVideo(java.lang.String, java.lang.String, java.lang.String, java.io.File)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">publishVideo</span>
-      <span class="normal">(String id, String title, String description, File video)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Upload a video. 
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>id</td>
-          <td>The id of the object that this video is being uploaded to (can be user ID, album ID, page ID, etc)</td>
-        </tr>
-        <tr>
-          <th>title</td>
-          <td>Title of the video</td>
-        </tr>
-        <tr>
-          <th>description</td>
-          <td>Description of the video</td>
-        </tr>
-        <tr>
-          <th>video</td>
-          <td>File containing the video</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The ID of the video that was just published
-</li></ul>
   </div>
 
     </div>
@@ -10286,6 +9760,86 @@ From class
 </div>
 
 
+<A NAME="setAppId(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAppId</span>
+      <span class="normal">(String appId)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>appId</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setAppSecret(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAppSecret</span>
+      <span class="normal">(String appSecret)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>appSecret</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="setClient(com.sun.jersey.api.client.Client)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -10320,186 +9874,6 @@ From class
           <td></td>
         </tr>
       </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setConsumerKey(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setConsumerKey</span>
-      <span class="normal">(String consumerKey)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>consumerKey</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setConsumerSecret(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setConsumerSecret</span>
-      <span class="normal">(String consumerSecret)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>consumerSecret</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setPagePictureFromLink(java.lang.String, java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        boolean
-      </span>
-      <span class="sympad">setPagePictureFromLink</span>
-      <span class="normal">(String page, String imageUrl)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the page picture to the image linked by the URL.
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>page</td>
-          <td>The ID of the page which will have its picture set</td>
-        </tr>
-        <tr>
-          <th>imageUrl</td>
-          <td>The web link of the image (e.g. Facebook's logo image URL).</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>A boolean result indicating the success or failure of the request
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setPagePictureFromSource(java.lang.String, java.io.File)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        boolean
-      </span>
-      <span class="sympad">setPagePictureFromSource</span>
-      <span class="normal">(String page, File source)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the page picture to the image file provided to this message processor 
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>page</td>
-          <td>The ID of the page which will have its picture set</td>
-        </tr>
-        <tr>
-          <th>source</td>
-          <td>File containing the photo</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>A boolean result indicating the success or failure of the request
-</li></ul>
   </div>
 
     </div>
@@ -10546,68 +9920,6 @@ From class
 </div>
 
 
-<A NAME="tagPhoto(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        boolean
-      </span>
-      <span class="sympad">tagPhoto</span>
-      <span class="normal">(String photoId, String to, String tagText, String x, String y)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Tag a photo. 
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>photoId</td>
-          <td>The ID of the photo where the tag should be placed</td>
-        </tr>
-        <tr>
-          <th>to</td>
-          <td>The userId of the user to tag. One of 'to' or 'tagText' must be set.</td>
-        </tr>
-        <tr>
-          <th>tagText</td>
-          <td>A text string to tag. One of 'to' or 'tagText' must be set.</td>
-        </tr>
-        <tr>
-          <th>x</td>
-          <td>The X coordinate of the tag, as a percentage offset from the left edge of the picture</td>
-        </tr>
-        <tr>
-          <th>y</td>
-          <td>The Y coordinate of the tag, as a percentage offset from the top edge of the picture</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>A boolean indicating the success or failure of the request
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
 <A NAME="tentativeEvent(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -10618,7 +9930,7 @@ From class
          
          
          
-        boolean
+        void
       </span>
       <span class="sympad">tentativeEvent</span>
       <span class="normal">(String eventId)</span>
@@ -10640,64 +9952,10 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>eventId</td>
-          <td>Represents the id of the event object</td>
+          <td>Represents the id of the event object
+</td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The result of the API request
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="uninviteUser(java.lang.String, java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Boolean
-      </span>
-      <span class="sympad">uninviteUser</span>
-      <span class="normal">(String eventId, String userId)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Uninvites a user from an event.
- </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>eventId</td>
-          <td>The ID of the event.</td>
-        </tr>
-        <tr>
-          <th>userId</td>
-          <td>The ID of the user to uninvite</td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Boolean result indicating success or failure of operation
-</li></ul>
   </div>
 
     </div>
