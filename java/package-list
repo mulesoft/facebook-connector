@@ -2,13 +2,10 @@ org.mule.module.facebook
 org.mule.module.facebook.adapter
 org.mule.module.facebook.adapters
 org.mule.module.facebook.agents
-org.mule.module.facebook.basic
-org.mule.module.facebook.callback
 org.mule.module.facebook.config
 org.mule.module.facebook.connection
 org.mule.module.facebook.devkit
 org.mule.module.facebook.oauth
-org.mule.module.facebook.process
 org.mule.module.facebook.processors
 org.mule.module.facebook.types
 
