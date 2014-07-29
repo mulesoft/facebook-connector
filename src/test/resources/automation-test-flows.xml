@@ -13,14 +13,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 
 	<facebook:config-with-oauth name="Facebook"
 		consumerKey="${facebook.consumerKey}" consumerSecret="${facebook.consumerSecret}"
-		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event">
+		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event,user_friends">
 		<facebook:oauth-callback-config domain="${facebook.domain}"
 			localPort="${facebook.localPort}" remotePort="${facebook.remotePort}"
 			path="${facebook.path}" />
 	</facebook:config-with-oauth>
 
 	<facebook:config-with-oauth name="auxFacebook" consumerKey="${facebook.aux.consumerKey}" consumerSecret="${facebook.aux.consumerSecret}"
-		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event">
+		scope="read_stream,manage_pages,publish_stream,user_photos,publish_actions,rsvp_event,user_friends">
 		<facebook:oauth-callback-config domain="${facebook.aux.domain}" localPort="${facebook.aux.localPort}" 
 			path="${facebook.aux.path}" remotePort="${facebook.aux.remotePort}" />	
 	</facebook:config-with-oauth>
@@ -224,8 +224,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
 	<flow name="logged-user-details">
-		<facebook:logged-user-details config-ref="Facebook"
-			accessTokenId="accessTokenId" />
+		<facebook:logged-user-details config-ref="Facebook"	accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="publish-message">
@@ -418,8 +417,13 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-friends config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
 	</flow>
-	
-	<flow name="get-user-groups">
+
+    <flow name="get-user-taggable-friends">
+        <facebook:get-user-taggable-friends config-ref="Facebook"
+                                   limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+    </flow>
+
+    <flow name="get-user-groups">
 		<facebook:get-user-groups config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
 	</flow>
@@ -453,6 +457,11 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-photos config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
 	</flow>
+
+    <flow name="get-user-photos-uploaded">
+        <facebook:get-user-photos-uploaded config-ref="Facebook"
+                                  limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+    </flow>
 	
 	<flow name="get-user-picture">
 		<facebook:get-user-picture config-ref="Facebook" user="#[payload.user]" type="#[payload.type]" accessTokenId="accessTokenId" />
@@ -467,8 +476,14 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 		<facebook:get-user-videos config-ref="Facebook"
 			limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
 	</flow>
-	
-	<flow name="search-posts">
+
+    <flow name="get-user-videos-uploaded">
+        <facebook:get-user-videos-uploaded config-ref="Facebook"
+                                  limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
+    </flow>
+
+
+    <flow name="search-posts">
 		<facebook:search-posts config-ref="Facebook" limit="#[payload.limit]" offset="#[payload.offset]"
 			since="#[payload.since]" until="#[payload.until]" q="#[payload.q]" accessTokenId="accessTokenId" />
 	</flow>

@@ -297,6 +297,11 @@
 <!-- END_INCLUDE(facebook:getUserFriends) -->
 
 
+<!-- BEGIN_INCLUDE(facebook:get-user-taggable-friends) -->
+<facebook:get-user-taggable-friends user="#[map-payload:user]"/>
+<!-- END_INCLUDE(facebook:get-user-taggable-friends) -->
+
+
 <!-- BEGIN_INCLUDE(facebook:getUserActivities) -->
 <facebook:get-user-activities user="#[map-payload:user]"/>
 <!-- END_INCLUDE(facebook:getUserActivities) -->
@@ -342,6 +347,11 @@
 <!-- END_INCLUDE(facebook:getUserPhotos) -->
 
 
+<!-- BEGIN_INCLUDE(facebook:get-user-photos-uploaded) -->
+<facebook:get-user-photos-uploaded user="#[map-payload:user]"/>
+<!-- END_INCLUDE(facebook:get-user-photos-uploaded) -->
+
+
 <!-- BEGIN_INCLUDE(facebook:getUserAlbums) -->
 <facebook:get-user-albums user="#[map-payload:user]"/>
 <!-- END_INCLUDE(facebook:getUserAlbums) -->
@@ -350,6 +360,11 @@
 <!-- BEGIN_INCLUDE(facebook:getUserVideos) -->
 <facebook:get-user-videos user="#[map-payload:user]"/>
 <!-- END_INCLUDE(facebook:getUserVideos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-videos-uploaded) -->
+<facebook:get-user-videos-uploaded user="#[map-payload:user]"/>
+<!-- END_INCLUDE(facebook:get-user-videos-uploaded) -->
 
 
 <!-- BEGIN_INCLUDE(facebook:getUserGroups) -->

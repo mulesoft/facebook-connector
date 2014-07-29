@@ -15,18 +15,15 @@
 		</property>
 	</bean>
 
-	<bean id="connectorOAuthState"
-		class="org.mule.module.facebook.oauth.FacebookConnectorOAuthState">
+	<bean id="connectorOAuthState" class="org.mule.common.security.oauth.OAuthState">
 		<property name="accessToken" value="${facebook.accessToken}" />
 	</bean>
 	
-	<bean id="connectorOAuthStatePage"
-		class="org.mule.module.facebook.oauth.FacebookConnectorOAuthState">
+	<bean id="connectorOAuthStatePage" class="org.mule.common.security.oauth.OAuthState">
 		<property name="accessToken" value="${facebook.accessToken.page}" />
 	</bean>
 	
-	<bean id="connectorOAuthStateAux" 
-		class="org.mule.module.facebook.oauth.FacebookConnectorOAuthState">
+	<bean id="connectorOAuthStateAux" class="org.mule.common.security.oauth.OAuthState">
 		<property name="accessToken" value="${facebook.aux.accessToken}" />		
 	</bean>
 
@@ -672,6 +669,15 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
+
+    <!-- get-user-taggable-friends -->
+    <util:map id="getUserTaggableFriendsTestData" map-class="java.util.HashMap"
+              key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+        <entry key="since" value="last week" />
+        <entry key="until" value="now" />
+        <entry key="limit" value="100" />
+        <entry key="offset" value="0" />
+    </util:map>
 	
 	<!-- get-user-groups -->
 	<util:map id="getUserGroupsTestData" map-class="java.util.HashMap"
@@ -741,6 +747,21 @@
 			-->
 		<entry key="photoFilePath" value="image.jpg" />
 	</util:map>
+
+    <!-- get-user-photos-uploaded -->
+    <util:map id="getUserPhotosUploadedTestData" map-class="java.util.HashMap"
+              key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+        <entry key="since" value="today" />
+        <entry key="until" value="now" />
+        <entry key="limit" value="100" />
+        <entry key="offset" value="0" />
+        <entry key="caption" value="Photo Caption" />
+        <!--
+            This file must be present in your classpath
+            This file is loaded as follows: getClass().getClassLoader().getResource(fileName)
+            -->
+        <entry key="photoFilePath" value="image2.jpg" />
+    </util:map>
 	
 	<!-- get-user-picture -->
 	<util:map id="getUserPictureTestData" map-class="java.util.HashMap"
@@ -769,7 +790,16 @@
 		<entry key="limit" value="100" />
 		<entry key="offset" value="0" />
 	</util:map>
-	
+
+    <!-- get-user-videos-uploaded -->
+    <util:map id="getUserVideosUploadedTestData" map-class="java.util.HashMap"
+              key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+        <entry key="since" value="last week" />
+        <entry key="until" value="now" />
+        <entry key="limit" value="100" />
+        <entry key="offset" value="0" />
+    </util:map>
+
 	<!-- search-posts -->
 	<util:map id="searchPostsTestData" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">

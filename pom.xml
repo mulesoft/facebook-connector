@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+    <groupId>org.mule.modules</groupId>
+    <artifactId>mule-module-facebook</artifactId>
+    <packaging>mule-module</packaging>
+    <name>Mule Facebook Connector</name>
+    <version>2.3.4-SNAPSHOT</version>
+
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
         <version>3.5.1</version>
     </parent>
-
-	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
 		<category>Community</category>
@@ -15,15 +20,8 @@
 		<jackson.version>1.9.5</jackson.version>
 		<mule.modules.utils.version>1.0</mule.modules.utils.version>
 		<restfb.version>1.6.9</restfb.version>
-		<devkit.studio.package.skip>false</devkit.studio.package.skip>
 		<connector.test.version>2.0.3</connector.test.version>
 	</properties>
-
-    <groupId>org.mule.modules</groupId>
-    <artifactId>mule-module-facebook</artifactId>
-    <packaging>mule-module</packaging>
-    <name>Mule Facebook Connector</name>
-    <version>2.3.3-SNAPSHOT</version>
 
 	<build>
 		<pluginManagement>

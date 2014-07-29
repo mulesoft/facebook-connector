@@ -8,38 +8,23 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Properties;
-
+import com.restfb.types.*;
+import com.restfb.types.Photo.Tag;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.config.MuleProperties;
-import org.mule.api.store.ObjectAlreadyExistsException;
-import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
-import org.mule.module.facebook.oauth.FacebookConnectorOAuthState;
+import org.mule.common.security.oauth.OAuthState;
 import org.mule.module.facebook.types.Photo;
 import org.mule.modules.tests.ConnectorTestCase;
 
-import com.restfb.types.Album;
-import com.restfb.types.Comment;
-import com.restfb.types.Event;
-import com.restfb.types.Group;
-import com.restfb.types.Link;
-import com.restfb.types.Note;
-import com.restfb.types.Photo.Tag;
-import com.restfb.types.StatusMessage;
-import com.restfb.types.User;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class FacebookTestParent extends ConnectorTestCase {
 
@@ -58,23 +43,22 @@ public class FacebookTestParent extends ConnectorTestCase {
 	@Before
     public void init() throws ObjectStoreException, IOException {
 
-    	ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-    	if(objectStore.contains("accessTokenId"))
-    			objectStore.remove("accessTokenId");
-    	if(objectStore.contains("accessTokenIdPage"))
-			objectStore.remove("accessTokenIdPage");
-    	if(objectStore.contains("accessTokenIdAux"))
-			objectStore.remove("accessTokenIdAux");
-    	
-    	FacebookConnectorOAuthState f = (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthState");
-    	objectStore.store("accessTokenId", f);
-    	objectStore.store("accessTokenIdPage", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStatePage"));
-    	objectStore.store("accessTokenIdAux", (FacebookConnectorOAuthState) getBeanFromContext("connectorOAuthStateAux"));
-    	
-		InputStream props = getClass().getClassLoader().getResourceAsStream("init-state.properties");
-		properties.load(props);
+        ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
+        if (objectStore.contains("accessTokenId"))
+            objectStore.remove("accessTokenId");
+        if (objectStore.contains("accessTokenIdPage"))
+            objectStore.remove("accessTokenIdPage");
+        if (objectStore.contains("accessTokenIdAux"))
+            objectStore.remove("accessTokenIdAux");
+
+        objectStore.store("accessTokenId", (OAuthState) getBeanFromContext("connectorOAuthState"));
+        objectStore.store("accessTokenIdPage", (OAuthState) getBeanFromContext("connectorOAuthStatePage"));
+        objectStore.store("accessTokenIdAux", (OAuthState) getBeanFromContext("connectorOAuthStateAux"));
+
+        InputStream props = getClass().getClassLoader().getResourceAsStream("init-state.properties");
+        properties.load(props);
     }
-	
+
 	protected Album requestAlbum(String albumId) throws Exception {
 		upsertOnTestRunMessage("album", albumId);
 
@@ -88,12 +72,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 
     	return runFlowAndGetPayload("publish-album");
     }
-    
+
     protected String publishAlbumOnPage(String albumName, String msg, String pageId) throws Exception {
     	upsertOnTestRunMessage("albumName", albumName);
     	upsertOnTestRunMessage("msg", msg);
     	upsertOnTestRunMessage("profileId", pageId);
-    	
+
     	return runFlowAndGetPayload("publish-album-on-page");
     }
 
@@ -117,7 +101,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 
 	protected StatusMessage getStatus(String statusId) throws Exception {
 		upsertOnTestRunMessage("status", statusId);
-		
+
 		return runFlowAndGetPayload("get-status");
 	}
 
@@ -170,10 +154,10 @@ public class FacebookTestParent extends ConnectorTestCase {
     	upsertOnTestRunMessage("title", title);
     	upsertOnTestRunMessage("description", description);
     	upsertOnTestRunMessage("videoRef", video);
-    	
+
 		return runFlowAndGetPayload("publish-video");
     }
-    
+
     public Boolean like(String postId) throws Exception {
     	upsertOnTestRunMessage("postId", postId);
 		return runFlowAndGetPayload("like");
@@ -181,7 +165,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 
     public Boolean dislike(String postId) throws Exception {
     	upsertOnTestRunMessage("postId", postId);
-    	
+
 		return runFlowAndGetPayload("dislike");
     }
 
@@ -202,16 +186,16 @@ public class FacebookTestParent extends ConnectorTestCase {
 
     protected Group getGroup(String groupId) throws Exception {
     	upsertOnTestRunMessage("group", groupId);
-    	
+
     	return runFlowAndGetPayload("get-group");
     }
-    
+
     protected Boolean deleteObject(String objectId) throws Exception {
     	upsertOnTestRunMessage("objectId", objectId);
-    	
+
 		return runFlowAndGetPayload("delete-object");
     }
-    
+
     protected Boolean deletePageObject(String objectId) throws Exception {
     	upsertOnTestRunMessage("objectId", objectId);
 
@@ -236,7 +220,7 @@ public class FacebookTestParent extends ConnectorTestCase {
     	upsertOnTestRunMessage("profileId", pageId);
     	upsertOnTestRunMessage("eventName", eventName);
     	upsertOnTestRunMessage("startTime", startTime);
-    	
+
 		return runFlowAndGetPayload("publish-event-on-page");
     }
 
@@ -252,7 +236,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 
 		return runFlowAndGetPayload("publish-message-all-attributes");
 	}
-    
+
 	protected String publishNote(String profileId, String msg, String subject ) throws Exception{
 		upsertOnTestRunMessage("profileId", profileId);
 		upsertOnTestRunMessage("msg", msg);
@@ -292,78 +276,78 @@ public class FacebookTestParent extends ConnectorTestCase {
 
 		return runFlowAndGetPayload("get-event");
 	}
-	
+
 	protected Boolean tentativeEvent(String eventId) throws Exception {
 		upsertOnTestRunMessage("eventId", eventId);
-		
+
 		return runFlowAndGetPayload("tentative-event");
 	}
 
 	public Boolean inviteUser(String eventId, String userId) throws Exception {
 		upsertOnTestRunMessage("eventId", eventId);
 		upsertOnTestRunMessage("userId", userId);
-		
+
 		return runFlowAndGetPayload("invite-user");
 	}
 
 	public Boolean inviteUserAux(String eventId, String userId) throws Exception {
 		upsertOnTestRunMessage("eventId", eventId);
 		upsertOnTestRunMessage("userId", userId);
-		
+
 		return runFlowAndGetPayload("invite-user-aux");
 	}
-	
+
 	public Boolean tagPhoto(String photoId, String to) throws Exception {
 		return tagPhoto(photoId, to, null, null, null);
 	}
-	
+
 	public Boolean tagPhoto(String photoId, String to, String tagText, Integer x, Integer y) throws Exception {
 		upsertOnTestRunMessage("photoId", photoId);
 		upsertOnTestRunMessage("to", to);
 		upsertOnTestRunMessage("tagText", tagText);
 		upsertOnTestRunMessage("x", x);
 		upsertOnTestRunMessage("y", y);
-		
+
 		return runFlowAndGetPayload("tag-photo");
 	}
-	
+
 	public Boolean setPagePicture(String pageId, String imageUrl) throws Exception {
 		upsertOnTestRunMessage("page", pageId);
 		upsertOnTestRunMessage("imageUrl", imageUrl);
-		
+
 		return runFlowAndGetPayload("set-page-picture-from-link");
 	}
-	
+
 	public Boolean setPagePicture(String pageId, File imageFile) throws Exception {
 		upsertOnTestRunMessage("page", pageId);
 		upsertOnTestRunMessage("sourceRef", imageFile);
-		
+
 		return runFlowAndGetPayload("set-page-picture-from-source");
 	}
 
 	public List<Tag> getPhotoTags(String photoId) throws Exception {
 		upsertOnTestRunMessage("photoId", photoId);
-		
+
 		return runFlowAndGetPayload("get-photo-tags");
 	}
-	
+
 	public Boolean uninviteUser(String eventId, String userId) throws Exception {
 		upsertOnTestRunMessage("eventId", eventId);
 		upsertOnTestRunMessage("userId", userId);
-		
+
 		return runFlowAndGetPayload("uninvite-user");
 	}
-	
+
 	public List<User> getEventInvited(String eventId, String until, String since, String limit, String offset) throws Exception {
 		upsertOnTestRunMessage("eventId", eventId);
     	upsertOnTestRunMessage("until", until);
     	upsertOnTestRunMessage("since", since);
     	upsertOnTestRunMessage("limit", limit);
     	upsertOnTestRunMessage("offset", offset);
-		
+
 		return runFlowAndGetPayload("get-event-invited");
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	protected List<Group> searchGroups(String query) throws Exception {
 		upsertOnTestRunMessage("q", query);
@@ -391,40 +375,40 @@ public class FacebookTestParent extends ConnectorTestCase {
 		calendar.add(Calendar.DAY_OF_YEAR, -1);
 		return format.format(calendar.getTime());
 	}
-	
+
 	/*
 	 * Gets the expected IDs of Music pages which the test account has liked
 	 * An an example, the Metallica and Deep Purple page IDs are 10212595263, 192121640808384 respectively
 	 * So, inside the properties file, you would need to have the following configuration:
-	 * 
+	 *
 	 * facebook.init.music=10212595263,192121640808384
-	 * 
+	 *
 	 * This method would then return the following list: ["10212595263", "192121640808384"]
 	 */
 	protected List<String> getExpectedMusic() throws IOException {
 		return parsePropertyList("facebook.init.music");
 	}
-	
+
 	/*
 	 * Gets the expected IDs of television show pages which the test account has liked
 	 * As an example, the Seinfeld and Top Gear UK page IDs are 9023924452, 133612723434302 respectively
 	 * So, inside the properties file, you would need to have the following configuration:
-	 * 
+	 *
 	 * facebook.init.television=9023924452,133612723434302
-	 * 
+	 *
 	 * This method would then return the following list: ["9023924452","133612723434302"]
 	 */
 	protected List<String> getExpectedTelevision() throws IOException {
 		return parsePropertyList("facebook.init.television");
 	}
-	
+
 	/*
 	 * Gets the expected IDs of book pages which the test account has liked
 	 * As an example, the Harry Potter and A Game of Thrones - A Song of Ice and Fire page IDs are 107641979264998, 402991343106786 respectively
 	 * So, inside the properties file, you need to have the following configuration:
-	 * 
-	 * facebook.init.books=107641979264998,402991343106786 
-	 * 
+	 *
+	 * facebook.init.books=107641979264998,402991343106786
+	 *
 	 * This method would then return the following list: ["107641979264998","402991343106786"]
 	 */
 	protected List<String> getExpectedBooks() throws IOException {
@@ -435,15 +419,15 @@ public class FacebookTestParent extends ConnectorTestCase {
 	 * Gets the expected IDs of book pages which the test account has liked
 	 * As an example, the Harry Potter and A Game of Thrones - A Song of Ice and Fire page IDs are 107641979264998, 402991343106786 respectively
 	 * So, inside the properties file, you need to have the following configuration:
-	 * 
-	 * facebook.init.books=107641979264998,402991343106786 
-	 * 
+	 *
+	 * facebook.init.books=107641979264998,402991343106786
+	 *
 	 * This method would then return the following list: ["107641979264998","402991343106786"]
 	 */
 	protected List<String> getExpectedMovies() throws IOException {
 		return parsePropertyList("facebook.init.movies");
 	}
-	
+
 	/*
 	 * This method collates the result of every one of the above four methods and returns them as a single list
 	 */
@@ -460,12 +444,12 @@ public class FacebookTestParent extends ConnectorTestCase {
 		finalList.addAll(movies);
 		return finalList;
 	}
-	
+
 	protected String getExpectedGroupId() {
 		String expectedGroupId = properties.getProperty("facebook.init.groupId");
 		return expectedGroupId;
 	}
-	
+
 	/*
 	 * Returns back a list of strings from the input array.
 	 * The different between this method and Arrays.asList() is that elements are trimmed before
@@ -478,7 +462,7 @@ public class FacebookTestParent extends ConnectorTestCase {
 		}
 		return list;
 	}
-	
+
 	/*
 	 * ========================================================================
 	 * 				A U X I L I A R Y   M E T H O D S    B E L O W

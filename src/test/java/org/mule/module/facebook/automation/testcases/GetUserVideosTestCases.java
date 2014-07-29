@@ -26,10 +26,10 @@ public class GetUserVideosTestCases extends FacebookTestParent {
 	@Before
 	public void setUp() throws Exception {
 		initializeTestRunMessage("getUserVideosTestData");
-			
-		String profileId = getProfileId();
-		upsertOnTestRunMessage("user", profileId);
-	}
+
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("user", profileId);
+    }
 	
 	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})

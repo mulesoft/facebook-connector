@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.servers.3.3.0.CE">
-    <name>facebook-demoPosta</name>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.5.1.ee" schemaVersion="3.5.0.0">
+    <name>facebook-demo</name>
     <description></description>
+    <muleExtension name="Facebook" qualifier="org.mule.tooling.ui.contribution.facebook.3.5.0"/>
+    <muleExtension name="Twitter" qualifier="org.mule.tooling.ui.contribution.twitter.3.5.0"/>
 </mule-project>
