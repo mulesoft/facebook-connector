@@ -290,6 +290,13 @@ public class FacebookConnectorListsUnitTest extends FacebookConnectorGenericUnit
         connector.getUserFriends("", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
+
+    @Test
+    public void testGetUserTaggableFriends()
+    {
+        connector.getUserTaggableFriends("", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
     
     @Test
     public void testGetUserActivities()
@@ -353,6 +360,13 @@ public class FacebookConnectorListsUnitTest extends FacebookConnectorGenericUnit
         connector.getUserPhotos("", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
+
+    @Test
+    public void testGetUserPhotosUploaded()
+    {
+        connector.getUserPhotosUploaded("", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
     
     @Test
     public void testGetUserAlbums()
@@ -365,6 +379,13 @@ public class FacebookConnectorListsUnitTest extends FacebookConnectorGenericUnit
     public void testGetUserVideos()
     {
         connector.getUserVideos("", "", "", "", "");
+        Mockito.verify(resource).get(String.class);
+    }
+
+    @Test
+    public void testGetUserVideosUploaded()
+    {
+        connector.getUserVideosUploaded("", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
     

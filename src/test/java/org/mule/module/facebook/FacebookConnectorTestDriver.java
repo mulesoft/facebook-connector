@@ -626,6 +626,18 @@ public class FacebookConnectorTestDriver
             assertNotNull(user.getName());
         }
     }
+
+    @Test
+    public void getUserTaggableFriends()
+    {
+        List<NamedFacebookType> users = connector.getUserTaggableFriends("chackn", "", "", "2", "1");
+        assertTrue(users.size() == 2);
+        for (NamedFacebookType user : users)
+        {
+            assertNotNull(user.getId());
+            assertNotNull(user.getName());
+        }
+    }
     
     @Test
     public void getUserActivities()
@@ -701,6 +713,19 @@ public class FacebookConnectorTestDriver
             assertNotNull(photo.getFrom());
         }
     }
+
+    @Test
+    public void getUserPhotosUploaded()
+    {
+        List<Photo> photos = connector.getUserPhotosUploaded("cocacola", "", "", "2", "");
+        assertNotNull(photos);
+        assertTrue(photos.size() == 2);
+        for (Photo photo : photos)
+        {
+            assertNotNull(photo.getId());
+            assertNotNull(photo.getFrom());
+        }
+    }
     
     @Test
     public void getUserAlbums()
@@ -719,6 +744,19 @@ public class FacebookConnectorTestDriver
     public void getUserVideos()
     {
         List<Video> videos = connector.getUserVideos("cocacola", "", "", "2", "");
+        assertNotNull(videos);
+        assertTrue(videos.size() == 2);
+        for (Video video : videos)
+        {
+            assertNotNull(video.getId());
+            assertNotNull(video.getFrom());
+        }
+    }
+
+    @Test
+    public void getUserVideosUploaded()
+    {
+        List<Video> videos = connector.getUserVideosUploaded("cocacola", "", "", "2", "");
         assertNotNull(videos);
         assertTrue(videos.size() == 2);
         for (Video video : videos)

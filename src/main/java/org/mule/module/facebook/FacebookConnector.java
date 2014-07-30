@@ -26,7 +26,6 @@ import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.oauth.OAuth2;
 import org.mule.api.annotations.oauth.OAuthAccessToken;
-import org.mule.api.annotations.oauth.OAuthAccessTokenIdentifier;
 import org.mule.api.annotations.oauth.OAuthConsumerKey;
 import org.mule.api.annotations.oauth.OAuthConsumerSecret;
 import org.mule.api.annotations.oauth.OAuthProtected;
@@ -42,7 +41,6 @@ import org.mule.modules.utils.MuleSoftException;
 
 import com.restfb.DefaultJsonMapper;
 import com.restfb.JsonMapper;
-import com.restfb.json.JsonArray;
 import com.restfb.json.JsonObject;
 import com.restfb.types.Album;
 import com.restfb.types.Application;
@@ -83,7 +81,7 @@ import com.sun.jersey.multipart.impl.MultiPartWriter;
 public class FacebookConnector {
 
     private static final Logger logger = Logger.getLogger(FacebookConnector.class);
-	private static String FACEBOOK_URI = "https://graph.facebook.com";
+	private static String FACEBOOK_URI = "https://graph.facebook.com/v1.0";
     private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
     private static JsonMapper mapper = new DefaultJsonMapper();
     
@@ -105,7 +103,6 @@ public class FacebookConnector {
      * Facebook permissions
      */
     @Configurable
-    @Optional
     @Default(value = "email,read_stream,publish_stream")
     @OAuthScope
     private String scope;
@@ -128,26 +125,6 @@ public class FacebookConnector {
     @OAuthAccessToken
     private String accessToken;
     
-    private String userId;
-    
-    @OAuthAccessTokenIdentifier
-    public String getUserId() {
-    	if (this.userId == null) {
-    		
-    		if (StringUtils.isEmpty(this.accessToken)) {
-    			if (logger.isDebugEnabled()) {
-    				logger.debug("No access token yet available. Returning null as user id");
-    			}
-    			return null;
-    		}
-    		
-    		User user = this.loggedUserDetails();
-    		this.userId = user.getUsername();
-    	}
-    	
-    	return this.userId;
-    }
-    
     /**
      * Gets the user logged details.
      * <p/>
@@ -160,9 +137,8 @@ public class FacebookConnector {
     public User loggedUserDetails()
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("me").build();
-        WebResource resource = this.newWebResource(uri, accessToken);
-        String json = resource.queryParam("access_token", accessToken).type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class);
-        return mapper.toJavaObject(json, User.class);
+        return mapper.toJavaObject(this.newWebResource(uri, accessToken)
+                .type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class), User.class);
     }
     
     /**
@@ -180,10 +156,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> searchPosts(String q,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -214,10 +190,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<User> searchUsers(String q,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -247,10 +223,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Page> searchPages(String q,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -279,10 +255,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Event> searchEvents(String q,
-                                    @Optional @Default("last week") String since,
-                                    @Optional @Default("yesterday") String until,
-                                    @Optional @Default("100") String limit,
-                                    @Optional @Default("0") String offset)
+                                    @Default("last week") String since,
+                                    @Default("yesterday") String until,
+                                    @Default("100") String limit,
+                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -311,10 +287,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Group> searchGroups(String q,
-                                    @Optional @Default("last week") String since,
-                                    @Optional @Default("yesterday") String until,
-                                    @Optional @Default("100") String limit,
-                                    @Optional @Default("0") String offset)
+                                    @Default("last week") String since,
+                                    @Default("yesterday") String until,
+                                    @Default("100") String limit,
+                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -343,10 +319,10 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public List<Checkin> searchCheckins(@Optional @Default("last week") String since,
-                                        @Optional @Default("yesterday") String until,
-                                        @Optional @Default("100") String limit,
-                                        @Optional @Default("0") String offset)
+    public List<Checkin> searchCheckins(@Default("last week") String since,
+                                        @Default("yesterday") String until,
+                                        @Default("100") String limit,
+                                        @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -372,7 +348,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Album getAlbum(String album, @Optional @Default("0") String metadata)
+    public Album getAlbum(String album, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}").build(album);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -395,10 +371,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Photo> getAlbumPhotos(String album,
-                                 @Optional @Default("last week") String since,
-                                 @Optional @Default("yesterday") String until,
-                                 @Optional @Default("100") String limit,
-                                 @Optional @Default("0") String offset)
+                                 @Default("last week") String since,
+                                 @Default("yesterday") String until,
+                                 @Default("100") String limit,
+                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}/photos").build(album);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -425,10 +401,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Comment> getAlbumComments(String album,
-                                   @Optional @Default("last week") String since,
-                                   @Optional @Default("yesterday") String until,
-                                   @Optional @Default("100") String limit,
-                                   @Optional @Default("0") String offset)
+                                   @Default("last week") String since,
+                                   @Default("yesterday") String until,
+                                   @Default("100") String limit,
+                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}/comments").build(album);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -453,7 +429,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Event getEvent(String eventId, @Optional @Default("0") String metadata)
+    public Event getEvent(String eventId, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -478,10 +454,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getEventWall(String eventId,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/feed").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -509,10 +485,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<User> getEventNoReply(String eventId,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/noreply").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -540,10 +516,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<User> getEventMaybe(String eventId,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/maybe").build(eventId);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -570,10 +546,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<User> getEventInvited(String eventId,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/invited").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -602,10 +578,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<User> getEventAttending(String eventId,
-                                    @Optional @Default("last week") String since,
-                                    @Optional @Default("yesterday") String until,
-                                    @Optional @Default("100") String limit,
-                                    @Optional @Default("0") String offset)
+                                    @Default("last week") String since,
+                                    @Default("yesterday") String until,
+                                    @Default("100") String limit,
+                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/attending").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -632,10 +608,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<User> getEventDeclined(String eventId,
-                                   @Optional @Default("last week") String since,
-                                   @Optional @Default("yesterday") String until,
-                                   @Optional @Default("100") String limit,
-                                   @Optional @Default("0") String offset)
+                                   @Default("last week") String since,
+                                   @Default("yesterday") String until,
+                                   @Default("100") String limit,
+                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/declined").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -661,7 +637,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public byte[] getEventPicture(String eventId, @Optional @Default("small") String type)
+    public byte[] getEventPicture(String eventId, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/picture").build(eventId);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -724,7 +700,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Group getGroup(String group, @Optional @Default("0") String metadata)
+    public Group getGroup(String group, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}").build(group);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -748,10 +724,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getGroupWall(String group,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/feed").build(group);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -780,10 +756,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Member> getGroupMembers(String group,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/members").build(group);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -808,7 +784,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public byte[] getGroupPicture(String group, @Optional @Default("small") String type)
+    public byte[] getGroupPicture(String group, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/picture").build(group);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -829,7 +805,7 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public Link getLink(String link,
-                        @Optional @Default("0") String metadata)
+                        @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}").build(link);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -851,10 +827,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Comment> getLinkComments(String link,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}/comments").build(link);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -878,7 +854,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Note getNote(String note, @Optional @Default("0") String metadata)
+    public Note getNote(String note, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}").build(note);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -900,10 +876,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Comment> getNoteComments(String note,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}/comments").build(note);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -929,10 +905,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public Likes getNoteLikes(String note,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}/likes").build(note);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -956,7 +932,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Page getPage(String page, @Optional @Default("0") String metadata)
+    public Page getPage(String page, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -978,10 +954,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getPageWall(String page,
-                              @Optional @Default("last week") String since,
-                              @Optional @Default("yesterday") String until,
-                              @Optional @Default("100") String limit,
-                              @Optional @Default("0") String offset)
+                              @Default("last week") String since,
+                              @Default("yesterday") String until,
+                              @Default("100") String limit,
+                              @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/feed").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1004,7 +980,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public byte[] getPagePicture(String page, @Optional @Default("small") String type)
+    public byte[] getPagePicture(String page, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1071,10 +1047,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getPageTagged(String page,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/tagged").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken) 
@@ -1100,10 +1076,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Link> getPageLinks(String page,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/links").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1130,10 +1106,10 @@ public class FacebookConnector {
 	@OAuthProtected
     public List<Photo> getPagePhotos(
     							String page,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/photos").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1159,10 +1135,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Group> getPageGroups(String page,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/groups").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1189,10 +1165,10 @@ public class FacebookConnector {
 	@OAuthProtected
     public List<Album> getPageAlbums(
     							String page,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/albums").build(page);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1218,10 +1194,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<StatusMessage> getPageStatuses(String page,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/statuses").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1247,10 +1223,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Video> getPageVideos(String page,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/videos").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1276,10 +1252,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Note> getPageNotes(String page,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/notes").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1305,10 +1281,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getPagePosts(String page,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/posts").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1334,10 +1310,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Event> getPageEvents(String page,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/events").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1363,10 +1339,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Checkin> getPageCheckins(String page,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/checkins").build(page);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1390,7 +1366,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public org.mule.module.facebook.types.Photo getPhoto(String photo, @Optional @Default("0") String metadata)
+    public org.mule.module.facebook.types.Photo getPhoto(String photo, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}").build(photo);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1456,10 +1432,10 @@ public class FacebookConnector {
 	@OAuthProtected
     public List<Comment> getPhotoComments(
     							   String photo,
-                                   @Optional @Default("last week") String since,
-                                   @Optional @Default("yesterday") String until,
-                                   @Optional @Default("100") String limit,
-                                   @Optional @Default("0") String offset)
+                                   @Default("last week") String since,
+                                   @Default("yesterday") String until,
+                                   @Default("100") String limit,
+                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}/comments").build(photo);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1485,10 +1461,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public Likes getPhotoLikes(String photo,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}/likes").build(photo);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1512,7 +1488,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Post getPost(String post, @Optional @Default("0") String metadata)
+    public Post getPost(String post, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}").build(post);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1534,10 +1510,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Comment> getPostComments(String post,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}/comments").build(post);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1561,7 +1537,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public StatusMessage getStatus(String status, @Optional @Default("0") String metadata)
+    public StatusMessage getStatus(String status, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}").build(status);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1583,10 +1559,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Comment> getStatusComments(String status,
-                                    @Optional @Default("last week") String since,
-                                    @Optional @Default("yesterday") String until,
-                                    @Optional @Default("100") String limit,
-                                    @Optional @Default("0") String offset)
+                                    @Default("last week") String since,
+                                    @Default("yesterday") String until,
+                                    @Default("100") String limit,
+                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}/comments").build(status);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1610,7 +1586,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public User getUser(String user, @Optional @Default("0") String metadata)
+    public User getUser(String user, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}").build(user);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1637,12 +1613,12 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getUserSearch(String user,
-                                    @Optional @Default("facebook") String q,
-                                    @Optional @Default("0") String metadata,
-                                    @Optional @Default("last week") String since,
-                                    @Optional @Default("yesterday") String until,
-                                    @Optional @Default("100") String limit,
-                                    @Optional @Default("0") String offset)
+                                    @Default("facebook") String q,
+                                    @Default("0") String metadata,
+                                    @Default("last week") String since,
+                                    @Default("yesterday") String until,
+                                    @Default("100") String limit,
+                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1670,10 +1646,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getUserHome(String user,
-                              @Optional @Default("last week") String since,
-                              @Optional @Default("yesterday") String until,
-                              @Optional @Default("100") String limit,
-                              @Optional @Default("0") String offset)
+                              @Default("last week") String since,
+                              @Default("yesterday") String until,
+                              @Default("100") String limit,
+                              @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1700,10 +1676,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getUserWall(String user,
-                              @Optional @Default("last week") String since,
-                              @Optional @Default("yesterday") String until,
-                              @Optional @Default("100") String limit,
-                              @Optional @Default("0") String offset)
+                              @Default("last week") String since,
+                              @Default("yesterday") String until,
+                              @Default("100") String limit,
+                              @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/feed").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1731,10 +1707,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getUserTagged(String user,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/tagged").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1761,10 +1737,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getUserPosts(String user,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/posts").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1787,7 +1763,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public byte[] getUserPicture(String user, @Optional @Default("small") String type)
+    public byte[] getUserPicture(String user, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/picture").build(user);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -1810,10 +1786,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<NamedFacebookType> getUserFriends(String user,
-                                 @Optional @Default("last week") String since,
-                                 @Optional @Default("yesterday") String until,
-                                 @Optional @Default("100") String limit,
-                                 @Optional @Default("0") String offset)
+                                 @Default("last week") String since,
+                                 @Default("yesterday") String until,
+                                 @Default("100") String limit,
+                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/friends").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1822,6 +1798,35 @@ public class FacebookConnector {
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .get(String.class), NamedFacebookType.class);
+    }
+
+    /**
+     * A list of friends that can be tagged or mentioned in stories published to Facebook.
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:get-user-taggable-friends}
+     *
+     *
+     * @param user Represents the ID of the user object.
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
+     * @return A list of taggable friends with the id and name.
+     */
+    @Processor
+    @OAuthProtected
+    public List<NamedFacebookType> getUserTaggableFriends(String user,
+                                                  @Default("last week") String since,
+                                                  @Default("yesterday") String until,
+                                                  @Default("100") String limit,
+                                                  @Default("0") String offset)
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/taggable_friends").build(user);
+        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+                .queryParam("since", since)
+                .queryParam("until", until)
+                .queryParam("limit", limit)
+                .queryParam("offset", offset)
+                .get(String.class), NamedFacebookType.class);
     }
 
     /**
@@ -1839,10 +1844,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<PageConnection> getUserActivities(String user,
-                                    @Optional @Default("last week") String since,
-                                    @Optional @Default("yesterday") String until,
-                                    @Optional @Default("100") String limit,
-                                    @Optional @Default("0") String offset)
+                                    @Default("last week") String since,
+                                    @Default("yesterday") String until,
+                                    @Default("100") String limit,
+                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/activities").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1868,10 +1873,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Checkin> getUserCheckins(String user,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/checkins").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1897,10 +1902,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<PageConnection> getUserInterests(String user,
-                                   @Optional @Default("last week") String since,
-                                   @Optional @Default("yesterday") String until,
-                                   @Optional @Default("100") String limit,
-                                   @Optional @Default("0") String offset)
+                                   @Default("last week") String since,
+                                   @Default("yesterday") String until,
+                                   @Default("100") String limit,
+                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/interests").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1926,10 +1931,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<PageConnection> getUserMusic(String user,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/music").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1955,10 +1960,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<PageConnection> getUserBooks(String user,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/books").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -1984,10 +1989,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<PageConnection> getUserMovies(String user,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/movies").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2013,10 +2018,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<PageConnection> getUserTelevision(String user,
-                                    @Optional @Default("last week") String since,
-                                    @Optional @Default("yesterday") String until,
-                                    @Optional @Default("100") String limit,
-                                    @Optional @Default("0") String offset)
+                                    @Default("last week") String since,
+                                    @Default("yesterday") String until,
+                                    @Default("100") String limit,
+                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/television").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2044,10 +2049,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<PageConnection> getUserLikes(String user,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/likes").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2075,10 +2080,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Photo> getUserPhotos(String user,
-    							@Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+    							@Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/photos").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2087,6 +2092,34 @@ public class FacebookConnector {
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .get(String.class), Photo.class);
+    }
+
+    /**
+     * Shows all photos that were published to Facebook by this user. Requires the user_photos permission.
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:get-user-photos-uploaded}
+     *
+     * @param user Represents the ID of the user object.
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
+     * @return A list of photos the given user has uploaded.
+     */
+    @Processor
+    @OAuthProtected
+    public List<Photo> getUserPhotosUploaded(String user,
+                                     @Default("last week") String since,
+                                     @Default("yesterday") String until,
+                                     @Default("100") String limit,
+                                     @Default("0") String offset)
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/photos/uploaded").build(user);
+        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+                .queryParam("since", since)
+                .queryParam("until", until)
+                .queryParam("limit", limit)
+                .queryParam("offset", offset)
+                .get(String.class), Photo.class);
     }
 
     /**
@@ -2106,10 +2139,10 @@ public class FacebookConnector {
 	@OAuthProtected
     public List<Album> getUserAlbums(
     							String user,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/albums").build(user);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2136,10 +2169,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Video> getUserVideos(String user,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/videos").build(user);
         
@@ -2149,6 +2182,35 @@ public class FacebookConnector {
             .queryParam("limit", limit)
             .queryParam("offset", offset)
             .get(String.class), Video.class);
+    }
+
+    /**
+     * Shows all videos that were published to Facebook by this user. Requires the user_videos permission.
+     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:get-user-videos-uploaded}
+     *
+     * @param user Represents the ID of the user object.
+     * @param since A unix timestamp or any date accepted by strtotime
+     * @param until A unix timestamp or any date accepted by strtotime
+     * @param limit Limit the number of items returned.
+     * @param offset An offset to the response. Useful for paging.
+     * @return A list containing the videos uploaded by the given user.
+     */
+    @Processor
+    @OAuthProtected
+    public List<Video> getUserVideosUploaded(String user,
+                                     @Default("last week") String since,
+                                     @Default("yesterday") String until,
+                                     @Default("100") String limit,
+                                     @Default("0") String offset)
+    {
+        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/videos/uploaded").build(user);
+
+        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+                .queryParam("since", since)
+                .queryParam("until", until)
+                .queryParam("limit", limit)
+                .queryParam("offset", offset)
+                .get(String.class), Video.class);
     }
 
     /**
@@ -2168,10 +2230,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Group> getUserGroups(String user,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/groups").build(user);
 
@@ -2198,10 +2260,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<StatusMessage> getUserStatuses(String user,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/statuses").build(user);
 
@@ -2228,10 +2290,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Link> getUserLinks(String user,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/links").build(user);
 
@@ -2258,10 +2320,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Note> getUserNotes(String user,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/notes").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2289,10 +2351,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Event> getUserEvents(String user,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/events").build(user);
 
@@ -2321,10 +2383,10 @@ public class FacebookConnector {
 	@OAuthProtected
     public List<org.mule.module.facebook.types.Thread> getUserInbox(
                                String user,
-                               @Optional @Default("last week") String since,
-                               @Optional @Default("yesterday") String until,
-                               @Optional @Default("100") String limit,
-                               @Optional @Default("0") String offset)
+                               @Default("last week") String since,
+                               @Default("yesterday") String until,
+                               @Default("100") String limit,
+                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/inbox").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2352,10 +2414,10 @@ public class FacebookConnector {
 	@OAuthProtected
     public List<OutboxThread> getUserOutbox(
                                 String user,
-                                @Optional @Default("last week") String since,
-                                @Optional @Default("yesterday") String until,
-                                @Optional @Default("100") String limit,
-                                @Optional @Default("0") String offset)
+                                @Default("last week") String since,
+                                @Default("yesterday") String until,
+                                @Default("100") String limit,
+                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/outbox").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2382,10 +2444,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<OutboxThread> getUserUpdates(String user,
-                                 @Optional @Default("last week") String since,
-                                 @Optional @Default("yesterday") String until,
-                                 @Optional @Default("100") String limit,
-                                 @Optional @Default("0") String offset)
+                                 @Default("last week") String since,
+                                 @Default("yesterday") String until,
+                                 @Default("100") String limit,
+                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/updates").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2411,10 +2473,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<GetUserAccountResponseType> getUserAccounts(String user,
-                                  @Optional @Default("last week") String since,
-                                  @Optional @Default("yesterday") String until,
-                                  @Optional @Default("100") String limit,
-                                  @Optional @Default("0") String offset)
+                                  @Default("last week") String since,
+                                  @Default("yesterday") String until,
+                                  @Default("100") String limit,
+                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/accounts").build(user);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -2439,7 +2501,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Video getVideo(String video, @Optional @Default("0") String metadata)
+    public Video getVideo(String video, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}").build(video);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2464,10 +2526,10 @@ public class FacebookConnector {
 	@OAuthProtected
     public List<Comment> getVideoComments(
     							   String video,
-                                   @Optional @Default("last week") String since,
-                                   @Optional @Default("yesterday") String until,
-                                   @Optional @Default("100") String limit,
-                                   @Optional @Default("0") String offset)
+                                   @Default("last week") String since,
+                                   @Default("yesterday") String until,
+                                   @Default("100") String limit,
+                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}/comments").build(video);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -2924,7 +2986,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public Checkin getCheckin(String checkin, @Optional @Default("0") String metadata)
+    public Checkin getCheckin(String checkin, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{checkin}").build(checkin);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -2963,10 +3025,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getApplicationWall(String application,
-                                     @Optional @Default("last week") String since,
-                                     @Optional @Default("yesterday") String until,
-                                     @Optional @Default("100") String limit,
-                                     @Optional @Default("0") String offset)
+                                     @Default("last week") String since,
+                                     @Default("yesterday") String until,
+                                     @Default("100") String limit,
+                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/feed").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -2989,7 +3051,7 @@ public class FacebookConnector {
      */
     @Processor
 	@OAuthProtected
-    public byte[] getApplicationPicture(String application, @Optional @Default("small") String type)
+    public byte[] getApplicationPicture(String application, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/picture").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -3014,10 +3076,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<GetApplicationTaggedResponseType> getApplicationTagged(String application,
-                                       @Optional @Default("last week") String since,
-                                       @Optional @Default("yesterday") String until,
-                                       @Optional @Default("100") String limit,
-                                       @Optional @Default("0") String offset)
+                                       @Default("last week") String since,
+                                       @Default("yesterday") String until,
+                                       @Default("100") String limit,
+                                       @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/tagged").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -3043,10 +3105,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Post> getApplicationLinks(String application,
-                                      @Optional @Default("last week") String since,
-                                      @Optional @Default("yesterday") String until,
-                                      @Optional @Default("100") String limit,
-                                      @Optional @Default("0") String offset)
+                                      @Default("last week") String since,
+                                      @Default("yesterday") String until,
+                                      @Default("100") String limit,
+                                      @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/links").build(application);
         WebResource resource = this.newWebResource(uri, accessToken);
@@ -3072,10 +3134,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Photo> getApplicationPhotos(String application,
-                                       @Optional @Default("last week") String since,
-                                       @Optional @Default("yesterday") String until,
-                                       @Optional @Default("100") String limit,
-                                       @Optional @Default("0") String offset)
+                                       @Default("last week") String since,
+                                       @Default("yesterday") String until,
+                                       @Default("100") String limit,
+                                       @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/photos").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -3101,10 +3163,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Album> getApplicationAlbums(String application,
-                                       @Optional @Default("last week") String since,
-                                       @Optional @Default("yesterday") String until,
-                                       @Optional @Default("100") String limit,
-                                       @Optional @Default("0") String offset)
+                                       @Default("last week") String since,
+                                       @Default("yesterday") String until,
+                                       @Default("100") String limit,
+                                       @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/albums").build(application);
         WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
@@ -3130,10 +3192,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<StatusMessage> getApplicationStatuses(String application,
-                                         @Optional @Default("last week") String since,
-                                         @Optional @Default("yesterday") String until,
-                                         @Optional @Default("100") String limit,
-                                         @Optional @Default("0") String offset)
+                                         @Default("last week") String since,
+                                         @Default("yesterday") String until,
+                                         @Default("100") String limit,
+                                         @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/statuses").build(application);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -3159,10 +3221,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Video> getApplicationVideos(String application,
-                                       @Optional @Default("last week") String since,
-                                       @Optional @Default("yesterday") String until,
-                                       @Optional @Default("100") String limit,
-                                       @Optional @Default("0") String offset)
+                                       @Default("last week") String since,
+                                       @Default("yesterday") String until,
+                                       @Default("100") String limit,
+                                       @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/videos").build(application);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -3188,10 +3250,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Note> getApplicationNotes(String application,
-                                      @Optional @Default("last week") String since,
-                                      @Optional @Default("yesterday") String until,
-                                      @Optional @Default("100") String limit,
-                                      @Optional @Default("0") String offset)
+                                      @Default("last week") String since,
+                                      @Default("yesterday") String until,
+                                      @Default("100") String limit,
+                                      @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/notes").build(application);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -3217,10 +3279,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Event> getApplicationEvents(String application,
-                                       @Optional @Default("last week") String since,
-                                       @Optional @Default("yesterday") String until,
-                                       @Optional @Default("100") String limit,
-                                       @Optional @Default("0") String offset)
+                                       @Default("last week") String since,
+                                       @Default("yesterday") String until,
+                                       @Default("100") String limit,
+                                       @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/events").build(application);
         return mapper.toJavaList(this.newWebResource(uri, accessToken)
@@ -3247,10 +3309,10 @@ public class FacebookConnector {
     @Processor
 	@OAuthProtected
     public List<Insight> getApplicationInsights(String application,
-                                         @Optional @Default("last week") String since,
-                                         @Optional @Default("yesterday") String until,
-                                         @Optional @Default("100") String limit,
-                                         @Optional @Default("0") String offset)
+                                         @Default("last week") String since,
+                                         @Default("yesterday") String until,
+                                         @Default("100") String limit,
+                                         @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/insights").build(application);
         WebResource resource = this.newWebResource(uri, accessToken);

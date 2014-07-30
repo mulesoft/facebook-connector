@@ -1,33 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:context="http://www.springframework.org/schema/context" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
-http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/current/mule-twitter.xsd 
-http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd 
-http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd 
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
-    <facebook:config-with-oauth name="Facebook" consumerKey="${facebookAppId}" consumerSecret="${facebookAppSecret}" doc:name="Facebook">
-        <facebook:oauth-callback-config domain="localhost" localPort="8081" remotePort="8081"/>
-    </facebook:config-with-oauth>
-    <twitter:config name="Twitter" accessKey="${twitterAccessKey}" accessSecret="${twitterAccessSecret}" consumerKey="${twitterConsumerKey}" consumerSecret="${twitterConsumerSecret}" doc:name="Twitter"/>
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:context="http://www.springframework.org/schema/context" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.5.1" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/current/mule-twitter.xsd
+http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
     <data-mapper:config name="get-first-friend-username" transformationGraphPath="get-first-friend-username.grf" doc:name="get-first-friend-username"/>
     <data-mapper:config name="get-like-id" transformationGraphPath="get-like-id.grf" doc:name="get-like-id"/>
     <data-mapper:config name="get-link-link" transformationGraphPath="get-link-link.grf" doc:name="get-link-link"/>
     <context:property-placeholder location="mule.properties"/>
+    <facebook:config-with-oauth name="Facebook" consumerKey="${facebookAppId}" consumerSecret="${facebookAppSecret}" doc:name="Facebook" scope="${facebookScope}">
+        <facebook:oauth-callback-config domain="localhost" localPort="8081" remotePort="8081" path="callback"/>
+    </facebook:config-with-oauth>
+    <twitter:config name="Twitter" accessKey="${twitterAccessKey}" accessSecret="${twitterAccessSecret}" consumerKey="${twitterConsumerKey}" consumerSecret="${twitterConsumerSecret}" doc:name="Twitter"/>
     <flow name="facebook-demo" doc:name="facebook-demo">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="fb-demo" doc:name="HTTP"/>
-        <facebook:get-user-friends config-ref="Facebook" limit="1" offset="0" user="me" doc:name="Get my first friend"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081"  doc:name="HTTP"/>
+        <facebook:authorize config-ref="Facebook" doc:name="Authorize"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload== &quot;/tweet&quot;]">
+                <flow-ref name="tweet-user-like-link" doc:name="Tweet User Like Link"/>
+            </when>
+            <when expression="#[payload== &quot;/photos&quot;]">
+                <flow-ref name="get-user-photos-uploaded" doc:name="Get User Photos Uploaded"/>
+            </when>
+            <when expression="#[payload== &quot;/videos&quot;]">
+                <flow-ref name="get-user-videos-uploaded" doc:name="Get User Videos Uploaded"/>
+            </when>
+            <when expression="#[payload== &quot;/taggable_friends&quot;]">
+                <flow-ref name="get-user-taggable-friends" doc:name="Get User Taggable Friends"/>
+            </when>
+            <otherwise>
+                <facebook:get-user config-ref="Facebook" user="me" doc:name="Get User"/>
+                <mulexml:object-to-xml-transformer doc:name="User to XML"/>
+            </otherwise>
+        </choice>
+    </flow>
+    <sub-flow name="tweet-user-like-link" doc:name="tweet-user-like-link">
+        <facebook:get-user-friends config-ref="Facebook" limit="1" user="me" doc:name="Get my first friend"/>
         <data-mapper:transform config-ref="get-first-friend-username" doc:name="DataMapper"/>
-        <facebook:get-user-likes config-ref="Facebook" limit="1" offset="0" since="last month" user="#[payload.id]" doc:name="Get user like"/>
+        <facebook:get-user-likes config-ref="Facebook" limit="1" since="last month" user="#[payload.id]" doc:name="Get user like"/>
         <data-mapper:transform config-ref="get-like-id" doc:name="DataMapper"/>
         <facebook:get-link config-ref="Facebook" link="#[payload.id]" doc:name="Get like link"/>
         <data-mapper:transform config-ref="get-link-link" doc:name="DataMapper"/>
         <twitter:update-status config-ref="Twitter" status="My friend likes this #[payload.link]. Check it out!" doc:name="Tweet"/>
-    </flow>
-    <flow name="facebook-authorize" doc:name="facebook-authorize">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="fb-authorize" doc:name="HTTP"/>
-        <facebook:authorize config-ref="Facebook" doc:name="Authorize"/>
-    </flow>
+    </sub-flow>
+    <sub-flow name="get-user-photos-uploaded" doc:name="get-user-photos-uploaded">
+        <facebook:get-user-photos-uploaded config-ref="Facebook" since="last month" until="now" user="me" doc:name="Get user photos uploaded"/>
+        <json:object-to-json-transformer doc:name="List&lt;Photo&gt; to JSON"/>
+    </sub-flow>
+    <sub-flow name="get-user-videos-uploaded" doc:name="get-user-videos-uploaded">
+        <facebook:get-user-videos-uploaded config-ref="Facebook" until="now" user="me" doc:name="Get user videos uploaded"/>
+        <json:object-to-json-transformer doc:name="List&lt;Video&gt; to JSON"/>
+    </sub-flow>
+    <sub-flow name="get-user-taggable-friends" doc:name="get-user-taggable-friends">
+        <facebook:get-user-taggable-friends config-ref="Facebook" until="now" user="me" doc:name="Get user taggable friends"/>
+        <json:object-to-json-transformer doc:name="List&lt;Friend&gt; to JSON"/>
+    </sub-flow>
 </mule>
