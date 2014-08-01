@@ -419,7 +419,7 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 	</flow>
 
     <flow name="get-user-taggable-friends">
-        <facebook:get-user-taggable-friends config-ref="Facebook"
+        <facebook:get-user-taggable-friends config-ref="auxFacebook"
                                    limit="#[payload.limit]" offset="#[payload.offset]" since="#[payload.since]" until="#[payload.until]" user="#[payload.user]" accessTokenId="accessTokenId" />
     </flow>
 
