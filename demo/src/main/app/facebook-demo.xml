@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:context="http://www.springframework.org/schema/context" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.5.1" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:context="http://www.springframework.org/schema/context" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.5.0" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/current/mule-twitter.xsd
 http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
@@ -31,9 +31,6 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
             <when expression="#[payload== &quot;/videos&quot;]">
                 <flow-ref name="get-user-videos-uploaded" doc:name="Get User Videos Uploaded"/>
             </when>
-            <when expression="#[payload== &quot;/taggable_friends&quot;]">
-                <flow-ref name="get-user-taggable-friends" doc:name="Get User Taggable Friends"/>
-            </when>
             <otherwise>
                 <facebook:get-user config-ref="Facebook" user="me" doc:name="Get User"/>
                 <mulexml:object-to-xml-transformer doc:name="User to XML"/>
@@ -56,9 +53,5 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
     <sub-flow name="get-user-videos-uploaded" doc:name="get-user-videos-uploaded">
         <facebook:get-user-videos-uploaded config-ref="Facebook" until="now" user="me" doc:name="Get user videos uploaded"/>
         <json:object-to-json-transformer doc:name="List&lt;Video&gt; to JSON"/>
-    </sub-flow>
-    <sub-flow name="get-user-taggable-friends" doc:name="get-user-taggable-friends">
-        <facebook:get-user-taggable-friends config-ref="Facebook" until="now" user="me" doc:name="Get user taggable friends"/>
-        <json:object-to-json-transformer doc:name="List&lt;Friend&gt; to JSON"/>
     </sub-flow>
 </mule>

@@ -625,17 +625,6 @@ public class FacebookConnectorTestDriver
         }
     }
 
-    @Test
-    public void getUserTaggableFriends()
-    {
-        List<NamedFacebookType> users = connector.getUserTaggableFriends("chackn", "", "", "2", "1");
-        assertTrue(users.size() == 2);
-        for (NamedFacebookType user : users)
-        {
-            assertNotNull(user.getId());
-            assertNotNull(user.getName());
-        }
-    }
     
     @Test
     public void getUserActivities()

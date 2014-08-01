@@ -98,7 +98,6 @@ import org.mule.module.facebook.automation.testcases.*;
 	GetUserPostsTestCases.class,
 	GetUserSearchTestCases.class,
 	GetUserStatusesTestCases.class,
-    GetUserTaggableFriendsTestCases.class,
 	GetUserTaggedTestCases.class,
 	GetUserTelevisionTestCases.class,
 	GetUserTestCases.class,
