@@ -297,11 +297,6 @@
 <!-- END_INCLUDE(facebook:getUserFriends) -->
 
 
-<!-- BEGIN_INCLUDE(facebook:get-user-taggable-friends) -->
-<facebook:get-user-taggable-friends user="#[map-payload:user]"/>
-<!-- END_INCLUDE(facebook:get-user-taggable-friends) -->
-
-
 <!-- BEGIN_INCLUDE(facebook:getUserActivities) -->
 <facebook:get-user-activities user="#[map-payload:user]"/>
 <!-- END_INCLUDE(facebook:getUserActivities) -->
