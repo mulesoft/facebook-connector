@@ -288,13 +288,6 @@ public class FacebookConnectorListsUnitTest extends FacebookConnectorGenericUnit
         connector.getUserFriends("", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
-
-    @Test
-    public void testGetUserTaggableFriends()
-    {
-        connector.getUserTaggableFriends("", "", "", "", "");
-        Mockito.verify(resource).get(String.class);
-    }
     
     @Test
     public void testGetUserActivities()

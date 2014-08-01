@@ -1798,34 +1798,6 @@ public class FacebookConnector {
             .get(String.class), NamedFacebookType.class);
     }
 
-    /**
-     * A list of friends that can be tagged or mentioned in stories published to Facebook.
-     * {@sample.xml ../../../doc/mule-module-facebook.xml.sample facebook:get-user-taggable-friends}
-     *
-     *
-     * @param user Represents the ID of the user object.
-     * @param since A unix timestamp or any date accepted by strtotime
-     * @param until A unix timestamp or any date accepted by strtotime
-     * @param limit Limit the number of items returned.
-     * @param offset An offset to the response. Useful for paging.
-     * @return A list of taggable friends with the id and name.
-     */
-    @Processor
-    @OAuthProtected
-    public List<NamedFacebookType> getUserTaggableFriends(String user,
-                                                  @Default("last week") String since,
-                                                  @Default("yesterday") String until,
-                                                  @Default("100") String limit,
-                                                  @Default("0") String offset)
-    {
-        URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/taggable_friends").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
-                .queryParam("since", since)
-                .queryParam("until", until)
-                .queryParam("limit", limit)
-                .queryParam("offset", offset)
-                .get(String.class), NamedFacebookType.class);
-    }
 
     /**
      * The activities listed on the user's profile 

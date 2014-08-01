@@ -26,7 +26,6 @@ Features and functionality
 Closed issues in release
 ------------------------
 The following new operations have been implemented in this release:
-* List of friends that can be tagged (Get user taggable friends).
 * List of videos that were published by user (Get user videos uploaded).
 * List of photos that were published by user (Get user photos uploaded).
 
