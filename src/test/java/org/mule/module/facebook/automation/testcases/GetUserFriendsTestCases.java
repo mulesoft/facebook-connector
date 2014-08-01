@@ -45,7 +45,7 @@ public class GetUserFriendsTestCases extends FacebookTestParent {
 			String auxProfileId = getTestRunMessageValue("auxProfileId");
 			
 			List<NamedFacebookType> result = runFlowAndGetPayload("get-user-friends");
-			assertEquals(1, result.size());
+			assertEquals(2, result.size());
 			
 			NamedFacebookType friend = result.get(0);
 			assertEquals(friend.getId(), auxProfileId);
