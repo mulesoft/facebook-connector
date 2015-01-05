@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mule.module.facebook.connection.strategy.FacebookOAuthStrategy;
 import org.mule.module.facebook.types.GetUserAccountResponseType;
 import org.mule.module.facebook.types.Member;
 import org.mule.module.facebook.types.OutboxThread;
@@ -48,7 +49,9 @@ public class FacebookConnectorTestDriver
     public void setup()
     {
         connector = new FacebookConnector();
-        connector.setAccessToken(ACCESS_TOKEN);
+        FacebookOAuthStrategy facebookOAuthStrategy = new FacebookOAuthStrategy();
+        facebookOAuthStrategy.setAccessToken(ACCESS_TOKEN);
+        connector.setStrategy(facebookOAuthStrategy);
     }
     
     @Test
