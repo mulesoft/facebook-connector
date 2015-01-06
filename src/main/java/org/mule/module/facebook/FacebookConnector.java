@@ -50,8 +50,6 @@ import java.util.List;
  * @author MuleSoft, inc.
  */
 @Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook", minMuleVersion="3.5", configElementName="config-with-oauth")
-//@OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize",
-//        accessTokenRegex = "access_token=([^&]+?)(&|$)", expirationRegex = "expires=([^&]+?)(&|$)")
 public class FacebookConnector {
 
     private static final Logger logger = Logger.getLogger(FacebookConnector.class);
@@ -61,27 +59,6 @@ public class FacebookConnector {
 
     @ConnectionStrategy
     private FacebookOAuthStrategy strategy;
-//    /**
-//     * The application identifier as registered with Facebook
-//     */
-//    @Configurable
-//    @OAuthConsumerKey
-//    private String consumerKey;
-//
-//    /**
-//     * The application secret
-//     */
-//    @Configurable
-//    @OAuthConsumerSecret
-//    private String consumerSecret;
-//
-//    /**
-//     * Facebook permissions
-//     */
-//    @Configurable
-//    @Default(value = "email,read_stream,publish_stream")
-//    @OAuthScope
-//    private String scope;
 
     /**
      * Jersey client
