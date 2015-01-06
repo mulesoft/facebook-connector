@@ -16,6 +16,7 @@ import java.net.URI;
 import javax.imageio.ImageIO;
 
 import org.junit.Before;
+import org.mule.module.facebook.connection.strategy.FacebookOAuthStrategy;
 import org.springframework.core.io.ClassPathResource;
 
 import com.sun.jersey.api.client.Client;
@@ -37,7 +38,9 @@ public abstract class FacebookConnectorGenericUnitTest
     public void setup() throws IOException
     {
         connector = new FacebookConnector();
-        connector.setAccessToken("ACCESS_TOKEN");
+        FacebookOAuthStrategy facebookOAuthStrategy = new FacebookOAuthStrategy();
+        facebookOAuthStrategy.setAccessToken("ACCESS_TOKEN");
+        connector.setStrategy(facebookOAuthStrategy);
         client = mock(Client.class);
         connector.setClient(client);
         resource = mock(WebResource.class);

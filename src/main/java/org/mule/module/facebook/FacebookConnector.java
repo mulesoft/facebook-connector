@@ -6,59 +6,13 @@
 
 package org.mule.module.facebook;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.mule.api.annotations.Configurable;
-import org.mule.api.annotations.Connector;
-import org.mule.api.annotations.Processor;
-import org.mule.api.annotations.oauth.OAuth2;
-import org.mule.api.annotations.oauth.OAuthAccessToken;
-import org.mule.api.annotations.oauth.OAuthConsumerKey;
-import org.mule.api.annotations.oauth.OAuthConsumerSecret;
-import org.mule.api.annotations.oauth.OAuthProtected;
-import org.mule.api.annotations.oauth.OAuthScope;
-import org.mule.api.annotations.param.Default;
-import org.mule.api.annotations.param.Optional;
-import org.mule.module.facebook.types.GetApplicationTaggedResponseType;
-import org.mule.module.facebook.types.GetUserAccountResponseType;
-import org.mule.module.facebook.types.Member;
-import org.mule.module.facebook.types.OutboxThread;
-import org.mule.module.facebook.types.Thread;
-import org.mule.modules.utils.MuleSoftException;
-
 import com.restfb.DefaultJsonMapper;
 import com.restfb.JsonMapper;
 import com.restfb.json.JsonObject;
-import com.restfb.types.Album;
-import com.restfb.types.Application;
-import com.restfb.types.Checkin;
-import com.restfb.types.Comment;
-import com.restfb.types.Event;
-import com.restfb.types.Group;
-import com.restfb.types.Insight;
-import com.restfb.types.Link;
-import com.restfb.types.NamedFacebookType;
-import com.restfb.types.Note;
-import com.restfb.types.Page;
-import com.restfb.types.PageConnection;
+import com.restfb.types.*;
 import com.restfb.types.Photo;
 import com.restfb.types.Photo.Tag;
-import com.restfb.types.Post;
 import com.restfb.types.Post.Likes;
-import com.restfb.types.StatusMessage;
-import com.restfb.types.User;
-import com.restfb.types.Video;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
@@ -67,6 +21,28 @@ import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 import com.sun.jersey.multipart.impl.MultiPartWriter;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.mule.api.annotations.ConnectionStrategy;
+import org.mule.api.annotations.Connector;
+import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.oauth.OAuthProtected;
+import org.mule.api.annotations.param.Default;
+import org.mule.api.annotations.param.Optional;
+import org.mule.module.facebook.connection.strategy.FacebookOAuthStrategy;
+import org.mule.module.facebook.types.*;
+import org.mule.module.facebook.types.Thread;
+import org.mule.modules.utils.MuleSoftException;
+
+import javax.imageio.ImageIO;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.List;
 
 /**
  * Facebook is a social networking service and website launched in February 2004.
@@ -74,36 +50,15 @@ import com.sun.jersey.multipart.impl.MultiPartWriter;
  * @author MuleSoft, inc.
  */
 @Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook", minMuleVersion="3.5", configElementName="config-with-oauth")
-@OAuth2(accessTokenUrl = "https://graph.facebook.com/oauth/access_token", authorizationUrl = "https://graph.facebook.com/oauth/authorize",
-        accessTokenRegex = "access_token=([^&]+?)(&|$)", expirationRegex = "expires=([^&]+?)(&|$)")
 public class FacebookConnector {
 
     private static final Logger logger = Logger.getLogger(FacebookConnector.class);
 	private static String FACEBOOK_URI = "https://graph.facebook.com/v1.0";
     private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
     private static JsonMapper mapper = new DefaultJsonMapper();
-    
-    /**
-     * The application identifier as registered with Facebook
-     */
-    @Configurable
-    @OAuthConsumerKey
-    private String consumerKey;
 
-    /**
-     * The application secret
-     */
-    @Configurable
-    @OAuthConsumerSecret
-    private String consumerSecret;
-
-    /**
-     * Facebook permissions
-     */
-    @Configurable
-    @Default(value = "email,read_stream,publish_stream")
-    @OAuthScope
-    private String scope;
+    @ConnectionStrategy
+    private FacebookOAuthStrategy strategy;
 
     /**
      * Jersey client
@@ -119,10 +74,7 @@ public class FacebookConnector {
     	config.getClasses().add(MultiPartWriter.class);
         client = Client.create(config);
     }
-    
-    @OAuthAccessToken
-    private String accessToken;
-    
+
     /**
      * Gets the user logged details.
      * <p/>
@@ -135,7 +87,7 @@ public class FacebookConnector {
     public User loggedUserDetails()
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("me").build();
-        return mapper.toJavaObject(this.newWebResource(uri, accessToken)
+        return mapper.toJavaObject(this.newWebResource(uri, getStrategy().getAccessToken())
                 .type(MediaType.APPLICATION_FORM_URLENCODED).get(String.class), User.class);
     }
     
@@ -160,7 +112,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         
         final String jsonResponse = resource.queryParam("q", q)
                                             .queryParam("since", since)
@@ -194,7 +146,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         final String jsonResponse = resource.queryParam("q", q)
                                             .queryParam("since", since)
                                             .queryParam("until", until)
@@ -227,7 +179,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         final String jsonResponse = resource.queryParam("q", q)
                                             .queryParam("type", "page")
                                             .queryParam("since", since)
@@ -259,7 +211,7 @@ public class FacebookConnector {
                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         final String jsonResponse = resource.queryParam("q", q)
                                             .queryParam("type", "event")
                                             .queryParam("since", since)
@@ -291,7 +243,7 @@ public class FacebookConnector {
                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         final String jsonResponse = resource.queryParam("q", q)
                                             .queryParam("type", "group")
                                             .queryParam("since", since)
@@ -323,7 +275,7 @@ public class FacebookConnector {
                                         @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("search").build();
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         final String jsonResponse = resource.queryParam("type", "checkin")
                                             .queryParam("since", since)
                                             .queryParam("until", until)
@@ -349,7 +301,7 @@ public class FacebookConnector {
     public Album getAlbum(String album, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}").build(album);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Album.class);
     }
 
@@ -375,7 +327,7 @@ public class FacebookConnector {
                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}/photos").build(album);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -405,7 +357,7 @@ public class FacebookConnector {
                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{album}/comments").build(album);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -430,7 +382,7 @@ public class FacebookConnector {
     public Event getEvent(String eventId, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).
 
         get(String.class), Event.class);
@@ -458,7 +410,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/feed").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList( resource.queryParam("since", since)
                                           .queryParam("until", until)
                                           .queryParam("limit", limit)
@@ -489,7 +441,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/noreply").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -520,7 +472,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/maybe").build(eventId);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
 						            .queryParam("since", since)
 						            .queryParam("until", until)
 						            .queryParam("limit", limit)
@@ -550,7 +502,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/invited").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         if (since != null) resource = resource.queryParam("since", since);
         if (until != null) resource = resource.queryParam("until", until);
         if (limit != null) resource = resource.queryParam("limit", limit);
@@ -582,7 +534,7 @@ public class FacebookConnector {
                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/attending").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource
 						            .queryParam("since", since)
 						            .queryParam("until", until)
@@ -612,7 +564,7 @@ public class FacebookConnector {
                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/declined").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource
 						            .queryParam("since", since)
 						            .queryParam("until", until)
@@ -638,7 +590,7 @@ public class FacebookConnector {
     public byte[] getEventPicture(String eventId, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{event}/picture").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         BufferedImage image = resource.queryParam("type", type).get(BufferedImage.class);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try
@@ -664,7 +616,7 @@ public class FacebookConnector {
     public List<Photo> getEventPhotos(String eventId)
     {
     	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/photos").build(eventId);
-    	WebResource resource = this.newWebResource(uri, accessToken);
+    	WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
     	return mapper.toJavaList(resource.get(String.class), Photo.class);
     }
 
@@ -680,7 +632,7 @@ public class FacebookConnector {
     public List<Video> getEventVideos(String eventId)
     {
     	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/videos").build(eventId);
-    	WebResource resource = this.newWebResource(uri, accessToken);
+    	WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
     	return mapper.toJavaList(resource.get(String.class), Video.class);
     }
     
@@ -701,7 +653,7 @@ public class FacebookConnector {
     public Group getGroup(String group, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}").build(group);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Group.class);
     }
 
@@ -728,7 +680,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/feed").build(group);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource
 						            .queryParam("since", since)
 						            .queryParam("until", until)
@@ -760,7 +712,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/members").build(group);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
 							            .queryParam("since", since)
 							            .queryParam("until", until)
 							            .queryParam("limit", limit)
@@ -785,7 +737,7 @@ public class FacebookConnector {
     public byte[] getGroupPicture(String group, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{group}/picture").build(group);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return bufferedImageToByteArray(resource.queryParam("type", type).get(BufferedImage.class));
     }
 
@@ -806,7 +758,7 @@ public class FacebookConnector {
                         @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}").build(link);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Link.class);
     }
 
@@ -831,7 +783,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{link}/comments").build(link);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -855,7 +807,7 @@ public class FacebookConnector {
     public Note getNote(String note, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}").build(note);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Note.class);
     }
 
@@ -880,7 +832,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}/comments").build(note);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -909,7 +861,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{note}/likes").build(note);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -933,7 +885,7 @@ public class FacebookConnector {
     public Page getPage(String page, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}").build(page);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), Page.class);
     }
 
@@ -958,7 +910,7 @@ public class FacebookConnector {
                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/feed").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -981,7 +933,7 @@ public class FacebookConnector {
     public byte[] getPagePicture(String page, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return bufferedImageToByteArray( resource.queryParam("type", type).get(BufferedImage.class));
     }
     
@@ -998,7 +950,7 @@ public class FacebookConnector {
     public boolean setPagePictureFromLink(String page, String imageUrl) 
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
-    	WebResource resource = this.newWebResource(uri, accessToken);
+    	WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
     	Form form = new Form();
 	    form.add("picture", imageUrl);
 	    String res = resource.type(MediaType.MULTIPART_FORM_DATA).post(String.class, form);
@@ -1019,7 +971,7 @@ public class FacebookConnector {
     public boolean setPagePictureFromSource(String page, File source) 
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/picture").build(page);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         
         FormDataMultiPart multiPart = new FormDataMultiPart();
         multiPart.bodyPart(new FileDataBodyPart("source", source, MediaType.APPLICATION_OCTET_STREAM_TYPE));
@@ -1051,7 +1003,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/tagged").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken) 
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1080,7 +1032,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/links").build(page);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1110,7 +1062,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/photos").build(page);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1139,7 +1091,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/groups").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1169,7 +1121,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/albums").build(page);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1198,7 +1150,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/statuses").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1227,7 +1179,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/videos").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1256,7 +1208,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/notes").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1285,7 +1237,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/posts").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1314,7 +1266,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/events").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1343,7 +1295,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/checkins").build(page);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1367,7 +1319,7 @@ public class FacebookConnector {
     public org.mule.module.facebook.types.Photo getPhoto(String photo, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}").build(photo);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), org.mule.module.facebook.types.Photo.class);
     }
     
@@ -1387,7 +1339,7 @@ public class FacebookConnector {
     public boolean tagPhoto(String photoId, @Optional String to, @Optional String tagText, @Optional String x, @Optional String y) 
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photoId}/tags").build(photoId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         
         Form form = new Form();
         if (to != null) { form.add("to", to); }
@@ -1410,7 +1362,7 @@ public class FacebookConnector {
     @OAuthProtected
     public List<Tag> getPhotoTags(String photoId) {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photoId}/tags").build(photoId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.get(String.class), Tag.class);
     }
     
@@ -1436,7 +1388,7 @@ public class FacebookConnector {
                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}/comments").build(photo);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1465,7 +1417,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{photo}/likes").build(photo);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1489,7 +1441,7 @@ public class FacebookConnector {
     public Post getPost(String post, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}").build(post);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Post.class);
     }
 
@@ -1514,7 +1466,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{post}/comments").build(post);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1538,7 +1490,7 @@ public class FacebookConnector {
     public StatusMessage getStatus(String status, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}").build(status);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), StatusMessage.class);
     }
 
@@ -1563,7 +1515,7 @@ public class FacebookConnector {
                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{status}/comments").build(status);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1587,7 +1539,7 @@ public class FacebookConnector {
     public User getUser(String user, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}").build(user);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.queryParam("metadata", metadata).get(String.class), User.class);
     }
 
@@ -1619,7 +1571,7 @@ public class FacebookConnector {
                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("q", q)
             .queryParam("metadata", metadata)
             .queryParam("since", since)
@@ -1650,7 +1602,7 @@ public class FacebookConnector {
                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/home").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1680,7 +1632,7 @@ public class FacebookConnector {
                               @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/feed").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1711,7 +1663,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/tagged").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1741,7 +1693,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/posts").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1764,7 +1716,7 @@ public class FacebookConnector {
     public byte[] getUserPicture(String user, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/picture").build(user);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         BufferedImage image = resource.queryParam("type", type).get(BufferedImage.class);
         return bufferedImageToByteArray(image);
     }
@@ -1790,7 +1742,7 @@ public class FacebookConnector {
                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/friends").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1820,7 +1772,7 @@ public class FacebookConnector {
                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/activities").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1849,7 +1801,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/checkins").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1878,7 +1830,7 @@ public class FacebookConnector {
                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/interests").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1907,7 +1859,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/music").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1936,7 +1888,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/books").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1965,7 +1917,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/movies").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -1994,7 +1946,7 @@ public class FacebookConnector {
                                     @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/television").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2025,7 +1977,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/likes").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2056,7 +2008,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/photos").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
         	.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2084,7 +2036,7 @@ public class FacebookConnector {
                                      @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/photos/uploaded").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
                 .queryParam("since", since)
                 .queryParam("until", until)
                 .queryParam("limit", limit)
@@ -2115,7 +2067,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/albums").build(user);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2146,7 +2098,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/videos").build(user);
         
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2175,7 +2127,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/videos/uploaded").build(user);
 
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
                 .queryParam("since", since)
                 .queryParam("until", until)
                 .queryParam("limit", limit)
@@ -2207,7 +2159,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/groups").build(user);
 
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2237,7 +2189,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/statuses").build(user);
 
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2267,7 +2219,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/links").build(user);
 
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2296,7 +2248,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/notes").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2328,7 +2280,7 @@ public class FacebookConnector {
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/events").build(user);
 
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2359,7 +2311,7 @@ public class FacebookConnector {
                                @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/inbox").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2390,7 +2342,7 @@ public class FacebookConnector {
                                 @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/outbox").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2420,7 +2372,7 @@ public class FacebookConnector {
                                  @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/updates").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2449,7 +2401,7 @@ public class FacebookConnector {
                                   @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{user}/accounts").build(user);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2474,7 +2426,7 @@ public class FacebookConnector {
     public Video getVideo(String video, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}").build(video);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaObject(resource
             .queryParam("metadata", metadata)
             .get(String.class), Video.class);
@@ -2502,7 +2454,7 @@ public class FacebookConnector {
                                    @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{video}/comments").build(video);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -2542,9 +2494,9 @@ public class FacebookConnector {
                                  @Optional List<String> tags)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/feed").build(profile_id);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
-        form.add("access_token", accessToken);
+        form.add("access_token", getStrategy().getAccessToken());
         form.add("message", msg);
 
         if (picture != null) form.add("picture", picture);
@@ -2577,9 +2529,9 @@ public class FacebookConnector {
     public String publishComment(String postId, String msg)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/comments").build(postId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
-        form.add("access_token", accessToken);
+        form.add("access_token", getStrategy().getAccessToken());
         form.add("message", msg);
 
         WebResource.Builder type = resource.type(MediaType.APPLICATION_FORM_URLENCODED);
@@ -2602,7 +2554,7 @@ public class FacebookConnector {
     public Boolean like(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         String response = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
         
         return Boolean.valueOf(response);
@@ -2624,7 +2576,7 @@ public class FacebookConnector {
                             String subject)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/notes").build(profile_id);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
         form.add("message", msg);
         form.add("subject", subject);
@@ -2653,7 +2605,7 @@ public class FacebookConnector {
     public String publishLink(String profile_id, String msg, String link)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/links").build(profile_id);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
         form.add("message", msg);
         form.add("link", link);
@@ -2688,10 +2640,10 @@ public class FacebookConnector {
     		@Optional String location_id, @Optional String privacy_type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/events").build(profile_id);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         
                
-        resource = resource.queryParam("access_token", accessToken)
+        resource = resource.queryParam("access_token", getStrategy().getAccessToken())
         		.queryParam("name", event_name)
         		.queryParam("start_time", start_time);
         
@@ -2729,7 +2681,7 @@ public class FacebookConnector {
     public Boolean attendEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/attending").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
 
         return Boolean.parseBoolean(res);
@@ -2748,7 +2700,7 @@ public class FacebookConnector {
     public boolean tentativeEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/maybe").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
 
         return Boolean.parseBoolean(res);
@@ -2767,7 +2719,7 @@ public class FacebookConnector {
     public Boolean declineEvent(String eventId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/declined").build(eventId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
         form.add("eventId", eventId);
         String res = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, form);
@@ -2788,7 +2740,7 @@ public class FacebookConnector {
     public Boolean inviteUser(String eventId, String userId)
     {
     	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/invited/{userId}").build(eventId, userId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
         form.add("eventId", eventId);
         form.add("userId", userId);
@@ -2810,7 +2762,7 @@ public class FacebookConnector {
     public Boolean uninviteUser(String eventId, String userId)
     {
     	URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{eventId}/invited/{userId}").build(eventId, userId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
         form.add("eventId", eventId);
         form.add("userId", userId);
@@ -2835,7 +2787,7 @@ public class FacebookConnector {
     public String publishAlbum(String profile_id, String msg, String albumName)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{profile_id}/albums").build(profile_id);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         Form form = new Form();
         form.add("message", msg);
         form.add("name", albumName);
@@ -2863,7 +2815,7 @@ public class FacebookConnector {
     public String publishPhoto(String albumId, String caption, File photo)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{albumId}/photos").build(albumId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         FormDataMultiPart multiPart = new FormDataMultiPart();
         multiPart.bodyPart(new FileDataBodyPart("source", photo, MediaType.APPLICATION_OCTET_STREAM_TYPE));
         multiPart.field("message", caption);
@@ -2894,7 +2846,7 @@ public class FacebookConnector {
     							File video)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{id}/videos").build(id);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         FormDataMultiPart multiPart = new FormDataMultiPart();
         multiPart.bodyPart(new FileDataBodyPart("source", video, MediaType.APPLICATION_OCTET_STREAM_TYPE));
         if (title != null) { multiPart.field("title", title); }
@@ -2920,7 +2872,7 @@ public class FacebookConnector {
     public Boolean deleteObject(String objectId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{object_id}").build(objectId);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         String result = resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(String.class);
         return Boolean.valueOf(result);
     }
@@ -2938,7 +2890,7 @@ public class FacebookConnector {
     public Boolean dislike(String postId)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{postId}/likes").build(postId);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         String response = resource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(String.class);
         return Boolean.valueOf(response);
     }
@@ -2959,7 +2911,7 @@ public class FacebookConnector {
     public Checkin getCheckin(String checkin, @Default("0") String metadata)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{checkin}").build(checkin);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         return mapper.toJavaObject(resource.queryParam("metadata", metadata).get(String.class), Checkin.class);
     }
 
@@ -2976,7 +2928,7 @@ public class FacebookConnector {
     public Application getApplication(String application)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}").build(application);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         return mapper.toJavaObject( resource.get(String.class), Application.class);
     }
 
@@ -3001,7 +2953,7 @@ public class FacebookConnector {
                                      @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/feed").build(application);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3024,7 +2976,7 @@ public class FacebookConnector {
     public byte[] getApplicationPicture(String application, @Default("small") String type)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/picture").build(application);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         BufferedImage image = resource.queryParam("type", type).get(BufferedImage.class);
         return bufferedImageToByteArray(image);
     }
@@ -3052,7 +3004,7 @@ public class FacebookConnector {
                                        @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/tagged").build(application);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3081,7 +3033,7 @@ public class FacebookConnector {
                                       @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/links").build(application);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3110,7 +3062,7 @@ public class FacebookConnector {
                                        @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/photos").build(application);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3139,7 +3091,7 @@ public class FacebookConnector {
                                        @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/albums").build(application);
-        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
+        WebResource resource = client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3168,7 +3120,7 @@ public class FacebookConnector {
                                          @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/statuses").build(application);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3197,7 +3149,7 @@ public class FacebookConnector {
                                        @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/videos").build(application);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3226,7 +3178,7 @@ public class FacebookConnector {
                                       @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/notes").build(application);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3255,7 +3207,7 @@ public class FacebookConnector {
                                        @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/events").build(application);
-        return mapper.toJavaList(this.newWebResource(uri, accessToken)
+        return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
             .queryParam("since", since)
             .queryParam("until", until)
             .queryParam("limit", limit)
@@ -3285,7 +3237,7 @@ public class FacebookConnector {
                                          @Default("0") String offset)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{application}/insights").build(application);
-        WebResource resource = this.newWebResource(uri, accessToken);
+        WebResource resource = this.newWebResource(uri, getStrategy().getAccessToken());
         return mapper.toJavaList(resource.queryParam("since", since)
 							            .queryParam("until", until)
 							            .queryParam("limit", limit)
@@ -3308,7 +3260,7 @@ public class FacebookConnector {
 	@OAuthProtected
     public byte[] downloadImage(String imageUri) {
     	URI uri = URI.create(imageUri);
-    	return this.bufferedImageToByteArray(this.newWebResource(uri, accessToken).get(BufferedImage.class));
+    	return this.bufferedImageToByteArray(this.newWebResource(uri, getStrategy().getAccessToken()).get(BufferedImage.class));
     }
     
     private byte[] bufferedImageToByteArray(BufferedImage image)
@@ -3334,35 +3286,15 @@ public class FacebookConnector {
     	return this.client.resource(uri).queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, accessToken);
     }
 
-    public String getConsumerKey()
-    {
-        return consumerKey;
+
+    public FacebookOAuthStrategy getStrategy() {
+        return strategy;
     }
 
-    public void setConsumerKey(String consumerKey)
-    {
-        this.consumerKey = consumerKey;
+    public void setStrategy(FacebookOAuthStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    public String getConsumerSecret()
-    {
-        return consumerSecret;
-    }
-
-    public void setConsumerSecret(String consumerSecret)
-    {
-        this.consumerSecret = consumerSecret;
-    }
-
-    public String getScope()
-    {
-        return scope;
-    }
-
-    public void setScope(String scope)
-    {
-        this.scope = scope;
-    }
     
     public Client getClient()
     {
@@ -3373,13 +3305,4 @@ public class FacebookConnector {
     {
         this.client = client;
     }
-
-	public String getAccessToken() {
-		return accessToken;
-	}
-
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-    
 }
