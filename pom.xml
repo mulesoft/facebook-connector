@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.modules</groupId>
     <artifactId>mule-module-facebook</artifactId>
     <packaging>mule-module</packaging>
@@ -13,87 +14,87 @@
         <version>3.6.0</version>
     </parent>
 
-	<properties>
-		<category>Community</category>
-		<licensePath>LICENSE.md</licensePath>
-		<devkit.studio.package.skip>false</devkit.studio.package.skip>
-		<jackson.version>1.9.5</jackson.version>
-		<mule.modules.utils.version>1.0</mule.modules.utils.version>
-		<restfb.version>1.6.9</restfb.version>
-		<connector.test.version>2.0.3</connector.test.version>
-	</properties>
+    <properties>
+        <category>Community</category>
+        <licensePath>LICENSE.md</licensePath>
+        <devkit.studio.package.skip>false</devkit.studio.package.skip>
+        <jackson.version>1.9.5</jackson.version>
+        <mule.modules.utils.version>1.0</mule.modules.utils.version>
+        <restfb.version>1.6.9</restfb.version>
+        <connector.test.version>2.0.3</connector.test.version>
+    </properties>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.6</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-						<nonFilteredFileExtensions>
-							<nonFilteredFileExtension>mp4</nonFilteredFileExtension>
-						</nonFilteredFileExtensions>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <nonFilteredFileExtensions>
+                            <nonFilteredFileExtension>mp4</nonFilteredFileExtension>
+                        </nonFilteredFileExtensions>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>1.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-multipart</artifactId>
-			<version>1.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-http</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-spring-config</artifactId>
-			<version>${mule.version}</version>
-			<optional>true</optional>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-modules-utils</artifactId>
-			<version>${mule.modules.utils.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.restfb</groupId>
-			<artifactId>restfb</artifactId>
-			<version>${restfb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-connector-test</artifactId>
-			<version>${connector.test.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-http</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-spring-config</artifactId>
+            <version>${mule.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-modules-utils</artifactId>
+            <version>${mule.modules.utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.restfb</groupId>
+            <artifactId>restfb</artifactId>
+            <version>${restfb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-connector-test</artifactId>
+            <version>${connector.test.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<scm>
-		<connection>scm:git:git://github.com:mulesoft/facebook-connector.git</connection>
-		<developerConnection>
+    <scm>
+        <connection>scm:git:git://github.com:mulesoft/facebook-connector.git</connection>
+        <developerConnection>
             scm:git:git@github.com:mulesoft/facebook-connector.git
         </developerConnection>
-		<url>http://github.com/mulesoft/facebook-connector</url>
-	</scm>
+        <url>http://github.com/mulesoft/facebook-connector</url>
+    </scm>
 
     <repositories>
         <repository>
@@ -108,6 +109,21 @@
             <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
             <layout>default</layout>
         </repository>
-	</repositories>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>mulesoft-releases</id>
+            <name>MuleSoft Repository</name>
+            <url>http://repository-master.mulesoft.org/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>mulesoft-snapshots</id>
+            <name>MuleSoft Snapshot Repository</name>
+            <url>http://repository-master.mulesoft.org/snapshots/</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
 
 </project>
