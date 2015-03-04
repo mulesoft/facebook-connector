@@ -6,63 +6,60 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.User;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GetEventDeclinedTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-    	initializeTestRunMessage("getEventDeclinedTestData");
-    	
-    	String profileId = getProfileId();
-    	
-    	String auxProfileId = getProfileIdAux();
-    	
-    	String eventName = getTestRunMessageValue("eventName");
-    	String startTime = getTestRunMessageValue("startTime");
-    	
-    	String eventId = publishEventAux(auxProfileId, eventName, startTime);
-    	declineEvent(eventId);
-    	
-    	upsertOnTestRunMessage("eventId", eventId);
-    	upsertOnTestRunMessage("profileId", profileId);
-    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetEventDeclined() {
-		try {
-			String profileId = getTestRunMessageValue("profileId");
-			
-			List<User> users = runFlowAndGetPayload("get-event-declined");
-			assertTrue(users.size() == 1);
-			
-			User user = users.get(0);
-			assertEquals(user.getId(), profileId);
-			
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
 
-	@After
-	public void tearDown() throws Exception {
-		String eventId = getTestRunMessageValue("eventId");
-		deleteObjectAux(eventId);
-	}
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getEventDeclinedTestData");
+
+        String profileId = getProfileId();
+
+        String auxProfileId = getProfileIdAux();
+
+        String eventName = getTestRunMessageValue("eventName");
+        String startTime = getTestRunMessageValue("startTime");
+
+        String eventId = publishEventAux(auxProfileId, eventName, startTime);
+        declineEvent(eventId);
+
+        upsertOnTestRunMessage("eventId", eventId);
+        upsertOnTestRunMessage("profileId", profileId);
+        upsertOnTestRunMessage("auxProfileId", auxProfileId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetEventDeclined() {
+        try {
+            String profileId = getTestRunMessageValue("profileId");
+
+            List<User> users = runFlowAndGetPayload("get-event-declined");
+            assertTrue(users.size() == 1);
+
+            User user = users.get(0);
+            assertEquals(user.getId(), profileId);
+
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        String eventId = getTestRunMessageValue("eventId");
+        deleteObjectAux(eventId);
+    }
 }

@@ -40,15 +40,6 @@ public class FacebookOAuthStrategy {
     @OAuthAccessToken
     private String accessToken;
 
-
-    /**
-     *
-     *
-     * GETTERS AND SETTERS
-     *
-     *
-     */
-
     public String getConsumerKey() {
         return consumerKey;
     }

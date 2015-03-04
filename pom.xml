@@ -21,7 +21,6 @@
         <jackson.version>1.9.5</jackson.version>
         <mule.modules.utils.version>1.0</mule.modules.utils.version>
         <restfb.version>1.6.9</restfb.version>
-        <connector.test.version>2.0.3</connector.test.version>
     </properties>
 
     <build>

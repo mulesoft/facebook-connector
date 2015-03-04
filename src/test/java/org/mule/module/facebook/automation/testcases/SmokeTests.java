@@ -7,7 +7,7 @@
 package org.mule.module.facebook.automation.testcases;
 
 public interface SmokeTests {
-	
-	/* category marker */ 
+
+	/* category marker */
 
 }

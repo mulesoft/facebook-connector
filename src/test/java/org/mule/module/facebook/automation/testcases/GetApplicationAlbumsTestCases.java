@@ -6,32 +6,31 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.Album;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Album;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public class GetApplicationAlbumsTestCases extends FacebookTestParent {
-	
-    @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetApplicationAlbums() {
-		try {
-			initializeTestRunMessage("getApplicationAlbumsTestData");
 
-			List<Album> albums = runFlowAndGetPayload("get-application-albums");
-			assertNotNull(albums);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-     
-	}
-    
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetApplicationAlbums() {
+        try {
+            initializeTestRunMessage("getApplicationAlbumsTestData");
+
+            List<Album> albums = runFlowAndGetPayload("get-application-albums");
+            assertNotNull(albums);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+
+    }
+
 }

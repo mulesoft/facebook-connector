@@ -7,7 +7,7 @@
 package org.mule.module.facebook.automation.testcases;
 
 public interface RegressionTests {
-	
-	/* category marker */ 
+
+	/* category marker */
 
 }

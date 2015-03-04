@@ -6,60 +6,59 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.File;
-import java.util.List;
-
+import com.restfb.types.Comment;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Comment;
+import java.io.File;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class GetPhotoCommentsTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getPhotoCommentsTestData");
-		String profileId = getProfileId();
-		upsertOnTestRunMessage("user", profileId);
-		
-		String caption = (String) getTestRunMessageValue("caption");
-		File photoFile = new File(getClass().getClassLoader().getResource((String) getTestRunMessageValue("photoFilePath")).toURI());
-		
-		String photoId = publishPhoto(profileId, caption, photoFile);
-		upsertOnTestRunMessage("photo", photoId);
-		
-		String commentId = publishComment((String) getTestRunMessageValue("photo"), (String) getTestRunMessageValue("msg"));
-		upsertOnTestRunMessage("commentId", commentId);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetPhotoComments() {
-		try {
-			List<Comment> result = runFlowAndGetPayload("get-photo-comments");
-			
-			assertTrue(result.size() == 1);
-			Comment comment = result.get(0);
-			assertTrue(comment.getId().equals((String) getTestRunMessageValue("commentId")));
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
-    
-	@After
-	public void tearDown() throws Exception {
-		String commentId = (String) getTestRunMessageValue("commentId");
-		deleteObject(commentId);
-		String photoId = (String) getTestRunMessageValue("photo");
-		deleteObject(photoId);
-	}
-    
+
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getPhotoCommentsTestData");
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("user", profileId);
+
+        String caption = (String) getTestRunMessageValue("caption");
+        File photoFile = new File(getClass().getClassLoader().getResource((String) getTestRunMessageValue("photoFilePath")).toURI());
+
+        String photoId = publishPhoto(profileId, caption, photoFile);
+        upsertOnTestRunMessage("photo", photoId);
+
+        String commentId = publishComment((String) getTestRunMessageValue("photo"), (String) getTestRunMessageValue("msg"));
+        upsertOnTestRunMessage("commentId", commentId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetPhotoComments() {
+        try {
+            List<Comment> result = runFlowAndGetPayload("get-photo-comments");
+
+            assertTrue(result.size() == 1);
+            Comment comment = result.get(0);
+            assertTrue(comment.getId().equals((String) getTestRunMessageValue("commentId")));
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        String commentId = (String) getTestRunMessageValue("commentId");
+        deleteObject(commentId);
+        String photoId = (String) getTestRunMessageValue("photo");
+        deleteObject(photoId);
+    }
+
 }

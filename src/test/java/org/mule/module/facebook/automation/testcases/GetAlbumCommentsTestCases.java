@@ -6,11 +6,7 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.Collection;
-
+import com.restfb.types.Comment;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.junit.Before;
@@ -18,53 +14,56 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Comment;
+import java.util.Collection;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class GetAlbumCommentsTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getAlbumCommentsTestData");
 
-		String albumName = (String) getTestRunMessageValue("albumName");
-		String msg = (String) getTestRunMessageValue("msg");
-		String profileId = getProfileId();
-		upsertOnTestRunMessage("profileId", profileId);
-			
-		String albumId = publishAlbum(albumName, msg, profileId);
-		upsertOnTestRunMessage("albumId", albumId);
-			
-		String commentMsg = (String) getTestRunMessageValue("commentMsg");
-		String commentId = publishComment(albumId, commentMsg);
-		upsertOnTestRunMessage("commentId", commentId);
-	}
-	
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetAlbumComments() {
-		try {
-			String albumId = (String) getTestRunMessageValue("albumId");
-			upsertOnTestRunMessage("album", albumId);
-			final String commentId = (String) getTestRunMessageValue("commentId");
-			
-			Collection<Comment> comments = runFlowAndGetPayload("get-album-comments");
-			
-			Collection<Comment> matching = CollectionUtils.select(comments, new Predicate() {
-				
-				@Override
-				public boolean evaluate(Object object) {
-					Comment comment = (Comment) object;
-					return comment.getId().equals(commentId);
-				}
-			});
-			
-			assertTrue(matching.size() == 1);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-     
-	}
-    
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getAlbumCommentsTestData");
+
+        String albumName = (String) getTestRunMessageValue("albumName");
+        String msg = (String) getTestRunMessageValue("msg");
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("profileId", profileId);
+
+        String albumId = publishAlbum(albumName, msg, profileId);
+        upsertOnTestRunMessage("albumId", albumId);
+
+        String commentMsg = (String) getTestRunMessageValue("commentMsg");
+        String commentId = publishComment(albumId, commentMsg);
+        upsertOnTestRunMessage("commentId", commentId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetAlbumComments() {
+        try {
+            String albumId = (String) getTestRunMessageValue("albumId");
+            upsertOnTestRunMessage("album", albumId);
+            final String commentId = (String) getTestRunMessageValue("commentId");
+
+            Collection<Comment> comments = runFlowAndGetPayload("get-album-comments");
+
+            Collection<Comment> matching = CollectionUtils.select(comments, new Predicate() {
+
+                @Override
+                public boolean evaluate(Object object) {
+                    Comment comment = (Comment) object;
+                    return comment.getId().equals(commentId);
+                }
+            });
+
+            assertTrue(matching.size() == 1);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+
+    }
+
 }

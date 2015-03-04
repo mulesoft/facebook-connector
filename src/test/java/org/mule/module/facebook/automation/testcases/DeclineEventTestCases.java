@@ -6,48 +6,48 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 public class DeclineEventTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("declineEventTestData");
 
-		String auxProfileId = getProfileIdAux();
-		String eventName = getTestRunMessageValue("eventName");
-		String startTime = getTestRunMessageValue("startTime");
-		
-		String eventId = publishEventAux(auxProfileId, eventName, startTime);
-		upsertOnTestRunMessage("eventId", eventId);
-		
-		attendEvent(eventId);
-	}
-	
-	@Category({SmokeTests.class, RegressionTests.class})
-	@Test
-	public void testDeclineEvent() {
-		try {
-			String eventId = getTestRunMessageValue("eventId");
-			Boolean result = declineEvent(eventId);
-			assertTrue(result);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("declineEventTestData");
 
-	@After
-	public void tearDown() throws Exception {
-		String eventId = getTestRunMessageValue("eventId");
-		deleteObjectAux(eventId);
-	}
-	
+        String auxProfileId = getProfileIdAux();
+        String eventName = getTestRunMessageValue("eventName");
+        String startTime = getTestRunMessageValue("startTime");
+
+        String eventId = publishEventAux(auxProfileId, eventName, startTime);
+        upsertOnTestRunMessage("eventId", eventId);
+
+        attendEvent(eventId);
+    }
+
+    @Category({SmokeTests.class, RegressionTests.class})
+    @Test
+    public void testDeclineEvent() {
+        try {
+            String eventId = getTestRunMessageValue("eventId");
+            Boolean result = declineEvent(eventId);
+            assertTrue(result);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        String eventId = getTestRunMessageValue("eventId");
+        deleteObjectAux(eventId);
+    }
+
 }

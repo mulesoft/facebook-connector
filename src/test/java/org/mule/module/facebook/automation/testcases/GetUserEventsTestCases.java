@@ -6,62 +6,61 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.Event;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Event;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class GetUserEventsTestCases extends FacebookTestParent {
-	
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-    	initializeTestRunMessage("getUserEventsTestData");
-			
-    	String profileId = getProfileId();
-    	upsertOnTestRunMessage("user", profileId);
-	    	
-    	String eventId = publishEvent(profileId, (String) getTestRunMessageValue("eventName"), (String) getTestRunMessageValue("startTime"));
-    	upsertOnTestRunMessage("objectId", eventId);
-	}
-	
-    @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetUserEvents() {
-		try {
-			List<Event> result = runFlowAndGetPayload("get-user-events");
 
-			assertTrue(result.size() != 0);
-			
-			String eventId = (String) getTestRunMessageValue("objectId");
-			boolean containsPublishedEvent = false;
-			for(Event event : result) {
-				if(eventId.equals(event.getId())) {
-					containsPublishedEvent = true;
-					break;
-				}
-			}
-			
-			assertTrue(containsPublishedEvent);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-     
-	}
-    
+
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getUserEventsTestData");
+
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("user", profileId);
+
+        String eventId = publishEvent(profileId, (String) getTestRunMessageValue("eventName"), (String) getTestRunMessageValue("startTime"));
+        upsertOnTestRunMessage("objectId", eventId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetUserEvents() {
+        try {
+            List<Event> result = runFlowAndGetPayload("get-user-events");
+
+            assertTrue(result.size() != 0);
+
+            String eventId = (String) getTestRunMessageValue("objectId");
+            boolean containsPublishedEvent = false;
+            for (Event event : result) {
+                if (eventId.equals(event.getId())) {
+                    containsPublishedEvent = true;
+                    break;
+                }
+            }
+
+            assertTrue(containsPublishedEvent);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+
+    }
+
     @After
-	public void tearDown() throws Exception {
-		deleteObject((String) getTestRunMessageValue("objectId"));
-	}
-    
+    public void tearDown() throws Exception {
+        deleteObject((String) getTestRunMessageValue("objectId"));
+    }
+
 }

@@ -6,37 +6,36 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
+import com.restfb.types.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.User;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class GetUserTestCases extends FacebookTestParent {
 
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getUserTestData");
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getUserTestData");
 
-		User loggedInUser = getLoggedUserDetails();
-		upsertOnTestRunMessage("username", loggedInUser.getId());
-	}
+        User loggedInUser = getLoggedUserDetails();
+        upsertOnTestRunMessage("username", loggedInUser.getId());
+    }
 
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetUser() {
-		try {
-			User user = runFlowAndGetPayload("get-user");
-			assertEquals(user.getId(), (String) getTestRunMessageValue("username"));
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetUser() {
+        try {
+            User user = runFlowAndGetPayload("get-user");
+            assertEquals(user.getId(), (String) getTestRunMessageValue("username"));
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
 
-	}
+    }
 
 }

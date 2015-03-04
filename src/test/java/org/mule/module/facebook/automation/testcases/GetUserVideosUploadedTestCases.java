@@ -35,8 +35,7 @@ public class GetUserVideosUploadedTestCases extends FacebookTestParent {
         try {
             List<Video> result = runFlowAndGetPayload("get-user-videos-uploaded");
             assertNotNull(result);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             fail(ConnectorTestUtils.getStackTrace(e));
         }
     }

@@ -6,36 +6,35 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.Checkin;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Checkin;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public class GetPageCheckinsTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getPageCheckinsTestData");
-	}
-	
+
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetPageCheckins() {
-		try {
-			List<Checkin> result = runFlowAndGetPayload("get-page-checkins");
-			assertNotNull(result);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
-    
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getPageCheckinsTestData");
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetPageCheckins() {
+        try {
+            List<Checkin> result = runFlowAndGetPayload("get-page-checkins");
+            assertNotNull(result);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
 }

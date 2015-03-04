@@ -6,62 +6,59 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.User;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GetEventNoReplyTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-    	initializeTestRunMessage("getEventNoReplyTestData");
-    	
-    	String profileId = getProfileId();
-    	String auxProfileId = getProfileIdAux();
 
-    	upsertOnTestRunMessage("profileId", profileId);
-    	upsertOnTestRunMessage("auxProfileId", auxProfileId);
-    	
-    	String eventName = getTestRunMessageValue("eventName");
-    	String startTime = getTestRunMessageValue("startTime");
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getEventNoReplyTestData");
 
-    	String eventId = publishEvent(profileId, eventName , startTime);
-    	upsertOnTestRunMessage("eventId", eventId);
-    	
-    	inviteUser(eventId, auxProfileId);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetEventNoReply() {
-		try {
-			String auxProfileId = getTestRunMessageValue("auxProfileId");
-			
-			List<User> users = runFlowAndGetPayload("get-event-no-reply");
-			assertTrue(users.size() == 1);
-			
-			User user = users.get(0);
-			assertEquals(user.getId(), auxProfileId);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
-	
-	@After
-	public void tearDown() throws Exception {
-		String eventId = getTestRunMessageValue("eventId");
-		deleteObject(eventId);
-	}
+        String profileId = getProfileId();
+        String auxProfileId = getProfileIdAux();
+
+        upsertOnTestRunMessage("profileId", profileId);
+        upsertOnTestRunMessage("auxProfileId", auxProfileId);
+
+        String eventName = getTestRunMessageValue("eventName");
+        String startTime = getTestRunMessageValue("startTime");
+
+        String eventId = publishEvent(profileId, eventName, startTime);
+        upsertOnTestRunMessage("eventId", eventId);
+
+        inviteUser(eventId, auxProfileId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetEventNoReply() {
+        try {
+            String auxProfileId = getTestRunMessageValue("auxProfileId");
+
+            List<User> users = runFlowAndGetPayload("get-event-no-reply");
+            assertTrue(users.size() == 1);
+
+            User user = users.get(0);
+            assertEquals(user.getId(), auxProfileId);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        String eventId = getTestRunMessageValue("eventId");
+        deleteObject(eventId);
+    }
 }

@@ -6,52 +6,51 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
+import com.restfb.types.Album;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Album;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class PublishAlbumTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("publishAlbumTestData");
-		String profileId = getProfileId();
-		upsertOnTestRunMessage("profileId", profileId);
-	}
-	
-	@Category({SmokeTests.class, RegressionTests.class})
-	@Test
-	public void testPublishAlbum() {
-		try {
-			String albumName = (String) getTestRunMessageValue("albumName");
-			String msg = (String) getTestRunMessageValue("msg");
-			String profileId = (String) getTestRunMessageValue("profileId");
-			
-			String albumId = publishAlbum(albumName, msg, profileId);
-			upsertOnTestRunMessage("albumId", albumId);
-			
-			Album retrievedAlbum = getAlbum(albumId);
-			assertEquals(retrievedAlbum.getId(), albumId);
-			assertEquals(retrievedAlbum.getName(), albumName);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
+
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("publishAlbumTestData");
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("profileId", profileId);
+    }
+
+    @Category({SmokeTests.class, RegressionTests.class})
+    @Test
+    public void testPublishAlbum() {
+        try {
+            String albumName = (String) getTestRunMessageValue("albumName");
+            String msg = (String) getTestRunMessageValue("msg");
+            String profileId = (String) getTestRunMessageValue("profileId");
+
+            String albumId = publishAlbum(albumName, msg, profileId);
+            upsertOnTestRunMessage("albumId", albumId);
+
+            Album retrievedAlbum = getAlbum(albumId);
+            assertEquals(retrievedAlbum.getId(), albumId);
+            assertEquals(retrievedAlbum.getName(), albumName);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
 
     @After
     public void tearDown() throws Exception {
-    	String albumId = (String) getTestRunMessageValue("albumId");
-    		
-   	// 	Deletion of albums cannot be done by the Facebook API.
-   	//	deleteObject(albumId);
+        String albumId = (String) getTestRunMessageValue("albumId");
+
+        // 	Deletion of albums cannot be done by the Facebook API.
+        //	deleteObject(albumId);
     }
-    
+
 }

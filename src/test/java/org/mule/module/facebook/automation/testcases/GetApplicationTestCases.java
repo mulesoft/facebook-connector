@@ -6,34 +6,33 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
+import com.restfb.types.Application;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Application;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class GetApplicationTestCases extends FacebookTestParent {
 
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getApplicationTestData");
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Category({ RegressionTests.class })
-	@Test
-	public void testGetApplication() {
-		try {
-			Application app = runFlowAndGetPayload("get-application");
-			assertEquals(getTestRunMessageValue("application"), app.getId());
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getApplicationTestData");
+    }
 
-	}
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetApplication() {
+        try {
+            Application app = runFlowAndGetPayload("get-application");
+            assertEquals(getTestRunMessageValue("application"), app.getId());
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+
+    }
 
 }

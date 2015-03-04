@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class GetUserPhotosUploadedTestCases extends FacebookTestParent{
+public class GetUserPhotosUploadedTestCases extends FacebookTestParent {
 
     @SuppressWarnings("unchecked")
     @Before
@@ -44,12 +44,11 @@ public class GetUserPhotosUploadedTestCases extends FacebookTestParent{
             String photoId = (String) getTestRunMessageValue("photoId");
 
             List<Photo> result = runFlowAndGetPayload("get-user-photos-uploaded");
-            assertEquals(result.size(), 1);
+            assertEquals(1, result.size());
 
             Photo photo = result.get(0);
             assertEquals(photo.getId(), photoId);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             fail(ConnectorTestUtils.getStackTrace(e));
         }
     }
