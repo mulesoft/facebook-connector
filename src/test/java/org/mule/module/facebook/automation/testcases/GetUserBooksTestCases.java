@@ -6,53 +6,50 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.PageConnection;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.PageConnection;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GetUserBooksTestCases extends FacebookTestParent {
-	
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-    	initializeTestRunMessage("getUserBooksTestData");
-			
-    	String profileId = getProfileId();
-    	upsertOnTestRunMessage("user", profileId);
-    	
-		List<String> expectedIds = getExpectedBooks();
-		upsertOnTestRunMessage("expected", expectedIds);
-	}
-	
+
+
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetUserBooks() {
-		try {
-			List<String> expectedIds = getTestRunMessageValue("expected");
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getUserBooksTestData");
 
-			assertTrue("Please make sure that you have liked a book page on your Facebook account before running this test.", !expectedIds.isEmpty());
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("user", profileId);
 
-			List<PageConnection> result = runFlowAndGetPayload("get-user-books");
-			for (PageConnection pageConnection : result) {
-				assertTrue(expectedIds.contains(pageConnection.getId()));
-			}
-			
-			assertEquals(expectedIds.size(), result.size());
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-     
-	}
-    
+        List<String> expectedIds = getExpectedBooks();
+        upsertOnTestRunMessage("expected", expectedIds);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetUserBooks() {
+        try {
+            List<String> expectedIds = getTestRunMessageValue("expected");
+
+            assertTrue("Please make sure that you have liked a book page on your Facebook account before running this test.", !expectedIds.isEmpty());
+
+            List<PageConnection> result = runFlowAndGetPayload("get-user-books");
+            for (PageConnection pageConnection : result) {
+                assertTrue(expectedIds.contains(pageConnection.getId()));
+            }
+
+            assertEquals(expectedIds.size(), result.size());
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+
+    }
+
 }

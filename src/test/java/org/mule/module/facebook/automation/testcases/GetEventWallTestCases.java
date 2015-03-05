@@ -6,66 +6,64 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.restfb.types.Post;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Post;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GetEventWallTestCases extends FacebookTestParent {
 
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getEventWallTestData");
-		
-		String profileId = getProfileId();
-		
-		String eventName = (String) getTestRunMessageValue("eventName");
-		String startTime = (String) getTestRunMessageValue("startTime");
-		String eventId = publishEvent(profileId, eventName, startTime);
-		upsertOnTestRunMessage("eventId", eventId);
-		
-		List<String> messages = (List<String>) getTestRunMessageValue("messages");
-		List<String> messageIds = new ArrayList<String>();
-		for (String message : messages) {
-			String messageId = publishMessage(eventId, message);
-			messageIds.add(messageId);
-		}
-		upsertOnTestRunMessage("messageIds", messageIds);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetEventWall() {
-		try {
-			List<String> messageIds = (List<String>) getTestRunMessageValue("messageIds");
-			
-			List<Post> wall = runFlowAndGetPayload("get-event-wall");
-			assertEquals(wall.size(), messageIds.size());
-			for (Post post : wall) {
-				assertTrue(messageIds.contains(post.getId()));
-			}
-		}
-		catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
-	
-	@After
-	public void tearDown() throws Exception{
-		String eventId = (String) getTestRunMessageValue("eventId");
-		deleteObject(eventId);
-	}
-	
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getEventWallTestData");
+
+        String profileId = getProfileId();
+
+        String eventName = getTestRunMessageValue("eventName").toString();
+        String startTime = getTestRunMessageValue("startTime").toString();
+        String eventId = publishEvent(profileId, eventName, startTime);
+        upsertOnTestRunMessage("eventId", eventId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetEventWall() {
+        try {
+            List<Post> wall = runFlowAndGetPayload("get-event-wall");
+            assertEquals(wall.size(), 1);
+
+            List<String> messages = getTestRunMessageValue("messages");
+            List<String> messageIds = new ArrayList<String>();
+            messageIds.add(wall.get(0).getId());
+
+            for (String message : messages) {
+                String messageId = publishMessage((String) getTestRunMessageValue("eventId"), message);
+                messageIds.add(messageId);
+            }
+            wall = runFlowAndGetPayload("get-event-wall");
+
+            assertEquals(wall.size(), messageIds.size());
+            for (Post post : wall) {
+                assertTrue(messageIds.contains(post.getId()));
+            }
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        String eventId = getTestRunMessageValue("eventId");
+        deleteObject(eventId);
+    }
+
 }

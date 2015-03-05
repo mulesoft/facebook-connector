@@ -6,56 +6,53 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.StatusMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.StatusMessage;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GetPageStatusesTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getPageStatusesTestData");
 
-		String page = (String) getTestRunMessageValue("page");
-		String msg = (String) getTestRunMessageValue("msg");
-		
-		String messageId = publishMessage(page, msg);
-		upsertOnTestRunMessage("messageId", messageId);
-	}
-	
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetPageStatuses() {
-		try {
-			String pageId = (String) getTestRunMessageValue("page");
-			String messageId = (String) getTestRunMessageValue("messageId");
-			
-			List<StatusMessage> result = runFlowAndGetPayload("get-page-statuses");
-			assertTrue(result.size() == 1);
-			
-			StatusMessage message = result.get(0);
-			assertEquals(pageId + "_" + message.getId(), messageId);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getPageStatusesTestData");
+
+        String page = (String) getTestRunMessageValue("page");
+        String msg = (String) getTestRunMessageValue("msg");
+
+        String messageId = publishMessage(page, msg);
+        upsertOnTestRunMessage("messageId", messageId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetPageStatuses() {
+        try {
+            String pageId = (String) getTestRunMessageValue("page");
+            String messageId = (String) getTestRunMessageValue("messageId");
+
+            List<StatusMessage> result = runFlowAndGetPayload("get-page-statuses");
+            assertTrue(result.size() == 1);
+
+            StatusMessage message = result.get(0);
+            assertEquals(pageId + "_" + message.getId(), messageId);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
 
     @After
     public void tearDown() throws Exception {
-    	String messageId = (String) getTestRunMessageValue("messageId");
-    	deleteObject(messageId);
+        String messageId = (String) getTestRunMessageValue("messageId");
+        deleteObject(messageId);
     }
-    
+
 }

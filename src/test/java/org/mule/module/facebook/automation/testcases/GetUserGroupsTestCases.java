@@ -6,55 +6,51 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import com.restfb.types.Group;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Group;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GetUserGroupsTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-    	initializeTestRunMessage("getUserGroupsTestData");
-			
-    	String profileId = getProfileId();
-    	upsertOnTestRunMessage("user", profileId);
-    	
-    	String groupId = getExpectedGroupId();
-    	upsertOnTestRunMessage("groupId", groupId);
-	}
-	
+
     @SuppressWarnings("unchecked")
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetUserGroups() {
-		try {
-			String groupId = getTestRunMessageValue("groupId");
-						
-			List<Group> result = runFlowAndGetPayload("get-user-groups");
-			assertFalse(result.isEmpty());
-			
-			boolean found = false;
-			for (Group group : result) {
-				if (group.getId().equals(groupId)) {
-					found = true;
-					break;
-				}
-			}
-			assertTrue(found);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
-    
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getUserGroupsTestData");
+
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("user", profileId);
+
+        String groupId = getExpectedGroupId();
+        upsertOnTestRunMessage("groupId", groupId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetUserGroups() {
+        try {
+            String groupId = getTestRunMessageValue("groupId");
+
+            List<Group> result = runFlowAndGetPayload("get-user-groups");
+            assertFalse(result.isEmpty());
+
+            boolean found = false;
+            for (Group group : result) {
+                if (group.getId().equals(groupId)) {
+                    found = true;
+                    break;
+                }
+            }
+            assertTrue(found);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
 }

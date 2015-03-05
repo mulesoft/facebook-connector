@@ -6,31 +6,31 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 public class GetPagePictureTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getPagePictureTestData");
-	}
-	
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetPagePicture() {
-		try {
-			byte[] result = runFlowAndGetPayload("get-page-picture");
-			assertTrue(result.length > 0);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
-    
+
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getPagePictureTestData");
+    }
+
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetPagePicture() {
+        try {
+            byte[] result = runFlowAndGetPayload("get-page-picture");
+            assertTrue(result.length > 0);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
 }

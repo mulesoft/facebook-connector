@@ -6,56 +6,55 @@
 
 package org.mule.module.facebook.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.File;
-
+import com.restfb.types.Post.Likes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.tests.ConnectorTestUtils;
 
-import com.restfb.types.Post.Likes;
+import java.io.File;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class GetPhotoLikesTestCases extends FacebookTestParent {
-	
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		initializeTestRunMessage("getPhotoLikesTestData");
-		
-		String profileId = getProfileId();
-		upsertOnTestRunMessage("profileId", profileId);
-		
-		String caption = (String) getTestRunMessageValue("caption");
-		String photoFileName = (String) getTestRunMessageValue("photoFileName");
-		
-		File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
-		String photoId = publishPhoto(profileId, caption, photo);
-		
-		// for "get-photo-likes"
-		upsertOnTestRunMessage("photo", photoId);
-		
-		like(photoId);
-	}
-	
-	@Category({RegressionTests.class})
-	@Test
-	public void testGetPhotoLikes() {
-		try {
-			Likes result = runFlowAndGetPayload("get-photo-likes");
-			assertTrue(result.getData().size() == 1);
-		} catch (Exception e) {
-			fail(ConnectorTestUtils.getStackTrace(e));
-		}
-	}
-	
+
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        initializeTestRunMessage("getPhotoLikesTestData");
+
+        String profileId = getProfileId();
+        upsertOnTestRunMessage("profileId", profileId);
+
+        String caption = (String) getTestRunMessageValue("caption");
+        String photoFileName = (String) getTestRunMessageValue("photoFileName");
+
+        File photo = new File(getClass().getClassLoader().getResource(photoFileName).toURI());
+        String photoId = publishPhoto(profileId, caption, photo);
+
+        // for "get-photo-likes"
+        upsertOnTestRunMessage("photo", photoId);
+
+        like(photoId);
+    }
+
+    @Category({RegressionTests.class})
+    @Test
+    public void testGetPhotoLikes() {
+        try {
+            Likes result = runFlowAndGetPayload("get-photo-likes");
+            assertTrue(result.getData().size() == 1);
+        } catch (Exception e) {
+            fail(ConnectorTestUtils.getStackTrace(e));
+        }
+    }
+
     @After
-	public void tearDown() throws Exception {
-    	String photoId = (String) getTestRunMessageValue("photo");
-    	deleteObject(photoId);
-	}
-    
+    public void tearDown() throws Exception {
+        String photoId = (String) getTestRunMessageValue("photo");
+        deleteObject(photoId);
+    }
+
 }
