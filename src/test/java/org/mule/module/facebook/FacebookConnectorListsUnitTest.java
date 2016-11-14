@@ -208,7 +208,7 @@ public class FacebookConnectorListsUnitTest extends FacebookConnectorGenericUnit
     @Test
     public void testGetPagePosts()
     {
-        connector.getPagePosts("", "", "", "", "");
+        connector.getPagePosts("", "", "", "", "", "");
         Mockito.verify(resource).get(String.class);
     }
     

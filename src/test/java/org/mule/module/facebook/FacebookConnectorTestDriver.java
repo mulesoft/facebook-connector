@@ -440,13 +440,13 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPagePosts()
     {
-        List<Post> posts = connector.getPagePosts("facebook", "", "", "3", "");
+        List<Post> posts = connector.getPagePosts("facebook", "", "", "3", "", "");
         assertTrue(posts.size() == 3);
         for (Post post : posts)
         {
             assertNotNull(post.getId());
             assertNotNull(post.getFrom().getName());
-            assertNotNull(post.getLikes().getCount());
+            assertNotNull(post.getLikes().getTotalCount());
         }
     }
     
