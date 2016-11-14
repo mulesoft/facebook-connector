@@ -52,7 +52,7 @@ import java.util.List;
 @Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook", minMuleVersion="3.5", configElementName="config-with-oauth")
 public class FacebookConnector {
 
-	private static String FACEBOOK_URI = "https://graph.facebook.com/v1.0";
+	private static String FACEBOOK_URI = "https://graph.facebook.com/v2.8";
     private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
     private static JsonMapper mapper = new DefaultJsonMapper();
 
@@ -1214,6 +1214,7 @@ public class FacebookConnector {
      * @param until A unix timestamp or any date accepted by strtotime
      * @param limit Limit the number of items returned.
      * @param offset An offset to the response. Useful for paging.
+     * @param fields A comma separated list of fields to ask from Facebook API.
      * @return A list of posts
      */
     @Processor
@@ -1222,7 +1223,8 @@ public class FacebookConnector {
                                @Default("last week") String since,
                                @Default("yesterday") String until,
                                @Default("100") String limit,
-                               @Default("0") String offset)
+                               @Default("0") String offset,
+                               @Default("message,likes.summary(true),shares") String fields)
     {
         URI uri = UriBuilder.fromPath(FACEBOOK_URI).path("{page}/posts").build(page);
         return mapper.toJavaList(this.newWebResource(uri, getStrategy().getAccessToken())
@@ -1230,6 +1232,7 @@ public class FacebookConnector {
             .queryParam("until", until)
             .queryParam("limit", limit)
             .queryParam("offset", offset)
+            .queryParam("fields", fields)
             .get(String.class), Post.class);
     }
 
