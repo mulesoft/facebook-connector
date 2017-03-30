@@ -11,8 +11,8 @@ import org.mule.api.annotations.param.Default;
 @OAuth2(friendlyName = "OAuth v2.0"
         , accessTokenUrl = "https://graph.facebook.com/oauth/access_token"
         , authorizationUrl = "https://graph.facebook.com/oauth/authorize"
-        , accessTokenRegex = "access_token=([^&]+?)(&|$)"
-        , expirationRegex = "expires=([^&]+?)(&|$)")
+        , accessTokenRegex = "\"access_token\":\"([^&]+?)\""
+        , expirationRegex = "\"expires_in\":([^&]+?),")
 public class FacebookOAuthStrategy {
 
     /**

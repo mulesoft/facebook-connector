@@ -20,7 +20,7 @@
         <devkit.studio.package.skip>false</devkit.studio.package.skip>
         <jackson.version>1.9.5</jackson.version>
         <mule.modules.utils.version>1.0</mule.modules.utils.version>
-        <restfb.version>1.6.9</restfb.version>
+        <restfb.version>1.39.0</restfb.version>
     </properties>
 
     <build>

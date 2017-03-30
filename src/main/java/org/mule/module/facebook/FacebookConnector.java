@@ -52,7 +52,7 @@ import java.util.List;
 @Connector(name = "facebook", schemaVersion = "2.0", friendlyName="Facebook", minMuleVersion="3.5", configElementName="config-with-oauth")
 public class FacebookConnector {
 
-	private static String FACEBOOK_URI = "https://graph.facebook.com/v1.0";
+	private static String FACEBOOK_URI = "https://graph.facebook.com/v2.8";
     private static String ACCESS_TOKEN_QUERY_PARAM_NAME = "access_token";
     private static JsonMapper mapper = new DefaultJsonMapper();
 

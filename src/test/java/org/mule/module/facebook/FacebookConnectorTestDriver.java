@@ -446,7 +446,7 @@ public class FacebookConnectorTestDriver
         {
             assertNotNull(post.getId());
             assertNotNull(post.getFrom().getName());
-            assertNotNull(post.getLikes().getCount());
+            assertNotNull(post.getLikes().getTotalCount());
         }
     }
     
