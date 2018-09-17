@@ -77,7 +77,7 @@ Figure 6. Creating a new global element
 
 In the Facebook configuration dialog box that follows, you need to enter the following information. On the "General" tab, enter a name for your configuration settings such as "Facebook-config". Also, put the "App Id" and "App Secret" you got when you created your app on Facebook website in their respective fields. App permissions must go to "Scope", in this case "user\_photos" - Figure 7. On the OAuth tab, you need to enter the callback URL that user requests will be redirected to after being authenticated by Facebook. Enter "localhost" in the "Domain" field and 8081 both in "Local Port" and "Remote Port". You are done with the configuration. Click "Ok" to close the dialog box. The XML for the global element should look like this:
 
-    <facebook:config-with-oauth name="Facebook-config" appId="428475660564909" appSecret="3969bb3e412d1e8f5dde450554fbc890" doc:name="Facebook" scope="user\_photos">    
+    <facebook:config-with-oauth name="Facebook-config" appId="428475660564909" appSecret="XXXXX" doc:name="Facebook" scope="user\_photos">    
             <facebook:oauth-callback-config domain="localhost" localPort="8081" remotePort="8081"/>  
     </facebook:config-with-oauth>
 
@@ -116,7 +116,7 @@ The final flow XML should look like this. Pay attention "appId" and "appSecret" 
     http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
     http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd "> 
     
-        <facebook:config-with-oauth name="Facebook-config" appId="428475660564909" appSecret="3969bb3e412d1e8f5dde450554fbc890" doc:name="Facebook" scope="user\_photos">
+        <facebook:config-with-oauth name="Facebook-config" appId="428475660564909" appSecret="XXXXX" doc:name="Facebook" scope="user\_photos">
             <facebook:oauth-callback-config domain="localhost" localPort="8081" remotePort="8081"/>
         </facebook:config-with-oauth>
     
